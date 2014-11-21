@@ -1,4 +1,4 @@
 internal-dashboard
 ==================
 
-Internal Dashboard
+Total Synergy internal dashboard designed to run in kiosk mode
