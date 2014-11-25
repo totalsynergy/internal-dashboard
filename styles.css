@@ -1,0 +1,438 @@
+/* CSS file placeholder. */
+@font-face {
+    font-family: openSans;
+    src: url(OpenSans-Bold.ttf);
+}
+
+@font-face {
+    font-family: openSansLight;
+    src: url(OpenSans-Light.ttf);
+}
+
+@font-face {
+    font-family: openSansBold;
+    src: url(OpenSans-ExtraBold.ttf);
+}
+
+html, body, .container{
+  height:100%;
+}
+
+h1{
+  font-family:openSansLight;
+  font-size: 5vw;
+  text-align:center;
+  color:#58595B;
+}
+
+.sliderWrapper{
+  width: 80%;
+  margin-left:10%;
+
+}
+
+.leftButton{
+ position: fixed;
+ background-color: transparent;
+ width: 10%;
+ height: 100%;
+}
+
+.leftButton:hover{
+  background-color: rgba(128, 128, 128, 0.5);
+}
+
+.rightButton{
+ position:fixed;
+ right:0%;
+ background-color: transparent;
+ width: 10%;
+ height: 100%;
+}
+
+.rightButton:hover{
+  background-color: rgba(128, 128, 128, 0.5);
+}
+
+
+.settingsButton{
+ position: fixed;
+ top:0;
+ background-color: transparent;
+ width: 100%;
+ height: 15%;
+ z-index:1001;
+}
+
+.settingsButton:hover{
+  background-color: rgba(128, 128, 128, 0.5);
+}
+
+.logo{
+    width:20%;
+    height:20%;
+    display:block;
+    position:fixed;
+    bottom:0;
+    left:0;
+    z-index:1000;
+}
+
+
+
+.stateFont{
+  color:#58595B;
+  font-size: 6vw;
+}
+
+#confAten{
+  font-family:openSansLight;
+}
+/*
+
+.nsw{
+  position:absolute;
+  width:100%;
+  z-index:999;
+  text-align: center;
+  left: 16.2%;
+  bottom:24%;
+  font-family:'openSans';
+}
+
+.qld{
+  position:absolute;
+  width:100%;
+  z-index:999;
+  text-align: center;
+  left: 16%;
+  bottom:49%;
+  font-family:'openSans';
+}
+
+.nt{
+  position:absolute;
+  width:100%;
+  z-index:999;
+  text-align: center;
+  right: 1.5%;
+  bottom:65%;
+  font-family:'openSans';
+}
+
+.wa{
+  position:absolute;
+  width:100%;
+  z-index:999;
+  text-align: center;
+  right: 18%;
+  bottom:34%;
+  font-family:'openSans';
+}
+
+.sa{
+  position:absolute;
+  width:100%;
+  z-index:999;
+  text-align: center;
+  right: 6%;
+  bottom:23%;
+  font-family:'openSans';
+}
+
+.vic{
+  position:absolute;
+  width:100%;
+  z-index:999;
+  text-align: center;
+  left: 6%;
+  bottom:13%;
+  font-family:'openSans';
+}
+
+.mapContainer{
+    height:100%;
+}
+
+.container{
+  height:100%;
+  z-index:-1;
+}
+
+.wrapper{
+  position: fixed;
+  width:10%;
+  margin-left:25%;
+  margin-right:25%;
+  text-align: justify;
+}
+
+.mapContainer{
+  width:100%;
+  height:100%;
+}
+
+
+.AustraliaMap{
+  margin-top:5%;
+  position:relative;
+  display:block;
+  margin-left: auto;
+  margin-right:auto;
+  width:75%;
+  height:75%;
+}
+*/
+
+.container{
+  height:100%;
+}
+
+.my-container{
+    position:relative;
+    width: 50%;
+    margin: 0 auto;
+}
+
+.country {
+    height: 100%;
+}
+
+span {
+    position: relative;
+}
+
+div.nsw, div.qld, div.sa, div.nt, div.wa, div.vic {
+    position: absolute;
+    width: 18.3%;
+    height: 18.3%;
+    text-align: center;
+    color:#58595B;
+     /*mess around */
+    font-family:openSans;
+}
+
+div.nsw {
+    top: 56.3%;
+    left: 77.2%;
+}
+
+div.qld {
+    top: 24.8%;
+    left: 76.2%;
+}
+
+div.wa {
+    top: 43.2%;
+    left: 1.7%;
+}
+
+div.sa {
+    top: 56%;
+    left: 28%;
+}
+
+div.nt {
+    top: 2.8%;
+    left: 37.65%;
+}
+
+div.vic {
+    top: 68.5%;
+    left: 55%;
+}
+
+@media all and (min-width: 50px)   {  span  { font-size:4.1em;  } }
+@media all and (min-width: 100px)  {  span  { font-size:4.2em;  } }
+@media all and (min-width: 200px)  {  span  { font-size:4.4em;  } }
+@media all and (min-width: 300px)  {  span  { font-size:4.6em;  } }
+@media all and (min-width: 400px)  {  span  { font-size:4.8em;  } }
+@media all and (min-width: 500px)  {  span  { font-size:3.0em;  } }
+@media all and (min-width: 600px)  {  span  { font-size:3.4em;  } }
+@media all and (min-width: 700px)  {  span  { font-size:3.8em;  } }
+@media all and (min-width: 800px)  {  span  { font-size:4.2em;  } }
+@media all and (min-width: 900px)  {  span  { font-size:4.6em;  } }
+@media all and (min-width: 1000px) {  span  { font-size:5.0em;  } }
+@media all and (min-width: 1100px) {  span  { font-size:5.4em;  } }
+@media all and (min-width: 1200px) {  span  { font-size:5.8em;  } }
+@media all and (min-width: 1300px) {  span  { font-size:6.2em;  } }
+@media all and (min-width: 1400px) {  span  { font-size:6.6em;  } }
+@media all and (min-width: 1500px) {  span  { font-size:7.0em;  } }
+@media all and (min-width: 1500px) {  span  { font-size:7.2em;  } }
+@media all and (min-width: 1600px) {  span  { font-size:7.4em;  } }
+@media all and (min-width: 1700px) {  span  { font-size:7.6em;  } }
+
+
+
+.countDownHeader{
+  color:#58595B;
+  font-family: openSansBold;
+  text-decoration:bold;
+  padding-top:20%;
+  text-align:center;
+  position:relative;
+}
+
+.countDown{
+  text-align: center;
+  margin: 0 auto;
+  margin: 0 auto;
+}
+
+.time, .period{
+  display: inline;
+}
+
+.time{
+  color:#58595B;
+  font-family:openSans;
+  font-size:10vw;
+}
+
+.period{
+  color:#58595B;
+  font-family:openSans;
+  font-size:2vw;
+  padding-right:10px;
+}
+
+.conferenceStarts{
+  padding-top:5%;
+  text-align: center;
+  height:100%;
+}
+
+.starts{
+  font-family:openSansLight;
+  color:#58595B;
+  font-size:2vw;
+}
+
+.startDate{
+  font-family:openSans;
+  color:#FDCE1D;
+  font-size:3vw;
+  position: relative;
+  bottom:2.5%;
+}
+
+.cube{
+  width:60%;
+  height:60%;
+  padding-top:10%;
+}
+
+.normal, .yellowBold{
+  display: inline;
+}
+
+.normal{
+  font-family:openSansLight;
+  color:#58595B;
+  font-size:2vw;
+}
+
+.yellowBold{
+  font-family:openSans;
+  color:#FDCE1D;
+  font-size:3vw;
+  padding-left:1%;
+  padding-right:1%;
+}
+
+.totalAttendees{
+  text-align: center;
+  width:50%;
+  height:80%;
+}
+
+.totalAttendeesHeader{
+  color:#58595B;
+  font-family: openSans;
+  font-size: 3vw;
+  padding-bottom:6%;
+}
+
+.numberOf{
+  position:absolute;
+  color:#58595B;
+  font-family: openSans;
+  text-align:center;
+  font-size:16vw;
+  width:25%;
+  height:25%;
+  bottom:60%;
+  left:37.5%;
+}
+
+input[type="text"] {
+  margin: 0;
+  width: 30%;
+  font-family: sans-serif;
+  font-size: 18px;
+  appearance: none;
+  box-shadow: none;
+  border-radius: none;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+input[type="text"]:focus {
+
+}
+#save{
+  width:20%;
+}
+
+.keyInput{
+  padding-top:5%;
+  font-size: 2vw;
+}
+
+.keyText{
+  text-align: center;
+  position:relative;
+  margin-right:5%;
+  font-family: openSansLight;
+}
+
+.pageSelected{
+  text-align:center;
+  font-family:openSansLight;
+  font-size:2vw;
+  padding-top:2.5%;
+  padding-bottom:1%;
+}
+
+.pageContainer{
+    width:50%;
+    margin-right:auto;
+    margin-left:auto;
+}
+
+input[type=checkbox]{
+  width:25px;
+  height:25px;
+}
+
+.pageName{
+  font-size:1vw;
+  padding-right:20px;
+}
+
+.speed{
+  font-size:2vw;
+  padding-top:7%;
+  text-align:center;
+  font-family: openSansLight;
+}
+
+.saveNExit{
+  text-align: center;
+  margin-left:auto;
+  margin-right:auto;
+  font-size:1.5vw;
+  padding-top:5%;
+  font-family:openSans;
+  width:50%;
+}

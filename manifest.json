@@ -1,0 +1,34 @@
+{
+  "manifest_version": 2,
+  "name": "Total Synergy Dashboard",
+  "short_name": "TSD",
+  "description": "Total Synergy Dashboard",
+
+  "version": "0.0.1.4",
+  "kiosk_enabled": true,
+
+  "icons": {
+    "16": "assets/favicon-16x16.png",
+    "128": "assets/Small-128x128.png",
+    "Logo" : "Eventbrite feed SVG_Logo.svg"
+  },
+
+  "app": {
+    "background": {
+      "scripts": ["background.js"]
+    }
+  },
+
+  "permissions": [
+    "power",
+    "https://www.eventbriteapi.com/",
+    "storage"
+    ],
+
+  "web_accessible_resources": [
+    "assets/Eventbrite feed SVG_Cube.svg",
+    "assets/Eventbrite feed SVG_Logo.svg",
+    "assets/Eventbrite feed SVG_Map.svg"
+    ]
+
+}
