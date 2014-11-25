@@ -15,7 +15,7 @@ app.controller('FirstController', function($scope, Service, $interval, $timeout)
     var timer = $timeout($scope.loop, $scope.speed);
 
     chrome.storage.local.get(null, function(result){
-      if(result.speed > 0)
+      if(result.pages != null)
       Service.updateKeys(result.eventBriteKey, result.totalSynergyKey, result.speed, result.pages);
     });
 
