@@ -28,6 +28,7 @@
     $scope.NT = 0;
     $scope.WA = 0;
     $scope.SA = 0;
+    $scope.international = 0;
 
     $scope.$on('tabUpdated', function(){
       $scope.tab = Service.tab;
@@ -47,26 +48,29 @@
       $scope.NT = 0;
       $scope.WA = 0;
       $scope.SA = 0;
+      $scope.international = 0;
       for(i = 0; i < data.attendees.length; i++){
         if(!data.attendees[i].cancelled){
-          switch(data.attendees[i].profile.addresses.work.region){
-           case 'NSW':
-           case 'ACT': $scope.NSWnACT += 1;
-                        break;
-           case 'QLD': $scope.QLD += 1;
-                        break;
-           case 'VIC': $scope.VICnTAS += 1;
+          if(data.attendees[i].profile.addresses.work.country === "AU"){
+            switch(data.attendees[i].profile.addresses.work.region){
+             case 'NSW':
+             case 'ACT': $scope.NSWnACT += 1;
+                          break;
+             case 'QLD': $scope.QLD += 1;
+                         break;
+             case 'VIC':
+             case 'TAS': $scope.VICnTAS += 1;
+                         break;
+             case 'NT': $scope.NT += 1;
+                         break;
+             case 'WA': $scope.WA += 1;
                        break;
-           case 'TAS': $scope.VICnTAS += 1;
+             case 'SA': $scope.SA += 1;
                        break;
-           case 'NT': $scope.NT += 1;
-                       break;
-           case 'WA': $scope.WA += 1;
-                      break;
-            case 'SA': $scope.SA += 1;
-                      break;
-            default: break;
-          }
+              default: ;
+              }
+            }
+          else{$scope.international++;}
           totalAttendees++;
         }
       }

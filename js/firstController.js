@@ -15,6 +15,7 @@ app.controller('FirstController', function($scope, Service, $interval, $timeout)
     var timer = $timeout($scope.loop, $scope.speed);
 
     chrome.storage.local.get(null, function(result){
+      if(result.speed > 0)
       Service.updateKeys(result.eventBriteKey, result.totalSynergyKey, result.speed, result.pages);
     });
 
@@ -27,10 +28,11 @@ app.controller('FirstController', function($scope, Service, $interval, $timeout)
     }
 
     $scope.init = function(){
+      goRight();
       $scope.loop();
       $interval(function(){
         Service.sendForData();
-      }, 6000);
+      }, 60000);
     }
 
 
@@ -107,6 +109,7 @@ app.controller('FirstController', function($scope, Service, $interval, $timeout)
       Service.updateTab(nextPage);
     }
 
+
     $scope.leftButtonHit = function(){
       //if not on settings page
       var nextPage = $scope.tab - 1;
@@ -133,6 +136,8 @@ app.controller('FirstController', function($scope, Service, $interval, $timeout)
 
     $scope.settingsButtonHit = function(){
       Service.updateTab(99);
+      $scope.speed = parseInt($scope.speed);
+      Service.updateSpeed($scope.speed);
     }
 
     $scope.$on('speedUpdated', function(){

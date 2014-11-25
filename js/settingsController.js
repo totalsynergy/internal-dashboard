@@ -1,11 +1,12 @@
   app.controller('SettingsController', function($scope, Service){
    $scope.eventBriteKey = '';
    $scope.totalSynergyKey = '';
-    $scope.speed;
+    $scope.speed = 10000;
     $scope.pages = pages;
+    $scope.practiceNumber = 10;
 
-    $scope.initSlider = function(){
-
+    $scope.speedChange = function(){
+      $scope.speed = parseInt($scope.speed);
     }
 
      $scope.$on('tabUpdated', function(){
