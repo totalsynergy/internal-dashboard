@@ -184,12 +184,13 @@ h1{
 }
 */
 
-.container{
+ body, html, .container{
   height:100%;
 }
 
 .my-container{
     position:relative;
+    right:3%;
     width: 50%;
     margin: 0 auto;
 }
@@ -202,7 +203,7 @@ span {
     position: relative;
 }
 
-div.nsw, div.qld, div.sa, div.nt, div.wa, div.vic {
+div.nsw, div.qld, div.sa, div.nt, div.wa, div.vic{
     position: absolute;
     width: 18.3%;
     height: 18.3%;
@@ -262,7 +263,34 @@ div.vic {
 @media all and (min-width: 1600px) {  span  { font-size:7.4em;  } }
 @media all and (min-width: 1700px) {  span  { font-size:7.6em;  } }
 
+.international{
+  position:absolute;
+  top:62%;
+  font-family:openSansLight;
+  font-size:2vw;
+  left:79.5%;
+}
+.earth{
+  width:13%;
+  position:absolute;
+  bottom:10%;
+  margin-left:80%;
+}
 
+div.earthNumbers{
+  top:70%;
+  right:4.5%;
+}
+
+div.earthNumbers{
+    position: absolute;
+    width: 18.3%;
+    height: 18.3%;
+    text-align: center;
+    color:#58595B;
+     /*mess around */
+    font-family:openSans;
+}
 
 .countDownHeader{
   color:#58595B;
