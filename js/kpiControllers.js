@@ -1,8 +1,54 @@
-  app.controller('SecondController', function($scope, Service){
+  app.controller('SecondController', function($scope, $http, Service){
+
+    $scope.data = "nothing yet";
+    $scope.data2 = "nothing yet";
+    $scope.version4 = "empty";
+    $scope.versionData = {};
 
     $scope.$on('tabUpdated', function(){
       $scope.tab = Service.tab;
     });
+
+    $http({
+      url: 'https://beta.synergycloudapp.com/totalsynergy/InternalKpi/Home/ClientVersions',
+      method: 'POST',
+      headers : {'internal-token' : 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImRldmVsb3BlckB0b3RhbHN5bmVyZ3kuY29tIiwidXNlcmlkIjoiIn0.i80s02LZ6VPxXumvZNbA6uk9rTj0Lgy4nXNd2lIeSY8'}
+    }).success(function(d, status, headers, config){
+      $scope.data2 = d.data;
+      $scope.version4 = d.data[0].Count;
+      $scope.versionTest = d.data[0];
+    })
+    .error(function(data, status, headers, config){
+      $scope.data2 = "fail";
+    });
+
+
+    /*$http.post('https://beta.synergycloudapp.com/totalsynergy/InternalKpi/Home/ClientVersions', {msg:'internal-token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImRldmVsb3BlckB0b3RhbHN5bmVyZ3kuY29tIiwidXNlcmlkIjoiIn0.i80s02LZ6VPxXumvZNbA6uk9rTj0Lgy4nXNd2lIeSY8'}).
+      success(function(data, status, headers, config) {
+        $scope.data2 = data;
+    // this callback will be called asynchronously
+    // when the response is available
+      }).
+      error(function(data, status, headers, config) {
+        $scope.data2 = "failed";
+    // called asynchronously if an error occurs
+    // or server returns response with an error status.
+      }); */
+
+    var dataGiven = {
+				internal_token : "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImRldmVsb3BlckB0b3RhbHN5bmVyZ3kuY29tIiwidXNlcmlkIjoiIn0.i80s02LZ6VPxXumvZNbA6uk9rTj0Lgy4nXNd2lIeSY8"
+		};
+
+		var dataObject = {};
+
+		$http.post('https://beta.synergycloudapp.com/totalsynergy/InternalKpi/Home/ClientVersions', dataObject)
+		  .success(function(data, status, headers, config) {
+			  $scope.data3 = config;
+	  	})
+	  	.error(function(data, status, headers, config) {
+			  $scope.data3 = "failed";
+		});
+
   });
 
 
@@ -145,7 +191,7 @@
         $scope.eventDate = new Date(data.start.utc).getTime();
         timerUpdate($scope.eventDate);
         $scope.eventData = data;
-        $scope.eventBriteKey= "Key Workds";
+        $scope.eventBriteKey= "Key Works";
         //Service.updateEventData(data);
       })
       .error(function(){

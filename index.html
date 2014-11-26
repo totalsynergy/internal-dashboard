@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="myApp" ng-csp="">
 <head>
+  <meta charset="utf-8">
   <title>test2</title>
   <script type="text/javascript" src="js/angular.min.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
@@ -13,6 +14,7 @@
     <script type="text/javascript" src="js/rzslider.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
     <script type="text/javascript" src="js/npm.js"></script>
+    <script type="text/javascript" src="js/d3.js"></script>
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="angular-csp.css">
@@ -21,7 +23,6 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="css/bootstrap-theme.css">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
 </head>
 
@@ -45,13 +46,17 @@
       <a href="" ng-click="settingsHit()">Settings</a>
       <p> Speed : {{speed}} </p>
       <p>Key: {{eventBriteKey}}</p>
-    </div>
+      </div>
+
   </div>
 
 
   <div ng-controller="SecondController" ng-show="tab == 2">
   <div class="container">
-    <h1>Desktop Versions</h1>
+    <h1>Desktop Versions Graph</h1>
+    <div ng-repeat="d in data2">
+      <p>Version : {{d.Version}} Count : {{d.Count}}</p>
+    </div>
     </div>
   </div>
 

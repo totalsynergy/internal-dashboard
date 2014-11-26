@@ -5,6 +5,7 @@
   "description": "Total Synergy Dashboard",
 
   "version": "0.0.1.6",
+
   "kiosk_enabled": true,
 
   "icons": {
@@ -19,16 +20,22 @@
     }
   },
 
+  "sandbox" : {
+    "pages" : []
+    },
+
   "permissions": [
     "power",
     "https://www.eventbriteapi.com/",
-    "storage"
+    "storage",
+    "https://beta.synergycloudapp.com/"
     ],
 
   "web_accessible_resources": [
     "assets/Eventbrite feed SVG_Cube.svg",
     "assets/Eventbrite feed SVG_Logo.svg",
-    "assets/Eventbrite feed SVG_Map.svg"
+    "assets/Eventbrite feed SVG_Map.svg",
+    "js/d3.js"
     ]
 
 }
