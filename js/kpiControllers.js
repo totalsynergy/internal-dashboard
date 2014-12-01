@@ -1,7 +1,49 @@
-  app.controller('SecondController', function($scope, $http, Service){
+app.controller('FirstKPI', function($scope, $http, Service){
+    $scope.keyAvailable = false;
 
+    $scope.pieData = function(){
+        var data = [
+      	  { key: "One", y: 5 },
+          { key: "Two", y: 2 },
+          { key: "Three", y: 9 },
+          { key: "Four", y: 7 },
+          { key: "Five", y: 4 },
+          { key: "Six", y: 3 },
+          { key: "Seven", y: 9 }
+        ];
+
+      return data;
+    }
+
+    $scope.xFunction = function(){
+      return function(d) {
+          return d.key;
+      };
+    }
+
+    $scope.yFunction = function(){
+    	return function(d){
+	  	  return d.y;
+    	};
+    }
+
+    $scope.$on('keysUpdated', function(){
+      $scope.totalSynergyKey = Service.totalSynergyKey;
+    })
+
+    $scope.$on('tabUpdated', function(){
+      $scope.tab = Service.tab;
+    });
+
+  });
+
+app.controller('SecondController', function($scope, $http, Service){
+    $scope.keyAvailable = false;
     $scope.data2 = "nothing yet";
     $scope.totalSynergyKey = "";
+    $scope.lengthOfData = 0;
+    $scope.barData = 0;
+    $scope.percentage = 0;
 
     $scope.$on('keysUpdated', function(){
       $scope.totalSynergyKey = Service.totalSynergyKey;
@@ -19,19 +61,57 @@
       method: 'POST',
       headers : {'internal-token' : $scope.totalSynergyKey}
     }).success(function(d, status, headers, config){
-      $scope.data2 = d.data;
+        $scope.data2 = d.data;
+        $scope.keyAvailable = true;
+        sortData(d.data);
     })
     .error(function(data, status, headers, config){
       $scope.data2 = "fail";
     });
 
+
+
     }
+
+    function sortData(dataPassed){
+        var dataToPass = [];
+        var percentageSum = 0;
+       for(i = 0; i < dataPassed.length; i++){
+         var versionObject = [dataPassed[i].Version, dataPassed[i].Count];
+         dataToPass.push(versionObject);
+         percentageSum += dataPassed[i].Count;
+          }
+        $scope.percentage = parseInt((dataPassed[i-2].Count + dataPassed[i-1].Count)/percentageSum*100);
+        /*var data5 = [];
+        var ran = ["postWorking", 69];
+        data5.push(ran); */
+
+        var data = [
+                {
+                    "values": dataToPass
+                }];
+
+         $scope.barData = data;
+    }
+
+    $scope.colorFunction = function(){
+      return function(d, i) {
+        if(i == $scope.data2.length - 1)
+    	    return '#F39200'
+    	 else if(i == $scope.data2.length - 2)
+    	    return '#004F93'
+    	 else
+    	  return '#78AD29'
+    };
+    }
+
+
 
   });
 
 
 
-  app.controller('ThirdController', function($scope, Service){
+app.controller('ThirdController', function($scope, Service){
     $scope.totalAttendees = 0;
 
     $scope.$on('tabUpdated', function(){
@@ -45,7 +125,7 @@
 
 
 
-  app.controller('FourthController', function($scope, Service, $http){
+app.controller('FourthController', function($scope, Service, $http){
     $scope.NSWnACT = 0;
     $scope.QLD = 0;
     $scope.VICnTAS = 0;
@@ -121,7 +201,7 @@
 
 
 
-  app.controller('FifthController', function($scope, $http, Service, $interval){
+app.controller('FifthController', function($scope, $http, Service, $interval){
 
     $scope.days = 0;
     $scope.hours = 0;

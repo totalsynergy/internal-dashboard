@@ -55,7 +55,7 @@
     return service;
 });
 
-  var app = angular.module('myApp', ['appService', 'uiSlider']);
+  var app = angular.module('myApp', ['appService', 'uiSlider', 'nvd3ChartDirectives']);
 
 
 
@@ -76,6 +76,10 @@
     ];
 
     var tabOpen = 4;
+
+
+
+
 
 
 // Maybe place settings tabs at default 99 - just for memory

@@ -20,9 +20,6 @@
     }
   },
 
-  "sandbox" : {
-    "pages" : []
-    },
 
   "permissions": [
     "power",

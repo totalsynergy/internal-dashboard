@@ -40,6 +40,7 @@ h1{
 
 .leftButton:hover{
   background-color: rgba(128, 128, 128, 0.5);
+  z-index:9999;
 }
 
 .rightButton{
@@ -48,10 +49,12 @@ h1{
  background-color: transparent;
  width: 10%;
  height: 100%;
+
 }
 
 .rightButton:hover{
   background-color: rgba(128, 128, 128, 0.5);
+   z-index:9999;
 }
 
 
@@ -66,6 +69,7 @@ h1{
 
 .settingsButton:hover{
   background-color: rgba(128, 128, 128, 0.5);
+  z-index:9999;
 }
 
 .logo{
@@ -75,6 +79,15 @@ h1{
     position:fixed;
     bottom:0;
     left:0;
+    z-index:1000;
+}
+
+.logo2{
+    display:block;
+    width:13%;
+    position:fixed;
+    bottom:3.5%;
+    left:1.5%;
     z-index:1000;
 }
 
@@ -88,101 +101,7 @@ h1{
 #confAten{
   font-family:openSansLight;
 }
-/*
 
-.nsw{
-  position:absolute;
-  width:100%;
-  z-index:999;
-  text-align: center;
-  left: 16.2%;
-  bottom:24%;
-  font-family:'openSans';
-}
-
-.qld{
-  position:absolute;
-  width:100%;
-  z-index:999;
-  text-align: center;
-  left: 16%;
-  bottom:49%;
-  font-family:'openSans';
-}
-
-.nt{
-  position:absolute;
-  width:100%;
-  z-index:999;
-  text-align: center;
-  right: 1.5%;
-  bottom:65%;
-  font-family:'openSans';
-}
-
-.wa{
-  position:absolute;
-  width:100%;
-  z-index:999;
-  text-align: center;
-  right: 18%;
-  bottom:34%;
-  font-family:'openSans';
-}
-
-.sa{
-  position:absolute;
-  width:100%;
-  z-index:999;
-  text-align: center;
-  right: 6%;
-  bottom:23%;
-  font-family:'openSans';
-}
-
-.vic{
-  position:absolute;
-  width:100%;
-  z-index:999;
-  text-align: center;
-  left: 6%;
-  bottom:13%;
-  font-family:'openSans';
-}
-
-.mapContainer{
-    height:100%;
-}
-
-.container{
-  height:100%;
-  z-index:-1;
-}
-
-.wrapper{
-  position: fixed;
-  width:10%;
-  margin-left:25%;
-  margin-right:25%;
-  text-align: justify;
-}
-
-.mapContainer{
-  width:100%;
-  height:100%;
-}
-
-
-.AustraliaMap{
-  margin-top:5%;
-  position:relative;
-  display:block;
-  margin-left: auto;
-  margin-right:auto;
-  width:75%;
-  height:75%;
-}
-*/
 
  body, html, .container{
   height:100%;
@@ -465,25 +384,57 @@ input[type=checkbox]{
   width:50%;
 }
 
-        .axis path, .axis line
-        {
-            fill: none;
-            stroke: #777;
-            shape-rendering: crispEdges;
-        }
+#svgGraph{
+  height:600px;
+  width:600px;
+}
 
-        .axis text
-        {
-            font-family: 'Arial';
-            font-size: 13px;
-        }
-        .tick
-        {
-            stroke-dasharray: 1, 2;
-        }
-        .bar
-        {
-            fill: FireBrick;
-        }
+#percentageText{
+  font-family:openSansLight;
+  font-size:3vw;
+  color:#58595B;
+  padding:0;
+}
+
+#percent{
+  font-family:openSans;
+  font-size:8vw;
+  color:#3F7AAD;
+  text-align: center;
+  padding-bottom:0;
+  margin-bottom:0;
+  padding-top:0;
+  margin-top:0;
+  position:relative;
+}
+
+#percentageText{
+  text-align: left;
+  padding-top:2.5%;
+  padding-bottom:2.5%;
+  height:100%;
+  width:100%;
+}
+
+.percentageHeader{
+  position:relative;
+  top:100px;
+}
+
+
+.container{
+  height:100%;
+}
+
+.versionsGraph{
+  position:relative;
+  top:40%;
+}
+
+.pieChart{
+  position:fixed;
+  z-index:99999;
+}
+
 
 
