@@ -2519,7 +2519,7 @@ nv.models.cumulativeLineChart = function() {
     , noData = 'No Data Available.'
     , average = function(d) { return d.average }
     , dispatch = d3.dispatch('tooltipShow', 'tooltipHide', 'stateChange', 'changeState')
-    , transitionDuration = 250
+    , transitionDuration = 2500
     , noErrorCheck = false  //if set to TRUE, will bypass an error check in the indexify function.
     ;
 
@@ -3492,6 +3492,7 @@ nv.models.discreteBar = function() {
 
   chart.options = nv.utils.optionsFunc.bind(chart);
 
+
   chart.x = function(_) {
     if (!arguments.length) return getX;
     getX = _;
@@ -3630,7 +3631,7 @@ nv.models.discreteBarChart = function() {
     , y
     , noData = "No Data Available."
     , dispatch = d3.dispatch('tooltipShow', 'tooltipHide', 'beforeUpdate')
-    , transitionDuration = 250
+    , transitionDuration = 2500
     ;
 
   xAxis
@@ -4126,7 +4127,7 @@ nv.models.historicalBarChart = function() {
     , defaultState = null
     , noData = 'No Data Available.'
     , dispatch = d3.dispatch('tooltipShow', 'tooltipHide', 'stateChange', 'changeState')
-    , transitionDuration = 250
+    , transitionDuration = 2500
     ;
 
   xAxis
@@ -5427,7 +5428,7 @@ nv.models.lineChart = function() {
     , defaultState = null
     , noData = 'No Data Available.'
     , dispatch = d3.dispatch('tooltipShow', 'tooltipHide', 'stateChange', 'changeState')
-    , transitionDuration = 250
+    , transitionDuration = 2500
     ;
 
   xAxis
@@ -6328,7 +6329,7 @@ nv.models.lineWithFocusChart = function() {
       }
     , noData = "No Data Available."
     , dispatch = d3.dispatch('tooltipShow', 'tooltipHide', 'brush')
-    , transitionDuration = 250
+    , transitionDuration = 2500
     ;
 
   lines
@@ -8024,7 +8025,7 @@ nv.models.multiBarChart = function() {
     , noData = "No Data Available."
     , dispatch = d3.dispatch('tooltipShow', 'tooltipHide', 'stateChange', 'changeState')
     , controlWidth = function() { return showControls ? 180 : 0 }
-    , transitionDuration = 250
+    , transitionDuration = 2500
     ;
 
   multibar
@@ -8992,7 +8993,7 @@ nv.models.multiBarHorizontalChart = function() {
     , noData = 'No Data Available.'
     , dispatch = d3.dispatch('tooltipShow', 'tooltipHide', 'stateChange', 'changeState')
     , controlWidth = function() { return showControls ? 180 : 0 }
-    , transitionDuration = 250
+    , transitionDuration = 2500
     ;
 
   multibar
@@ -11665,7 +11666,7 @@ nv.models.scatterChart = function() {
     , defaultState = null
     , dispatch     = d3.dispatch('tooltipShow', 'tooltipHide', 'stateChange', 'changeState')
     , noData       = "No Data Available."
-    , transitionDuration = 250
+    , transitionDuration = 2500
     ;
 
   scatter
@@ -12293,7 +12294,7 @@ nv.models.scatterPlusLineChart = function() {
     , defaultState = null
     , dispatch = d3.dispatch('tooltipShow', 'tooltipHide', 'stateChange', 'changeState')
     , noData       = "No Data Available."
-    , transitionDuration = 250
+    , transitionDuration = 2500
     ;
 
   scatter
@@ -13219,14 +13220,14 @@ nv.models.sparklinePlus = function() {
             .style('fill-opacity', 0);
 
         hoverValue.exit()
-          .transition().duration(250)
+          .transition().duration(2500)
             .style('stroke-opacity', 0)
             .style('fill-opacity', 0)
             .remove();
 
         hoverValue
             .attr('transform', function(d) { return 'translate(' + x(sparkline.x()(data[d],d)) + ',0)' })
-          .transition().duration(250)
+          .transition().duration(2500)
             .style('stroke-opacity', 1)
             .style('fill-opacity', 1);
 
@@ -13770,7 +13771,7 @@ nv.models.stackedAreaChart = function() {
     , controlWidth = 250
     , cData = ['Stacked','Stream','Expanded']
     , controlLabels = {}
-    , transitionDuration = 250
+    , transitionDuration = 2500
     ;
 
   xAxis

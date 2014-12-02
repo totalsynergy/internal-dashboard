@@ -1,8 +1,7 @@
 app.controller('FirstKPI', function($scope, $http, Service){
     $scope.keyAvailable = false;
 
-    $scope.pieData = function(){
-        var data = [
+    $scope.pieData = [
       	  { key: "One", y: 5 },
           { key: "Two", y: 2 },
           { key: "Three", y: 9 },
@@ -12,12 +11,22 @@ app.controller('FirstKPI', function($scope, $http, Service){
           { key: "Seven", y: 9 }
         ];
 
-      return data;
-    }
-
-    $scope.xFunction = function(){
+    $scope.xLoopFunction = function(){
       return function(d) {
           return d.key;
+      };
+    }
+
+    $scope.yLoopFunction = function(){
+      return function(d) {
+          return d.y;
+      };
+    }
+
+
+    $scope.xFunction = function(){
+      return function() {
+          return $scope.pieData.key;
       };
     }
 
@@ -27,23 +36,32 @@ app.controller('FirstKPI', function($scope, $http, Service){
     	};
     }
 
+
     $scope.$on('keysUpdated', function(){
       $scope.totalSynergyKey = Service.totalSynergyKey;
+
     })
+
 
     $scope.$on('tabUpdated', function(){
       $scope.tab = Service.tab;
+      $scope.pieData[2].y += 25;
+      $scope.xFunction = $scope.xLoopFunction;
+      $scope.yFunction = $scope.yLoopFunction;
     });
 
   });
 
-app.controller('SecondController', function($scope, $http, Service){
+app.controller('SecondController', function($scope, $http, Service, $interval){
     $scope.keyAvailable = false;
     $scope.data2 = "nothing yet";
     $scope.totalSynergyKey = "";
     $scope.lengthOfData = 0;
     $scope.barData = 0;
     $scope.percentage = 0;
+    $scope.rawData = 0;
+    $scope.testData = 0;
+    $scope.percentageHolder = 50;
 
     $scope.$on('keysUpdated', function(){
       $scope.totalSynergyKey = Service.totalSynergyKey;
@@ -52,7 +70,26 @@ app.controller('SecondController', function($scope, $http, Service){
 
     $scope.$on('tabUpdated', function(){
       $scope.tab = Service.tab;
+      if(Service.tab == 2){
+        $scope.barData = $scope.rawData;
+        countUpPercentage();
+      }
+      else{
+        $scope.barData = $scope.testData;
+      }
     });
+
+    function countUpPercentage(){
+      var limit = $scope.percentage;
+      $scope.percentage = 0;
+      $interval(function(){
+        $scope.percentage++;;
+      },10, limit)
+      //for(i = 0; i < limit; i++){
+      //  $scope.percentage += 1;
+      //}
+      //}
+    }
 
     function weGotKey(){
 
@@ -75,23 +112,31 @@ app.controller('SecondController', function($scope, $http, Service){
 
     function sortData(dataPassed){
         var dataToPass = [];
+        var blankData = [];
         var percentageSum = 0;
        for(i = 0; i < dataPassed.length; i++){
          var versionObject = [dataPassed[i].Version, dataPassed[i].Count];
+         var blankVersionObject = [dataPassed[i].Version, -0];
          dataToPass.push(versionObject);
+         blankData.push(blankVersionObject);
          percentageSum += dataPassed[i].Count;
           }
         $scope.percentage = parseInt((dataPassed[i-2].Count + dataPassed[i-1].Count)/percentageSum*100);
         /*var data5 = [];
         var ran = ["postWorking", 69];
         data5.push(ran); */
-
         var data = [
                 {
                     "values": dataToPass
                 }];
+        var blankData = [
+                {
+                    "values": blankData
+                }];
 
          $scope.barData = data;
+         $scope.rawData = data;
+         $scope.testData = blankData;
     }
 
     $scope.colorFunction = function(){

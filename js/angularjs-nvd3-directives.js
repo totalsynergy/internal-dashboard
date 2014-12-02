@@ -152,7 +152,7 @@
           scope.$watch( 'data', function ( data ) {
             if ( data ) {
               if ( scope.chart ) {
-                return d3.select( '#' + attrs.id + ' svg' ).attr( 'height', height ).attr( 'width', width ).datum( data ).transition().duration( 250 ).call( scope.chart );
+                return d3.select( '#' + attrs.id + ' svg' ).attr( 'height', height ).attr( 'width', width ).datum( data ).transition().duration( 1000 ).call( scope.chart );
               }
               margin = scope.$eval( attrs.margin ) || {
                 top: 5,
@@ -182,7 +182,7 @@
                   if ( !d3.select( '#' + attrs.id + ' svg' )[ 0 ][ 0 ] ) {
                     d3.select( '#' + attrs.id ).append( 'svg' );
                   }
-                  d3.select( '#' + attrs.id + ' svg' ).attr( 'height', height ).attr( 'width', width ).datum( data ).transition().duration( 250 ).call( chart );
+                  d3.select( '#' + attrs.id + ' svg' ).attr( 'height', height ).attr( 'width', width ).datum( data ).transition().duration( 1000 ).call( chart );
                   nv.utils.windowResize( chart.update );
                   scope.chart = chart;
                   return chart;
@@ -793,7 +793,7 @@
     if ( d3.select( d3Select + ' svg' ).empty() ) {
       d3.select( d3Select ).append( 'svg' );
     }
-    d3.select( d3Select + ' svg' ).attr( 'viewBox', '0 0 ' + scope.width + ' ' + scope.height ).datum( data ).transition().duration( attrs.transitionduration === undefined ? 250 : +attrs.transitionduration ).call( chart );
+    d3.select( d3Select + ' svg' ).attr( 'viewBox', '0 0 ' + scope.width + ' ' + scope.height ).datum( data ).transition().duration( attrs.transitionduration === undefined ? 1000 : +attrs.transitionduration ).call( chart );
   }
 
   function updateDimensions( scope, attrs, element, chart ) {
@@ -1992,7 +1992,7 @@
                     return '<strong>' + x + '</strong>';
                   } : scope.tooltipXContent() ).tooltipYContent( attrs.tooltipycontent === undefined ? function ( key, x, y ) {
                     return '<strong>' + y + '</strong>';
-                  } : scope.tooltipYContent() ).showControls( attrs.showcontrols === undefined ? false : attrs.showcontrols === 'true' ).showLegend( attrs.showlegend === undefined ? false : attrs.showlegend === 'true' ).showDistX( attrs.showdistx === undefined ? false : attrs.showdistx === 'true' ).showDistY( attrs.showdisty === undefined ? false : attrs.showdisty === 'true' ).xPadding( attrs.xpadding === undefined ? 0 : +attrs.xpadding ).yPadding( attrs.ypadding === undefined ? 0 : +attrs.ypadding ).fisheye( attrs.fisheye === undefined ? 0 : +attrs.fisheye ).noData( attrs.nodata === undefined ? 'No Data Available.' : scope.nodata ).color( attrs.color === undefined ? nv.utils.defaultColor() : scope.color() ).transitionDuration( attrs.transitionduration === undefined ? 250 : +attrs.transitionduration );
+                  } : scope.tooltipYContent() ).showControls( attrs.showcontrols === undefined ? false : attrs.showcontrols === 'true' ).showLegend( attrs.showlegend === undefined ? false : attrs.showlegend === 'true' ).showDistX( attrs.showdistx === undefined ? false : attrs.showdistx === 'true' ).showDistY( attrs.showdisty === undefined ? false : attrs.showdisty === 'true' ).xPadding( attrs.xpadding === undefined ? 0 : +attrs.xpadding ).yPadding( attrs.ypadding === undefined ? 0 : +attrs.ypadding ).fisheye( attrs.fisheye === undefined ? 0 : +attrs.fisheye ).noData( attrs.nodata === undefined ? 'No Data Available.' : scope.nodata ).color( attrs.color === undefined ? nv.utils.defaultColor() : scope.color() ).transitionDuration( attrs.transitionduration === undefined ? 1000 : +attrs.transitionduration );
                   if ( attrs.shape ) {
                     chart.scatter.onlyCircles( false );
                     chart.scatter.shape( attrs.shape === undefined ? function ( d ) {
@@ -2171,7 +2171,7 @@
                     return '<strong>' + x + '</strong>';
                   } : scope.tooltipXContent() ).tooltipYContent( attrs.tooltipycontent === undefined ? function ( key, x, y ) {
                     return '<strong>' + y + '</strong>';
-                  } : scope.tooltipYContent() ).showControls( attrs.showcontrols === undefined ? false : attrs.showcontrols === 'true' ).showLegend( attrs.showlegend === undefined ? false : attrs.showlegend === 'true' ).showDistX( attrs.showdistx === undefined ? false : attrs.showdistx === 'true' ).showDistY( attrs.showdisty === undefined ? false : attrs.showdisty === 'true' ).fisheye( attrs.fisheye === undefined ? 0 : +attrs.fisheye ).noData( attrs.nodata === undefined ? 'No Data Available.' : scope.nodata ).color( attrs.color === undefined ? nv.utils.defaultColor() : scope.color() ).transitionDuration( attrs.transitionduration === undefined ? 250 : +attrs.transitionduration );
+                  } : scope.tooltipYContent() ).showControls( attrs.showcontrols === undefined ? false : attrs.showcontrols === 'true' ).showLegend( attrs.showlegend === undefined ? false : attrs.showlegend === 'true' ).showDistX( attrs.showdistx === undefined ? false : attrs.showdistx === 'true' ).showDistY( attrs.showdisty === undefined ? false : attrs.showdisty === 'true' ).fisheye( attrs.fisheye === undefined ? 0 : +attrs.fisheye ).noData( attrs.nodata === undefined ? 'No Data Available.' : scope.nodata ).color( attrs.color === undefined ? nv.utils.defaultColor() : scope.color() ).transitionDuration( attrs.transitionduration === undefined ? 1000 : +attrs.transitionduration );
                   if ( attrs.shape ) {
                     chart.scatter.onlyCircles( false );
                     chart.scatter.shape( attrs.shape === undefined ? function ( d ) {
@@ -2765,7 +2765,7 @@
                 ];
                 bandLines = sLineSelection.selectAll( '.nv-bandline' ).data( [ bandlineData ] );
                 bandLines.enter().append( 'g' ).attr( 'class', 'nv-bandline' );
-                selectedChart.transition().duration( $attrs.transitionduration === undefined ? 250 : +$attrs.transitionduration ).call( chart );
+                selectedChart.transition().duration( $attrs.transitionduration === undefined ? 1000 : +$attrs.transitionduration ).call( chart );
               } else {
                 if ( !d3.select( '#' + $attrs.id + ' svg' ) ) {
                   d3.select( '#' + $attrs.id ).append( 'svg' );
@@ -2782,7 +2782,7 @@
                 ];
                 bandLines = sLineSelection.selectAll( '.nv-bandline' ).data( [ bandlineData ] );
                 bandLines.enter().append( 'g' ).attr( 'class', 'nv-bandline' );
-                selectedChart.transition().duration( $attrs.transitionduration === undefined ? 250 : +$attrs.transitionduration ).call( chart );
+                selectedChart.transition().duration( $attrs.transitionduration === undefined ? 1000 : +$attrs.transitionduration ).call( chart );
               }
             };
           }
