@@ -46,9 +46,14 @@
   </div>
 
 
-  <div ng-controller="FirstKPI" ng-show="tab == 1">
+  <div class="heightController" ng-controller="FirstKPI" ng-show="tab == 1">
       <div class="container">
-      <h1>Pie Chart</h1>
+      <div id="cloudPercentTextContainer">
+      <p id="cloudPercent">{{percentage}}%</p>
+      <p id="cloudPercentText">OF CLIENTS SYNCHRONISE<br>WITH THE CLOUD</p>
+      </div>
+      </div>
+      <div id="pieChartContainer">
       <nvd3-pie-chart
     	  data="pieData"
         id="pieChart"
@@ -56,10 +61,12 @@
         height="350"
         x="xFunction()"
         y="yFunction()"
-        objectEquality="true">
+        objectEquality="true"
+        color="colorFunction()">
         <svg height="250"></svg>
-    </nvd3-pie-chart>
-      </div>
+      </nvd3-pie-chart>
+    </div>
+
   </div>
 
 

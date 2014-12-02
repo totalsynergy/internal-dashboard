@@ -1,27 +1,55 @@
-app.controller('FirstKPI', function($scope, $http, Service){
+app.controller('FirstKPI', function($scope, $http, Service, $interval){
     $scope.keyAvailable = false;
+    $scope.totalSynergyKey = "empty";
+    $scope.cloudUptakeData = null;
+    $scope.onCloud = 0;
+    $scope.notOnCloud = 0;
+    $scope.pieData = null;
+    $scope.percentage = 0;
 
-    $scope.pieData = [
-      	  { key: "One", y: 5 },
-          { key: "Two", y: 2 },
-          { key: "Three", y: 9 },
-          { key: "Four", y: 7 },
-          { key: "Five", y: 4 },
-          { key: "Six", y: 3 },
-          { key: "Seven", y: 9 }
-        ];
+    $scope.$on('fetchEventData', function(){
+      weGotKey();
+    })
 
-    $scope.xLoopFunction = function(){
-      return function(d) {
-          return d.key;
+   $scope.$on('keysUpdated', function(){
+      $scope.totalSynergyKey = Service.totalSynergyKey;
+      weGotKey();
+    })
+
+
+    function weGotKey(){
+       $http({
+         url: 'https://beta.synergycloudapp.com/totalsynergy/InternalKpi/Home/CloudUptake',
+         method: 'POST',
+         headers : {'internal-token' : $scope.totalSynergyKey}
+         }).success(function(d, status, headers, config){
+           $scope.cloudUptakeData = d.data;
+           sortData(d.data);
+         })
+        .error(function(data, status, headers, config){
+           $scope.data2 = "fail";
+        });
+    }
+
+
+    $scope.colorFunction = function() {
+      var colorArray = ['#F39200', '#004F93'];
+	    return function(d, i) {
+    	return colorArray[i];
       };
     }
 
-    $scope.yLoopFunction = function(){
-      return function(d) {
-          return d.y;
-      };
+    function sortData(data){
+      $scope.percentage = parseInt((data[0].Count / (data[0].Count + data[1].Count ))*100);
+      var dataToPass = [];
+      var dataArray = {key: "Not On Cloud", y: data[1].Count};
+      dataToPass.push(dataArray);
+      var dataArray2 = {key: "On Cloud", y: data[0].Count};
+      dataToPass.push(dataArray2);
+      $scope.pieData = dataToPass;
+      $scope.originalData = dataToPass;
     }
+
 
 
     $scope.xFunction = function(){
@@ -37,20 +65,32 @@ app.controller('FirstKPI', function($scope, $http, Service){
     }
 
 
-    $scope.$on('keysUpdated', function(){
-      $scope.totalSynergyKey = Service.totalSynergyKey;
-
-    })
-
-
     $scope.$on('tabUpdated', function(){
       $scope.tab = Service.tab;
-      $scope.pieData[2].y += 25;
-      $scope.xFunction = $scope.xLoopFunction;
-      $scope.yFunction = $scope.yLoopFunction;
+
+      if(Service.tab == 1){
+        $scope.pieData = $scope.originalData;
+        countUpPercentage2();
+      }
+      else{
+        $scope.pieData = [{key: "Not On Cloud", y: 100}, {key: "On Cloud", y: 0}];
+      }
+
     });
 
+    function countUpPercentage2(){
+      var limit = $scope.percentage;
+      $scope.percentage = 0;
+      $interval(function(){
+        $scope.percentage++;
+      },10, limit)
+    }
   });
+
+
+
+
+
 
 app.controller('SecondController', function($scope, $http, Service, $interval){
     $scope.keyAvailable = false;
@@ -61,10 +101,13 @@ app.controller('SecondController', function($scope, $http, Service, $interval){
     $scope.percentage = 0;
     $scope.rawData = 0;
     $scope.testData = 0;
-    $scope.percentageHolder = 50;
 
     $scope.$on('keysUpdated', function(){
       $scope.totalSynergyKey = Service.totalSynergyKey;
+      weGotKey();
+    })
+
+    $scope.$on('fetchEventData', function(){
       weGotKey();
     })
 
@@ -116,7 +159,7 @@ app.controller('SecondController', function($scope, $http, Service, $interval){
         var percentageSum = 0;
        for(i = 0; i < dataPassed.length; i++){
          var versionObject = [dataPassed[i].Version, dataPassed[i].Count];
-         var blankVersionObject = [dataPassed[i].Version, -0];
+         var blankVersionObject = [dataPassed[i].Version, 0];
          dataToPass.push(versionObject);
          blankData.push(blankVersionObject);
          percentageSum += dataPassed[i].Count;
@@ -153,6 +196,11 @@ app.controller('SecondController', function($scope, $http, Service, $interval){
 
 
   });
+
+
+
+
+
 
 
 
@@ -243,6 +291,11 @@ app.controller('FourthController', function($scope, Service, $http){
       })
     }
   });
+
+
+
+
+
 
 
 
