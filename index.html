@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="css/bootstrap-theme.css">
     <link rel="stylesheet" href="css/nv.d3.css">
+    <link rel="stylesheet" href="css/animations.css">
 
 
 </head>
@@ -46,7 +47,7 @@
   </div>
 
 
-  <div class="heightController" ng-controller="FirstKPI" ng-show="tab == 1">
+  <div class="heightController  at-view-flip-in-vertical at-view-flip-out-vertical" ng-controller="FirstKPI" ng-show="tab == 1">
       <div class="container">
       <div id="cloudPercentTextContainer">
       <p id="cloudPercent">{{percentage}}%</p>
