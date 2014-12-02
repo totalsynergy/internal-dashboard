@@ -48,7 +48,6 @@ app.controller('FirstController', function($scope, Service, $interval, $timeout)
     })
 
     $scope.settingsHit = function(){
-      tabOpen = 4;
      // $scope.tab = 99;
       //counter = 6;
       Service.updateTab(99);

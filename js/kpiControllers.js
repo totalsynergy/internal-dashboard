@@ -1,3 +1,5 @@
+
+//tab = 1
 app.controller('FirstKPI', function($scope, $http, Service, $interval){
     $scope.keyAvailable = false;
     $scope.totalSynergyKey = "empty";
@@ -88,11 +90,21 @@ app.controller('FirstKPI', function($scope, $http, Service, $interval){
   });
 
 
+  //tab = 2
+app.controller('SecondKPI', function($scope, Service){
+
+    $scope.$on('tabUpdated', function(){
+      $scope.tab = Service.tab;
+    });
+
+    $scope.$on('attendeesUpdated', function() {
+      $scope.totalAttendees = Service.totalAttendees;
+    });
+   });
 
 
 
-
-app.controller('SecondController', function($scope, $http, Service, $interval){
+app.controller('ThirdKPI', function($scope, $http, Service, $interval){
     $scope.keyAvailable = false;
     $scope.data2 = "nothing yet";
     $scope.totalSynergyKey = "";
@@ -113,7 +125,7 @@ app.controller('SecondController', function($scope, $http, Service, $interval){
 
     $scope.$on('tabUpdated', function(){
       $scope.tab = Service.tab;
-      if(Service.tab == 2){
+      if(Service.tab == 3){
         $scope.barData = $scope.rawData;
         countUpPercentage();
       }
@@ -204,7 +216,7 @@ app.controller('SecondController', function($scope, $http, Service, $interval){
 
 
 
-app.controller('ThirdController', function($scope, Service){
+app.controller('FourthKPI', function($scope, Service){
     $scope.totalAttendees = 0;
 
     $scope.$on('tabUpdated', function(){
@@ -218,7 +230,7 @@ app.controller('ThirdController', function($scope, Service){
 
 
 
-app.controller('FourthController', function($scope, Service, $http){
+app.controller('FifthKPI', function($scope, Service, $http){
     $scope.NSWnACT = 0;
     $scope.QLD = 0;
     $scope.VICnTAS = 0;
@@ -299,7 +311,7 @@ app.controller('FourthController', function($scope, Service, $http){
 
 
 
-app.controller('FifthController', function($scope, $http, Service, $interval){
+app.controller('SixthKPI', function($scope, $http, Service, $interval){
 
     $scope.days = 0;
     $scope.hours = 0;

@@ -72,7 +72,8 @@
     var pages = [
       {"name" : "totalSynergy", "isSelected" : false},
       {"name" : "desktopVersion", "isSelected" : false},
-      {"name" : "totalAttendees", "isSelected" : true},
+      {"name" : "another Graph", "isSelected" : true},
+      {"name" : "total Attendees", "isSelected" : true},
       {"name" : "attendeeMap", "isSelected" : true},
       {"name" : "conferenceCountDown", "isSelected" : true}
     ];
