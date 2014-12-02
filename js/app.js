@@ -52,6 +52,8 @@
       $rootScope.$broadcast("fetchEventData");
     }
 
+
+
     return service;
 });
 

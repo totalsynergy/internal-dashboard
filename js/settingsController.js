@@ -27,6 +27,8 @@
       chrome.storage.local.set({'totalSynergyKey': $scope.totalSynergyKey});
       chrome.storage.local.set({'speed' : $scope.speed});
       chrome.storage.local.set({'pages' : $scope.pages});
+      Service.updateKeys($scope.eventBriteKey, $scope.totalSynergyKey, $scope.speed, $scope.pages);
+      Service.sendForData();
     }
 
     $scope.settingsClose = function(){
