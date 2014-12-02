@@ -426,9 +426,13 @@ input[type=checkbox]{
   height:100%;
 }
 
-.versionsGraph{
-  position:relative;
-  top:40%;
+.graphContainer{
+  width:60%;
+  height:60%;
+  position:fixed;
+  bottom:5%;
+  left:20%;
+
 }
 
 .pieChart{
