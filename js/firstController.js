@@ -7,7 +7,7 @@ app.controller('FirstController', function($scope, Service, $interval, $timeout)
     $scope.testNumber = test;
     $scope.pages = pages;
     $scope.amountOfPages = $scope.pages.length;
-    $scope.timer = $timeout($scope.loop, $scope.speed);
+    $scope.myTimeout = null;
     $scope.timerBoolean = false;
 
   //fix this loop
@@ -28,17 +28,29 @@ app.controller('FirstController', function($scope, Service, $interval, $timeout)
 
     $scope.init = function(){
       goRight();
-      $scope.loop();
+      $scope.myTimeout = $timeout($scope.onTimeout, $scope.speed);
+      $scope.on('change', function(){
+        $timeout.cancel($scope.myTimeout);
+      });
       $interval(function(){
         Service.sendForData();
       }, 60000);
+    }
+
+    $scope.onTimeout = function(){
+      if($scope.tab != 99)
+        goRight();
+      $scope.myTimeout = $timeout($scope.onTimeout, $scope.speed);
+      $scope.on('change', function(){
+        $timeout.cancel($scope.myTimeout);
+      });
     }
 
 
     $scope.loop = function(){
       if($scope.tab != 99)
         goRight();
-      $scope.timer = $timeout($scope.loop, $scope.speed);
+      timer = $timeout($scope.loop, $scope.speed);
       //
     }
 
@@ -46,6 +58,10 @@ app.controller('FirstController', function($scope, Service, $interval, $timeout)
     $scope.$on('selectedUpdated', function(){
       $scope.pages = Service.pages;
     })
+
+    $scope.$on('$destroy', function( event ) {
+        $timeout.cancel(timer);
+     });
 
     $scope.settingsHit = function(){
      // $scope.tab = 99;
@@ -93,6 +109,7 @@ app.controller('FirstController', function($scope, Service, $interval, $timeout)
           nextPage++;
       }
       Service.updateTab(nextPage);
+      $scope.$broadcast('change');
     }
 
     function goRight(){
@@ -118,7 +135,7 @@ app.controller('FirstController', function($scope, Service, $interval, $timeout)
         else
           nextPage--;
       }
-
+      $timeout.cancel($scope.myTimeout);
       Service.updateTab(nextPage);
 
 

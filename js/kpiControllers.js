@@ -46,6 +46,7 @@ app.controller('FirstKPI', function($scope, $http, Service, $interval){
       dataToPass.push(dataArray);
       var dataArray2 = {key: "On Cloud", y: data[0].Count};
       dataToPass.push(dataArray2);
+      cloudConversionData = dataToPass;
       $scope.pieData = dataToPass;
       $scope.originalData = dataToPass;
     }
@@ -95,23 +96,24 @@ app.controller('FirstKPI', function($scope, $http, Service, $interval){
 
   //tab = 2
 app.controller('SecondKPI', function($scope, Service){
-    $scope.percentage = 97;
+    $scope.percentage = 92;
     $scope.internPieData = [
-      {key: "Productive Time", y: 3},
-      {key: "UnProductive Time", y: 97}
+      {key: "Productive Time", y: 8},
+      {key: "UnProductive Time", y: 92}
       ];
 
     $scope.$on('tabUpdated', function(){
       $scope.tab = Service.tab;
       if(Service.tab == 2){
         $scope.internPieData = [
-          {key: "Productive Time", y: 3},
-          {key: "UnProductive Time", y: 97}
+          {key: "Productive Time", y: 8},
+          {key: "UnProductive Time", y: 92}
         ];
         //countUpPercentage2();
       }
       else{
-        $scope.internPieData = [{key: "Productive Time", y: 100}, {key: "UnProductive Time", y: 0}];
+        //$scope.internPieData = [{key: "Productive Time", y: 100}, {key: "UnProductive Time", y: 0}];
+        $scope.internPieData = cloudConversionData;
       }
     });
 

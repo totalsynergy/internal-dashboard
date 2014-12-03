@@ -481,6 +481,7 @@ input[type=checkbox]{
 
 .kpi{
   opacity: 1;
+  transition: ease-out;
 }
  /* when hiding the picture */
 /* Initial state when showing
@@ -498,21 +499,26 @@ input[type=checkbox]{
 
 
 
-//TRANSFORMATIONS
-
-
-.ng-hide-remove{
-  transition: 2s;
+.animate.ng-hide-remove{
+  transition: 3s;
   opacity: 0;
   display: block !important;
 }
 
-.ng-hide-remove-active{
-  transition:2s;
+.animate.ng-hide-remove-active{
+  transition:3s;
   opacity: 1;
 }
 
+.animate.ng-hide-add{
+  transition:0.1s;
+  opacity: 1;
+}
 
+.animate.ng-hide-add-active{
+  transition:0.1s;
+  opacity: 0;
+}
 
 
 

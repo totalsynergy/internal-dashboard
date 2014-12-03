@@ -87,6 +87,8 @@
 
     var tabOpen = 4;
 
+    var cloudConversionData = "";
+
 
 
 
