@@ -9,6 +9,7 @@ app.controller('FirstController', function($scope, Service, $interval, $timeout)
     $scope.amountOfPages = $scope.pages.length;
     $scope.myTimeout = null;
     $scope.timerBoolean = false;
+    var timer = $timeout($scope.onTimeout, $scope.speed);;
 
   //fix this loop
 
@@ -28,10 +29,9 @@ app.controller('FirstController', function($scope, Service, $interval, $timeout)
 
     $scope.init = function(){
       goRight();
-      $scope.myTimeout = $timeout($scope.onTimeout, $scope.speed);
-      $scope.on('change', function(){
-        $timeout.cancel($scope.myTimeout);
-      });
+      timer = $timeout($scope.onTimeout, $scope.speed);
+      //goRight();
+      //$scope.newTime();
       $interval(function(){
         Service.sendForData();
       }, 60000);
@@ -40,10 +40,7 @@ app.controller('FirstController', function($scope, Service, $interval, $timeout)
     $scope.onTimeout = function(){
       if($scope.tab != 99)
         goRight();
-      $scope.myTimeout = $timeout($scope.onTimeout, $scope.speed);
-      $scope.on('change', function(){
-        $timeout.cancel($scope.myTimeout);
-      });
+      timer = $timeout($scope.onTimeout, $scope.speed);
     }
 
 
@@ -54,6 +51,7 @@ app.controller('FirstController', function($scope, Service, $interval, $timeout)
       //
     }
 
+    $timeout.cancel($scope.myTimeout);
 
     $scope.$on('selectedUpdated', function(){
       $scope.pages = Service.pages;
@@ -83,6 +81,12 @@ app.controller('FirstController', function($scope, Service, $interval, $timeout)
       $scope.tab = Service.tab;
     });
 
+    $scope.newTime = function(){
+      if($scope.tab != 99)
+      $timeout($scope.newTime, $scope.speed);
+      goRight();
+    }
+
     //kind of works
 
     $scope.leftButton = function(){
@@ -110,6 +114,7 @@ app.controller('FirstController', function($scope, Service, $interval, $timeout)
       }
       Service.updateTab(nextPage);
       $scope.$broadcast('change');
+      $timeout.cancel(timer);
     }
 
     function goRight(){
@@ -123,7 +128,9 @@ app.controller('FirstController', function($scope, Service, $interval, $timeout)
           nextPage++;
       }
       Service.updateTab(nextPage);
+      //$scope.newTime;
     }
+
 
 
     $scope.leftButtonHit = function(){
