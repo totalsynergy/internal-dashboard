@@ -18,7 +18,6 @@ app.controller('FirstKPI', function($scope, $http, Service, $interval){
       weGotKey();
     })
 
-
     function weGotKey(){
        $http({
          url: 'https://beta.synergycloudapp.com/totalsynergy/InternalKpi/Home/CloudUptake',
@@ -32,7 +31,6 @@ app.controller('FirstKPI', function($scope, $http, Service, $interval){
            $scope.data2 = "fail";
         });
     }
-
 
     $scope.colorFunction = function() {
       var colorArray = ['#F39200', '#004F93'];
@@ -52,8 +50,6 @@ app.controller('FirstKPI', function($scope, $http, Service, $interval){
       $scope.originalData = dataToPass;
     }
 
-
-
     $scope.xFunction = function(){
       return function() {
           return $scope.pieData.key;
@@ -66,41 +62,91 @@ app.controller('FirstKPI', function($scope, $http, Service, $interval){
     	};
     }
 
-
     $scope.$on('tabUpdated', function(){
       $scope.tab = Service.tab;
 
       if(Service.tab == 1){
         $scope.pieData = $scope.originalData;
-        countUpPercentage2();
+        //countUpPercentage2();
       }
       else{
         $scope.pieData = [{key: "Not On Cloud", y: 100}, {key: "On Cloud", y: 0}];
       }
-
     });
 
-    function countUpPercentage2(){
+    /*function countUpPercentage2(){
       var limit = $scope.percentage;
       $scope.percentage = 0;
       $interval(function(){
         $scope.percentage++;
       },10, limit)
-    }
+    } */
   });
+
+
+
+
+
+
+
+
+
 
 
   //tab = 2
 app.controller('SecondKPI', function($scope, Service){
+    $scope.percentage = 97;
+    $scope.internPieData = [
+      {key: "Productive Time", y: 3},
+      {key: "UnProductive Time", y: 97}
+      ];
 
     $scope.$on('tabUpdated', function(){
       $scope.tab = Service.tab;
+      if(Service.tab == 2){
+        $scope.internPieData = [
+          {key: "Productive Time", y: 3},
+          {key: "UnProductive Time", y: 97}
+        ];
+        //countUpPercentage2();
+      }
+      else{
+        $scope.internPieData = [{key: "Productive Time", y: 100}, {key: "UnProductive Time", y: 0}];
+      }
     });
 
     $scope.$on('attendeesUpdated', function() {
       $scope.totalAttendees = Service.totalAttendees;
     });
+
+   $scope.xFunction = function(){
+      return function() {
+          return $scope.pieData.key;
+      };
+    }
+
+    $scope.yFunction = function(){
+    	return function(d){
+	  	  return d.y;
+    	};
+    }
+
+    $scope.colorFunction = function() {
+      var colorArray = ['#F39200', '#004F93'];
+	    return function(d, i) {
+    	return colorArray[i];
+      };
+    }
+
    });
+
+
+
+
+
+
+
+
 
 
 
@@ -113,6 +159,7 @@ app.controller('ThirdKPI', function($scope, $http, Service, $interval){
     $scope.percentage = 0;
     $scope.rawData = 0;
     $scope.testData = 0;
+
 
     $scope.$on('keysUpdated', function(){
       $scope.totalSynergyKey = Service.totalSynergyKey;
@@ -127,12 +174,13 @@ app.controller('ThirdKPI', function($scope, $http, Service, $interval){
       $scope.tab = Service.tab;
       if(Service.tab == 3){
         $scope.barData = $scope.rawData;
-        countUpPercentage();
+        //countUpPercentage();
       }
       else{
         $scope.barData = $scope.testData;
       }
     });
+    /*
 
     function countUpPercentage(){
       var limit = $scope.percentage;
@@ -143,8 +191,9 @@ app.controller('ThirdKPI', function($scope, $http, Service, $interval){
       //for(i = 0; i < limit; i++){
       //  $scope.percentage += 1;
       //}
-      //}
-    }
+      //
+      */
+
 
     function weGotKey(){
 
@@ -160,9 +209,6 @@ app.controller('ThirdKPI', function($scope, $http, Service, $interval){
     .error(function(data, status, headers, config){
       $scope.data2 = "fail";
     });
-
-
-
     }
 
     function sortData(dataPassed){
@@ -227,6 +273,11 @@ app.controller('FourthKPI', function($scope, Service){
       $scope.totalAttendees = Service.totalAttendees;
     });
    });
+
+
+
+
+
 
 
 
@@ -311,6 +362,8 @@ app.controller('FifthKPI', function($scope, Service, $http){
 
 
 
+
+
 app.controller('SixthKPI', function($scope, $http, Service, $interval){
 
     $scope.days = 0;
@@ -327,7 +380,6 @@ app.controller('SixthKPI', function($scope, $http, Service, $interval){
       $scope.totalSynergyKey = Service.totalSynergyKey;
       weGotKey();
     })
-
 
     $scope.$on('selectedUpdated', function(){
       $scope.pages = Service.pages;

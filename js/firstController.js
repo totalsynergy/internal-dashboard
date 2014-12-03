@@ -2,17 +2,16 @@ app.controller('FirstController', function($scope, Service, $interval, $timeout)
     var time = 1;
     var counter = 1;
     $scope.speed = 1000;
-    var loop;
     //$scope.tab = getTab();
     $scope.tab = 1;
     $scope.testNumber = test;
     $scope.pages = pages;
     $scope.amountOfPages = $scope.pages.length;
-    var timer = null;
+    $scope.timer = $timeout($scope.loop, $scope.speed);
+    $scope.timerBoolean = false;
 
   //fix this loop
 
-    var timer = $timeout($scope.loop, $scope.speed);
 
     chrome.storage.local.get(null, function(result){
       if(result.pages != null)
@@ -39,7 +38,8 @@ app.controller('FirstController', function($scope, Service, $interval, $timeout)
     $scope.loop = function(){
       if($scope.tab != 99)
         goRight();
-      timer = $timeout($scope.loop, $scope.speed);
+      $scope.timer = $timeout($scope.loop, $scope.speed);
+      //
     }
 
 
@@ -51,7 +51,7 @@ app.controller('FirstController', function($scope, Service, $interval, $timeout)
      // $scope.tab = 99;
       //counter = 6;
       Service.updateTab(99);
-
+      $scope.loop();
     }
 
     $scope.settingsClose = function(){
@@ -59,7 +59,7 @@ app.controller('FirstController', function($scope, Service, $interval, $timeout)
     }
 
     $scope.$on('settingsClosed', function(){
-      $timeout.cancel(timer);
+
       //$scope.loop;
     })
 
@@ -118,7 +118,10 @@ app.controller('FirstController', function($scope, Service, $interval, $timeout)
         else
           nextPage--;
       }
+
       Service.updateTab(nextPage);
+
+
       //if(counter == 1)
       //  Service.updateTab(pages.length);
       //else
@@ -131,6 +134,7 @@ app.controller('FirstController', function($scope, Service, $interval, $timeout)
         Service.updateTab(1);
       else
         Service.updateTab(counter + 1);
+      $scope.timerBoolean = true;
     }
 
     $scope.settingsButtonHit = function(){

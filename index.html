@@ -16,7 +16,7 @@
     <script type="text/javascript" src="js/npm.js"></script>
     <script type="text/javascript" src="js/d3.js"></script>
     <script type="text/javascript" src="js/nv.d3.js"></script>
-    <script type="text/javascript" src="js/mychart.js"></script>
+    <script type="text/javascript" src="js/angular-animate.js"></script>
     <script type="text/javascript" src="js/angularjs-nvd3-directives.js"></script>
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -47,7 +47,7 @@
   </div>
 
 
-  <div class="heightController  at-view-flip-in-vertical at-view-flip-out-vertical" ng-controller="FirstKPI" ng-show="tab == 1">
+  <div class="heightController kpi pieKPI" ng-controller="FirstKPI" ng-show="tab == 1">
       <div class="container">
       <div id="cloudPercentTextContainer">
       <p id="cloudPercent">{{percentage}}%</p>
@@ -67,16 +67,33 @@
         <svg height="250"></svg>
       </nvd3-pie-chart>
     </div>
-
   </div>
 
-  <div ng-controller="SecondKPI" ng-show="tab ==2">
-    <h1>2nd Graph</h1>
+  <div ng-controller="SecondKPI" class="kpi" ng-show="tab ==2">
+    <div class="container" ng-show="tab == 2">
+      <div id="cloudPercentTextContainer">
+      <p id="cloudPercent">{{percentage}}%</p>
+      <p id="cloudPercentText">INTERN PRODUCTIVITY</p></p>
+      </div>
+      </div>
+      <div id="pieChartContainer">
+      <nvd3-pie-chart
+    	  data="internPieData"
+        id="internPieChart"
+        width="550"
+        height="350"
+        x="xFunction()"
+        y="yFunction()"
+        objectEquality="true"
+        color="colorFunction()">
+        <svg height="250"></svg>
+      </nvd3-pie-chart>
+    </div>
   </div>
 
 
-  <div class="heightController" ng-controller="ThirdKPI" ng-show="tab == 3">
-  <div class="container percentageHeader" >
+  <div class="heightController kpi" ng-controller="ThirdKPI" ng-show="tab == 3">
+  <div class="container percentageHeader">
       <div id="rows">
          <div class="col-md-4">
             <p id="percent">{{percentage}}%</p>
@@ -103,7 +120,7 @@
  </div>
 
 
-  <div ng-controller="FourthKPI" ng-show="tab == 4">
+  <div ng-controller="FourthKPI" class="kpi animate" ng-show="tab == 4">
   <div class="container totalAttendees">
     <img class="cube" src="assets/cubeBlank.png">
     <div class="numberOf"><p class="numberOfAttendees">{{totalAttendees}}</p></div>
@@ -115,7 +132,7 @@
   </div>
 
 
-  <div ng-controller="FifthKPI" ng-show="tab == 5">
+  <div ng-controller="FifthKPI" class="kpi" ng-show="tab == 5">
     <h1 id="confAten">CONFERENCE ATTENDEES</h1>
     <div class="my-container">
     <img class="country" src="assets/Eventbrite feed SVG_Map.svg" alt="" />
@@ -144,7 +161,7 @@
 
 
 
-  <div ng-controller="SixthKPI" ng-show="tab == 6">
+  <div ng-controller="SixthKPI" class="kpi" ng-show="tab == 6">
   <div class="container">
     <h2 class="countDownHeader">SYNERGY2015<br>COUNTDOWN</h2>
     <div class="countDown">
@@ -161,7 +178,8 @@
 
 
 <!-- TO ADD A NEW KPI - INSERT AT END, ADD A VARIABLE ONTO APP.JS VARIABLE PAGES, CREATE THE WRITE LISTENERS IN THE CONTROLLER AND MAKE TAB == WHATEVER
-CONTROLLER IT IS. FINALLY, TURN OFF CHROME LOCAL STORAGE - then SAVE PAGES. TUNR OFF APP AND TURN ON LOCAL STORAGE AGAIN -->
+CONTROLLER IT IS. FINALLY, TURN OFF CHROME LOCAL STORAGE - then SAVE PAGES. TUNR OFF APP AND TURN ON LOCAL STORAGE AGAIN + CHANGE THE BACKUP PAGES
+IN SETTINGS RESTORE-->
 
 
 
@@ -198,6 +216,7 @@ CONTROLLER IT IS. FINALLY, TURN OFF CHROME LOCAL STORAGE - then SAVE PAGES. TUNR
       <div class="saveNExit">
           <input type="submit" value="Save" id="save" ng-click="save()"/>
           <input type="submit" value="Exit" id="save" ng-click="settingsClose()"/>
+          <input type="submit" value="Restore" id="restore" ng-click="restoreDefaults()"/>
       </div>
     </div>
   </div>

@@ -31,6 +31,10 @@
       Service.sendForData();
     }
 
+    $scope.restoreDefaults = function(){
+      Service.restore(15, restorePages);
+    }
+
     $scope.settingsClose = function(){
       for(i = 0; i < pages.length; i++)
         if($scope.pages[i].isSelected){
@@ -55,5 +59,15 @@
     $scope.$on('selectedUpdated', function(){
       $scope.pages = Service.pages;
     })
+
+
+    var restorePages = [
+      {"name" : "Cloud Users", "isSelected" : false},
+      {"name" : "Another PieChart", "isSelected" : false},
+      {"name" : "Desktop Version Graph", "isSelected" : false},
+      {"name" : "Total Attendees", "isSelected" : true},
+      {"name" : "Attendee Map", "isSelected" : true},
+      {"name" : "conference CountDown", "isSelected" : true}
+    ];
 
   });

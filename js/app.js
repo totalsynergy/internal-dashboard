@@ -18,7 +18,7 @@
       this.pages = pag;
       $rootScope.$broadcast("keysUpdated");
       $rootScope.$broadcast("speedUpdated");
-      $rootScope.$broadcast("selectedUpdated")
+      $rootScope.$broadcast("selectedUpdated");
     }
 
 
@@ -52,12 +52,19 @@
       $rootScope.$broadcast("fetchEventData");
     }
 
+    service.restore = function(speed, page){
+      this.pages = page;
+      this.speed = 15000;
+      $rootScope.$broadcast("speedUpdated");
+      $rootScope.$broadcast("selectedUpdated");
+    }
+
 
 
     return service;
 });
 
-  var app = angular.module('myApp', ['appService', 'uiSlider', 'nvd3ChartDirectives']);
+  var app = angular.module('myApp', ['appService', 'uiSlider', 'nvd3ChartDirectives', 'ngAnimate']);
 
 
 
@@ -70,12 +77,12 @@
     var speed = 15000;
 
     var pages = [
-      {"name" : "totalSynergy", "isSelected" : false},
-      {"name" : "desktopVersion", "isSelected" : false},
-      {"name" : "another Graph", "isSelected" : true},
-      {"name" : "total Attendees", "isSelected" : true},
-      {"name" : "attendeeMap", "isSelected" : true},
-      {"name" : "conferenceCountDown", "isSelected" : true}
+      {"name" : "Cloud Users", "isSelected" : false},
+      {"name" : "Another PieChart", "isSelected" : false},
+      {"name" : "Desktop Version Graph", "isSelected" : true},
+      {"name" : "Total Attendees", "isSelected" : true},
+      {"name" : "Attendee Map", "isSelected" : true},
+      {"name" : "conference CountDown", "isSelected" : true}
     ];
 
     var tabOpen = 4;
