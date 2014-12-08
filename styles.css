@@ -16,6 +16,7 @@
 
 html, body, .container{
   height:100%;
+  /*background-color: #F0EFF4;  FIX PNG + SVG WHITE BACKGROUNDS FIRST */
 }
 
 h1{
@@ -165,11 +166,11 @@ div.vic {
     left: 55%;
 }
 
-@media all and (min-width: 50px)   {  span  { font-size:4.1em;  } }
-@media all and (min-width: 100px)  {  span  { font-size:4.2em;  } }
-@media all and (min-width: 200px)  {  span  { font-size:4.4em;  } }
-@media all and (min-width: 300px)  {  span  { font-size:4.6em;  } }
-@media all and (min-width: 400px)  {  span  { font-size:4.8em;  } }
+@media all and (min-width: 50px)   {  span  { font-size:2.1em;  } }
+@media all and (min-width: 100px)  {  span  { font-size:2.2em;  } }
+@media all and (min-width: 200px)  {  span  { font-size:2.4em;  } }
+@media all and (min-width: 300px)  {  span  { font-size:2.6em;  } }
+@media all and (min-width: 400px)  {  span  { font-size:2.8em;  } }
 @media all and (min-width: 500px)  {  span  { font-size:3.0em;  } }
 @media all and (min-width: 600px)  {  span  { font-size:3.4em;  } }
 @media all and (min-width: 700px)  {  span  { font-size:3.8em;  } }
@@ -519,6 +520,78 @@ input[type=checkbox]{
   transition:0.1s;
   opacity: 0;
 }
+
+#dataContainer{
+  width:50%;
+}
+
+.synergy4Map{
+  height:100%;
+}
+
+.my-container2{
+    position:relative;
+    right:3%;
+    width: 50%;
+    margin: 0 auto;
+
+}
+
+div.nsw2, div.qld2, div.sa2, div.nt2, div.wa2, div.vic2, div.act2, div.tas2{
+    position: absolute;
+    width: 18.3%;
+    height: 18.3%;
+    text-align: center;
+    color:#58595B;
+     /*mess around */
+    font-family:openSans;
+    font-size:80%;
+}
+
+div.act2, div.tas2{
+  font-size:40%;
+}
+
+div.nsw2 {
+    top: 58.3%;
+    left: 79.6%;
+}
+
+div.qld2 {
+    top: 26.8%;
+    left: 76.2%;
+}
+
+div.wa2 {
+    top: 45.2%;
+    left: 1.7%;
+}
+
+div.sa2 {
+    top: 58%;
+    left: 28%;
+}
+
+div.nt2 {
+    top: 4.8%;
+    left: 37.65%;
+}
+
+div.vic2 {
+    top: 70.5%;
+    left: 55%;
+}
+
+div.tas2 {
+    top: 87.5%;
+    left: 76.2%;
+}
+div.act2 {
+    top: 59.5%;
+    left: 65.2%;
+}
+
+
 
 
 

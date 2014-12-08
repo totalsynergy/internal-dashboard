@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 18.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1036 1012" enable-background="new 0 0 1036 1012" xml:space="preserve">
+<g id="Layer_1">
+	<g>
+		<defs>
+			<path id="SVGID_1_" d="M1024.9,517.3L901.5,838L718,854.5L498.1,697.5L355,695l-220.7,54.6l-48.8-57.9l9.9-10.7L37.2,389.1
+				L240.9,270l119.9-134.1l71.9,44.1l25.3-85.3l164-11l-22.9,100l124.6,75.6l34.7-225.7L1024.9,517.3z M813,986l39.7,12.4l45.4-97.6
+				l-105.7,13.2L813,986z"/>
+		</defs>
+		<use xlink:href="#SVGID_1_"  overflow="visible" fill="#8DC63F"/>
+		<clipPath id="SVGID_2_">
+			<use xlink:href="#SVGID_1_"  overflow="visible"/>
+		</clipPath>
+	</g>
+	<circle fill="#00AEEF" cx="486.2" cy="128.1" r="101.8"/>
+	<circle fill="#00AEEF" cx="884.2" cy="352.1" r="101.8"/>
+	<circle fill="#00AEEF" cx="926.2" cy="675.1" r="101.8"/>
+	<circle fill="#00AEEF" cx="664.2" cy="800.1" r="101.8"/>
+	<circle fill="#00AEEF" cx="386.2" cy="670.1" r="101.8"/>
+	<circle fill="#00AEEF" cx="113.2" cy="540.1" r="101.8"/>
+	<g>
+		<g>
+			<text transform="matrix(1 0 0 1 96.6143 632.0002)" fill="#FFFFFF" font-family="'AvenirLT-Book'" font-size="20">WA</text>
+		</g>
+	</g>
+	<g>
+		<g>
+			<text transform="matrix(1 0 0 1 373.9009 761.7976)" fill="#FFFFFF" font-family="'AvenirLT-Book'" font-size="20">SA</text>
+		</g>
+	</g>
+	<g>
+		<g>
+			<text transform="matrix(1 0 0 1 664.4756 869.3749)"><tspan x="0" y="0" fill="#FFFFFF" font-family="'AvenirLT-Book'" font-size="20"> </tspan><tspan x="-15.8" y="22" fill="#FFFFFF" font-family="'AvenirLT-Book'" font-size="20">VIC</tspan></text>
+		</g>
+	</g>
+	<g>
+		<g>
+			<text transform="matrix(1 0 0 1 902.9767 767.8361)" fill="#FFFFFF" font-family="'AvenirLT-Book'" font-size="20">NSW</text>
+		</g>
+	</g>
+	<circle fill="#00AEEF" cx="771.2" cy="649.1" r="48.8"/>
+	<g>
+		<g>
+			<text transform="matrix(1 0 0 1 770.7565 664.8361)"><tspan x="0" y="0" fill="#FFFFFF" font-family="'AvenirLT-Book'" font-size="20"> </tspan><tspan x="-19.6" y="22" fill="#FFFFFF" font-family="'AvenirLT-Book'" font-size="20">ACT</tspan></text>
+		</g>
+	</g>
+	<circle fill="#00AEEF" cx="884.2" cy="931.1" r="48.8"/>
+	<g>
+		<g>
+			<text transform="matrix(1 0 0 1 883.7565 946.8361)"><tspan x="0" y="0" fill="#FFFFFF" font-family="'AvenirLT-Book'" font-size="20"> </tspan><tspan x="-18.2" y="22" fill="#FFFFFF" font-family="'AvenirLT-Book'" font-size="20">TAS</tspan></text>
+		</g>
+	</g>
+	<g>
+		<g>
+			<text transform="matrix(1 0 0 1 863.8228 444.2925)" fill="#FFFFFF" font-family="'AvenirLT-Book'" font-size="20">QLD</text>
+		</g>
+	</g>
+	<g>
+		<g>
+			<text transform="matrix(1 0 0 1 472.6341 219.856)" fill="#FFFFFF" font-family="'AvenirLT-Book'" font-size="20">NT</text>
+		</g>
+	</g>
+</g>
+<g id="Layer_2" display="none">
+	<g display="inline">
+		<text transform="matrix(1 0 0 1 398.3491 160.5889)" fill="#58595B" font-family="'AvenirLT-Black'" font-size="98.8804">100</text>
+	</g>
+	<g display="inline">
+		<text transform="matrix(1 0 0 1 796.7677 385.0254)" fill="#58595B" font-family="'AvenirLT-Black'" font-size="98.8804">100</text>
+	</g>
+	<g display="inline">
+		<text transform="matrix(1 0 0 1 805.9514 707.9023)" fill="#58595B" font-family="'AvenirLT-Black'" font-size="98.8804">100</text>
+	</g>
+	<g display="inline">
+		<text transform="matrix(1 0 0 1 576.6707 832.1078)" fill="#58595B" font-family="'AvenirLT-Black'" font-size="98.8804">100</text>
+	</g>
+	<g display="inline">
+		<text transform="matrix(1 0 0 1 298.5158 702.5305)" fill="#58595B" font-family="'AvenirLT-Black'" font-size="98.8804">100</text>
+	</g>
+	<g display="inline">
+		<text transform="matrix(1 0 0 1 25.109 572.7332)" fill="#58595B" font-family="'AvenirLT-Black'" font-size="98.8804">100</text>
+	</g>
+</g>
+</svg>

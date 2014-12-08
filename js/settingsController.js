@@ -64,10 +64,14 @@
     var restorePages = [
       {"name" : "Cloud Users", "isSelected" : false},
       {"name" : "Another PieChart", "isSelected" : false},
-      {"name" : "Desktop Version Graph", "isSelected" : false},
+      {"name" : "Desktop Version Graph", "isSelected" : true},
       {"name" : "Total Attendees", "isSelected" : true},
       {"name" : "Attendee Map", "isSelected" : true},
-      {"name" : "conference CountDown", "isSelected" : true}
+      {"name" : "conference CountDown", "isSelected" : true},
+      {"name" : "Gravatar", "isSelected" : false},
+      {"name" : "Test1", "isSelected" : false},
+      {"name" : "Test2", "isSelected" : false},
+      {"name" : "Test3", "isSelected" : false}
     ];
 
   });

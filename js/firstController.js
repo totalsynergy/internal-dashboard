@@ -1,4 +1,4 @@
-app.controller('FirstController', function($scope, Service, $interval, $timeout){
+app.controller('FirstController', function($scope, Service, $interval, $timeout, ngAudio){
     var time = 1;
     var counter = 1;
     $scope.speed = 1000;
@@ -12,6 +12,9 @@ app.controller('FirstController', function($scope, Service, $interval, $timeout)
     var timer = $timeout($scope.onTimeout, $scope.speed);;
 
   //fix this loop
+
+   // $scope.sound = ngAudio.load("assets/bell.mp3");
+
 
 
     chrome.storage.local.get(null, function(result){
@@ -38,8 +41,10 @@ app.controller('FirstController', function($scope, Service, $interval, $timeout)
     }
 
     $scope.onTimeout = function(){
-      if($scope.tab != 99)
+      if($scope.tab != 99){
         goRight();
+        //$scope.sound.play();
+      }
       timer = $timeout($scope.onTimeout, $scope.speed);
     }
 

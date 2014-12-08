@@ -64,7 +64,7 @@
     return service;
 });
 
-  var app = angular.module('myApp', ['appService', 'uiSlider', 'nvd3ChartDirectives', 'ngAnimate']);
+  var app = angular.module('myApp', ['appService', 'uiSlider', 'nvd3ChartDirectives', 'ngAnimate', 'gravatarModule', 'ngAudio']);
 
 
 
@@ -82,7 +82,11 @@
       {"name" : "Desktop Version Graph", "isSelected" : true},
       {"name" : "Total Attendees", "isSelected" : true},
       {"name" : "Attendee Map", "isSelected" : true},
-      {"name" : "conference CountDown", "isSelected" : true}
+      {"name" : "conference CountDown", "isSelected" : true},
+      {"name" : "Gravatar", "isSelected" : false},
+      {"name" : "Test1", "isSelected" : false},
+      {"name" : "Test2", "isSelected" : false},
+      {"name" : "Test3", "isSelected" : false}
     ];
 
     var tabOpen = 4;

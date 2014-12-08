@@ -9,6 +9,7 @@ app.controller('FirstKPI', function($scope, $http, Service, $interval){
     $scope.pieData = null;
     $scope.percentage = 0;
 
+
     $scope.$on('fetchEventData', function(){
       weGotKey();
     })
@@ -19,6 +20,7 @@ app.controller('FirstKPI', function($scope, $http, Service, $interval){
     })
 
     function weGotKey(){
+      //debugger
        $http({
          url: 'https://beta.synergycloudapp.com/totalsynergy/InternalKpi/Home/CloudUptake',
          method: 'POST',
@@ -63,8 +65,11 @@ app.controller('FirstKPI', function($scope, $http, Service, $interval){
     	};
     }
 
+
     $scope.$on('tabUpdated', function(){
       $scope.tab = Service.tab;
+
+      //ngAudio.play("assets/bell.mp3");
 
       if(Service.tab == 1){
         $scope.pieData = $scope.originalData;
@@ -264,15 +269,19 @@ app.controller('ThirdKPI', function($scope, $http, Service, $interval){
 
 
 
-app.controller('FourthKPI', function($scope, Service){
+app.controller('FourthKPI', function($scope, Service, ngAudio){
     $scope.totalAttendees = 0;
+    $scope.sound = ngAudio.load("assets/bell.mp3");
 
     $scope.$on('tabUpdated', function(){
       $scope.tab = Service.tab;
     });
 
     $scope.$on('attendeesUpdated', function() {
+      if($scope.totalAttendees != Service.totalAttendees && $scope.totalAttendees != 0)
+        $scope.sound.play();
       $scope.totalAttendees = Service.totalAttendees;
+
     });
    });
 
@@ -424,4 +433,136 @@ app.controller('SixthKPI', function($scope, $http, Service, $interval){
     this.parseJsonDate = function(jsonDateString) {
        return new Date(parseInt(jsonDateString.replace('"', '')));
     }
+  });
+
+
+
+
+
+
+
+app.controller('SeventhKPI', function($scope, Service, $http, gravatarService){
+    $scope.stat = "";
+    $scope.your_email = "adamhannigan@hotmail.com";
+
+    $scope.$on('tabUpdated', function(){
+      $scope.tab = Service.tab;
+    });
+  });
+
+
+
+
+
+  app.controller('EighthKPI', function($scope, Service, $http, gravatarService){
+    $scope.stat = "";
+    $scope.your_email = "adamhannigan@hotmail.com";
+
+    $scope.$on('tabUpdated', function(){
+      $scope.tab = Service.tab;
+    });
+
+    $scope.$on('keysUpdated', function(){
+      $scope.totalSynergyKey = Service.totalSynergyKey;
+      weGotKey();
+    })
+
+    function weGotKey(){
+      //debugger
+       $http({
+         url: 'https://beta.synergycloudapp.com/totalsynergy/InternalKpi/Home/Clients',
+         method: 'POST',
+         headers : {'internal-token' : $scope.totalSynergyKey}
+         }).success(function(d, status, headers, config){
+           //$scope.data = d.data
+           count(d.data);
+         })
+        .error(function(data, status, headers, config){
+           $scope.data = "fail";
+        });
+    }
+
+
+    function count(data){
+      $scope.total = 0;
+      $scope.NSW = 1;
+      $scope.ACT = 0;
+      $scope.QLD = 0;
+      $scope.VIC = 0;
+      $scope.TAS = 0;
+      $scope.NT = 0;
+      $scope.WA = 0;
+      $scope.SA = 0;
+      $scope.international = 0;
+      for(i = 0; i < data.length; i++){
+
+            switch(data[i].State){
+             case 'NSW': $scope.NSW++; break;
+             case 'ACT': $scope.ACT++;
+                          break;
+             case 'QLD': $scope.QLD += 1;
+                         break;
+             case 'VIC': $scope.VIC++; break;
+             case 'TAS': $scope.TAS += 1;
+                         break;
+             case 'NT': $scope.NT += 1;
+                         break;
+             case 'WA': $scope.WA += 1;
+                       break;
+             case 'SA': $scope.SA += 1;
+                       break;
+              default: ;
+              }
+           $scope.total++;
+            }
+        }
+
+  });
+
+
+
+
+
+
+  app.controller('NinthKPI', function($scope, Service, $http, gravatarService){
+    $scope.stat = "";
+    $scope.your_email = "adamhannigan@hotmail.com";
+
+    $scope.$on('tabUpdated', function(){
+      $scope.tab = Service.tab;
+    });
+
+    $scope.$on('keysUpdated', function(){
+      $scope.totalSynergyKey = Service.totalSynergyKey;
+      weGotKey();
+    })
+
+    function weGotKey(){
+      //debugger
+       $http({
+         url: 'https://beta.synergycloudapp.com/totalsynergy/InternalKpi/Home/Staff',
+         method: 'POST',
+         headers : {'internal-token' : $scope.totalSynergyKey}
+         }).success(function(d, status, headers, config){
+           $scope.data = d;
+         })
+        .error(function(data, status, headers, config){
+           $scope.data = "fail";
+        });
+    }
+
+  });
+
+
+
+
+
+
+  app.controller('TenthKPI', function($scope, Service, $http, gravatarService){
+    $scope.stat = "";
+    $scope.your_email = "adamhannigan@hotmail.com";
+
+    $scope.$on('tabUpdated', function(){
+      $scope.tab = Service.tab;
+    });
   });

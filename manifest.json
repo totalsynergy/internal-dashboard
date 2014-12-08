@@ -21,11 +21,14 @@
   },
 
 
+
+
   "permissions": [
     "power",
     "https://www.eventbriteapi.com/",
     "storage",
-    "https://beta.synergycloudapp.com/"
+    "https://beta.synergycloudapp.com/",
+    "https://en.gravatar.com/"
     ],
 
   "web_accessible_resources": [

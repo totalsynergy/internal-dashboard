@@ -19,6 +19,9 @@
     <script type="text/javascript" src="js/angular-animate.js"></script>
     <script type="text/javascript" src="js/angularjs-nvd3-directives.js"></script>
     <script type="text/javascript" src="js/snowstorm.js"></script>
+    <script type="text/javascript" src="js/md5.js"></script>
+    <script type="text/javascript" src="js/gravatar.js"></script>
+    <script type="text/javascript" src="js/angular.audio.js"></script>
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="angular-csp.css">
@@ -100,7 +103,7 @@
             <p id="percent">{{percentage}}%</p>
          </div>
          <div class="colo-md-8">
-            <p id="percentageText">OF CLIENTS ARE ON THE<br> CURRENT DESKTOP VERISON</p>
+            <p id="percentageText">OF CLIENTS ARE ON THE<br> CURRENT DESKTOP VERSION</p>
          </div>
       </div>
   </div>
@@ -178,7 +181,55 @@
   </div>
 
 
-<!-- TO ADD A NEW KPI - INSERT AT END, ADD A VARIABLE ONTO APP.JS VARIABLE PAGES, CREATE THE WRITE LISTENERS IN THE CONTROLLER AND MAKE TAB == WHATEVER
+
+  <div ng-controller="SeventhKPI" class="kpi animate" ng-show="tab == 7">
+    <div class="container">
+      <h1>Gravatar Page</h1>
+      <gravatar-image
+       email-hash="118394d2af406acea6466ce99579643a"
+       ssl="true"
+       ext="png"
+       size="200"
+       default-image="assets/gravatarTest.jpg"
+       force-default-image="false"
+       rating="g"
+       />
+      <gravatar-image email={{your_email}}/>
+      Status: {{stat}}
+    </div>
+  </div>
+
+  <div ng-controller="EighthKPI" class="kpi animate" ng-show="tab == 8">
+      <h1>Total Synergy Clients</h1>
+      <div class="my-container2">
+      <img class="synergy4Map" src="assets/Synergy4Map.svg" alt="" />
+       <div class="nsw2"><span>{{NSW}}</span></div>
+       <div class="qld2"><span>{{QLD}}</span></div>
+       <div class="wa2"><span>{{WA}}</span></div>
+       <div class="nt2"><span>{{NT}}</span></div>
+       <div class="vic2"><span>{{VIC}}</span></div>
+       <div class="sa2"><span>{{SA}}</span></div>
+       <div class="act2"><span>{{ACT}}</span></div>
+       <div class="tas2"><span>{{TAS}}</span></div>
+      </div>
+  </div>
+
+  <div ng-controller="NinthKPI" class="kpi animate" ng-show="tab == 9">
+    <div class="container">
+      <h1>Test Page 2</h1>
+       Data: {{data}}
+    </div>
+  </div>
+
+  <div ng-controller="TenthKPI" class="kpi animate" ng-show="tab == 10">
+    <div class="container">
+      <h1>Test Page 3</h1>
+       Test Page
+    </div>
+  </div>
+
+
+<!-- TO ADD A NEW KPI - INSERT AT END, ADD A VARIABLE ONTO APP.JS VARIABLE PAGES, CREATE THE RIGHT LISTENERS IN THE CONTROLLER AND MAKE TAB == WHATEVER
 CONTROLLER IT IS. FINALLY, TURN OFF CHROME LOCAL STORAGE - then SAVE PAGES. TUNR OFF APP AND TURN ON LOCAL STORAGE AGAIN + CHANGE THE BACKUP PAGES
 IN SETTINGS RESTORE-->
 
@@ -218,10 +269,12 @@ IN SETTINGS RESTORE-->
           <input type="submit" value="Save" id="save" ng-click="save()"/>
           <input type="submit" value="Exit" id="save" ng-click="settingsClose()"/>
           <input type="submit" value="Restore" id="restore" ng-click="restoreDefaults()"/>
+          <button ng-audio=assets/bell.mp3 vol=0.5 start=0.2> Play Sound </button>
       </div>
     </div>
   </div>
   </div>
+
 
 
 </body>
