@@ -441,14 +441,73 @@ app.controller('SixthKPI', function($scope, $http, Service, $interval){
 
 
 
-app.controller('SeventhKPI', function($scope, Service, $http, gravatarService){
+app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, md5){
     $scope.stat = "";
-    $scope.your_email = "adamhannigan@hotmail.com";
+    //$scope.email1 = "greg.swanson@totalsynergy.com";
+   // $scope.email2 = "adamhannigan@hotmail.com";
+   // $scope.email3 = "gregswanson@totalsynergy.com.au";
+    $scope.imageHolder = [];
+    $scope.hashHolder = [];
+    $scope.gravatarHash = md5.createHash($scope.email1 || '');
+    $scope.gravatarHash2 = md5.createHash($scope.email2 || '');
+    $scope.gravatarHash3 = md5.createHash($scope.email3 || '');
+    $scope.hashHolder.push($scope.gravatarHash);
+    $scope.hashHolder.push($scope.gravatarHash2);
+    $scope.hashHolder.push($scope.gravatarHash3);
 
     $scope.$on('tabUpdated', function(){
       $scope.tab = Service.tab;
     });
+
+    function getImages(){
+        for(i = 0; i <= $scope.hashHolder.length - 1; i++){
+            var url = "https://secure.gravatar.com/avatar/" +  $scope.hashHolder[i] + "?s=200&d=mm";
+            var loadImage = function(uri) {
+            var xhr = new XMLHttpRequest();
+            xhr.responseType = 'blob';
+            xhr.onload = function() {
+             // document.getElementById("img1").src  //TRY DO SOME STUFF HERE
+              var image  = window.URL.createObjectURL(xhr.response);
+              $scope.imageHolder.push(image);
+           }
+            xhr.open('GET', uri, true);
+            xhr.send();
+          }
+        loadImage(url);
+        }
+    }
+
+    $scope.$on('keysUpdated', function(){
+      $scope.totalSynergyKey = Service.totalSynergyKey;
+      weGotKey();
+    })
+
+    function weGotKey(){
+      //debugger
+
+       $http({
+         url: 'https://beta.synergycloudapp.com/totalsynergy/InternalKpi/Home/staff',
+         method: 'POST',
+         headers : {'internal-token' : $scope.totalSynergyKey}
+         }).success(function(d, status, headers, config){
+           sortEmails(d.data);
+         })
+        .error(function(data, status, headers, config){
+           $scope.data = "fail";
+        });
+    }
+
+
+    function sortEmails(data){
+      $scope.emailHolder = [];
+      for(i = 0; i < data.length; i++){
+        var hash = md5.createHash(data[i].Email || '');
+        $scope.hashHolder.push(hash);
+      }
+      getImages();
+    }
   });
+
 
 
 
@@ -495,27 +554,33 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService){
       $scope.SA = 0;
       $scope.international = 0;
       for(i = 0; i < data.length; i++){
-
+        if(data[i].Active && !data[i].NoUpgrades && !data[i].Testing){
             switch(data[i].State){
-             case 'NSW': $scope.NSW++; break;
+             case 'NSW': $scope.NSW++;
+                         break;
              case 'ACT': $scope.ACT++;
-                          break;
+                         break;
              case 'QLD': $scope.QLD += 1;
                          break;
-             case 'VIC': $scope.VIC++; break;
+             case 'VIC': $scope.VIC++;
+                         break;
              case 'TAS': $scope.TAS += 1;
                          break;
              case 'NT': $scope.NT += 1;
                          break;
              case 'WA': $scope.WA += 1;
-                       break;
+                        break;
              case 'SA': $scope.SA += 1;
-                       break;
+                        break;
               default: ;
               }
-           $scope.total++;
+           if(data[i].Country != 'Australia')
+            $scope.international++;
+           else
+            $scope.total++;
             }
         }
+       }
 
   });
 
@@ -540,11 +605,11 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService){
     function weGotKey(){
       //debugger
        $http({
-         url: 'https://beta.synergycloudapp.com/totalsynergy/InternalKpi/Home/Staff',
+         url: 'https://beta.synergycloudapp.com/totalsynergy/InternalKpi/Home/staff',
          method: 'POST',
          headers : {'internal-token' : $scope.totalSynergyKey}
          }).success(function(d, status, headers, config){
-           $scope.data = d;
+           $scope.data = d.data[0].Email;
          })
         .error(function(data, status, headers, config){
            $scope.data = "fail";
@@ -565,4 +630,25 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService){
     $scope.$on('tabUpdated', function(){
       $scope.tab = Service.tab;
     });
+
+    $scope.$on('keysUpdated', function(){
+      $scope.totalSynergyKey = Service.totalSynergyKey;
+      weGotKey();
+    })
+
+    function weGotKey(){
+
+      $http({
+         url: 'https://beta.synergycloudapp.com/totalsynergy/InternalKpi/Home/Clients',
+         method: 'POST',
+         headers : {'internal-token' : $scope.totalSynergyKey}
+         }).success(function(d, status, headers, config){
+           //$scope.data = d.data
+           $scope.data = d.data[0];
+         })
+        .error(function(data, status, headers, config){
+           $scope.data = "fail";
+        });
+
+    }
   });

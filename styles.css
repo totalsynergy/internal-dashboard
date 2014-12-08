@@ -340,8 +340,8 @@ input[type="text"]:focus {
 }
 
 .keyInput{
-  padding-top:5%;
-  font-size: 2vw;
+  padding-top:2.5%;
+  font-size: 1.5vw;
 }
 
 .keyText{
@@ -377,7 +377,7 @@ input[type=checkbox]{
 
 .speed{
   font-size:2vw;
-  padding-top:7%;
+  padding-top:27%;
   text-align:center;
   font-family: openSansLight;
 }
@@ -537,7 +537,7 @@ input[type=checkbox]{
 
 }
 
-div.nsw2, div.qld2, div.sa2, div.nt2, div.wa2, div.vic2, div.act2, div.tas2{
+div.nsw2, div.qld2, div.sa2, div.nt2, div.wa2, div.vic2, div.act2, div.tas2, div.total{
     position: absolute;
     width: 18.3%;
     height: 18.3%;
@@ -591,7 +591,36 @@ div.act2 {
     left: 65.2%;
 }
 
+div.total{
+  top:30%;
+  left:35%;
+  font-size:140%;
+}
 
+/* EXAMINE DATA WITH WORD WRAP ID BELOW */
+
+#w74 { word-wrap: break-word; }
+
+.gravatarImage{
+  width:100%;
+  height:100%;
+}
+
+.imageHolder{
+  width:12.5%;
+  height:25%;
+  float:left;
+  overflow:hidden;
+  display:inline;
+  padding:0;
+  margin:0;
+}
+
+
+
+.hunredHeight{
+  width:100%;
+}
 
 
 

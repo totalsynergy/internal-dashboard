@@ -19,7 +19,7 @@
     <script type="text/javascript" src="js/angular-animate.js"></script>
     <script type="text/javascript" src="js/angularjs-nvd3-directives.js"></script>
     <script type="text/javascript" src="js/snowstorm.js"></script>
-    <script type="text/javascript" src="js/md5.js"></script>
+    <script type="text/javascript" src="js/angular-md5.js"></script>
     <script type="text/javascript" src="js/gravatar.js"></script>
     <script type="text/javascript" src="js/angular.audio.js"></script>
 
@@ -37,8 +37,8 @@
 
 <body>
 <div ng-controller="FirstController" ng-init="init()">
-<img src="assets/Eventbrite feed SVG_Logo.svg" ng-show="tab > 3 && tab != 99" class="logo">
-<img src="assets/logo.png" ng-show="tab < 4 || tab == 99" class="logo2">
+<img src="assets/Eventbrite feed SVG_Logo.svg" ng-show="(tab == 4 || tab == 5 || tab == 6) && tab != 99 " class="logo">
+<img src="assets/logo.png" ng-show="tab < 4 || tab ==  6 || tab  > 7" class="logo2">
 </div>
 
   <div class="leftButton" ng-controller="FirstController" ng-show="tab != 99" ng-click="leftButton()">
@@ -182,27 +182,20 @@
 
 
 
-  <div ng-controller="SeventhKPI" class="kpi animate" ng-show="tab == 7">
-    <div class="container">
-      <h1>Gravatar Page</h1>
-      <gravatar-image
-       email-hash="118394d2af406acea6466ce99579643a"
-       ssl="true"
-       ext="png"
-       size="200"
-       default-image="assets/gravatarTest.jpg"
-       force-default-image="false"
-       rating="g"
-       />
-      <gravatar-image email={{your_email}}/>
-      Status: {{stat}}
-    </div>
+  <div ng-controller="SeventhKPI" class="kpi animate heightController hunredHeight" ng-show="tab == 7">
+      <div ng-repeat="image in imageHolder" class="hunredHeight">
+      <div class="imageHolder">
+      <img ng-src="{{image}}" class="gravatarImage"/>
+      </div>
+      </div>
+      {{hashHolder}}
   </div>
 
   <div ng-controller="EighthKPI" class="kpi animate" ng-show="tab == 8">
-      <h1>Total Synergy Clients</h1>
-      <div class="my-container2">
+      <h1 ng-show="tab == 8">Total Synergy Clients</h1>
+      <div class="my-container2" ng-show="tab == 8">
       <img class="synergy4Map" src="assets/Synergy4Map.svg" alt="" />
+       <div class="total"><span>{{total}}</span></div>
        <div class="nsw2"><span>{{NSW}}</span></div>
        <div class="qld2"><span>{{QLD}}</span></div>
        <div class="wa2"><span>{{WA}}</span></div>
@@ -212,6 +205,9 @@
        <div class="act2"><span>{{ACT}}</span></div>
        <div class="tas2"><span>{{TAS}}</span></div>
       </div>
+      <div class="international">INTERNATIONAL</div>
+    <img class="earth" src="assets/EARTH.svg" alt=""/>
+    <div class="earthNumbers"><span>{{international}}</span></div>
   </div>
 
   <div ng-controller="NinthKPI" class="kpi animate" ng-show="tab == 9">
@@ -224,7 +220,7 @@
   <div ng-controller="TenthKPI" class="kpi animate" ng-show="tab == 10">
     <div class="container">
       <h1>Test Page 3</h1>
-       Test Page
+      <p id="w74"> Data: {{data}}</p>
     </div>
   </div>
 
@@ -241,15 +237,15 @@ IN SETTINGS RESTORE-->
     <h1>SETTINGS</h1>
     </div>
     <div class="row keyInput">
-    <p class="col-md-6 keyText">EventBrite Key - </p>
-    <input type="text" class = "col-md-6" ng-model="eventBriteKey" name="text" />
+    <p class="col-md-3 col-md-offset-3 keyText">EventBrite Key - </p>
+    <input type="text" class = "col-md-3 col-md-offset-3" ng-model="eventBriteKey" name="text" />
     </div>
     <div class="rows keyInput">
-    <p class="col-md-6 keyText">TotalSynergy Key -</p>
-    <input type="text" class = "col-md-6" ng-model="totalSynergyKey" name="text" />
+    <p class="col-md-3 col-md-offset-3 keyText">TotalSynergy Key -</p>
+    <input type="text" class = "col-md-3 col-md-offset-3" ng-model="totalSynergyKey" name="text" />
     </div>
     </div>
-    <p class="pageSelected">Page Selected</p>
+    <p class="pageSelected">Pages Selected</p>
     <div class="rows pageContainer">
       <div ng-repeat="page in pages">
         <div class="col-md-4 col-lg-4 pageName">
@@ -257,19 +253,17 @@ IN SETTINGS RESTORE-->
         </div>
       </div>
     </div>
-    <div class="rows">
+    <div class="pageContainer">
+    <div class="col md-12">
     <p class="speed">Speed: {{speed/1000}} seconds</p>
-    </div>
-    <div class="rows pageContainer">
     <slider floor="1000" ceiling="30000" step="1000" ng-model="speed"></slider>
     </div>
-
+    </div>
     <div class="rows pageContainer">
       <div class="saveNExit">
           <input type="submit" value="Save" id="save" ng-click="save()"/>
           <input type="submit" value="Exit" id="save" ng-click="settingsClose()"/>
           <input type="submit" value="Restore" id="restore" ng-click="restoreDefaults()"/>
-          <button ng-audio=assets/bell.mp3 vol=0.5 start=0.2> Play Sound </button>
       </div>
     </div>
   </div>
