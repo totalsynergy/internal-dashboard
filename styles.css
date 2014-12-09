@@ -88,7 +88,7 @@ h1{
 
 .logo2{
     display:block;
-    width:13%;
+    width:8%;
     position:fixed;
     bottom:3.5%;
     left:1.5%;
@@ -542,7 +542,7 @@ div.nsw2, div.qld2, div.sa2, div.nt2, div.wa2, div.vic2, div.act2, div.tas2, div
     width: 18.3%;
     height: 18.3%;
     text-align: center;
-    color:#58595B;
+    color:#FFF;
      /*mess around */
     font-family:openSans;
     font-size:80%;
@@ -610,21 +610,20 @@ div.total{
   width:12.5%;
   height:25%;
   float:left;
-  overflow:hidden;
   display:inline;
   padding:0;
   margin:0;
 }
 
 .imageHolder2{
-  width:10%;
+  width:100px;
   height:25%;
-  background-color:#777;
   float:left;
-  overflow:hidden;
   display:inline;
   padding:0;
   margin:0;
+  display:block;
+  padding-left:12.5%;
 }
 
 
@@ -637,6 +636,19 @@ div.total{
   width:100px;
   height:100px;
 }
+
+.blueBackground{
+  background-color:#00AEEF;
+  height:100%;
+}
+
+.gravatarLogo{
+  position:fixed;
+  width:20%;
+  top:30%;
+  left:40%;
+}
+
 
 
 

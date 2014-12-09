@@ -441,7 +441,7 @@ app.controller('SixthKPI', function($scope, $http, Service, $interval){
 
 
 
-app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, md5){
+app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, md5, $timeout){
     $scope.stat = "";
     //$scope.email1 = "greg.swanson@totalsynergy.com";
    // $scope.email2 = "adamhannigan@hotmail.com";
@@ -455,6 +455,10 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, m
     $scope.count = 0;
     $scope.randomNumber = 5;
     $scope.blanks = [];
+    $scope.orderedImages = [];
+    $scope.imageCounter = 0;
+    $scope.avatars = [];
+    $scope.showCounter = 0;
 
 
     $scope.$on('tabUpdated', function(){
@@ -481,21 +485,26 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, m
       $scope.blanksLength = blanksNeeded;
       $scope.blanks.push(11,12,17,18);
       for(i = 0; i < blanksNeeded; i++){
-        var randomNum = Math.floor((Math.random() * 32) + 1);
+        var randomNum = Math.floor((Math.random() * 18) + 1);
         if(isTrue($scope.blanks,randomNum))
           $scope.blanks.push(randomNum);
+      }
+      for(j=0; j < $scope.blanks.length; j++){
+        $scope.imageHolder[$scope.blanks[j]] = "assets/transparent.png";
       }
     }
 
     function isTrue(array, number){
-      for(i = 0; i < array.length; i++){
+      for(i = 0; i < array.length - 1; i++){
         if(number == array[i])
           return false;
       }
       return true;
     }
 
+    /*
     function getImage(hash, index){
+      $scope.blanks.push(index);
         var image = null;
         var url = "https://secure.gravatar.com/avatar/" +  hash + "?s=200&d=mm";
         var loadImage = function(uri) {
@@ -504,19 +513,25 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, m
         xhr.onload = function() {
          // document.getElementById("img1").src  //TRY DO SOME STUFF HERE
             image  = window.URL.createObjectURL(xhr.response);
-            $scope.imageHolder[index] = image;
-            $scope.imageHolder.splice(3,0, "null");
+            if(!isTrue($scope.blanks, index))
+            $scope.imageHolder[3] = image;
+            //$scope.imageHolder.splice(3,0, "null");
             fillBlanks();
           }
         xhr.open('GET', uri, true);
         xhr.send();
         }
+        //if(isTrue($scope.blanks, index))
         loadImage(url);
     }
 
     function fillBlanks(){
-
+      /*for(i = 0; i < $scope.blanks.length; i++){
+        $scope.imageHolder[$scope.blanks[i]] = null;
+      }
     }
+    */
+
 
     function weGotKey(){
       //debugger
@@ -526,7 +541,8 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, m
          method: 'POST',
          headers : {'internal-token' : $scope.totalSynergyKey}
          }).success(function(d, status, headers, config){
-           sortEmails(d.data);
+           //sortEmails(d.data);
+           sortEmails2(d.data);
            $scope.count++;
            $scope.dataLength = d.data.length;
          })
@@ -535,17 +551,55 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, m
         });
     }
 
-
+    /*
     function sortEmails(data){
       for(i = 0; i < data.length; i++){
-        $scope.emailHolder.push(data[i].Email);
         var hash = md5.createHash(data[i].Email || '');
         getImage(hash, i);
-        //$scope.hashHolder.push(hash);
       }
       $scope.emailHolder = [];
-      //getImages();
+    } */
+
+    function sortEmails2(data){
+      var counter = 0;
+      for(i = 0; i < 32; i++){
+        var hash = md5.createHash(data[i].Email || '');
+        loadAvatar(hash);
+        $scope.imageCounter++;
+      }
     }
+
+    function sortImages(){
+      $scope.avatars[3] = null;
+     // $scope.avatars[6] = null;
+    }
+
+    $scope.indexIsUsed = function(index){
+      for(i = 0; i < $scope.blanks.length; i++){
+        if($scope.blanks[i] == index)
+          return true;
+      }
+      return false;
+    }
+
+    function loadAvatar(hash){
+        var count = $scope.imageCounter
+        var url = "https://secure.gravatar.com/avatar/" +  hash + "?s=200&d=mm";
+        var loadImage = function(uri) {
+        var xhr = new XMLHttpRequest();
+        xhr.responseType = 'blob';
+        xhr.onload = function() {
+            var image  = window.URL.createObjectURL(xhr.response);
+            $scope.avatars.push(image);
+          }
+        xhr.open('GET', uri, true);
+        xhr.send();
+        }
+        //if(isTrue($scope.blanks, index))
+        loadImage(url);
+
+    }
+
   });
 
 
