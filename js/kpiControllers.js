@@ -448,39 +448,75 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, m
    // $scope.email3 = "gregswanson@totalsynergy.com.au";
     $scope.imageHolder = [];
     $scope.hashHolder = [];
-    $scope.gravatarHash = md5.createHash($scope.email1 || '');
-    $scope.gravatarHash2 = md5.createHash($scope.email2 || '');
-    $scope.gravatarHash3 = md5.createHash($scope.email3 || '');
-    $scope.hashHolder.push($scope.gravatarHash);
-    $scope.hashHolder.push($scope.gravatarHash2);
-    $scope.hashHolder.push($scope.gravatarHash3);
+    $scope.emailHolder = [];
+    $scope.blanksLength = 0;
+    //BE CAREFUL BELOW
+    $scope.dataLength = 15;
+    $scope.count = 0;
+    $scope.randomNumber = 5;
+    $scope.blanks = [];
+
 
     $scope.$on('tabUpdated', function(){
       $scope.tab = Service.tab;
     });
 
-    function getImages(){
-        for(i = 0; i <= $scope.hashHolder.length - 1; i++){
-            var url = "https://secure.gravatar.com/avatar/" +  $scope.hashHolder[i] + "?s=200&d=mm";
-            var loadImage = function(uri) {
-            var xhr = new XMLHttpRequest();
-            xhr.responseType = 'blob';
-            xhr.onload = function() {
-             // document.getElementById("img1").src  //TRY DO SOME STUFF HERE
-              var image  = window.URL.createObjectURL(xhr.response);
-              $scope.imageHolder.push(image);
-           }
-            xhr.open('GET', uri, true);
-            xhr.send();
-          }
-        loadImage(url);
-        }
-    }
 
     $scope.$on('keysUpdated', function(){
       $scope.totalSynergyKey = Service.totalSynergyKey;
+      if($scope.count == 0)
       weGotKey();
+      $scope.count++;
+      pickNumbers();
     })
+
+    $scope.$on('fetchEventData', function(){
+      weGotKey();
+      pickNumbers();
+    })
+
+    function pickNumbers(){
+      $scope.blanks = [];
+      var blanksNeeded = 28 - $scope.dataLength;
+      $scope.blanksLength = blanksNeeded;
+      $scope.blanks.push(11,12,17,18);
+      for(i = 0; i < blanksNeeded; i++){
+        var randomNum = Math.floor((Math.random() * 32) + 1);
+        if(isTrue($scope.blanks,randomNum))
+          $scope.blanks.push(randomNum);
+      }
+    }
+
+    function isTrue(array, number){
+      for(i = 0; i < array.length; i++){
+        if(number == array[i])
+          return false;
+      }
+      return true;
+    }
+
+    function getImage(hash, index){
+        var image = null;
+        var url = "https://secure.gravatar.com/avatar/" +  hash + "?s=200&d=mm";
+        var loadImage = function(uri) {
+        var xhr = new XMLHttpRequest();
+        xhr.responseType = 'blob';
+        xhr.onload = function() {
+         // document.getElementById("img1").src  //TRY DO SOME STUFF HERE
+            image  = window.URL.createObjectURL(xhr.response);
+            $scope.imageHolder[index] = image;
+            $scope.imageHolder.splice(3,0, "null");
+            fillBlanks();
+          }
+        xhr.open('GET', uri, true);
+        xhr.send();
+        }
+        loadImage(url);
+    }
+
+    function fillBlanks(){
+
+    }
 
     function weGotKey(){
       //debugger
@@ -491,6 +527,8 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, m
          headers : {'internal-token' : $scope.totalSynergyKey}
          }).success(function(d, status, headers, config){
            sortEmails(d.data);
+           $scope.count++;
+           $scope.dataLength = d.data.length;
          })
         .error(function(data, status, headers, config){
            $scope.data = "fail";
@@ -499,12 +537,14 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, m
 
 
     function sortEmails(data){
-      $scope.emailHolder = [];
       for(i = 0; i < data.length; i++){
+        $scope.emailHolder.push(data[i].Email);
         var hash = md5.createHash(data[i].Email || '');
-        $scope.hashHolder.push(hash);
+        getImage(hash, i);
+        //$scope.hashHolder.push(hash);
       }
-      getImages();
+      $scope.emailHolder = [];
+      //getImages();
     }
   });
 

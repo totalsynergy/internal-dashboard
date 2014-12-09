@@ -97,7 +97,7 @@
       {"name" : "Attendee Map", "isSelected" : true},
       {"name" : "conference CountDown", "isSelected" : true},
       {"name" : "Gravatar", "isSelected" : false},
-      {"name" : "Test1", "isSelected" : false},
+      {"name" : "Synergy Clients", "isSelected" : false},
       {"name" : "Test2", "isSelected" : false},
       {"name" : "Test3", "isSelected" : false}
     ];

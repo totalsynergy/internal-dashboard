@@ -183,12 +183,19 @@
 
 
   <div ng-controller="SeventhKPI" class="kpi animate heightController hunredHeight" ng-show="tab == 7">
+    BlanksLength: {{blanksLength}}
+    <div ng-repeat="blank in blanks">{{blank}}</div>
+      Data Length {{dataLength}}
+      Count: {{count}}
+      Email Holder Lenght {{emailHolder.length}}
+      Hash Holder Length {{hashHolder.length}}
       <div ng-repeat="image in imageHolder" class="hunredHeight">
-      <div class="imageHolder">
+      <div ng-if="image == null" class="hunredHeight"> <div class="imageHolder2">none</div></div>
+      <div ng-if="image != null" class="imageHolder">
       <img ng-src="{{image}}" class="gravatarImage"/>
       </div>
       </div>
-      {{hashHolder}}
+
   </div>
 
   <div ng-controller="EighthKPI" class="kpi animate" ng-show="tab == 8">

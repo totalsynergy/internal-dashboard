@@ -616,10 +616,26 @@ div.total{
   margin:0;
 }
 
+.imageHolder2{
+  width:10%;
+  height:25%;
+  background-color:#777;
+  float:left;
+  overflow:hidden;
+  display:inline;
+  padding:0;
+  margin:0;
+}
 
 
 .hunredHeight{
   width:100%;
+}
+
+.block{
+  opacity:0;
+  width:100px;
+  height:100px;
 }
 
 
