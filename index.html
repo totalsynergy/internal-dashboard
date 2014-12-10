@@ -124,7 +124,7 @@
  </div>
 
 
-  <div ng-controller="FourthKPI" class="kpi animate" ng-show="tab == 4">
+  <div ng-controller="FourthKPI" class="kpi animate greyBackground" ng-show="tab == 4">
   <div class="container totalAttendees">
     <img class="cube" src="assets/cubeBlank.png">
     <div class="numberOf"><p class="numberOfAttendees">{{totalAttendees}}</p></div>
@@ -136,7 +136,8 @@
   </div>
 
 
-  <div ng-controller="FifthKPI" class="kpi animate" ng-show="tab == 5">
+  <div ng-controller="FifthKPI" class="kpi animate greyBackground" ng-show="tab == 5">
+    <div class="greyCover"></div>
     <h1 id="confAten">CONFERENCE ATTENDEES</h1>
     <div class="my-container">
     <img class="country" src="assets/Eventbrite feed SVG_Map.svg" alt="" />
@@ -165,8 +166,8 @@
 
 
 
-  <div ng-controller="SixthKPI" class="kpi animate" ng-show="tab == 6">
-  <div class="container">
+  <div ng-controller="SixthKPI" class="kpi animate greyBackground" ng-show="tab == 6">
+  <div class="container greyBackground">
     <h2 class="countDownHeader">SYNERGY2015<br>COUNTDOWN</h2>
     <div class="countDown">
     <h3 class="time">{{days}}</h3><p class="period">DAYS</p>
@@ -182,22 +183,20 @@
 
 
 
-    <div ng-controller="SeventhKPI" class="kpi animate heightController hunredHeight blueBackground" ng-show="tab == 7">
-      Blanks: {{blanks}}
-      <div ng-repeat="image in avatars track by $index" class="hunredHeight">
-      <!-- <div ng-if="image == null" class="hunredHeight">
-        <img src="assets/transparent.png" class="imageHolder"/>
-      </div> -->
+    <div ng-controller="SeventhKPI" class="kpi animate blueBackground throwingHundreds" ng-show="tab == 7">
+      <div ng-repeat="image in displayArray track by $index" class="realImageContainer" >
+          <div class="imageHolder" ng-if="image != null">
+            <img ng-src="{{image.photo}}" class="gravatarImage"/>
+            <p ng-if="!noImage(image.photo)"id="nameAndShameEmployees">{{image.emailAddress}} </p>
+          </div>
+          <div class="imageHolder2" ng-if="image == null">
+            <img src="assets/transparent.png" class="gravatarImage"/>
+          </div>
 
-      <div ng-if="$index != 0" class="imageHolder">
-        <img ng-src="{{image}}" class="gravatarImage"/>
-      </div>
-      <div ng-if="indexIsUsed($index)" class="imageHolder2">
-        &nbsp;
-      </div>
       </div>
       <img src="assets/logoWhite.svg" class="gravatarLogo"/>
   </div>
+
 
   <div ng-controller="EighthKPI" class="kpi animate" ng-show="tab == 8">
       <h1 ng-show="tab == 8">Total Synergy Clients</h1>

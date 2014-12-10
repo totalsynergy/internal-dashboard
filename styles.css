@@ -16,7 +16,22 @@
 
 html, body, .container{
   height:100%;
+  min-height: 100%;
   /*background-color: #F0EFF4;  FIX PNG + SVG WHITE BACKGROUNDS FIRST */
+}
+
+.greyBackground{
+  background-color: #F0EFF4;
+  height:100%;
+}
+
+.greyCover{
+  background-color: #F0EFF4;
+  position:fixed;
+  height:300%;
+  width:300%;
+  z-index:-99;
+  bottom:300px;
 }
 
 h1{
@@ -601,34 +616,43 @@ div.total{
 
 #w74 { word-wrap: break-word; }
 
+.throwingHundreds{
+  position:relative;
+  height:100vw;
+}
+
+.throwingPercents{
+  height:100%;
+}
 .gravatarImage{
   width:100%;
   height:100%;
+  /*-webkit-filter: grayscale(1);
+       /* REMOVE */
 }
 
 .imageHolder{
-  width:12.5%;
-  height:25%;
+  width:100%;
+  height:100%;
   float:left;
-  display:inline;
+  position:relative;
   padding:0;
-  margin:0;
+  overflow:hidden;
+  size: cover;
+  max-width: 100%;
+  max-height: 100%;
 }
 
 .imageHolder2{
-  width:100px;
-  height:25%;
+  width:100%;
+  height:100%;
   float:left;
-  display:inline;
-  padding:0;
-  margin:0;
-  display:block;
-  padding-left:12.5%;
 }
 
 
 .hunredHeight{
   width:100%;
+  height:100%;
 }
 
 .block{
@@ -644,12 +668,39 @@ div.total{
 
 .gravatarLogo{
   position:fixed;
-  width:20%;
-  top:30%;
-  left:40%;
+  width:25%;
+  top:35%;
+  left:36%;
+}
+
+.realImageContainer{
+  width:12.5%;
+  height:25%;
+  float:right;
+  size: cover;
+
 }
 
 
+#nameAndShameEmployees{
+  position:absolute;
+  padding: 0;
+  margin: 0;
+  bottom:5%;
+  left:5%;
+  text-align:center;
+  font-family:openSansLight;
+  font-size:1vw;
+  z-index:1000;
+  color: #000;
+  text-shadow: 0.5px 0.5px #fff;
+  text-overflow: none;
+}
+
+.gravatarContainer{
+  padding: auto;
+  margin:auto;
+}
 
 
 

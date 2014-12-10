@@ -442,24 +442,12 @@ app.controller('SixthKPI', function($scope, $http, Service, $interval){
 
 
 app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, md5, $timeout){
-    $scope.stat = "";
-    //$scope.email1 = "greg.swanson@totalsynergy.com";
-   // $scope.email2 = "adamhannigan@hotmail.com";
-   // $scope.email3 = "gregswanson@totalsynergy.com.au";
-    $scope.imageHolder = [];
-    $scope.hashHolder = [];
-    $scope.emailHolder = [];
-    $scope.blanksLength = 0;
-    //BE CAREFUL BELOW
-    $scope.dataLength = 15;
-    $scope.count = 0;
-    $scope.randomNumber = 5;
-    $scope.blanks = [];
-    $scope.orderedImages = [];
-    $scope.imageCounter = 0;
-    $scope.avatars = [];
-    $scope.showCounter = 0;
 
+    //BE CAREFUL BELOW
+    $scope.dataLength = 20;
+    $scope.count = 0;
+    $scope.displayArray = [];
+    $scope.arrayOfEmpties = [];
 
     $scope.$on('tabUpdated', function(){
       $scope.tab = Service.tab;
@@ -471,66 +459,22 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, m
       if($scope.count == 0)
       weGotKey();
       $scope.count++;
-      pickNumbers();
+      initialiseArray();
     })
 
     $scope.$on('fetchEventData', function(){
+      $scope.displayArray = [];
       weGotKey();
       pickNumbers();
+      pickDecisiveNumbers();
     })
 
-    function pickNumbers(){
-      $scope.blanks = [];
-      var blanksNeeded = 28 - $scope.dataLength;
-      $scope.blanksLength = blanksNeeded;
-      $scope.blanks.push(11,12,17,18);
-      for(i = 0; i < blanksNeeded; i++){
-        var randomNum = Math.floor((Math.random() * 18) + 1);
-        if(isTrue($scope.blanks,randomNum))
-          $scope.blanks.push(randomNum);
-      }
-      for(j=0; j < $scope.blanks.length; j++){
-        $scope.imageHolder[$scope.blanks[j]] = "assets/transparent.png";
+    function initialiseArray(){
+      for(i = 0; i < 32; i ++){
+        $scope.displayArray[i] = null;
       }
     }
 
-    function isTrue(array, number){
-      for(i = 0; i < array.length - 1; i++){
-        if(number == array[i])
-          return false;
-      }
-      return true;
-    }
-
-    /*
-    function getImage(hash, index){
-      $scope.blanks.push(index);
-        var image = null;
-        var url = "https://secure.gravatar.com/avatar/" +  hash + "?s=200&d=mm";
-        var loadImage = function(uri) {
-        var xhr = new XMLHttpRequest();
-        xhr.responseType = 'blob';
-        xhr.onload = function() {
-         // document.getElementById("img1").src  //TRY DO SOME STUFF HERE
-            image  = window.URL.createObjectURL(xhr.response);
-            if(!isTrue($scope.blanks, index))
-            $scope.imageHolder[3] = image;
-            //$scope.imageHolder.splice(3,0, "null");
-            fillBlanks();
-          }
-        xhr.open('GET', uri, true);
-        xhr.send();
-        }
-        //if(isTrue($scope.blanks, index))
-        loadImage(url);
-    }
-
-    function fillBlanks(){
-      /*for(i = 0; i < $scope.blanks.length; i++){
-        $scope.imageHolder[$scope.blanks[i]] = null;
-      }
-    }
-    */
 
 
     function weGotKey(){
@@ -542,7 +486,8 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, m
          headers : {'internal-token' : $scope.totalSynergyKey}
          }).success(function(d, status, headers, config){
            //sortEmails(d.data);
-           sortEmails2(d.data);
+           sortEmails2(d.data, d.data.length);
+           $scope.data = d.data;
            $scope.count++;
            $scope.dataLength = d.data.length;
          })
@@ -551,46 +496,50 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, m
         });
     }
 
-    /*
-    function sortEmails(data){
+    function sortEmails2(data, length){
+      var counter = 0;
+      $scope.arrayOfEmpties = [];
       for(i = 0; i < data.length; i++){
         var hash = md5.createHash(data[i].Email || '');
-        getImage(hash, i);
-      }
-      $scope.emailHolder = [];
-    } */
-
-    function sortEmails2(data){
-      var counter = 0;
-      for(i = 0; i < 32; i++){
-        var hash = md5.createHash(data[i].Email || '');
-        loadAvatar(hash);
+        loadAvatar(hash, i, data[i].Name);
         $scope.imageCounter++;
       }
     }
 
-    function sortImages(){
-      $scope.avatars[3] = null;
-     // $scope.avatars[6] = null;
+    function randomNumber(){
+      var isPickable = false;
+      var randomNum = 0;
+      while(!isPickable){
+        randomNum = Math.floor((Math.random() * 32));
+        if(!numberIsUsed(randomNum)){
+          $scope.arrayOfEmpties.push(randomNum);
+          isPickable = true;
+        }
+      }
+      return randomNum;
     }
 
-    $scope.indexIsUsed = function(index){
-      for(i = 0; i < $scope.blanks.length; i++){
-        if($scope.blanks[i] == index)
-          return true;
-      }
+    function numberIsUsed(number){
+      if(number == 11 || number == 10 || number == 12 || number == 13 || number == 18 || number == 20 || number == 21 || number == 19)
+        return true;
+     if($scope.arrayOfEmpties.length == 0)
+      return false;
+     for(i = 0; i < $scope.arrayOfEmpties.length; i++){
+       if(number == $scope.arrayOfEmpties[i])
+        return true;
+     }
       return false;
     }
 
-    function loadAvatar(hash){
+    function loadAvatar(hash, index, email){
         var count = $scope.imageCounter
-        var url = "https://secure.gravatar.com/avatar/" +  hash + "?s=200&d=mm";
+        var url = "https://secure.gravatar.com/avatar/" +  hash + "?s=300&d=mm";
         var loadImage = function(uri) {
         var xhr = new XMLHttpRequest();
         xhr.responseType = 'blob';
         xhr.onload = function() {
             var image  = window.URL.createObjectURL(xhr.response);
-            $scope.avatars.push(image);
+            $scope.displayArray[randomNumber()] = {photo: image, emailAddress: email};
           }
         xhr.open('GET', uri, true);
         xhr.send();
@@ -599,6 +548,13 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, m
         loadImage(url);
 
     }
+
+    $scope.noImage = function(image){
+      if($scope.standardImage == image)
+        return true;
+      return false;
+    }
+
 
   });
 
