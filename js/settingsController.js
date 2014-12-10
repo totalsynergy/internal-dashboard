@@ -1,6 +1,7 @@
   app.controller('SettingsController', function($scope, Service){
    $scope.eventBriteKey = '';
    $scope.totalSynergyKey = '';
+   $scope.slackKey = '';
     $scope.speed = 10000;
     $scope.pages = pages;
     $scope.practiceNumber = 10;
@@ -16,6 +17,7 @@
     $scope.$on('keysUpdated', function(){
       $scope.eventBriteKey = Service.eventBriteKey;
       $scope.totalSynergyKey = Service.totalSynergyKey;
+      $scope.slackKey = Service.slackKey;
     })
 
     $scope.$on('speedUpdated', function(){
@@ -25,9 +27,10 @@
     $scope.save = function(){
       chrome.storage.local.set({'eventBriteKey': $scope.eventBriteKey});
       chrome.storage.local.set({'totalSynergyKey': $scope.totalSynergyKey});
+      chrome.storage.local.set({'slackKey': $scope.slackKey});
       chrome.storage.local.set({'speed' : $scope.speed});
       chrome.storage.local.set({'pages' : $scope.pages});
-      Service.updateKeys($scope.eventBriteKey, $scope.totalSynergyKey, $scope.speed, $scope.pages);
+      Service.updateKeys($scope.eventBriteKey, $scope.totalSynergyKey, $scope.slackKey, $scope.speed, $scope.pages);
       Service.sendForData();
     }
 

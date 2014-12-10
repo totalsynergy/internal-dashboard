@@ -19,7 +19,7 @@ app.controller('FirstController', function($scope, Service, $interval, $timeout,
 
     chrome.storage.local.get(null, function(result){
       if(result.pages != null)
-      Service.updateKeys(result.eventBriteKey, result.totalSynergyKey, result.speed, result.pages);
+      Service.updateKeys(result.eventBriteKey, result.totalSynergyKey, result.slackKey, result.speed, result.pages);
     });
 
     function getTab(){

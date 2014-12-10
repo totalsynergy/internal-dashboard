@@ -227,7 +227,14 @@
   <div ng-controller="TenthKPI" class="kpi animate" ng-show="tab == 10">
     <div class="container">
       <h1>Test Page 3</h1>
-      <p id="w74"> Data: {{data}}</p>
+      <div ng-repeat="message in data">
+      <p id="w74"> Person : {{returnName(message.user)}} Message {{message.text}}</p>
+      </div>
+      <div ng-repeat="info in imageNameAndMessage">
+        Image : {{info.image}}
+        Name : {{info.name}}
+        Message : {{info.message}}
+      </div>
     </div>
   </div>
 
@@ -250,6 +257,10 @@ IN SETTINGS RESTORE-->
     <div class="rows keyInput">
     <p class="col-md-3 col-md-offset-3 keyText">TotalSynergy Key -</p>
     <input type="text" class = "col-md-3 col-md-offset-3" ng-model="totalSynergyKey" name="text" />
+    </div>
+    <div class="rows keyInput">
+    <p class="col-md-3 col-md-offset-3 keyText">Slack Key -</p>
+    <input type="text" class = "col-md-3 col-md-offset-3" ng-model="slackKey" name="text" />
     </div>
     </div>
     <p class="pageSelected">Pages Selected</p>

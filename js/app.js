@@ -10,10 +10,12 @@
     service.totalAttendees = 0;
     service.totalSynergyKey = "";
     service.eventBriteKey = "";
+    service.slackKey = "";
 
-    service.updateKeys = function(eventKey, tsKey, speed, pag){
+    service.updateKeys = function(eventKey, tsKey, sKey, speed, pag){
       this.totalSynergyKey = tsKey;
       this.eventBriteKey = eventKey;
+      this.slackKey = sKey;
       this.speed = speed;
       this.pages = pag;
       $rootScope.$broadcast("keysUpdated");

@@ -500,7 +500,8 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, m
       var counter = 0;
       $scope.arrayOfEmpties = [];
       for(i = 0; i < data.length; i++){
-        var hash = md5.createHash(data[i].Email || '');
+        var lowerCaseEmail = data[i].Email.toLowerCase();
+        var hash = md5.createHash(lowerCaseEmail || '');
         loadAvatar(hash, i, data[i].Name);
         $scope.imageCounter++;
       }
@@ -532,7 +533,7 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, m
     }
 
     function loadAvatar(hash, index, email){
-        var count = $scope.imageCounter
+        var count = $scope.imageCounter;
         var url = "https://secure.gravatar.com/avatar/" +  hash + "?s=300&d=mm";
         var loadImage = function(uri) {
         var xhr = new XMLHttpRequest();
@@ -674,31 +675,75 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, m
 
 
   app.controller('TenthKPI', function($scope, Service, $http, gravatarService){
-    $scope.stat = "";
-    $scope.your_email = "adamhannigan@hotmail.com";
+    $scope.data = null;
+    $scope.people = null;
+    $scope.slackKey = '';
+    $scope.imageNameAndMessage = [];
+
 
     $scope.$on('tabUpdated', function(){
       $scope.tab = Service.tab;
     });
 
     $scope.$on('keysUpdated', function(){
-      $scope.totalSynergyKey = Service.totalSynergyKey;
+      $scope.slackKey = Service.slackKey;
       weGotKey();
     })
 
-    function weGotKey(){
-
-      $http({
-         url: 'https://beta.synergycloudapp.com/totalsynergy/InternalKpi/Home/Clients',
-         method: 'POST',
-         headers : {'internal-token' : $scope.totalSynergyKey}
-         }).success(function(d, status, headers, config){
-           //$scope.data = d.data
-           $scope.data = d.data[0];
-         })
-        .error(function(data, status, headers, config){
-           $scope.data = "fail";
-        });
-
+    $scope.returnName = function(id){
+      for(i = 0; i < $scope.people.length; i++){
+        if($scope.people[i].id == id)
+          return $scope.people[i].name;
+      }
+      return "didnt work";
     }
+
+    function sortData(){
+      $scope.imageNameAndMessage = [];
+      for(i = 0; i < $scope.data.length; i++){
+        var object = {'image' : null, 'name' : $scope.returnName("won't work")  , 'message' : $scope.data[i].text };
+        $scope.imageNameAndMessage.push(object);
+      }
+    }
+
+    function weGotKey(){
+      $http.get("https://slack.com/api/channels.history?token=" + $scope.slackKey + "&channel=C02NW54S2&pretty=1")
+      .success(function(data){
+        $scope.data = data.messages;
+        sortData();
+        //Service.updateEventData(data);
+      })
+      .error(function(){
+        $scope.data = "fail";
+      })
+
+      $http.get("https://slack.com/api/users.list?token=" + $scope.slackKey + "&channel=C02NW54S2&pretty=1")
+      .success(function(data){
+        $scope.people = data.members;
+        //Service.updateEventData(data);
+      })
+      .error(function(){
+        $scope.people = "fail";
+      })
+    }
+
+    function getGravatar(email){
+        var lowerCaseEmail = email.toLowerCase();
+        var hash = md5.createHash(lowerCaseEmail || '');
+        var url = "https://secure.gravatar.com/avatar/" +  hash + "?s=300&d=mm";
+        var loadImage = function(uri) {
+        var xhr = new XMLHttpRequest();
+        xhr.responseType = 'blob';
+        xhr.onload = function() {
+            var image  = window.URL.createObjectURL(xhr.response);
+            return image;
+          }
+        xhr.open('GET', uri, true);
+        xhr.send();
+        }
+        //if(isTrue($scope.blanks, index))
+        loadImage(url);
+    }
+
   });
+
