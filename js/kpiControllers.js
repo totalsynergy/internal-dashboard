@@ -553,7 +553,7 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, m
             $scope.displayArray[randomNumber()] = {photo: image, emailAddress: email};
           }
         console.log("URI Of Request for Gravatar", uri)
-                   xhr.onerror = requestError;
+          xhr.onerror = requestError;
         xhr.onabort = requestError;
         xhr.open('GET', uri, true);
 
@@ -588,6 +588,126 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, m
 
   });
 
+/*
+
+app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, md5, $timeout){
+
+    //BE CAREFUL BELOW
+    $scope.dataLength = 20;
+    $scope.count = 0;
+    $scope.displayArray = [];
+    $scope.arrayOfEmpties = [];
+
+    $scope.$on('tabUpdated', function(){
+      $scope.tab = Service.tab;
+    });
+
+
+    $scope.$on('keysUpdated', function(){
+      $scope.totalSynergyKey = Service.totalSynergyKey;
+      if($scope.count == 0)
+      weGotKey();
+      $scope.count++;
+      initialiseArray();
+    })
+
+    $scope.$on('fetchEventData', function(){
+      $scope.displayArray = [];
+      weGotKey();
+      pickNumbers();
+      pickDecisiveNumbers();
+    })
+
+    function initialiseArray(){
+      for(i = 0; i < 32; i ++){
+        $scope.displayArray[i] = null;
+      }
+    }
+
+
+
+    function weGotKey(){
+      //debugger
+
+       $http({
+         url: 'https://beta.synergycloudapp.com/totalsynergy/InternalKpi/Home/staff',
+         method: 'POST',
+         headers : {'internal-token' : $scope.totalSynergyKey}
+         }).success(function(d, status, headers, config){
+           //sortEmails(d.data);
+           sortEmails2(d.data, d.data.length);
+           $scope.data = d.data;
+           $scope.count++;
+           $scope.dataLength = d.data.length;
+         })
+        .error(function(data, status, headers, config){
+           $scope.data = "fail";
+        });
+    }
+
+    function sortEmails2(data, length){
+      var counter = 0;
+      $scope.arrayOfEmpties = [];
+      for(i = 0; i < data.length; i++){
+        var hash = md5.createHash(data[i].Email || '');
+        loadAvatar(hash, i, data[i].Name);
+        $scope.imageCounter++;
+      }
+    }
+
+    function randomNumber(){
+      var isPickable = false;
+      var randomNum = 0;
+      while(!isPickable){
+        randomNum = Math.floor((Math.random() * 32));
+        if(!numberIsUsed(randomNum)){
+          $scope.arrayOfEmpties.push(randomNum);
+          isPickable = true;
+        }
+      }
+      return randomNum;
+    }
+
+    function numberIsUsed(number){
+      if(number == 11 || number == 10 || number == 12 || number == 13 || number == 18 || number == 20 || number == 21 || number == 19)
+        return true;
+     if($scope.arrayOfEmpties.length == 0)
+      return false;
+     for(i = 0; i < $scope.arrayOfEmpties.length; i++){
+       if(number == $scope.arrayOfEmpties[i])
+        return true;
+     }
+      return false;
+    }
+
+    function loadAvatar(hash, index, email){
+        var count = $scope.imageCounter
+        var url = "https://secure.gravatar.com/avatar/" +  hash + "?s=300&d=mm";
+        var loadImage = function(uri) {
+        var xhr = new XMLHttpRequest();
+        xhr.responseType = 'blob';
+        xhr.onload = function() {
+            var image  = window.URL.createObjectURL(xhr.response);
+            $scope.displayArray[randomNumber()] = {photo: image, emailAddress: email};
+          }
+        xhr.open('GET', uri, true);
+        xhr.send();
+        }
+        //if(isTrue($scope.blanks, index))
+        loadImage(url);
+
+    }
+
+    $scope.noImage = function(image){
+      if($scope.standardImage == image)
+        return true;
+      return false;
+    }
+
+
+  });
+
+*/
 
 
 
@@ -713,6 +833,23 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, m
       {"from": "Contract Expenditure", "to": "Contract Administration"}
     ];
 
+    $scope.callsData = [];
+
+    /*$scope.callsData = [
+      {"month" : "January", "date" : "2014-01-2014", "OneHour" : 0, "FourHours" : 0, "OneDay" : 0},
+      {"month" : "February", "date" : "2014-02-2014", "OneHour" : 0, "FourHours" : 0, "OneDay" : 0},
+      {"month" : "March", "date" : "2014-03-2014", "OneHour" : 0, "FourHours" : 0, "OneDay" : 0},
+      {"month" : "April", "date" : "2014-04-2014", "OneHour" : 0, "FourHours" : 0, "OneDay" : 0},
+      {"month" : "May", "date" : "2014-05-2014", "OneHour" : 0, "FourHours" : 0, "OneDay" : 0},
+      {"month" : "June", "date" : "2014-06-2014", "OneHour" : 0, "FourHours" : 0, "OneDay" : 0},
+      {"month" : "July", "date" : "2014-07-2014", "OneHour" : 0, "FourHours" : 0, "OneDay" : 0},
+      {"month" : "August", "date" : "2014-08-2014", "OneHour" : 0, "FourHours" : 0, "OneDay" : 0},
+      {"month" : "September", "date" : "2014-09-2014", "OneHour" : 0, "FourHours" : 0, "OneDay" : 0},
+      {"month" : "October", "date" : "2014-10-2014", "OneHour" : 0, "FourHours" : 0, "OneDay" : 0},
+      {"month" : "November", "date" : "2014-11-2014", "OneHour" : 0, "FourHours" : 0, "OneDay" : 0},
+      {"month" : "December", "date" : "2014-12-2014", "OneHour" : 0, "FourHours" : 0, "OneDay" : 0}
+      ] */
+
     $scope.$on('tabUpdated', function(){
       $scope.tab = Service.tab;
     });
@@ -741,7 +878,9 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, m
          data: {from:'2014-03-12T13:37:27+00:00', to:'2014-06-12T13:37:27+00:00'}
          }).success(function(d, status, headers, config){
            $scope.data = d.data;
+           $scope.rawData = d;
            newSort();
+           responseClassificationSort();
          })
         .error(function(data, status, headers, config){
            $scope.data = "fail";
@@ -756,6 +895,60 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, m
         incrementCategory(group);
       }
       formatForGraph();
+    }
+
+    function responseClassificationSort(){
+      for(var i =0; i < $scope.data.length; i++){
+        var month = $scope.data[i].ResponseDate;
+        var slicedMonth = month.substr(0,7);
+        $scope.month = slicedMonth;
+        var classification = $scope.data[i].ResponseClassification;
+        $scope.classification = classification;
+        incrementCategoryForResponse(slicedMonth, classification);
+        //var index = getIndexOfMonth(month);
+        //$scope.index = index;
+        //count(index,classifcation);
+      }
+    }
+
+    function incrementCategoryForResponse(month, classification){
+      var exists = false;
+      var object = null;
+      var i = 0;
+      if($scope.callsData.length != 0){
+        for(i =0; i < $scope.callsData.length; i++){
+          if(month == $scope.callsData[i].date){
+            object = $scope.callsData[i];
+            exists = true; break;
+          }
+        }
+      }
+      if(!exists){
+        object = {"date" : month, "OneHour" : 0, "FourHours" : 0, "OneDay" : 0}      //MAKING ONE FOR EACH DAY - ONLY FOR EACH MONTH
+        $scope.callsData.push(object);
+      }
+      if(classification == '1 Hour')                    //THEYRE FALLING THROUGH //because you're searching callsData not $scope.data
+        object.OneHour++;
+      else if(classification == '4 Hours')
+        object.FourHours++;
+      else
+        object.OneDay++;
+    }
+
+    function getIndexOfMonth(monthName){
+      for( var i = 0; i < $scope.callsData.length; i++){
+        if(monthName == $scope.callsData[i].date) //something here not working
+          return i;
+      }
+    }
+
+    function count(index, classification){
+        if(classification == '1 Hour')
+          $scope.callsData[index].OneHour++;
+        else if(classification == '4 hours')
+          $scope.callsData[index].FourHours++;
+        else
+          $scope.callsData[index].OneDay++;
     }
 
     function formatForGraph(){
@@ -829,7 +1022,6 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, m
          data: {from:'2014-03-12T13:37:27+00:00', to:'2014-06-12T13:37:27+00:00'}
          }).success(function(d, status, headers, config){
            $scope.data = d.data;
-           newSort();
          })
         .error(function(data, status, headers, config){
            $scope.data = "fail";

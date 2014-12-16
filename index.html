@@ -216,6 +216,11 @@
 
   <div ng-controller="NinthKPI" class="kpi animate" ng-show="tab == 9">
       <h1>Help Desk Data</h1>
+      classification: {{classification}}
+      month {{month}}
+      index: {{index}}
+      data {{callsData}}
+      {{rawData}}
       <div id="helpDeskCategoryContainer">
       <nvd3-multi-bar-horizontal-chart
             data="barData"
