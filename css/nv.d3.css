@@ -40,7 +40,7 @@
   z-index: 10000;
 
   font-family: openSans;
-  font-size: 13px;
+  font-size: 3px; /* from 13 */
   text-align: left;
   pointer-events: none;
 
@@ -162,11 +162,11 @@ svg {
 
 
 svg text {
-  font: normal 12px openSans;
+  font: normal 5pt openSans;
 }
 
 svg .title {
- font: 14px openSans;
+ font: 10px openSans;   /*CHANNNNNNNNNNNNNNNNNNGGGGGGGGGGGGGGEEEEEEEEEEEEEE */
 }
 
 .nvd3 .nv-background {
@@ -178,7 +178,7 @@ svg .title {
 }
 
 .nvd3.nv-noData {
-  font-size: 18px;
+  font-size: 10px;
 
 }
 
@@ -559,7 +559,7 @@ svg .title {
 *  Bullet
 */
 
-.nvd3.nv-bullet { font: 10px openSans; }
+.nvd3.nv-bullet { font: 5px openSans; } /* 10 to 5 */
 .nvd3.nv-bullet .nv-measure { fill-opacity: .8; }
 .nvd3.nv-bullet .nv-measure:hover { fill-opacity: 1; }
 .nvd3.nv-bullet .nv-marker { stroke: #000; stroke-width: 2px; }
@@ -568,7 +568,7 @@ svg .title {
 .nvd3.nv-bullet .nv-range.nv-s0 { fill: #eee; }
 .nvd3.nv-bullet .nv-range.nv-s1 { fill: #ddd; }
 .nvd3.nv-bullet .nv-range.nv-s2 { fill: #ccc; }
-.nvd3.nv-bullet .nv-title { font-size: 14px;  }
+.nvd3.nv-bullet .nv-title { font-size: 4px;  } /*changed from 14 */
 .nvd3.nv-bullet .nv-subtitle { fill: #999; }
 
 
@@ -615,7 +615,7 @@ svg .title {
   stroke: #666;
   */
   stroke-width: 0;
-  font-size: .9em;
+  font-size: .3em; /*from .9em */
   font-weight: normal;
 }
 
@@ -639,7 +639,7 @@ svg .title {
   fill: #000;
   */
 
-  font-size: 1.1em;
+  font-size: 0.4em; /*from 1.1
 }
 
 /**********

@@ -13,6 +13,10 @@
 
 var snowStorm = null;
 
+var today = new Date();
+var mm = today.getMonth()+1; //January is 0!
+
+
 function SnowStorm() {
 
   // --- PROPERTIES ---
@@ -492,4 +496,5 @@ function SnowStorm() {
 
 }
 
+if(mm == 12)
 snowStorm = new SnowStorm();

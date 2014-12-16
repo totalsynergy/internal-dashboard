@@ -28,7 +28,8 @@
     "https://www.eventbriteapi.com/",
     "storage",
     "https://beta.synergycloudapp.com/",
-    "https://en.gravatar.com/"
+    "https://en.gravatar.com/",
+    "https://s3-us-west-2.amazonaws.com/"
     ],
 
   "web_accessible_resources": [

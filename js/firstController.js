@@ -9,13 +9,20 @@ app.controller('FirstController', function($scope, Service, $interval, $timeout,
     $scope.amountOfPages = $scope.pages.length;
     $scope.myTimeout = null;
     $scope.timerBoolean = false;
-    var timer = $timeout($scope.onTimeout, $scope.speed);;
+    var timer = $timeout($scope.onTimeout, $scope.speed);
 
   //fix this loop
 
    // $scope.sound = ngAudio.load("assets/bell.mp3");
 
 
+  $scope.error = {
+      message: null,
+      errorFunction: null,
+  };
+
+
+  $scope.errorList = [];
 
     chrome.storage.local.get(null, function(result){
       if(result.pages != null)
@@ -37,7 +44,7 @@ app.controller('FirstController', function($scope, Service, $interval, $timeout,
       //$scope.newTime();
       $interval(function(){
         Service.sendForData();
-      }, 60000);
+      }, 300000);
     }
 
     $scope.onTimeout = function(){

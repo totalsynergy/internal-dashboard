@@ -73,7 +73,9 @@
       {"name" : "conference CountDown", "isSelected" : true},
       {"name" : "Gravatar", "isSelected" : false},
       {"name" : "Synergy Clients", "isSelected" : false},
-      {"name" : "Test2", "isSelected" : false},
+      {"name" : "Help Desk 1", "isSelected" : false},
+      {"name" : "Help Desk 2", "isSelected" : false},
+      {"name" : "Help Desk 3", "isSelected" : false},
       {"name" : "Test3", "isSelected" : false}
     ];
 

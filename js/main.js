@@ -3,7 +3,7 @@
     var time = 0;
     $rootScope.$broadCast('TimeChange');
     time += 1000;
-  }.1000);
+  },1000);
 })();
 
 var synergyApiKey = "";

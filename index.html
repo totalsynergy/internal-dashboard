@@ -11,9 +11,7 @@
      <script type="text/javascript" src="js/eventBriteController.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
     <script type="text/javascript" src="js/angular-slider.js"></script>
-    <script type="text/javascript" src="js/rzslider.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
-    <script type="text/javascript" src="js/npm.js"></script>
     <script type="text/javascript" src="js/d3.js"></script>
     <script type="text/javascript" src="js/nv.d3.js"></script>
     <script type="text/javascript" src="js/angular-animate.js"></script>
@@ -26,7 +24,6 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="angular-csp.css">
     <link rel="stylesheet" href="angular-slider.css">
-    <link rel="stylesheet" href="css/rzslider.css">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="css/bootstrap-theme.css">
     <link rel="stylesheet" href="css/nv.d3.css">
@@ -118,7 +115,7 @@
             showYAxis="false"
             color="colorFunction()"
             objectEquality="true">
-        <svg></svg>
+        <svg class="smallText"></svg>
     </nvd3-discrete-bar-chart>
     </div>
  </div>
@@ -218,24 +215,43 @@
   </div>
 
   <div ng-controller="NinthKPI" class="kpi animate" ng-show="tab == 9">
-    <div class="container">
-      <h1>Test Page 2</h1>
-       Data: {{data}}
-    </div>
+      <h1>Help Desk Data</h1>
+      <div id="helpDeskCategoryContainer">
+      <nvd3-multi-bar-horizontal-chart
+            data="barData"
+            id="helpDeskCategories"
+            width="500"
+            height="250"
+            tooltips="false"
+            showXAxis="true"
+            showYAxis="true"
+            objectEquality="true"
+            clipEdge="true"
+            color="colorFunction()"
+            margin="{left:150,top:10,bottom:20,right:50}"
+            noData="Loading Data...">
+        <div id="smallerContainer">
+        <svg id="smallText"></svg>
+        </div>
+      </nvd3-multi-bar-horizontal-chart>
+      </div>
   </div>
 
   <div ng-controller="TenthKPI" class="kpi animate" ng-show="tab == 10">
-    <div class="container">
-      <h1>Test Page 3</h1>
-      <div ng-repeat="message in data">
-      <p id="w74"> Person : {{returnName(message.user)}} Message {{message.text}}</p>
+      <h1>Help Desk Data 2</h1>
+      {{data}}
+  </div>
+
+  <div ng-controller="EleventhKPI" class="kpi animate" ng-show="tab == 11">
+      <h1>Help Desk Data 3</h1>
+  </div>
+
+  <div ng-controller="TwelthKPI" class="kpi animate" ng-show="tab == 12">
+      <h1>Slack Updates</h1>
+      <div ng-repeat="message in data" class="slackHolder">
+        <div class="slackName">{{returnName(message.user)}}</div>
+        <div class="slackMessage">{{message.text}}</div>
       </div>
-      <div ng-repeat="info in imageNameAndMessage">
-        Image : {{info.image}}
-        Name : {{info.name}}
-        Message : {{info.message}}
-      </div>
-    </div>
   </div>
 
 
@@ -286,7 +302,12 @@ IN SETTINGS RESTORE-->
     </div>
   </div>
   </div>
-
+<!--<div class="error-popover" style="display:block; position:absolute; bottom: 100px;">
+  <img alt="blahblah" src="//secure.gravatar.com/avatar/4ba08eadef37b5a2ae8e9949ca726bc8?s=300&d=mm"/>
+  <section ng-repeat="error in errorList">
+  <textarea class="error-message">{{error.message}}</textarea>
+  </section>
+</div> -->
 
 
 </body>

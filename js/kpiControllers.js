@@ -1,5 +1,3 @@
-
-//tab = 1
 app.controller('FirstKPI', function($scope, $http, Service, $interval){
     $scope.keyAvailable = false;
     $scope.totalSynergyKey = "empty";
@@ -8,6 +6,8 @@ app.controller('FirstKPI', function($scope, $http, Service, $interval){
     $scope.notOnCloud = 0;
     $scope.pieData = null;
     $scope.percentage = 0;
+
+
 
 
     $scope.$on('fetchEventData', function(){
@@ -101,10 +101,10 @@ app.controller('FirstKPI', function($scope, $http, Service, $interval){
 
   //tab = 2
 app.controller('SecondKPI', function($scope, Service){
-    $scope.percentage = 92;
+    $scope.percentage = 96;
     $scope.internPieData = [
       {key: "Productive Time", y: 8},
-      {key: "UnProductive Time", y: 92}
+      {key: "UnProductive Time", y: 96}
       ];
 
     $scope.$on('tabUpdated', function(){
@@ -112,7 +112,7 @@ app.controller('SecondKPI', function($scope, Service){
       if(Service.tab == 2){
         $scope.internPieData = [
           {key: "Productive Time", y: 8},
-          {key: "UnProductive Time", y: 92}
+          {key: "UnProductive Time", y: 96}
         ];
         //countUpPercentage2();
       }
@@ -188,7 +188,6 @@ app.controller('ThirdKPI', function($scope, $http, Service, $interval){
       }
     });
     /*
-
     function countUpPercentage(){
       var limit = $scope.percentage;
       $scope.percentage = 0;
@@ -443,6 +442,14 @@ app.controller('SixthKPI', function($scope, $http, Service, $interval){
 
 app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, md5, $timeout){
 
+  $scope.error = {
+      message: null,
+      errorFunction: null,
+  };
+
+
+  $scope.errorList = [];
+
     //BE CAREFUL BELOW
     $scope.dataLength = 20;
     $scope.count = 0;
@@ -465,8 +472,8 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, m
     $scope.$on('fetchEventData', function(){
       $scope.displayArray = [];
       weGotKey();
-      pickNumbers();
-      pickDecisiveNumbers();
+      //pickNumbers();
+      //pickDecisiveNumbers();
     })
 
     function initialiseArray(){
@@ -485,6 +492,7 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, m
          method: 'POST',
          headers : {'internal-token' : $scope.totalSynergyKey}
          }).success(function(d, status, headers, config){
+           console.log(d,status,headers,config);
            //sortEmails(d.data);
            sortEmails2(d.data, d.data.length);
            $scope.data = d.data;
@@ -497,9 +505,11 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, m
     }
 
     function sortEmails2(data, length){
+      console.log(data, length);
       var counter = 0;
       $scope.arrayOfEmpties = [];
       for(i = 0; i < data.length; i++){
+
         var lowerCaseEmail = data[i].Email.toLowerCase();
         var hash = md5.createHash(lowerCaseEmail || '');
         loadAvatar(hash, i, data[i].Name);
@@ -537,12 +547,16 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, m
         var url = "https://secure.gravatar.com/avatar/" +  hash + "?s=300&d=mm";
         var loadImage = function(uri) {
         var xhr = new XMLHttpRequest();
-        xhr.responseType = 'blob';
+        //xhr.responseType = 'blob';
         xhr.onload = function() {
             var image  = window.URL.createObjectURL(xhr.response);
             $scope.displayArray[randomNumber()] = {photo: image, emailAddress: email};
           }
+        console.log("URI Of Request for Gravatar", uri)
+                   xhr.onerror = requestError;
+        xhr.onabort = requestError;
         xhr.open('GET', uri, true);
+
         xhr.send();
         }
         //if(isTrue($scope.blanks, index))
@@ -557,8 +571,22 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, m
     }
 
 
-  });
 
+        var requestError = function (error) {
+        // The response is always empty
+        // See https://xhr.spec.whatwg.org/#request-error-steps and https://fetch.spec.whatwg.org/#concept-network-error
+        var errorItem = angular.copy($scope.error);
+        errorItem.message = error.message;
+        $scope.errorList.push(errorItem);
+        console.log("Error has occured:" ,error);
+        //completeRequest(callback, -1, null, null, '');
+      };
+
+
+
+
+
+  });
 
 
 
@@ -643,6 +671,47 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, m
   app.controller('NinthKPI', function($scope, Service, $http, gravatarService){
     $scope.stat = "";
     $scope.your_email = "adamhannigan@hotmail.com";
+    $scope.unknown = [];
+    $scope.categories = [];
+    $scope.barData = [];
+    $scope.colorCounter = 0;
+    $scope.testData = [
+        {
+            "values": [ ['one', 5],['onse', 15],['ossne', 7],['osssne', 11]]
+        }];
+    $scope.groupingList = [
+      {"from": "Document Management", "to": "Documents & Transmittals"},
+      {"from": "Document Tables", "to": "Connect"},
+      {"from": "Notes", "to": "Admin + Default Menus"},
+      {"from": "KPI Panels", "to": "Admin + Default Menus"},
+      {"from": "Web Application", "to": "Project Accounting"},
+      {"from": "Notes", "to": "Admin + Default Menus"},
+      {"from": "Server \\ Database", "to": "Technical"},
+      {"from": "Upgrade", "to": "Technical"},
+      {"from": "Transmittals", "to": "Documents & Transmittals"},
+      {"from": "MYOB Connect", "to": "Connect"},
+      {"from": "Templates", "to": "Reporting"},
+      {"from": "Downloads Library", "to": "Reporting"},
+      {"from": "Reports", "to": "Reporting"},
+      {"from": "Error Messages", "to": "Technical"},
+      {"from": "Licensing", "to": "Technical"},
+      {"from": "Projects", "to": "Project Accounting"},
+      {"from": "Tasks + Checklists", "to": "Admin + Default Menus"},
+      {"from": "Alerts \\ messages", "to": "Admin + Default Menus"},
+      {"from": "Attributes", "to": "Admin + Default Menus"},
+      {"from": "Installation", "to": "Technical"},
+      {"from": "Quickbooks Connect", "to": "Connect"},
+      {"from": "Xero Connect", "to": "Connect"},
+      {"from": "MYOB Export", "to": "Connect"},
+      {"from": "Time and Expense Entry", "to": "Project Accounting"},
+      {"from": "Costing and Rates", "to": "Project Accounting"},
+      {"from": "Implementation and Training Issue", "to": "Project Accounting"},
+      {"from": "Installation", "to": "Technical"},
+      {"from": "MS Office Integration", "to": "Technical"},
+      {"from": "Offices", "to": "Project Accounting"},
+      {"from": "New product ideas", "to": "New product ideas"},
+      {"from": "Contract Expenditure", "to": "Contract Administration"}
+    ];
 
     $scope.$on('tabUpdated', function(){
       $scope.tab = Service.tab;
@@ -653,21 +722,82 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, m
       weGotKey();
     })
 
+
+    $scope.colorFunction = function(){
+      return function(d, i) {
+        if(d[1] > 5)
+    	    return '#F39200'
+    	 else
+    	  return '#78AD29'
+      };
+    }
+
     function weGotKey(){
       //debugger
        $http({
-         url: 'https://beta.synergycloudapp.com/totalsynergy/InternalKpi/Home/staff',
+         url: 'https://beta.synergycloudapp.com/totalsynergy/InternalKpi/Home/helpdeskdata',
          method: 'POST',
-         headers : {'internal-token' : $scope.totalSynergyKey}
+         headers: {'Content-Type': 'application/json', 'internal-token' : $scope.totalSynergyKey},
+         data: {from:'2014-03-12T13:37:27+00:00', to:'2014-06-12T13:37:27+00:00'}
          }).success(function(d, status, headers, config){
-           $scope.data = d.data[0].Email;
+           $scope.data = d.data;
+           newSort();
          })
         .error(function(data, status, headers, config){
            $scope.data = "fail";
         });
     }
 
+    function newSort(){
+      $scope.categories = [];
+      for(i=0; i < $scope.data.length; i++){
+        var group = $scope.data[i].Category;
+        group = findGroup(group);
+        incrementCategory(group);
+      }
+      formatForGraph();
+    }
+
+    function formatForGraph(){
+      var dataToPass = [];
+      for(var i = 0; i < $scope.categories.length; i++){
+         var category = [$scope.categories[i].category, $scope.categories[i].count];
+         dataToPass.push(category);
+      }
+      $scope.barData = [
+        {
+            "values": dataToPass
+        }];
+    }
+
+    function findGroup(groupName){
+      for( var i = 0; i < $scope.groupingList.length; i++){
+        if(groupName == $scope.groupingList[i].from) //something here not working
+          return $scope.groupingList[i].to;
+      }
+      return groupName;
+    }
+
+    function incrementCategory(groupName){
+      var exists = false;
+      if($scope.categories.length != 0){
+        for(var i =0; i < $scope.categories.length; i++){
+          if(groupName == $scope.categories[i].category){
+            $scope.categories[i].count++;
+            exists = true; break;
+          }
+        }
+      }
+      if(!exists){
+        var categoryObject = {'category' : groupName, 'count' : 1};
+        $scope.categories.push(categoryObject);
+      }
+    }
+
   });
+
+
+
 
 
 
@@ -690,27 +820,74 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, m
       weGotKey();
     })
 
-    $scope.returnName = function(id){
-      for(i = 0; i < $scope.people.length; i++){
-        if($scope.people[i].id == id)
-          return $scope.people[i].name;
-      }
-      return "didnt work";
+       function weGotKey(){
+      //debugger
+       $http({
+         url: 'https://beta.synergycloudapp.com/totalsynergy/InternalKpi/Home/helpdeskdata',
+         method: 'POST',
+         headers: {'Content-Type': 'application/json', 'internal-token' : $scope.totalSynergyKey},
+         data: {from:'2014-03-12T13:37:27+00:00', to:'2014-06-12T13:37:27+00:00'}
+         }).success(function(d, status, headers, config){
+           $scope.data = d.data;
+           newSort();
+         })
+        .error(function(data, status, headers, config){
+           $scope.data = "fail";
+        });
     }
 
-    function sortData(){
-      $scope.imageNameAndMessage = [];
-      for(i = 0; i < $scope.data.length; i++){
-        var object = {'image' : null, 'name' : $scope.returnName("won't work")  , 'message' : $scope.data[i].text };
-        $scope.imageNameAndMessage.push(object);
+  });
+
+  app.controller('EleventhKPI', function($scope, Service, $http, gravatarService){
+    $scope.data = null;
+    $scope.people = null;
+    $scope.slackKey = '';
+    $scope.imageNameAndMessage = [];
+
+
+    $scope.$on('tabUpdated', function(){
+      $scope.tab = Service.tab;
+    });
+
+    $scope.$on('keysUpdated', function(){
+      $scope.slackKey = Service.slackKey;
+      //weGotKey();
+    })
+
+  });
+
+
+  app.controller('TwelthKPI', function($scope, Service, $http, gravatarService){
+    $scope.data = null;
+    $scope.people = null;
+    $scope.slackKey = '';
+    $scope.imageNameAndMessage = [];
+
+
+    $scope.$on('tabUpdated', function(){
+      $scope.tab = Service.tab;
+    });
+
+    $scope.$on('keysUpdated', function(){
+      $scope.slackKey = Service.slackKey;
+      weGotKey();
+    })
+
+    $scope.returnName = function(id){
+      if($scope.people != null){
+      for(i = 0; i < $scope.people.length; i++){
+        if($scope.people[i].id == id)
+          return $scope.people[i].real_name;
+      }
+      return "didnt work";
       }
     }
+
 
     function weGotKey(){
       $http.get("https://slack.com/api/channels.history?token=" + $scope.slackKey + "&channel=C02NW54S2&pretty=1")
       .success(function(data){
         $scope.data = data.messages;
-        sortData();
         //Service.updateEventData(data);
       })
       .error(function(){
@@ -738,8 +915,8 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, m
             var image  = window.URL.createObjectURL(xhr.response);
             return image;
           }
-        xhr.open('GET', uri, true);
-        xhr.send();
+        //xhr.open('GET', uri, true);
+        //xhr.send();
         }
         //if(isTrue($scope.blanks, index))
         loadImage(url);
@@ -747,3 +924,133 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, m
 
   });
 
+
+
+  /*
+    function sortData(){
+
+      $scope.unknown = [];
+      $scope.namesArray = [];
+      $scope.technical = 0;
+      $scope.webApplication = 0;
+      $scope.notes = 0;
+      $scope.staff = 0;
+      $scope.resource = 0;
+      $scope.reporting = 0;
+      $scope.projectTeams = 0;
+      $scope.projectAccounting = 0;
+      $scope.generalHelpFiles = 0;
+      $scope.serverDatabase = 0;
+      $scope.documents = 0;
+      $scope.dataImport = 0;
+      $scope.contactAdministration = 0;
+      $scope.contacts = 0;
+      $scope.connect = 0;
+      $scope.billingInvoicing = 0;
+      $scope.admin = 0;
+      $scope.other = 0;
+      $scope.upgrade = 0;
+      $scope.transmittals = 0;
+      $scope.templates = 0;
+      $scope.MYOBConnect = 0;
+      $scope.errorMessages = 0;
+      $scope.licensing = 0;
+      $scope.projects = 0;
+      $scope.checkLists = 0;
+      $scope.importData = 0;
+      $scope.alerts = 0;
+      $scope.installation = 0;
+      $scope.xeroConnect = 0;
+      $scope.quickbooksConnect = 0;
+      $scope.timeAndExpenseEntry = 0;
+      $scope.contractAdministration = 0;
+      $scope.costingAndRates = 0;
+      $scope.documentMangement = 0;
+      $scope.MSOfficeIntegration = 0;
+      $scope.offices = 0;
+      $scope.documentTables = 0;
+      for(i=0; i < $scope.data.length; i++){
+        switch($scope.data[i].Category){
+          case 'Web Application': $scope.webApplication++; break;
+          case 'Notes' : $scope.notes++; break;
+          case 'Billing \\ Invoicing': $scope.billingInvoicing++; break;
+          case 'Server \\ Database' : $scope.serverDatabase++; break;
+          case 'Contacts' : $scope.contacts++; break;
+          case 'Upgrade' : $scope.upgrade++; break;
+          case 'Admin + Default Menus': $scope.admin++; break;
+          case 'Transmittals' : $scope.transmittals++; break;
+          case 'MYOB Connect' : $scope.MYOBConnect++; break;
+          case 'Templates' : $scope.templates++; break;
+          case 'Reports' : $scope.reporting++; break;
+          case 'Error Messages' : $scope.errorMessages++; break;
+          case 'Licensing' : $scope.licensing++; break;
+          case 'Projects' : $scope.projects++; break;
+          case 'Tasks + Checklists' : $scope.checkLists++; break;
+          case 'Data Import' : $scope.importData++; break;
+          case 'General Help Files/doco' : $scope.generalHelpFiles++; break;
+          case 'Resource Management': $scope.resource++; break;
+          case 'Alerts \\ messages' : $scope.alerts++; break;
+          case 'Staff \\ Employees' : $scope.staff++; break;
+          case 'Installation' : $scope.installation++; break;
+          case 'Quickbooks Connect ' : $scope.quickbooksConnect++; break;    //EXTRA SPACE AT THE END OF THIS - WATCH THIS WHILST FILTERING
+          case 'Xero Connect' : $scope.xeroConnect++; break;
+          case 'Time and Expense Entry' : $scope.timeAndExpenseEntry++; break;
+          case 'Contract Administration' : $scope.contactAdministration++; break;
+          case 'Costing and Rates' : $scope.costingAndRates++; break;
+          case 'Document Management' : $scope.documentManagement++; break;
+          case 'MS Office Integration' : $scope.MSOfficeIntegration++; break;
+          case 'Offices' : $scope.offices++; break;
+          case 'Document Tables' : $scope.documentTables++; break;
+          default: $scope.unknown.push($scope.data[i]); $scope.unknown.push('works'); $scope.other++;
+        }
+      }
+      for(i = 0; i < dataPassed.length; i++){
+         var versionObject = [dataPassed[i].Version, dataPassed[i].Count];
+         var blankVersionObject = [dataPassed[i].Version, 0];
+         dataToPass.push(versionObject);
+         blankData.push(blankVersionObject);
+         percentageSum += dataPassed[i].Count;
+          }
+        $scope.percentage = parseInt((dataPassed[i-2].Count + dataPassed[i-1].Count)/percentageSum*100);
+        /*var data5 = [];
+        var ran = ["postWorking", 69];
+        data5.push(ran);
+        var data = [
+                {
+                    "values": dataToPass
+                }];
+        var blankData = [
+                {
+                    "values": blankData
+                }];
+    }
+
+
+    /*function sortData(dataPassed){
+        var dataToPass = [];
+        var blankData = [];
+        var percentageSum = 0;
+       for(i = 0; i < dataPassed.length; i++){
+         var versionObject = [dataPassed[i].Version, dataPassed[i].Count];
+         var blankVersionObject = [dataPassed[i].Version, 0];
+         dataToPass.push(versionObject);
+         blankData.push(blankVersionObject);
+         percentageSum += dataPassed[i].Count;
+          }
+        $scope.percentage = parseInt((dataPassed[i-2].Count + dataPassed[i-1].Count)/percentageSum*100);
+        /*var data5 = [];
+        var ran = ["postWorking", 69];
+        data5.push(ran);
+        var data = [
+                {
+                    "values": dataToPass
+                }];
+        var blankData = [
+                {
+                    "values": blankData
+                }];
+
+         $scope.barData = data;
+         $scope.rawData = data;
+         $scope.testData = blankData;
+    }*/

@@ -1,6 +1,6 @@
 
 
-  angular.module('appService', []).factory('Service', function($rootScope){
+  angular.module('appService', []).factory('Service' , function($rootScope){
     var service = {};
     service.tab = 3;
     service.second = 0;
@@ -68,18 +68,7 @@
 
   var app = angular.module('myApp', ['appService', 'uiSlider', 'nvd3ChartDirectives', 'ngAnimate', 'gravatarModule', 'ngAudio', 'ngMd5']);
 
-  //DIDNT WORK
-  app.config( [
-    '$compileProvider',
-    function( $compileProvider )
-    {
-        var currentImgSrcSanitizationWhitelist = $compileProvider.imgSrcSanitizationWhitelist();
-            newImgSrcSanitizationWhiteList = currentImgSrcSanitizationWhitelist.toString().slice(0,-1)+'|filesystem:chrome-extension:'+'|blob:chrome-extension%3A'+currentImgSrcSanitizationWhitelist.toString().slice(-1);
-        console.log("Changing imgSrcSanitizationWhiteList from "+currentImgSrcSanitizationWhitelist+" to "+newImgSrcSanitizationWhiteList);
 
-        $compileProvider.imgSrcSanitizationWhitelist(newImgSrcSanitizationWhiteList);
-    }
-  ]);
 
 
 
@@ -100,7 +89,9 @@
       {"name" : "conference CountDown", "isSelected" : true},
       {"name" : "Gravatar", "isSelected" : false},
       {"name" : "Synergy Clients", "isSelected" : false},
-      {"name" : "Test2", "isSelected" : false},
+      {"name" : "HelpDesk1", "isSelected" : false},
+      {"name" : "HelpDesk2", "isSelected" : false},
+      {"name" : "HelpDesk3", "isSelected" : false},
       {"name" : "Test3", "isSelected" : false}
     ];
 
