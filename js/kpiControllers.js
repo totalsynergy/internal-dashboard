@@ -1035,15 +1035,17 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, m
 
   app.controller('TenthKPI', function($scope, Service){
     $scope.callsData = [];
-    $scope.callsDataBarData = [];
     $scope.count = 0;
     $scope.maxY = 200;
     $scope.blankData1 = [];
     $scope.blankData2 = [];
-    $scope.blankData2 = [];
+    $scope.blankData3 = [];
     $scope.callsDataBarData = [];
     $scope.callsDataBarData2 = [];
     $scope.callsDataBarData3 = [];
+    $scope.callsDataBarDataRec = [];
+    $scope.callsDataBarData2Rec = [];
+    $scope.callsDataBarData3Rec = [];
 
 
     $scope.$on('tabUpdated', function(){
@@ -1053,9 +1055,9 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, m
         $scope.callsDataBarData2 = $scope.callsDataBarData2Rec;
         $scope.callsDataBarData3 = $scope.callsDataBarData3Rec;
       }
-      else{
-        $scope.callsDataBarData = $scope.blankData1;
+      else if(Service.tab != 9 || Service.tab != 11){
         $scope.callsDataBarData2 = $scope.blankData2;
+        $scope.callsDataBarData = $scope.blankData2;
         $scope.callsDataBarData3 = $scope.blankData3;
       }
     });
@@ -1111,15 +1113,15 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, m
             "values": [ [$scope.callsData[0].date, monthCounts[0]], [$scope.callsData[1].date, monthCounts[1]] , [$scope.callsData[2].date, monthCounts[2]], [$scope.callsData[3].date, monthCounts[3]]]
            }];
 
-      $scope.blankData1 = angular.copy($scope.callsDataBarDataRec);
-      for(var j = 0; j  < blankData.values.length; j++){
-        $scope.blankData.values[j][1] = 0;
+      $scope.blankData1 = $scope.callsDataBarDataRec;
+      for(var j = 0; j  < blankData1.values.length; j++){
+        $scope.blankData1.values[j][1] = 0;
       }
-      $scope.blankData2 = angular.copy($scope.callsDataBarData2Rec);
+      $scope.blankData2 = $scope.callsDataBarData2Rec;
       for(var j = 0; j  < blankData2.values.length; j++){
         $scope.blankData2.values[j][1] = 0;
       }
-      $scope.blankData3 = angular.copy($scope.callsDataBarData3Rec);
+      $scope.blankData3 = $scope.callsDataBarData3Rec;
       for(var j = 0; j  < blankData3.values.length; j++){
         $scope.blankData3.values[j][1] = 0;
       }
