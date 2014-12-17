@@ -101,10 +101,10 @@ app.controller('FirstKPI', function($scope, $http, Service, $interval){
 
   //tab = 2
 app.controller('SecondKPI', function($scope, Service){
-    $scope.percentage = 96;
+    $scope.percentage = 96.5;
     $scope.internPieData = [
       {key: "Productive Time", y: 8},
-      {key: "UnProductive Time", y: 96}
+      {key: "UnProductive Time", y: 96.5}
       ];
 
     $scope.$on('tabUpdated', function(){
@@ -112,7 +112,7 @@ app.controller('SecondKPI', function($scope, Service){
       if(Service.tab == 2){
         $scope.internPieData = [
           {key: "Productive Time", y: 8},
-          {key: "UnProductive Time", y: 96}
+          {key: "UnProductive Time", y: 96.5}
         ];
         //countUpPercentage2();
       }
@@ -794,7 +794,12 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, m
     $scope.unknown = [];
     $scope.categories = [];
     $scope.barData = [];
+    $scope.blankData = [];
+    $scope.recoveryData = [];
     $scope.colorCounter = 0;
+    $scope.currentDate = new Date();
+    $scope.yearAgoData = 0;
+    $scope.maxY = 130;
     $scope.testData = [
         {
             "values": [ ['one', 5],['onse', 15],['ossne', 7],['osssne', 11]]
@@ -835,23 +840,14 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, m
 
     $scope.callsData = [];
 
-    /*$scope.callsData = [
-      {"month" : "January", "date" : "2014-01-2014", "OneHour" : 0, "FourHours" : 0, "OneDay" : 0},
-      {"month" : "February", "date" : "2014-02-2014", "OneHour" : 0, "FourHours" : 0, "OneDay" : 0},
-      {"month" : "March", "date" : "2014-03-2014", "OneHour" : 0, "FourHours" : 0, "OneDay" : 0},
-      {"month" : "April", "date" : "2014-04-2014", "OneHour" : 0, "FourHours" : 0, "OneDay" : 0},
-      {"month" : "May", "date" : "2014-05-2014", "OneHour" : 0, "FourHours" : 0, "OneDay" : 0},
-      {"month" : "June", "date" : "2014-06-2014", "OneHour" : 0, "FourHours" : 0, "OneDay" : 0},
-      {"month" : "July", "date" : "2014-07-2014", "OneHour" : 0, "FourHours" : 0, "OneDay" : 0},
-      {"month" : "August", "date" : "2014-08-2014", "OneHour" : 0, "FourHours" : 0, "OneDay" : 0},
-      {"month" : "September", "date" : "2014-09-2014", "OneHour" : 0, "FourHours" : 0, "OneDay" : 0},
-      {"month" : "October", "date" : "2014-10-2014", "OneHour" : 0, "FourHours" : 0, "OneDay" : 0},
-      {"month" : "November", "date" : "2014-11-2014", "OneHour" : 0, "FourHours" : 0, "OneDay" : 0},
-      {"month" : "December", "date" : "2014-12-2014", "OneHour" : 0, "FourHours" : 0, "OneDay" : 0}
-      ] */
-
     $scope.$on('tabUpdated', function(){
       $scope.tab = Service.tab;
+      if(Service.tab == 9){
+        $scope.barData = $scope.recoveryData;
+      }
+      else if(Service.tab != 8 && Service.tab != 10){
+        $scope.barData = $scope.blankData;
+      }
     });
 
     $scope.$on('keysUpdated', function(){
@@ -869,13 +865,23 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, m
       };
     }
 
+    $scope.valueFormatFunction = function(){
+      var format = d3.format(',.0f');
+      return function(d){
+    	  return format(d);
+      }
+    }
+
     function weGotKey(){
       //debugger
+      var currentDate = new Date();
+      var currentDateMinusThreeMonths = new Date(new Date(currentDate).setMonth(currentDate.getMonth()-3));
+      currentDateMinusThreeMonths.setDate(1);
        $http({
          url: 'https://beta.synergycloudapp.com/totalsynergy/InternalKpi/Home/helpdeskdata',
          method: 'POST',
          headers: {'Content-Type': 'application/json', 'internal-token' : $scope.totalSynergyKey},
-         data: {from:'2014-03-12T13:37:27+00:00', to:'2014-06-12T13:37:27+00:00'}
+         data: {from:currentDateMinusThreeMonths, to:currentDate}
          }).success(function(d, status, headers, config){
            $scope.data = d.data;
            $scope.rawData = d;
@@ -898,7 +904,9 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, m
     }
 
     function responseClassificationSort(){
+      $scope.callsData = [];
       for(var i =0; i < $scope.data.length; i++){
+        if($scope.data[i].ResponseDate != ""){
         var month = $scope.data[i].ResponseDate;
         var slicedMonth = month.substr(0,7);
         $scope.month = slicedMonth;
@@ -908,7 +916,9 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, m
         //var index = getIndexOfMonth(month);
         //$scope.index = index;
         //count(index,classifcation);
+        }
       }
+      Service.passCallsData($scope.callsData);
     }
 
     function incrementCategoryForResponse(month, classification){
@@ -953,15 +963,41 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, m
 
     function formatForGraph(){
       var dataToPass = [];
+      var sortedData = [];
+      $scope.numberOfCalls = 0;
       for(var i = 0; i < $scope.categories.length; i++){
          var category = [$scope.categories[i].category, $scope.categories[i].count];
          dataToPass.push(category);
+         $scope.numberOfCalls += $scope.categories[i].count;
+      }
+      dataToPass.sort(function(a,b){
+        return b[1] - a[1];
+      });
+      var other = 0;
+      for(var j = 8; j < dataToPass.length; j++){
+        var element = dataToPass[j];
+        other += element[1];
+      }
+      dataToPass.splice(11,6);
+      dataToPass.push(['Other', other]);
+      dataToPass.sort(function(a,b){    //Don't need to sort every function
+        return b[1] - a[1];
+      });
+      var recoverData = angular.copy(dataToPass);
+      for(var i = 0; i < recoverData.length; i++){
+        recoverData[i][1] = null;
       }
       $scope.barData = [
         {
             "values": dataToPass
         }];
+      $scope.recoveryData = $scope.barData;
+      $scope.blankData =[
+        {
+            "values": recoverData
+        }];
     }
+
 
     function findGroup(groupName){
       for( var i = 0; i < $scope.groupingList.length; i++){
@@ -997,38 +1033,135 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, m
 
 
 
-  app.controller('TenthKPI', function($scope, Service, $http, gravatarService){
-    $scope.data = null;
-    $scope.people = null;
-    $scope.slackKey = '';
-    $scope.imageNameAndMessage = [];
+  app.controller('TenthKPI', function($scope, Service){
+    $scope.callsData = [];
+    $scope.callsDataBarData = [];
+    $scope.count = 0;
+    $scope.maxY = 200;
+    $scope.blankData1 = [];
+    $scope.blankData2 = [];
+    $scope.blankData2 = [];
+    $scope.callsDataBarData = [];
+    $scope.callsDataBarData2 = [];
+    $scope.callsDataBarData3 = [];
 
 
     $scope.$on('tabUpdated', function(){
       $scope.tab = Service.tab;
+      if(Service.tab == 10){
+        $scope.callsDataBarData = $scope.callsDataBarDataRec;
+        $scope.callsDataBarData2 = $scope.callsDataBarData2Rec;
+        $scope.callsDataBarData3 = $scope.callsDataBarData3Rec;
+      }
+      else{
+        $scope.callsDataBarData = $scope.blankData1;
+        $scope.callsDataBarData2 = $scope.blankData2;
+        $scope.callsDataBarData3 = $scope.blankData3;
+      }
     });
 
     $scope.$on('keysUpdated', function(){
       $scope.slackKey = Service.slackKey;
-      weGotKey();
+      //weGotKey();
     })
 
-       function weGotKey(){
-      //debugger
-       $http({
-         url: 'https://beta.synergycloudapp.com/totalsynergy/InternalKpi/Home/helpdeskdata',
-         method: 'POST',
-         headers: {'Content-Type': 'application/json', 'internal-token' : $scope.totalSynergyKey},
-         data: {from:'2014-03-12T13:37:27+00:00', to:'2014-06-12T13:37:27+00:00'}
-         }).success(function(d, status, headers, config){
-           $scope.data = d.data;
-         })
-        .error(function(data, status, headers, config){
-           $scope.data = "fail";
-        });
+    $scope.yAxisTickFormatFunction = function(){
+      var format = d3.format(',.0f');
+      return function(d){
+    	  return format(d);
+      }
+    }
+
+    $scope.xAxisTickFormatFunction = function(){
+    return function(d){
+        return d3.time.format('%b')(new Date(d));
+      }
+    }
+
+    $scope.$on('callsDataUpdated', function(){
+      $scope.callsData = Service.callsData;
+      formatForGraph();
+    })
+
+    function formatForGraph(){
+      var monthCounts = [0,0,0,0];
+      var calls = $scope.callsData;
+      for(var i = 0; i < calls.length; i++){
+          monthCounts[i] += calls[i].OneHour;
+          monthCounts[i] += calls[i].FourHours;
+          monthCounts[i] += calls[i].OneDay;
+      }
+
+      $scope.monthCounts = monthCounts;
+      calculateMaxY();
+      //Really? Somehow put into for Loop. DONT BE LAZY
+      $scope.callsDataBarDataRec = [
+           {
+             "key": "Series 1",
+             "values": [ [$scope.callsData[0].date, $scope.callsData[0].OneHour], [$scope.callsData[1].date, $scope.callsData[1].OneHour] , [$scope.callsData[2].date, $scope.callsData[2].OneHour], [$scope.callsData[3].date, $scope.callsData[3].OneHour]]
+           }];
+      $scope.callsDataBarData2Rec = [
+          {
+             "key": "Series 2",
+            "values": [ [$scope.callsData[0].date, $scope.callsData[0].FourHours + $scope.callsData[0].OneHour], [$scope.callsData[1].date, $scope.callsData[1].FourHours + $scope.callsData[1].OneHour] , [$scope.callsData[2].date, $scope.callsData[2].FourHours + $scope.callsData[2].OneHour], [$scope.callsData[3].date, $scope.callsData[3].FourHours + $scope.callsData[3].OneHour]]
+           }];
+      $scope.callsDataBarData3Rec = [
+          {
+             "key": "Series 3",
+            "values": [ [$scope.callsData[0].date, monthCounts[0]], [$scope.callsData[1].date, monthCounts[1]] , [$scope.callsData[2].date, monthCounts[2]], [$scope.callsData[3].date, monthCounts[3]]]
+           }];
+
+      $scope.blankData1 = angular.copy($scope.callsDataBarDataRec);
+      for(var j = 0; j  < blankData.values.length; j++){
+        $scope.blankData.values[j][1] = 0;
+      }
+      $scope.blankData2 = angular.copy($scope.callsDataBarData2Rec);
+      for(var j = 0; j  < blankData2.values.length; j++){
+        $scope.blankData2.values[j][1] = 0;
+      }
+      $scope.blankData3 = angular.copy($scope.callsDataBarData3Rec);
+      for(var j = 0; j  < blankData3.values.length; j++){
+        $scope.blankData3.values[j][1] = 0;
+      }
+
+      $scope.callsDataBarData = $scope.callsDataBarDataRec;
+      $scope.callsDataBarData2 = $scope.callsDataBarData2Rec;
+      $scope.callsDataBarData3 = $scope.callsDataBarData3Rec;
+    }
+
+    function calculateMaxY(){
+      var maxNumber = 0;
+      for(var i = 0; i < $scope.monthCounts.length; i++){
+        if($scope.monthCounts[i] > maxNumber)
+          maxNumber = $scope.monthCounts[i];
+      }
+      $scope.maxY = Math.ceil(maxNumber / 20) * 20;
+    }
+
+    $scope.colorFunction = function(){
+      return function(d, i) {
+    	  return '#F39200'
+      };
+    }
+
+    $scope.colorFunction2 = function(){
+      return function(d, i) {
+        return '#009EE3'
+      };
+    }
+
+    $scope.colorFunction3 = function(){
+      return function(d, i) {
+        return '#78AD29'
+      };
     }
 
   });
+
+
+
+
+
 
   app.controller('EleventhKPI', function($scope, Service, $http, gravatarService){
     $scope.data = null;

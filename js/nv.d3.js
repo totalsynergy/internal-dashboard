@@ -9008,7 +9008,7 @@ nv.models.multiBarHorizontalChart = function() {
     ;
   yAxis
     .orient('bottom')
-    .tickFormat(d3.format(',.1f'))
+    .tickFormat(d3.format(',.0f'))
     ;
 
   controls.updateState(false);
@@ -9022,8 +9022,8 @@ nv.models.multiBarHorizontalChart = function() {
   var showTooltip = function(e, offsetElement) {
     var left = e.pos[0] + ( offsetElement.offsetLeft || 0 ),
         top = e.pos[1] + ( offsetElement.offsetTop || 0),
-        x = xAxis.tickFormat()(multibar.x()(e.point, e.pointIndex)),
-        y = yAxis.tickFormat()(multibar.y()(e.point, e.pointIndex)),
+        x = xAxis.tickFormat(d3.format(',.0f'))(multibar.x()(e.point, e.pointIndex)),
+        y = yAxis.tickFormat(d3.format(',.0f'))(multibar.y()(e.point, e.pointIndex)),
         content = tooltip(e.series.key, x, y, e, chart);
 
     nv.tooltip.show([left, top], content, e.value < 0 ? 'e' : 'w', null, offsetElement);

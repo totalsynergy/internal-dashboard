@@ -215,12 +215,7 @@
   </div>
 
   <div ng-controller="NinthKPI" class="kpi animate" ng-show="tab == 9">
-      <h1>Help Desk Data</h1>
-      classification: {{classification}}
-      month {{month}}
-      index: {{index}}
-      data {{callsData}}
-      {{rawData}}
+      <h1>SUPPORT - BY PRODUCT LINE</h1>
       <div id="helpDeskCategoryContainer">
       <nvd3-multi-bar-horizontal-chart
             data="barData"
@@ -229,10 +224,13 @@
             height="250"
             tooltips="false"
             showXAxis="true"
-            showYAxis="true"
+            showYAxis="false"
             objectEquality="true"
             clipEdge="true"
-            color="colorFunction()"
+            forcey="[0,{{maxY}}]"
+            objectEquality="true"
+            showValues="true"
+            valueFormat="valueFormatFunction()"
             margin="{left:150,top:10,bottom:20,right:50}"
             noData="Loading Data...">
         <div id="smallerContainer">
@@ -240,11 +238,62 @@
         </div>
       </nvd3-multi-bar-horizontal-chart>
       </div>
+      <div id='threeMonthsDiv'>
+        <p class="normalThree">Over The Last 4 Months</p>
+        <p class="numberOfCalls">{{numberOfCalls}}</p>
+        <p class="normalThree">Support Issues Have Been Raised</p>
+      </div>
   </div>
 
-  <div ng-controller="TenthKPI" class="kpi animate" ng-show="tab == 10">
-      <h1>Help Desk Data 2</h1>
-      {{data}}
+  <div ng-controller="TenthKPI" class="kpi animate hundredHeight" ng-show="tab == 10">
+      <h1 ng-show="tab == 10">TOTAL CALLS / RESPONSES</h1>
+      <div id="firstChartContainer">
+      <nvd3-discrete-bar-chart
+    	  data="callsDataBarData3"
+        id="tenthKPIChart"
+        showXAxis="true"
+        showYAxis="true"
+        yAxisTickFormat="yAxisTickFormatFunction()"
+        xAxisTickFormat="xAxisTickFormatFunction()"
+        width="800"
+        height="400"
+        forcey="[0, {{maxY}}]"
+        objectEquality="true"
+        color="colorFunction()">
+        	<svg></svg>
+    </nvd3-discrete-bar-chart>
+    </div>
+    <div id="secondChartContainer">
+    <nvd3-discrete-bar-chart
+    	  data="callsDataBarData2"
+        id="tenthKPIChart2"
+        showXAxis="false"
+        showYAxis="false"
+        width="800"
+        height="400"
+        forcey="[0,{{maxY}}]"
+        objectEquality="true"
+        color="colorFunction2()">
+        	<svg></svg>
+    </nvd3-discrete-bar-chart>
+    </div>
+    <div id="thirdChartContainer">
+    <nvd3-discrete-bar-chart
+    	  data="callsDataBarData"
+        id="tenthKPIChart3"
+        showXAxis="false"
+        showYAxis="false"
+        width="800"
+        height="400"
+        forcey="[0,{{maxY}}]"
+        objectEquality="true"
+        color="colorFunction3()">
+        	<svg></svg>
+    </nvd3-discrete-bar-chart>
+    </div>
+    <div id="callsLegend" ng-show="tab == 10">
+      <p class="key">One Hour</p><div id="oneHourKey"></div> <p class="key">Four Hours</p><div id="fourHoursKey"></div> <p class="key">One Day</p><div id="oneDayKey"></div>
+    </div>
   </div>
 
   <div ng-controller="EleventhKPI" class="kpi animate" ng-show="tab == 11">

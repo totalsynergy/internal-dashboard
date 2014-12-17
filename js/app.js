@@ -11,6 +11,7 @@
     service.totalSynergyKey = "";
     service.eventBriteKey = "";
     service.slackKey = "";
+    service.callsData = null;
 
     service.updateKeys = function(eventKey, tsKey, sKey, speed, pag){
       this.totalSynergyKey = tsKey;
@@ -21,6 +22,11 @@
       $rootScope.$broadcast("keysUpdated");
       $rootScope.$broadcast("speedUpdated");
       $rootScope.$broadcast("selectedUpdated");
+    }
+
+    service.passCallsData = function(callsData){
+      this.callsData = callsData;
+      $rootScope.$broadcast('callsDataUpdated');
     }
 
 

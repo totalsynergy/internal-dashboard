@@ -734,7 +734,7 @@ div.total{
   height:80%;
   font-size:1vw;
   position:fixed;
-  bottom:10%;
+  bottom:5%;
   left:10%;
 }
 
@@ -746,10 +746,89 @@ div.total{
   font-size:1vw;
 }
 
+#firstChartContainer{
+  width:80%;
+  position:fixed;
+  left:13%;
+  top:18%;
+}
+
+#secondChartContainer{
+  width:80%;
+  position:fixed;
+  left:13%;
+  top:18%;
+}
+
+#thirdChartContainer{
+  width:80%;
+  position:fixed;
+  left:13%;
+  top:18%;
+}
+
 
 
 svg text {
   font: normal 10px openSans !important;
 }
 
+#callsLegend{
+  display: inline-block;
+  text-align:center;
+  width: 50%;
+  margin-left:22%;
+  padding-top:1.5%;
+}
 
+#oneHourKey{
+  display: inline-block;
+  width:30px;
+  height:30px;
+  background-color: #6BAB4E
+
+}
+
+#fourHoursKey{
+  display: inline-block;
+  width:30px;
+  height:30px;
+  background-color: #3ac
+}
+
+#oneDayKey{
+  display: inline-block;
+  width:30px;
+  height:30px;
+  background-color: #F39200
+}
+
+.key{
+  display: inline-block;
+  font-family:openSansLight;
+  font-size:2vw;
+  padding-left:2.5%;
+  padding-right:.5%;
+}
+
+#threeMonthsDiv{
+  position:fixed;
+  bottom:20%;
+  right:20%;
+  text-align:center;
+}
+
+.normalThree{
+  font-family:openSansLight;
+  font-size:2vw;
+  margin: 0;
+  padding:0;
+}
+
+.numberOfCalls{
+  font-family:openSans;
+  font-size:7vw;
+  margin: 0;
+  padding:0;
+  color:#3F7AAD;
+}

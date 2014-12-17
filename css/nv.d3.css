@@ -306,7 +306,7 @@ svg .title {
 .nvd3 .nv-multibar .nv-groups rect,
 .nvd3 .nv-multibarHorizontal .nv-groups rect,
 .nvd3 .nv-discretebar .nv-groups rect {
-  stroke-opacity: 0;
+  stroke-opacity: 1;
 
   transition: fill-opacity 250ms linear;
   -moz-transition: fill-opacity 250ms linear;
