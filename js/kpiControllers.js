@@ -299,6 +299,7 @@ app.controller('FifthKPI', function($scope, Service, $http){
     $scope.WA = 0;
     $scope.SA = 0;
     $scope.international = 0;
+    $scope.data = {};
 
     $scope.$on('tabUpdated', function(){
       $scope.tab = Service.tab;
@@ -348,20 +349,40 @@ app.controller('FifthKPI', function($scope, Service, $http){
     }
 
     $scope.$on('fetchEventData', function(){
-      $http.get("https://www.eventbriteapi.com/v3/events/13747447987/attendees/?token=" + $scope.eventBriteKey)
-      .success(function(data){
-        count(data);
+      var event = { "attendees" : [] };
+      $scope.getPagedData(1, event);
+      //$http.get("https://www.eventbriteapi.com/v3/events/13747447987/attendees/?token=" + $scope.eventBriteKey)
+      //.success(function(data){
+      //    count(data);
         //Service.updateEventData(data);
-      });
+      //});
     })
 
-    function weGotKey(){
-      $http.get("https://www.eventbriteapi.com/v3/events/13747447987/attendees/?token=" + $scope.eventBriteKey)
+    $scope.getPagedData = function(page, event) {
+      $http.get("https://www.eventbriteapi.com/v3/events/13747447987/attendees/?page=" + page  + "&token=" + $scope.eventBriteKey)
       .success(function(data){
-        count(data);
-        $scope.address = data.attendees[0].profile.addresses.work.region;
+        for(i = 0; i < data.attendees.length; i++){
+          event.attendees.push(data.attendees[i]);
+        }
+        if(page < data.pagination.page_count)
+        {
+          $scope.getPagedData(page + 1, event);
+        } else {
+          count(event);
+        }
         //Service.updateEventData(data);
-      })
+      });
+    };
+
+    function weGotKey(){
+      var event = { "attendees" : [] };
+      $scope.getPagedData(1, event);
+      //$http.get("https://www.eventbriteapi.com/v3/events/13747447987/attendees/?token=" + $scope.eventBriteKey)
+      //.success(function(data){
+      //  count(data);
+      //  $scope.address = data.attendees[0].profile.addresses.work.region;
+        //Service.updateEventData(data);
+      //})
     }
   });
 
