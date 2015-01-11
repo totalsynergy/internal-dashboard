@@ -1055,7 +1055,7 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, m
         $scope.callsDataBarData2 = $scope.callsDataBarData2Rec;
         $scope.callsDataBarData3 = $scope.callsDataBarData3Rec;
       }
-      else if(Service.tab != 9 || Service.tab != 11){
+      else if(Service.tab != 9 && Service.tab != 11){
         $scope.callsDataBarData2 = $scope.blankData2;
         $scope.callsDataBarData = $scope.blankData2;
         $scope.callsDataBarData3 = $scope.blankData3;
