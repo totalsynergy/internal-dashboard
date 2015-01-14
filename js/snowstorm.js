@@ -9,7 +9,7 @@
    To customize properties, edit below or override configuration after this script
    has run (but before body.onload), eg. snowStorm.snowStick = false;
 
-*/
+
 
 var snowStorm = null;
 
@@ -47,7 +47,7 @@ function SnowStorm() {
   // --- End of user section ---
 
   // jslint global declarations
-  /*global window, document, navigator, clearInterval, setInterval */
+  /*global window, document, navigator, clearInterval, setInterval
 
   var addEvent = (typeof(window.attachEvent)=='undefined'?function(o,evtName,evtHandler) {
 	return o.addEventListener(evtName,evtHandler,false);
@@ -498,3 +498,5 @@ function SnowStorm() {
 
 if(mm == 12)
 snowStorm = new SnowStorm();
+
+*/

@@ -12,6 +12,7 @@
     service.eventBriteKey = "";
     service.slackKey = "";
     service.callsData = null;
+    service.progressData = null;
 
     service.updateKeys = function(eventKey, tsKey, sKey, speed, pag){
       this.totalSynergyKey = tsKey;
@@ -24,8 +25,9 @@
       $rootScope.$broadcast("selectedUpdated");
     }
 
-    service.passCallsData = function(callsData){
+    service.passCallsData = function(callsData, progressData){
       this.callsData = callsData;
+      this.progressData = progressData;
       $rootScope.$broadcast('callsDataUpdated');
     }
 
@@ -72,8 +74,19 @@
     return service;
 });
 
-  var app = angular.module('myApp', ['appService', 'uiSlider', 'nvd3ChartDirectives', 'ngAnimate', 'gravatarModule', 'ngAudio', 'ngMd5']);
+  var app = angular.module('myApp', ['appService', 'uiSlider', 'nvd3ChartDirectives', 'ngAnimate', 'gravatarModule', 'ngAudio', 'ngMd5'])
+  .config( [
+    '$compileProvider',
+    function( $compileProvider ) {
+        var currentImgSrcSanitizationWhitelist = $compileProvider.imgSrcSanitizationWhitelist();
+        var newImgSrcSanitizationWhiteList = currentImgSrcSanitizationWhitelist.toString().slice(0,-1)
+        + '|chrome-extension:'
+        +currentImgSrcSanitizationWhitelist.toString().slice(-1);
 
+        console.log("Changing imgSrcSanitizationWhiteList from "+currentImgSrcSanitizationWhitelist+" to "+newImgSrcSanitizationWhiteList);
+        $compileProvider.imgSrcSanitizationWhitelist(newImgSrcSanitizationWhiteList);
+    }
+]);
 
 
 
@@ -98,6 +111,8 @@
       {"name" : "HelpDesk1", "isSelected" : false},
       {"name" : "HelpDesk2", "isSelected" : false},
       {"name" : "HelpDesk3", "isSelected" : false},
+      {"name" : "HelpDesk4", "isSelected" : false},
+      {"name" : "HelpDesk5", "isSelected" : false},
       {"name" : "Test3", "isSelected" : false}
     ];
 

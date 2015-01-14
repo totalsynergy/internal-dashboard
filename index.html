@@ -4,11 +4,24 @@
   <meta charset="utf-8">
   <title>test2</title>
   <script type="text/javascript" src="js/angular.min.js"></script>
+      <script type="text/javascript" src="js/jquery-1.11.2.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
-    <script type="text/javascript" src="js/firstController.js"></script>
-     <script type="text/javascript" src="js/kpiControllers.js"></script>
-     <script type="text/javascript" src="js/settingsController.js"></script>
-     <script type="text/javascript" src="js/eventBriteController.js"></script>
+    <script type="text/javascript" src="JSControllers/firstController.js"></script>
+    <script type="text/javascript" src="JSControllers/attendeeMapController.js"></script>
+    <script type="text/javascript" src="JSControllers/clientMap.js"></script>
+    <script type="text/javascript" src="JSControllers/cloudUsersController.js"></script>
+    <script type="text/javascript" src="JSControllers/eventCountdownController.js"></script>
+    <script type="text/javascript" src="JSControllers/gravatarController.js"></script>
+    <script type="text/javascript" src="JSControllers/helpDeskCallCategoriesController.js"></script>
+    <script type="text/javascript" src="JSControllers/helpDeskCallResponseController.js"></script>
+    <script type="text/javascript" src="JSControllers/helpDeskProgressController.js"></script>
+    <script type="text/javascript" src="JSControllers/internController.js"></script>
+    <script type="text/javascript" src="JSControllers/slackController.js"></script>
+     <script type="text/javascript" src="JSControllers/synergyVersionsController.js"></script>
+     <script type="text/javascript" src="JSControllers/settingsController.js"></script>
+     <script type="text/javascript" src="JSControllers/totalAttendeesController.js"></script>
+     <script type="text/javascript" src="JSControllers/helpDeskCallersController.js"></script>
+     <script type="text/javascript" src="JSControllers/helpDeskCloseTimeController.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
     <script type="text/javascript" src="js/angular-slider.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
@@ -20,6 +33,7 @@
     <script type="text/javascript" src="js/angular-md5.js"></script>
     <script type="text/javascript" src="js/gravatar.js"></script>
     <script type="text/javascript" src="js/angular.audio.js"></script>
+
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="angular-csp.css">
@@ -130,6 +144,7 @@
     <p class="yellowBold">96</p>
     <p class="normal"> ATTENDEES</p>
     </div>
+    <canvas id="canvas">    </canvas>
   </div>
 
 
@@ -148,17 +163,6 @@
     <div class="international">INTERNATIONAL</div>
     <img class="earth" src="assets/EARTH.svg" alt=""/>
     <div class="earthNumbers"><span>{{international}}</span></div>
-    <!--
-    <div class ="mapContainer">
-
-    <img src="assets/Eventbrite feed SVG_Map.svg" class="AustraliaMap"></img>
-      <p class="nsw stateFont">{{NSWnACT}}</p>
-      <p class="qld stateFont">{{QLD}}</p>
-      <p class="nt stateFont">{{NT}}</p>
-      <p class="wa stateFont">{{WA}}</p>
-      <p class="sa stateFont">{{SA}}</p>
-      <p class="vic stateFont">{{VICnTAS}}</p>
-    </div> -->
   </div>
 
 
@@ -181,17 +185,26 @@
 
 
     <div ng-controller="SeventhKPI" class="kpi animate blueBackground throwingHundreds" ng-show="tab == 7">
+
+          <div id="gravDiv"></div>
+          </div>
+      <!--<webview src='{{gravatar}}' width="640" height="480"></webview>
+      {{isTrue}}
+      {{displayArray[1].photo}}
       <div ng-repeat="image in displayArray track by $index" class="realImageContainer" >
+          index: {{$index}}
           <div class="imageHolder" ng-if="image != null">
-            <img ng-src="{{image.photo}}" class="gravatarImage"/>
-            <p ng-if="!noImage(image.photo)"id="nameAndShameEmployees">{{image.emailAddress}} </p>
+            {{image.photo}}
+           <img ng-src="{{image.photo}}" class="gravatarImage"/>
+
+            <p id="nameAndShameEmployees">{{image.emailAddress}} </p>
           </div>
           <div class="imageHolder2" ng-if="image == null">
             <img src="assets/transparent.png" class="gravatarImage"/>
           </div>
 
       </div>
-      <img src="assets/logoWhite.svg" class="gravatarLogo"/>
+      <img src="assets/logoWhite.svg" class="gravatarLogo"/> -->
   </div>
 
 
@@ -246,7 +259,8 @@
   </div>
 
   <div ng-controller="TenthKPI" class="kpi animate hundredHeight" ng-show="tab == 10">
-      <h1 ng-show="tab == 10">TOTAL CALLS / RESPONSES</h1>
+    <!-- CAN TURN THESE 3 INTO STACKED USING MULTIBARCHART 'STACKED MODE' ON -->
+      <h1 ng-show="tab == 10">CALL RESPONSE TIME</h1>
       <div id="firstChartContainer">
       <nvd3-discrete-bar-chart
     	  data="callsDataBarData3"
@@ -297,10 +311,90 @@
   </div>
 
   <div ng-controller="EleventhKPI" class="kpi animate" ng-show="tab == 11">
+
       <h1>Help Desk Data 3</h1>
+      {{shorterItems}}
+      <div id="firstChartContainer">
+      <nvd3-discrete-bar-chart
+            data="data1"
+            id="firstOfTheCharts"
+            width="800"
+            height="400"
+            tooltips="false"
+            showXAxis="true"
+            showYAxis="true"
+            objectEquality="true">
+        <svg class="smallText"></svg>
+    </nvd3-discrete-bar-chart>
+    </div>
+    <div id="firstChartContainer">
+      <nvd3-discrete-bar-chart
+            data="data2"
+            id="secondOfTheCharts"
+            width="800"
+            height="400"
+            tooltips="false"
+            showXAxis="false"
+            showYAxis="false"
+            objectEquality="true">
+        <svg class="smallText"></svg>
+    </nvd3-discrete-bar-chart>
+    </div>
+    <div id="firstChartContainer">
+      <nvd3-discrete-bar-chart
+            data="data4"
+            id="fourthOfTheCharts"
+            width="800"
+            height="400"
+            tooltips="false"
+            showXAxis="false"
+            showYAxis="false"
+            objectEquality="true">
+        <svg class="smallText"></svg>
+    </nvd3-discrete-bar-chart>
+    </div>
+    <div id="firstChartContainer">
+    <nvd3-cumulative-line-chart
+		data="data3"
+	    id="thirdOfTheCharts"
+	    width="800"
+	    height="400"
+	    showXAxis="false"
+	    showYAxis="false"
+	    tooltips="false"
+	    interactive="false">
+	    <svg></svg>
+	</nvd3-cumulative-line-chart>
+	</div>
+    </div>
   </div>
 
   <div ng-controller="TwelthKPI" class="kpi animate" ng-show="tab == 12">
+
+  </div>
+
+  <div ng-controller="ThirteenthKPI" class="kpi animate" ng-show="tab == 13">
+    <h1>CLOSED TIMING</h1>
+    <div id="weirdGraphContainer">
+ 	<nvd3-multi-bar-chart
+    	data="chartData"
+        id="unique"
+        width="800"
+        height="400"
+        showXAxis="true"
+        showYAxis="true"
+        color="colorFunction()"
+        objectEquality="true"
+        xAxisTickFormat="xAxisTickFormatFunction()">
+        	<svg></svg>
+    </nvd3-multi-bar-chart>
+    </div>
+    <div id="callsLegend2" ng-show="tab == 13">
+      <p class="key">One Hour</p><div id="oneHourKey"></div> <p class="key">One Day</p><div id="fourHoursKey"></div> <p class="key">More Than 3 Days</p><div id="oneDayKey"></div>
+    </div>
+  </div>
+
+  <div ng-controller="FourteenthKPI" class="kpi animate" ng-show="tab == 14">
       <h1>Slack Updates</h1>
       <div ng-repeat="message in data" class="slackHolder">
         <div class="slackName">{{returnName(message.user)}}</div>
