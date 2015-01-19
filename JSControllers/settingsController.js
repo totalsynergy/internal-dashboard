@@ -1,4 +1,4 @@
-  app.controller('SettingsController', function($scope, Service){
+  app.controller('SettingsController', function($scope, Service, $rootScope){
    $scope.eventBriteKey = '';
    $scope.totalSynergyKey = '';
    $scope.slackKey = '';

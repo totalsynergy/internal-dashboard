@@ -18,6 +18,10 @@ app.controller('ThirteenthKPI', function($scope, Service, ngAudio){
 
     $scope.$on('tabUpdated', function(){
       $scope.tab = Service.tab;
+      if($scope.tab != 13)
+        $scope.data = $scope.blankData;
+      else
+        $scope.data = $scope.chartData;
     });
 
      $scope.$on('callsDataUpdated', function(){
@@ -53,6 +57,17 @@ app.controller('ThirteenthKPI', function($scope, Service, ngAudio){
         //chartData.push(object);
 
       $scope.chartData = chartData;
+      $scope.blankData = [
+        {
+                    "values": [ [$scope.monthData[3].CompleteDate, 0] , [$scope.monthData[2].CompleteDate, 0] , [$scope.monthData[1].CompleteDate, 0] , [$scope.monthData[0].CompleteDate, 0] ]
+                },
+                {
+                    "values": [ [$scope.monthData[3].CompleteDate, 0] , [$scope.monthData[2].CompleteDate, 0] , [$scope.monthData[1].CompleteDate, 0] , [$scope.monthData[0].CompleteDate, 0] ]
+                },
+                {
+                    "values": [ [$scope.monthData[3].CompleteDate, 0] , [$scope.monthData[2].CompleteDate, 0] , [$scope.monthData[1].CompleteDate, 0] , [$scope.monthData[0].CompleteDate, 0] ]
+                },
+        ];
     }
 
 

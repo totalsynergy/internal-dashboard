@@ -4,7 +4,8 @@
   <meta charset="utf-8">
   <title>test2</title>
   <script type="text/javascript" src="js/angular.min.js"></script>
-      <script type="text/javascript" src="js/jquery-1.11.2.js"></script>
+  <script type="text/javascript" src="js/jquery-1.11.2.js"></script>
+  <script type="text/javascript" src="js/jqfloat.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
     <script type="text/javascript" src="JSControllers/firstController.js"></script>
     <script type="text/javascript" src="JSControllers/attendeeMapController.js"></script>
@@ -185,9 +186,12 @@
 
 
     <div ng-controller="SeventhKPI" class="kpi animate blueBackground throwingHundreds" ng-show="tab == 7">
-
+      <img src="assets/logoWhite.svg" class="gravatarLogo animate" ng-show="tab == 7">
+      <div id="gravHolder" class="rows">
+        <div class="imageHolder col-md-4">
           <div id="gravDiv"></div>
-          </div>
+        </div>
+      </div>
       <!--<webview src='{{gravatar}}' width="640" height="480"></webview>
       {{isTrue}}
       {{displayArray[1].photo}}
@@ -262,7 +266,20 @@
     <!-- CAN TURN THESE 3 INTO STACKED USING MULTIBARCHART 'STACKED MODE' ON -->
       <h1 ng-show="tab == 10">CALL RESPONSE TIME</h1>
       <div id="firstChartContainer">
-      <nvd3-discrete-bar-chart
+      <nvd3-multi-bar-chart
+    	  data="data"
+        id="unique2"
+        width="800"
+        height="400"
+        showXAxis="true"
+        showYAxis="true"
+        color="colorFunction()"
+        objectEquality="true"
+        xAxisTickFormat="xAxisTickFormatFunction()"
+        stacked="true">
+        	<svg></svg>
+    </nvd3-multi-bar-chart>
+      <!--<nvd3-discrete-bar-chart
     	  data="callsDataBarData3"
         id="tenthKPIChart"
         showXAxis="true"
@@ -303,7 +320,7 @@
         objectEquality="true"
         color="colorFunction3()">
         	<svg></svg>
-    </nvd3-discrete-bar-chart>
+    </nvd3-discrete-bar-chart> -->
     </div>
     <div id="callsLegend" ng-show="tab == 10">
       <p class="key">One Hour</p><div id="oneHourKey"></div> <p class="key">Four Hours</p><div id="fourHoursKey"></div> <p class="key">One Day</p><div id="oneDayKey"></div>
@@ -313,6 +330,7 @@
   <div ng-controller="EleventhKPI" class="kpi animate" ng-show="tab == 11">
 
       <h1>Help Desk Data 3</h1>
+      <!--
       {{shorterItems}}
       <div id="firstChartContainer">
       <nvd3-discrete-bar-chart
@@ -367,17 +385,48 @@
 	</nvd3-cumulative-line-chart>
 	</div>
     </div>
+    -->
   </div>
 
   <div ng-controller="TwelthKPI" class="kpi animate" ng-show="tab == 12">
-
+    <h1>TOP CALLERS</h1>
+   <!-- Caller Stats: {{callerStats}}
+    Data Test: {{progressData}} -->
+    <div id="helpDeskCategoryContainer2">
+      <nvd3-multi-bar-horizontal-chart
+            data="data"
+            id="helpDeskCategories2"
+            width="500"
+            height="250"
+            tooltips="false"
+            showXAxis="true"
+            showYAxis="false"
+            objectEquality="true"
+            clipEdge="true"
+            forcey="[0,{{maxY}}]"
+            objectEquality="true"
+            showValues="true"
+            valueFormat="valueFormatFunction()"
+            margin="{left:150,top:10,bottom:20,right:50}"
+            noData="Loading Data..."
+            color="colorFunction()">
+        <div id="smallerContainer">
+        <svg id="smallText"></svg>
+        </div>
+      </nvd3-multi-bar-horizontal-chart>
+      </div>
+      <div id='threeMonthsDiv'>
+        <p class="normalThree">Top 10 Callers Made</p>
+        <p class="numberOfCalls">{{percentage}}%</p>
+        <p class="normalThree">Of Total Calls</p>
+      </div>
   </div>
 
   <div ng-controller="ThirteenthKPI" class="kpi animate" ng-show="tab == 13">
     <h1>CLOSED TIMING</h1>
     <div id="weirdGraphContainer">
  	<nvd3-multi-bar-chart
-    	data="chartData"
+    	data="data"
         id="unique"
         width="800"
         height="400"
