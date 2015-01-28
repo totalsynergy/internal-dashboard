@@ -1,9 +1,9 @@
 
 app.controller('SecondKPI', function($scope, Service){
-    $scope.percentage = 96.5;
+    $scope.percentage = 94.35;
     $scope.internPieData = [
       {key: "Productive Time", y: 8},
-      {key: "UnProductive Time", y: 96.5}
+      {key: "UnProductive Time", y: 94.35}
       ];
 
     $scope.$on('tabUpdated', function(){
@@ -11,7 +11,7 @@ app.controller('SecondKPI', function($scope, Service){
       if(Service.tab == 2){
         $scope.internPieData = [
           {key: "Productive Time", y: 8},
-          {key: "UnProductive Time", y: 96.5}
+          {key: "UnProductive Time", y: 94.35}
         ];
       }
       else{

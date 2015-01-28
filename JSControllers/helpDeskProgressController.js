@@ -65,7 +65,7 @@ app.controller('EleventhKPI', function($scope, Service, $http, gravatarService){
 
     function sort(){
       for(var i = 0; i < $scope.progressData.length; i++){
-        if($scope.progressData[i].Status != 'Development' && $scope.progressData[i].Status != 'Closed' && $scope.progressData[i].Status != 'Support'){
+        if($scope.progressData[i].Status != 'Development' && $scope.progressData[i].Status != 'Closed' && $scope.progressData[i].Status != 'Support' && $scope.progressData[i] != undefined){
           $scope.slightlySortedData.push($scope.progressData[i]);
         }
       }

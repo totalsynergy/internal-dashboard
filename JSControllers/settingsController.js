@@ -78,7 +78,13 @@
       {"name" : "Help Desk 3", "isSelected" : false},
       {"name" : "HelpDesk4", "isSelected" : false},
       {"name" : "HelpDesk5", "isSelected" : false},
-      {"name" : "Test3", "isSelected" : false}
+      {"name" : "Slack", "isSelected" : false},
+      {"name" : "Twitter", "isSelected" : false},
+      {"name" : "Synergy5First", "isSelected" : false},
+      {"name" : "Synergy5Second", "isSelected" : false},
+      {"name" : "Synergy5Third", "isSelected" : false},
+      {"name" : "Synergy5Fourth", "isSelected" : false},
+      {"name" : "Synergy5Fifth", "isSelected" : false}
     ];
 
   });

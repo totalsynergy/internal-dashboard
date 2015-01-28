@@ -14,6 +14,11 @@
     src: url(OpenSans-ExtraBold.ttf);
 }
 
+@font-face {
+    font-family: billabong;
+    src: url(fonts/billabong.ttf);
+}
+
 html, body, .container{
   height:100%;
   min-height: 100%;
@@ -128,6 +133,11 @@ body{
 
  body, html, .container{
   height:100%;
+}
+
+
+.container{
+
 }
 
 .my-container{
@@ -359,6 +369,12 @@ input[type="text"]:focus {
   width:40%;
 }
 
+.settingsContainer{
+  position:fixed;
+  bottom:3%;
+  width:100%;
+}
+
 .keyInput{
   padding-top:2.5%;
   font-size: 1.5vw;
@@ -377,10 +393,12 @@ input[type="text"]:focus {
   font-size:2vw;
   padding-top:2.5%;
   padding-bottom:1%;
+      overflow:hidden;
 }
 
 .pageContainer{
-    width:50%;
+    width:70%;
+    height:40%;
     margin-right:auto;
     margin-left:auto;
 }
@@ -462,10 +480,38 @@ input[type=checkbox]{
 
 }
 
+.graphContainer2{
+  width:80%;
+  height:80%;
+  position:fixed;
+  bottom:5%;
+  left:10%;
+  z-index: 9999;
+
+}
+
 #pieChartContainer{
   position:absolute;
   left:35%;
   top:20%;
+  width:80%;
+  z-index:1000;
+
+}
+
+#pieChartContainer2{
+  position:absolute;
+  top:15%;
+  right:30%;
+  width:80%;
+  z-index:1000;
+
+}
+
+#pieChartContainer3{
+  position:absolute;
+  top:15%;
+  left:30%;
   width:80%;
   z-index:1000;
 
@@ -678,6 +724,7 @@ canvas {
 .fixedContainer{
 }
 
+
 .gravatarLogo{
   position:fixed;
   width:25%;
@@ -685,12 +732,16 @@ canvas {
   left:36%;
 }
 
-.realImageContainer{
-  width:12.5%;
-  height:25%;
-  float:right;
-  size: cover;
+#realImageContainer{
+  width:100%;
+  display:block;
+}
 
+#holdAllTheGravatars{
+  position:relative;
+  height:100%;
+  margin-left:2.3%;
+  margin-right:1%;
 }
 
 
@@ -741,7 +792,7 @@ canvas {
   width:80%;
   margin-left:auto;
   margin-right:auto;
-  margin-top:10%;
+  margin-top:5%;
 }
 
 
@@ -865,6 +916,13 @@ svg text {
   position:fixed;
   bottom:20%;
   right:20%;
+  text-align:center;
+}
+
+#threeMonthsDiv2{
+  position:fixed;
+  bottom:20%;
+  right:10%;
   text-align:center;
 }
 
@@ -994,4 +1052,367 @@ webview{
   z-index:1000;
 
 }
+
+.gravatarNames{
+  z-index:99999999;
+  font-size:5vw;
+  position:fixed;
+  right:200px;
+  top:100px;
+  color: #000;
+}
+
+.testText{
+  z-index:9999999;
+  color: #000;
+  position:absolute;
+  top:10%;
+  right:10%;
+
+}
+
+.gravHolder{
+  position:relative;
+}
+
+#instagram{
+  width:400px;
+  height:400px;
+}
+
+.clientTrialHeader{
+  font-family:openSansLight;
+  font-size: 3vw;
+  position:absolute;
+  left:46%;
+  top:10%;
+}
+
+.clientTrialHeader2{
+  font-family:openSansLight;
+  font-size: 3vw;
+  position:absolute;
+  left:46%;
+  top:10%;
+}
+
+#trialAndActive{
+  position:relative;
+}
+
+#pieChart4{
+  position:relative;
+  top:25px;
+}
+
+.bloodyLegendName{
+  float:left;
+  font-family:openSansLight;
+  font-size:2vw;
+  padding-right:1%;
+  padding-left:3%;
+}
+
+#bloodyLegend{
+  position:absolute;
+  bottom:5%;
+  left:30%;
+  width:50%;
+}
+
+#orangeDiv{
+  width:40px;
+  height:40px;
+  border-radius:2px;
+  background: #F39200;
+  float:left;
+}
+
+#blueDiv{
+  width:40px;
+  height:40px;
+  border-radius:2px;
+  background: #009EE3;
+  float:left;
+}
+
+#greenDiv{
+  width:40px;
+  height:40px;
+  border-radius:2px;
+  background: #78AD29;
+  float:left;
+}
+
+.donutPercentage{
+  font-size: 6vw;
+  color: #C6C8CA;
+  font-family:openSans;
+  position:absolute;
+  left:43%;
+  top:42%;
+}
+
+#firstInstagram{
+  width:100%;
+  height:37%;
+  border: 1px solid #e6e6e6;
+  box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
+  background: #fff;
+  border-radius:10px;
+  padding:2%;
+  margin:2%;
+  float:right;
+  overflow:hidden;
+  padding-bottom:100px;
+}
+
+#secondInstagram{
+  width:100%;
+  height:37%;
+  border: 1px solid #e6e6e6;
+  box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
+  background: #fff;
+  border-radius:10px;
+  padding:2%;
+  margin:2%;
+  float:right;
+  overflow:hidden;
+}
+#thirdInstagram{
+ width:100%;
+  height:43%;
+  border: 1px solid #e6e6e6;
+  box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
+  background: #fff;
+  border-radius:10px;
+  padding:2%;
+  margin:2%;
+  overflow:hidden;
+}
+#fourthInstagram{
+  width:100%;
+  height:36%;
+  border: 1px solid #e6e6e6;
+  box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
+  background: #fff;
+  border-radius:10px;
+  padding:2%;
+  overflow:hidden;
+  margin:2%;
+}
+#fifthInstagram{
+  width:100%;
+  height:36%;
+  border: 1px solid #e6e6e6;
+  box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
+  background: #fff;
+  border-radius:10px;
+  padding:2%;
+  margin:2%;
+  overflow:hidden;
+}
+#sixthInstagram{
+  width:100%;
+  height:43%;
+  border: 1px solid #e6e6e6;
+  box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
+  background: #fff;
+  border-radius:10px;
+  padding:2%;
+  margin:2%;
+  float:center;
+  overflow: hidden;
+}
+#seventhInstagram{
+  width:100%;
+  height:43%;
+  border: 1px solid #e6e6e6;
+  box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
+  background: #fff;
+  border-radius:10px;
+  padding:2%;
+  margin:2%;
+  float:center;
+  overflow: hidden;
+}
+#eighthInstagram{
+  width:100%;
+  height:36%;
+  border: 1px solid #e6e6e6;
+  box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
+  background: #fff;
+  border-radius:10px;
+  padding:2%;
+  margin:2%;
+  overflow:hidden;
+  }
+
+.instagramController{
+  position:relative;
+  height: 100%;
+
+}
+
+.cols{
+  height:100%;
+  width:22%;
+  float:left;
+  padding-right:1%;
+  margin-left:2%
+  background: #777;
+}
+
+#colsHolder{
+  width:100%;
+  height:100%;
+  margin-left:7%;
+}
+
+.instagramImage{
+  width:90%;
+  border-radius: 7px;
+  overflow: hidden;
+  margin-left:5%;
+}
+
+#synergyGram{
+  width:30%;
+  margin-left:35%;
+}
+
+.caption{
+  text-align:center;
+  font-size:1vw;
+  color:#777;
+  font-family:openSansLight;
+  padding-top:0%;
+  overflow:hidden;
+}
+
+#billabong{
+  font-family: billabong;
+  font-size: 7vw;
+  text-align: center;
+}
+#heart {
+    position: relative;
+    width: 25px;
+    height: 22px;
+    left:30%;
+    top:24%;
+    padding-top:0px;
+}
+#heart:before,
+#heart:after {
+    position: absolute;
+    content: "";
+    left: 12.5px;
+    top: 0;
+    width: 12.5px;
+    height: 20px;
+    background: #c6c8ca;
+    border-radius: 12.5px 12.5px 0 0;
+    transform: rotate(-45deg);
+    transform-origin: 0 100%;
+}
+#heart:after {
+    left: 0;
+    transform: rotate(45deg);
+    transform-origin :100% 100%;
+}
+
+#likesCount {
+  font-family:openSans;
+  font-size:1.5vw;
+  color: #c6c8ca;
+  position: absolute;
+  margin-left: 4%;
+  padding-top:0.3%;
+  display: inline;
+}
+
+#talkbubble {
+   width: 24px;
+   height: 18px;
+   background: #c6c8ca;
+   position: relative;
+  bottom:15px;
+left: 55%;
+  border-radius: 2px;
+  margin-left: 9%;
+}
+#talkbubble:before {
+   content:"";
+   position: absolute;
+   right: 100%;
+   top: 4px;
+   width: 0;
+   height: 0;
+   border-top: 3.9px solid transparent;
+   border-right: 7.8px solid #c6c8ca;
+   border-bottom: 3.9px solid transparent;
+}
+
+#commentsCount {
+  font-family:openSans;
+  font-size:1.5vw;
+  color: #c6c8ca;
+  position: absolute;
+  margin-left: 11%;
+  padding-top:0.3%;
+  display: inline;
+}
+
+#instagramStats{
+  width:100%;
+  height:8%;
+}
+
+#monthNameHolder{
+  width:72%;
+  position:absolute;
+  height:10%;
+  bottom: 5%;
+/*  background: #c6c8ca; */
+  margin-left:15%;
+}
+
+#monthNames{
+  display: inline;
+  padding-right:19%;
+  font-family: openSansLight;
+  font-size:1vw;
+
+}
+
+#g1, #g2, #g3, #g4, #g5, #g6, #g7, #g8, #g9, #g10, #g11, #g12, #g13, #g14, #g15, #g16, #g17, #g18, #g19, #g20, #g21, #g22, #g23, #g24, #g25, #g26, #g27, #g28{
+  width:14.25%;
+  height:25%;
+  padding:0.75%;
+  float: left;
+}
+
+.gHolder{
+  width:100%;
+  height:100%;
+}
+
+#heatMapContainer{
+  position:fixed;
+  top:160%;
+  left:10%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 

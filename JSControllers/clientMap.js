@@ -20,6 +20,7 @@ app.controller('EighthKPI', function($scope, Service, $http, gravatarService){
          }).success(function(d, status, headers, config){
            //$scope.data = d.data
            count(d.data);
+           $scope.data = d.data;
          })
         .error(function(data, status, headers, config){
            $scope.data = "fail";
