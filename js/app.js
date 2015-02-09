@@ -13,11 +13,15 @@
     service.slackKey = "";
     service.callsData = null;
     service.progressData = null;
+    service.images = [];
 
-    service.updateKeys = function(eventKey, tsKey, sKey, speed, pag){
+     service.updateKeys = function(eventKey, tsKey, sKey, trKey, s5Key, speed, pag){
       this.totalSynergyKey = tsKey;
       this.eventBriteKey = eventKey;
       this.slackKey = sKey;
+      this.trelloKeys = trKey;
+      this.totalSynergy5Key = s5Key;
+      console.log("S5 KEY IS:" + s5Key);
       this.speed = speed;
       this.pages = pag;
       $rootScope.$broadcast("keysUpdated");
@@ -35,6 +39,12 @@
     service.updateTab = function(value){
         this.tab = value;
         $rootScope.$broadcast("tabUpdated");
+    }
+
+    service.updateGravatars = function(images){
+      this.images = images;
+      console.log("Gravatar update");
+      $rootScope.$broadcast("gravatarsUpdated");
     }
 
 
@@ -60,6 +70,10 @@
 
     service.sendForData = function(){
       $rootScope.$broadcast("fetchEventData");
+    }
+
+    service.sendForCallsData = function(){
+      $rootScope.$broadcast("fetchCallsData");
     }
 
     service.restore = function(speed, page){
@@ -108,18 +122,19 @@
       {"name" : "conference CountDown", "isSelected" : true},
       {"name" : "Gravatar", "isSelected" : false},
       {"name" : "Synergy Clients", "isSelected" : false},
-      {"name" : "HelpDesk1", "isSelected" : false},
-      {"name" : "HelpDesk2", "isSelected" : false},
-      {"name" : "HelpDesk3", "isSelected" : false},
-      {"name" : "HelpDesk4", "isSelected" : false},
-      {"name" : "HelpDesk5", "isSelected" : false},
+      {"name" : "Calls Categories", "isSelected" : false},
+      {"name" : "Call Response Time", "isSelected" : false},
+      {"name" : "Help Desk Test", "isSelected" : false},
+      {"name" : "Top Callers", "isSelected" : false},
+      {"name" : "Time To Close Calls", "isSelected" : false},
       {"name" : "SlackPage", "isSelected" : false},
       {"name" : "TwitterPage", "isSelected" : false},
-      {"name" : "Synergy5First", "isSelected" : false},
-      {"name" : "Synergy5Second", "isSelected" : false},
-      {"name" : "Synergy5Third", "isSelected" : false},
-      {"name" : "Synergy5Fourth", "isSelected" : false},
-      {"name" : "Synergy5Fifth", "isSelected" : false}
+      {"name" : "Trial vs Active", "isSelected" : false},
+      {"name" : "Synergy 5 Timeline", "isSelected" : false},
+      {"name" : "Synergy 5 Client Count", "isSelected" : false},
+      {"name" : "Trello Cards", "isSelected" : false},
+      {"name" : "Synergy 4 World Map", "isSelected" : false},
+      {"name" : "Synergy 5 World Map", "isSelected" : false}
     ];
 
     var tabOpen = 4;

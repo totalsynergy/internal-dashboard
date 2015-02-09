@@ -2,6 +2,8 @@
    $scope.eventBriteKey = '';
    $scope.totalSynergyKey = '';
    $scope.slackKey = '';
+   $scope.totalSynergy5Key = '';
+   $scope.trelloKeys = '';
     $scope.speed = 10000;
     $scope.pages = pages;
     $scope.practiceNumber = 10;
@@ -18,6 +20,8 @@
       $scope.eventBriteKey = Service.eventBriteKey;
       $scope.totalSynergyKey = Service.totalSynergyKey;
       $scope.slackKey = Service.slackKey;
+      $scope.trelloKeys = Service.trelloKeys;
+      $scope.totalSynergy5Key = Service.totalSynergy5Key;
     })
 
     $scope.$on('speedUpdated', function(){
@@ -29,8 +33,11 @@
       chrome.storage.local.set({'totalSynergyKey': $scope.totalSynergyKey});
       chrome.storage.local.set({'slackKey': $scope.slackKey});
       chrome.storage.local.set({'speed' : $scope.speed});
+      chrome.storage.local.set({'trelloKeys' : $scope.trelloKeys});
+      chrome.storage.local.set({'synergy5Keys' : $scope.totalSynergy5Key});
       chrome.storage.local.set({'pages' : $scope.pages});
-      Service.updateKeys($scope.eventBriteKey, $scope.totalSynergyKey, $scope.slackKey, $scope.speed, $scope.pages);
+      console.log($scope.totalSynergy5Key);
+      Service.updateKeys($scope.eventBriteKey, $scope.totalSynergyKey, $scope.slackKey, $scope.trelloKeys, $scope.totalSynergy5Key, $scope.speed, $scope.pages);
       Service.sendForData();
     }
 
@@ -65,26 +72,27 @@
 
 
     var restorePages = [
-      {"name" : "Cloud Users", "isSelected" : false},
-      {"name" : "Another PieChart", "isSelected" : false},
-      {"name" : "Desktop Version Graph", "isSelected" : true},
-      {"name" : "Total Attendees", "isSelected" : true},
-      {"name" : "Attendee Map", "isSelected" : true},
-      {"name" : "conference CountDown", "isSelected" : true},
-      {"name" : "Gravatar", "isSelected" : false},
-      {"name" : "Synergy Clients", "isSelected" : false},
-      {"name" : "Help Desk 1", "isSelected" : false},
-      {"name" : "Help Desk 2", "isSelected" : false},
-      {"name" : "Help Desk 3", "isSelected" : false},
-      {"name" : "HelpDesk4", "isSelected" : false},
-      {"name" : "HelpDesk5", "isSelected" : false},
-      {"name" : "Slack", "isSelected" : false},
-      {"name" : "Twitter", "isSelected" : false},
-      {"name" : "Synergy5First", "isSelected" : false},
-      {"name" : "Synergy5Second", "isSelected" : false},
-      {"name" : "Synergy5Third", "isSelected" : false},
-      {"name" : "Synergy5Fourth", "isSelected" : false},
-      {"name" : "Synergy5Fifth", "isSelected" : false}
+      {"name" : "Total Synergy Gravatar", "isSelected" : false},
+      {"name" : "Total SynergyGram", "isSelected" : false},
+      {"name" : "Conference Total Attendees", "isSelected" : true},
+      {"name" : "Conference Attendee Map", "isSelected" : true},
+      {"name" : "Conference CountDown", "isSelected" : true},
+      {"name" : "Help Desk Calls Categories", "isSelected" : false},
+      {"name" : "Help Desk Call Response Time", "isSelected" : false},
+      {"name" : "Help Desk Test Page", "isSelected" : false},
+      {"name" : "Help Desk Top Callers", "isSelected" : false},
+      {"name" : "Help Desk Time To Close Calls", "isSelected" : false},
+      {"name" : "Development Trello Cards", "isSelected" : false},
+      {"name" : "Development SlackPage", "isSelected" : false},
+      {"name" : "Synergy 4 Cloud Users", "isSelected" : false},
+      {"name" : "Synergy 4 Intern PieChart", "isSelected" : false},
+      {"name" : "Synergy 4 Desktop Version Graph", "isSelected" : true},
+      {"name" : "Synergy 4 Client Aus Map", "isSelected" : false},
+      {"name" : "Synergy 4 World Map", "isSelected" : false},
+      {"name" : "Synergy 5 Trial vs Active", "isSelected" : false},
+      {"name" : "Synergy 5 Timeline", "isSelected" : false},
+      {"name" : "Synergy 5 Client Count", "isSelected" : false},
+      {"name" : "Synergy 5 World Map", "isSelected" : false}
     ];
 
   });

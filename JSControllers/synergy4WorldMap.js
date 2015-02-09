@@ -1,4 +1,4 @@
-app.controller('TwentiethKPI', function($scope, Service, ngAudio, $http){
+app.controller('KPI17', function($scope, Service, ngAudio, $http){
 
     $scope.countries = [];
     $scope.count = 0;
@@ -11,8 +11,11 @@ app.controller('TwentiethKPI', function($scope, Service, ngAudio, $http){
     $scope.$on('keysUpdated', function(){
       $scope.totalSynergyKey = Service.totalSynergyKey;
       weGotKey();
-       // count++;
-      //}
+    })
+
+
+    $scope.$on('fetchEventData', function(){
+      weGotKey();
     })
 
     function weGotKey(){
@@ -32,7 +35,6 @@ app.controller('TwentiethKPI', function($scope, Service, ngAudio, $http){
             loadMap();
             //$scope.count++;
           }
-           //count(d.data[10].Country);
 
          })
         .error(function(data, status, headers, config){
@@ -43,7 +45,6 @@ app.controller('TwentiethKPI', function($scope, Service, ngAudio, $http){
     function count(data){
       $scope.countries = [];
       for(var i = 0; i < data.length; i++){
-        //$scope.countryNames.push(data[i].Country);
         incrementCategory('theBoys');
       }
     }
@@ -69,9 +70,10 @@ app.controller('TwentiethKPI', function($scope, Service, ngAudio, $http){
 
     function loadMap(){
       if($scope.count == 0){
-        var width = $(window).width();
-      new Heatmap(width - 200, 'heatMapContainer');
-                console.log('HeatMap Ready for action');
+        var width = $(window).height()*1.5;
+      $("#heatMapContainer").empty();
+      new Heatmap(width, 'heatMapContainer');
+                //console.log('HeatMap Ready for action');
                 var callback = function(data) {
                     var text = "";
 
@@ -92,37 +94,17 @@ app.controller('TwentiethKPI', function($scope, Service, ngAudio, $http){
                 values[7] = 100;
                 values [8] = 250;
                 values [9] = 250;
-
-                /*for (var key in Heatmap.worldmap['names']) {
-                  console.log('Heating up ' + key);
-                    if (key == 'AU') {
-                        values[key] = 0;
-                    }
-                    else {
-                        values[key] = parseInt(Math.random() * 100);
-                    }
-                }
-                for(var x = 0; x < 20; x++){
-                  var pathObject = Heatmap.worldmap['names'][0];
-                  //var string = pathObject[1];
-                  console.log('Keycode is: ' + pathObject);
-                  //$scope.keys.push(keyCode + "");
-                } */
                 $.each(Heatmap.worldmap['names'], function(k, v) {
                   //display the key and value pair
                   var boolTest = true;
-                  console.log(k + ' is to ' + v);
-                  console.log('Scope countries length of ' + $scope.countries.length);
                   for(var y = 0; y < $scope.countries.length; y++){
 
                     if(v == $scope.countries[y].name){
-                      console.log('v matched ' + $scope.countries[y].name);
                       values[k] = $scope.countries[y].count;
                       boolTest = false;
                       break;
                     }
-                    else
-                      console.log(v + ' did not match anything.');
+                    else{}
                   }
                   if(boolTest)
                     values[k] = 0;

@@ -116,6 +116,17 @@ h1{
 }
 
 
+.logo3{
+    width:10%;
+    height:15%;
+    display:block;
+    position:fixed;
+    bottom:0;
+    left:0;
+    z-index:1000;
+}
+
+
 
 .stateFont{
   color:#58595B;
@@ -348,7 +359,7 @@ div.earthNumbers{
 
 input[type="text"] {
   margin: 0;
-  width: 30%;
+  width: 90%;
   font-family: sans-serif;
   font-size: 18px;
   appearance: none;
@@ -411,13 +422,6 @@ input[type=checkbox]{
 .pageName{
   font-size:1vw;
   padding-right:20px;
-}
-
-.speed{
-  font-size:2vw;
-  padding-top:27%;
-  text-align:center;
-  font-family: openSansLight;
 }
 
 .saveNExit{
@@ -505,7 +509,6 @@ input[type=checkbox]{
   right:30%;
   width:80%;
   z-index:1000;
-
 }
 
 #pieChartContainer3{
@@ -732,6 +735,8 @@ canvas {
   left:36%;
 }
 
+/*INDIVIAL GRAVATAR ID BELOW */
+
 #realImageContainer{
   width:100%;
   display:block;
@@ -751,7 +756,17 @@ canvas {
   margin: 0;
   bottom:5%;
   left:5%;
-  text-align:center;
+  font-family:openSansLight;
+  font-size:1vw;
+  z-index:1000;
+  color: #000;
+  text-shadow: 0.5px 0.5px #fff;
+}
+
+#gravatarName{
+  position:relative;
+  bottom: 15%;
+margin-left: 3%;
   font-family:openSansLight;
   font-size:1vw;
   z-index:1000;
@@ -1149,7 +1164,7 @@ webview{
   color: #C6C8CA;
   font-family:openSans;
   position:absolute;
-  left:43%;
+  left:47.5%;
   top:42%;
 }
 
@@ -1300,7 +1315,7 @@ webview{
     width: 25px;
     height: 22px;
     left:30%;
-    top:24%;
+    top:60%;
     padding-top:0px;
 }
 #heart:before,
@@ -1311,7 +1326,7 @@ webview{
     top: 0;
     width: 12.5px;
     height: 20px;
-    background: #c6c8ca;
+    background: #777;
     border-radius: 12.5px 12.5px 0 0;
     transform: rotate(-45deg);
     transform-origin: 0 100%;
@@ -1325,7 +1340,7 @@ webview{
 #likesCount {
   font-family:openSans;
   font-size:1.5vw;
-  color: #c6c8ca;
+  color: #777;
   position: absolute;
   margin-left: 4%;
   padding-top:0.3%;
@@ -1335,7 +1350,7 @@ webview{
 #talkbubble {
    width: 24px;
    height: 18px;
-   background: #c6c8ca;
+   background: #777;
    position: relative;
   bottom:15px;
 left: 55%;
@@ -1350,14 +1365,14 @@ left: 55%;
    width: 0;
    height: 0;
    border-top: 3.9px solid transparent;
-   border-right: 7.8px solid #c6c8ca;
+   border-right: 7.8px solid #777;
    border-bottom: 3.9px solid transparent;
 }
 
 #commentsCount {
   font-family:openSans;
   font-size:1.5vw;
-  color: #c6c8ca;
+  color: #777;
   position: absolute;
   margin-left: 11%;
   padding-top:0.3%;
@@ -1367,6 +1382,7 @@ left: 55%;
 #instagramStats{
   width:100%;
   height:8%;
+  padding-top:5%;
 }
 
 #monthNameHolder{
@@ -1398,14 +1414,160 @@ left: 55%;
   height:100%;
 }
 
+.key{
+}
+
+#mapContainer{
+  width: 100%;
+  position:fixed;
+  height:100%;
+  background: #c0c0c0;
+}
+
 #heatMapContainer{
   position:fixed;
-  top:160%;
-  left:10%;
+  top:30%;
+  padding-left:5%;
+  padding-right:5%;
+}
+
+#heatMapContainer2{
+  position:fixed;
+  top:31%;
+  padding-left:5%;
+  padding-right:5%;
 }
 
 
+.keyRow{
+  padding-bottom: 3%;
+  padding-top:3%;
+}
 
+.paddingTop{
+  padding-top:5%;
+}
+
+.speed{
+  text-align:center;
+}
+
+.speedHolder{
+  position:fixed;
+  bottom:10%;
+  left:15%;
+  width:50%;
+}
+
+.buttonHolder{
+  position:fixed;
+  bottom:10%;
+  right:0%;
+  width:30%;
+}
+
+.btn{
+  margin-right:1%;
+}
+
+.form-control{
+  width: 90%;
+}
+
+.card{
+  background: #c6c8ca;
+  padding-bottom:1%;
+}
+
+#trelloGravatar{
+  width:100%;
+  border-radius: 10%;
+
+}
+
+.cardHolder{
+  box-shadow: 7px 25px 5px 0px rgba(49, 50, 50, 0.5);
+  background: #fff;
+  border-radius:10px;
+  margin: 1.5%;
+  height:35%;
+  width:30%;
+  float: left;
+}
+
+.isDoing{
+  position: relative;
+  padding: 2%;
+}
+
+#trello0, #trello1, #trello2, #trello3, #trello4, #trello5, #trello6, #trello7, #trello8{
+  float:left;
+  width:20%;
+  padding:1%;
+  padding: 0 10px 10px 10px;
+}
+
+.trelloName{
+  font-family:openSansLight;
+  padding-top:3%;
+  padding-bottom:10%;
+}
+
+.trelloName2{
+  font-family:openSansLight;
+  text-align: center;
+  font-size:2vw;
+  padding: 1% 1% 1% 1%;
+}
+
+.blueBackground{
+  background: #0E74AF;
+  height:102%;
+  width:100%;
+  position:fixed;
+  bottom:0%;
+}
+
+.cardContainer{
+  width:80%;
+  height:100%;
+  margin-right:auto;
+  margin-left:auto;
+  padding-top:2%;
+}
+
+#trello{
+  font-family:openSansLight;
+  color: #E2E4E6;
+}
+
+.topDiv{
+  width:100%;
+  height:30%;
+  background: #fff;
+}
+
+.bottomDiv{
+  background: #e4e6e8;
+  height:70%;
+  border-radius: 0px 0px 10px 10px;
+  border-top: 2px solid #c0c0c0;
+}
+
+#mapLegend{
+  position:fixed;
+  width:50%;
+  margin-left: 30%;
+  bottom:10%;
+}
+
+.kineticjs-content{
+  position: relative;
+  top: 1000px;
+  display: inline-block;
+  width: 1455px;
+  height: 388px;
+}
 
 
 

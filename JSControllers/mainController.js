@@ -1,4 +1,4 @@
-app.controller('FirstController', function($scope, Service, $interval, $timeout, ngAudio){
+app.controller('mainController', function($scope, Service, $interval, $timeout, ngAudio){
     var time = 1;
     var counter = 1;
     $scope.speed = 1000;
@@ -26,7 +26,7 @@ app.controller('FirstController', function($scope, Service, $interval, $timeout,
 
     chrome.storage.local.get(null, function(result){
       if(result.pages != null)
-      Service.updateKeys(result.eventBriteKey, result.totalSynergyKey, result.slackKey, result.speed, result.pages);
+      Service.updateKeys(result.eventBriteKey, result.totalSynergyKey, result.slackKey,  result.trelloKeys, result.synergy5Keys, result.speed, result.pages);
     });
 
     function getTab(){
@@ -133,6 +133,7 @@ app.controller('FirstController', function($scope, Service, $interval, $timeout,
     }
 
     function goRight(){
+      console.log($scope.tab);
       var nextPage = $scope.tab + 1;
       while(nextPage <= $scope.pages.length + 2){
         if(nextPage > $scope.pages.length)

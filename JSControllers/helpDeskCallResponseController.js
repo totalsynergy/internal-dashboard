@@ -1,4 +1,4 @@
-app.controller('TenthKPI', function($scope, Service){
+app.controller('KPI7', function($scope, Service){
     $scope.callsData = [];
     $scope.count = 0;
     $scope.maxY = 200;
@@ -9,14 +9,14 @@ app.controller('TenthKPI', function($scope, Service){
 
     $scope.$on('tabUpdated', function(){
       $scope.tab = Service.tab;
-      if($scope.tab != 10)
+      if($scope.tab != 7)
         $scope.data = $scope.blankData;
       else
         $scope.data = $scope.singularData;
     });
 
     $scope.$on('keysUpdated', function(){
-      $scope.slackKey = Service.slackKey;
+      //$scope.slackKey = Service.slackKey;
       //weGotKey();
     })
 
@@ -36,7 +36,7 @@ app.controller('TenthKPI', function($scope, Service){
     $scope.$on('callsDataUpdated', function(){
       $scope.callsData = Service.callsData;
       $scope.test = Service.callsData;
-      formatForGraph();
+      //formatForGraph();
     })
 
     function formatForGraph(){

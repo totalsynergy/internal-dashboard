@@ -7,25 +7,26 @@ var Heatmap = function(width, container) {
     Heatmap.emptyclick = false;
     Heatmap.mode = null;
 
-    Heatmap.borderStroke = '#111';
-    Heatmap.borderStrokeWidth = 0.5;
+    Heatmap.borderStroke = '#fff';
+    Heatmap.borderStrokeWidth = 0.4;
 
-    Heatmap.shadeFill = '#fff';
-    Heatmap.shadeOpacity = 0.9;
+    Heatmap.shadeFill = '#ff0000';
+    Heatmap.shadeOpacity = 2;
 
-    Heatmap.rectStroke = '#333';
-    Heatmap.rectStrokeWidth = 1;
+    Heatmap.rectStroke = '#fff';
+    Heatmap.rectStrokeWidth = 4;
 
     Heatmap.startc = {
-        'r': 255,
-        'g': 0,
-        'b': 0
+        'r': 0,
+        'g': 57,
+        'b': 111
     };
 
     Heatmap.endc = {
-        'r': 255,
-        'g': 212,
-        'b': 143
+
+        'r': 192,   //CHANNNNNNNNNNNNNNNNNNNNNNNNGGGGGGGGGGGGGGGGGGGGGGEEEEEEEEEEEEEEEEEEEEE
+        'g': 192,
+        'b': 192
     };
 
     Heatmap.init = function(markedCallback) {
@@ -41,8 +42,8 @@ var Heatmap = function(width, container) {
 
         Heatmap.stage = new Kinetic.Stage({
             container: Heatmap.container,
-            width: Heatmap.width,
-            height: Heatmap.height
+            width: Heatmap.width*1.5,
+            height: Heatmap.height*1
         });
 
         Heatmap.stage.on('mouseup', function() {
@@ -86,17 +87,35 @@ var Heatmap = function(width, container) {
 
             var val = parseInt(values[key]);
 
-            var rgb = 'rgb(238,238,238)';
-
+            var rgb = 'rgb(192,192,192)';
+            //console.log("VALUE IS: " + val);
             if (val > 0) {
+              if(val < 50)
+                val = 100;
                 var pos = parseInt((Math.round((val / max) * 100)).toFixed(0));
                 var red = parseInt((Heatmap.endc['r'] + ((pos * (Heatmap.startc['r'] - Heatmap.endc['r'])) / (Heatmap.ngroups - 1))).toFixed(0));
-                var green = parseInt((Heatmap.endc['g'] + ((pos * (Heatmap.startc['g'] - Heatmap.endc['g'])) / (Heatmap.ngroups - 1))).toFixed(0));
+                var green = parseInt((Heatmap.endc['g'] + ((pos * (Heatmap.startc['g'] - Heatmap.endc['g'])) / (Heatmap.ngroups - 1))).toFixed(1));
                 var blue = parseInt((Heatmap.endc['b'] + ((pos * (Heatmap.startc['b'] - Heatmap.endc['b'])) / (Heatmap.ngroups - 1))).toFixed(0));
-                var blue2 = 255 - parseInt(val/2);
-                console.log('blue2 is: ' + blue2);
+                //var blue2 = 255 - parseInt(val/2);
+                //console.log('blue2 is: ' + blue2);
+              /*var red, blue, green = 0;
+              if(val > 0 && val < 50){
+                red = 243;
+                green = 146;
+                blue = 0;
+              }
+              else if(val > 50 && val < 100){
+                red = 120;
+                green = 173;
+                blue = 41;
+              }
+              else{
+                red = 0;
+                green = 158;
+                blue = 227;
+              } */
 
-                rgb = 'rgb(' + 0 + ',' + 50 + ',' + blue2 + ')';
+                rgb = 'rgb(' + red + ',' + green + ',' + blue + ')';
             }
 
 
