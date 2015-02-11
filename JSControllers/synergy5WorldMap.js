@@ -95,7 +95,8 @@ app.controller('KPI21', function($scope, Service, ngAudio, $http){
                   //display the key and value pair
                   var boolTest = true;
                   for(var y = 0; y < $scope.countries.length; y++){
-
+                    if($scope.countries[y].name == 'Hong Kong SAR')
+                      $scope.countries[y].name = 'China';
                     if(v == $scope.countries[y].name){
                       values[k] = $scope.countries[y].count;
                       boolTest = false;

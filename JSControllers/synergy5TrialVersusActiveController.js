@@ -93,6 +93,7 @@ app.controller('KPI18', function($scope, Service, ngAudio, $http){
         $scope.originalData.type += clients[i].Count;
       }
       console.log($scope.originalData);
+      Service.updateSynergy5Data($scope.originalData);
     }
 
     function increaseType(type, count){

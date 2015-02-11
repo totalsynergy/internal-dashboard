@@ -133,7 +133,6 @@ app.controller('mainController', function($scope, Service, $interval, $timeout, 
     }
 
     function goRight(){
-      console.log($scope.tab);
       var nextPage = $scope.tab + 1;
       while(nextPage <= $scope.pages.length + 2){
         if(nextPage > $scope.pages.length)

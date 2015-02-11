@@ -656,6 +656,7 @@ var Heatmap = function(width, container) {
             GT: "Guatemala",
             GW: "Guinea-Bissau",
             GY: "Guyana",
+            HK: "Hong Kong SAR",
             HN: "Honduras",
             HR: "Croatia",
             HT: "Haiti",

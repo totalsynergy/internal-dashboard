@@ -14,6 +14,7 @@
     service.callsData = null;
     service.progressData = null;
     service.images = [];
+    service.synergy5Data = null;
 
      service.updateKeys = function(eventKey, tsKey, sKey, trKey, s5Key, speed, pag){
       this.totalSynergyKey = tsKey;
@@ -83,6 +84,11 @@
       $rootScope.$broadcast("selectedUpdated");
     }
 
+    service.updateSynergy5Data = function(data){
+      this.synergy5Data = data;
+      $rootScope.$broadcast("synergy5DataUpdated");
+    }
+
 
 
     return service;
@@ -114,27 +120,29 @@
     var speed = 15000;
 
     var pages = [
-      {"name" : "Cloud Users", "isSelected" : false},
-      {"name" : "Another PieChart", "isSelected" : false},
-      {"name" : "Desktop Version Graph", "isSelected" : true},
-      {"name" : "Total Attendees", "isSelected" : true},
-      {"name" : "Attendee Map", "isSelected" : true},
-      {"name" : "conference CountDown", "isSelected" : true},
-      {"name" : "Gravatar", "isSelected" : false},
-      {"name" : "Synergy Clients", "isSelected" : false},
-      {"name" : "Calls Categories", "isSelected" : false},
-      {"name" : "Call Response Time", "isSelected" : false},
-      {"name" : "Help Desk Test", "isSelected" : false},
-      {"name" : "Top Callers", "isSelected" : false},
-      {"name" : "Time To Close Calls", "isSelected" : false},
-      {"name" : "SlackPage", "isSelected" : false},
-      {"name" : "TwitterPage", "isSelected" : false},
-      {"name" : "Trial vs Active", "isSelected" : false},
+      {"name" : "Total Synergy Gravatar", "isSelected" : false},
+      {"name" : "Total SynergyGram", "isSelected" : false},
+      {"name" : "Conference Total Attendees", "isSelected" : true},
+      {"name" : "Conference Attendee Map", "isSelected" : true},
+      {"name" : "Conference CountDown", "isSelected" : true},
+      {"name" : "Help Desk Calls Categories", "isSelected" : false},
+      {"name" : "Help Desk Call Response Time", "isSelected" : false},
+      {"name" : "Help Desk Test Page", "isSelected" : false},
+      {"name" : "Help Desk Top Callers", "isSelected" : false},
+      {"name" : "Help Desk Time To Close Calls", "isSelected" : false},
+      {"name" : "Development Trello Cards", "isSelected" : false},
+      {"name" : "Development SlackPage", "isSelected" : false},
+      {"name" : "Synergy 4 Cloud Users", "isSelected" : false},
+      {"name" : "Synergy 4 Intern PieChart", "isSelected" : false},
+      {"name" : "Synergy 4 Desktop Version Graph", "isSelected" : true},
+      {"name" : "Synergy 4 Client Aus Map", "isSelected" : false},
+      {"name" : "Synergy 4 World Map", "isSelected" : false},
+      {"name" : "Synergy 5 Trial vs Active", "isSelected" : false},
       {"name" : "Synergy 5 Timeline", "isSelected" : false},
       {"name" : "Synergy 5 Client Count", "isSelected" : false},
-      {"name" : "Trello Cards", "isSelected" : false},
-      {"name" : "Synergy 4 World Map", "isSelected" : false},
-      {"name" : "Synergy 5 World Map", "isSelected" : false}
+      {"name" : "Synergy 5 World Map", "isSelected" : false},
+      {"name" : "Synergy 5 Subscribers", "isSelected" : false},
+      {"name" : "Synergy 5 Staff Distribution", "isSelected" : false}
     ];
 
     var tabOpen = 4;

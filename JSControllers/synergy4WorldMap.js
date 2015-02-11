@@ -14,7 +14,7 @@ app.controller('KPI17', function($scope, Service, ngAudio, $http){
     })
 
 
-    $scope.$on('fetchEventData', function(){
+    $scope.$on('fetchCallsData', function(){
       weGotKey();
     })
 

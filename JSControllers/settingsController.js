@@ -4,8 +4,9 @@
    $scope.slackKey = '';
    $scope.totalSynergy5Key = '';
    $scope.trelloKeys = '';
+   $scope.masterKey ='';
     $scope.speed = 10000;
-    $scope.pages = pages;
+    $scope.pages = null;
     $scope.practiceNumber = 10;
 
     $scope.speedChange = function(){
@@ -22,6 +23,7 @@
       $scope.slackKey = Service.slackKey;
       $scope.trelloKeys = Service.trelloKeys;
       $scope.totalSynergy5Key = Service.totalSynergy5Key;
+      $scope.pages = Service.pages;
     })
 
     $scope.$on('speedUpdated', function(){
@@ -29,13 +31,33 @@
     })
 
     $scope.save = function(){
+      /*
+      $http({
+         url: 'https://beta.synergycloudapp.com/totalsynergy/InternalKpi/Home/Clients',
+         method: 'POST',
+         headers : {'internal-token' : $scope.masterKey}
+         }).success(function(d, status, headers, config){
+           arrangeKeys(d);
+         })
+        .error(function(data, status, headers, config){
+           $scope.data = "fail";
+        });
+      */
+      arrangeKeys();
+    }
+
+    function arrangeKeys(){
+      saveKeysToLocalStorage();
+    }
+
+    function saveKeysToLocalStorage(){
       chrome.storage.local.set({'eventBriteKey': $scope.eventBriteKey});
       chrome.storage.local.set({'totalSynergyKey': $scope.totalSynergyKey});
       chrome.storage.local.set({'slackKey': $scope.slackKey});
       chrome.storage.local.set({'speed' : $scope.speed});
       chrome.storage.local.set({'trelloKeys' : $scope.trelloKeys});
       chrome.storage.local.set({'synergy5Keys' : $scope.totalSynergy5Key});
-      chrome.storage.local.set({'pages' : $scope.pages});
+      chrome.storage.local.set({'pages' : Service.pages});
       console.log($scope.totalSynergy5Key);
       Service.updateKeys($scope.eventBriteKey, $scope.totalSynergyKey, $scope.slackKey, $scope.trelloKeys, $scope.totalSynergy5Key, $scope.speed, $scope.pages);
       Service.sendForData();
@@ -92,7 +114,9 @@
       {"name" : "Synergy 5 Trial vs Active", "isSelected" : false},
       {"name" : "Synergy 5 Timeline", "isSelected" : false},
       {"name" : "Synergy 5 Client Count", "isSelected" : false},
-      {"name" : "Synergy 5 World Map", "isSelected" : false}
+      {"name" : "Synergy 5 World Map", "isSelected" : false},
+      {"name" : "Synergy 5 Subscribers", "isSelected" : false},
+      {"name" : "Synergy 5 Staff Distribution", "isSelected" : false}
     ];
 
   });

@@ -15,8 +15,8 @@ app.controller('KPI11', function($scope, Service, ngAudio, $http){
       $scope.totalSynergyKey = Service.totalSynergyKey;
       $scope.trelloKeys = Service.trelloKeys.split("-");
       if($scope.count == 0)
+        $scope.count++;
         trelloGet();
-      $scope.count++;
     })
 
     $scope.$on('gravatarsUpdated', function(){
@@ -27,10 +27,10 @@ app.controller('KPI11', function($scope, Service, ngAudio, $http){
 
     $scope.$on('fetchEventData', function(){
       if($scope.count == 0){
+        $scope.count++
         $scope.doingCards = [];
         trelloGet();
         testImages();
-        $scope.count++
       }
     })
 
@@ -52,7 +52,8 @@ app.controller('KPI11', function($scope, Service, ngAudio, $http){
 
     function pinImages(){
         for(var x = 0; x < $scope.doingCards.length; x++){
-        $('#trello' + i).empty();
+        $('#trello' + x).empty();
+        console.log("PINNING :" + $scope.doingCards[x].Name + " with " + $scope.doingCards[x].Image);
         var img = document.createElement('img');
         img.src = $scope.doingCards[x].Image;
         img.setAttribute("id", "trelloGravatar");

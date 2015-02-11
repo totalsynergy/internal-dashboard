@@ -42,6 +42,8 @@
     <script type="text/javascript" src="JSControllers/synergy4InternController.js"></script>
     <script type="text/javascript" src="JSControllers/synergy4VersionsController.js"></script>
     <script type="text/javascript" src="JSControllers/synergy4WorldMap.js"></script>
+    <script type="text/javascript" src="JSControllers/synergy5StaffDistributionController.js"></script>
+    <script type="text/javascript" src="JSControllers/synergy5SubscribersController.js"></script>
     <script type="text/javascript" src="JSControllers/synergy5TimelineController.js"></script>
     <script type="text/javascript" src="JSControllers/synergy5TotalClientsController.js"></script>
     <script type="text/javascript" src="JSControllers/synergy5TrialVersusActiveController.js"></script>
@@ -63,7 +65,7 @@
 <div ng-controller="mainController" ng-init="init()">
   <img src="assets/Eventbrite feed SVG_Logo.svg" ng-show="tab > 2 && tab < 6" class="logo">
   <img src="assets/logo.png" ng-show="tab > 12 && tab < 18" class="logo2">
-  <img src="assets/logoSynergy5.png" ng-show="tab > 17 && tab <= 21" class="logo3">
+  <img src="assets/logoSynergy5.png" ng-show="tab > 17 && tab <= 23" class="logo3">
 
   <div class="leftButton" ng-show="tab != 99" ng-click="leftButton()">
   </div>
@@ -368,11 +370,21 @@
   <!--  DEVELOPMENT SLACK PAGE -->
 
 
-  <div ng-controller="KPI12" class="kpi animate" ng-show="tab == 12">
-      <h1>Slack Updates</h1>
-      <div ng-repeat="message in data" class="slackHolder">
-        <div class="slackName">{{returnName(message.user)}}</div>
-        <div class="slackMessage">{{message.text}}</div>
+  <div ng-controller="KPI12" class="kpi animate greyBackground" ng-show="tab == 12">
+      <div class="container greyBackground">
+        <h1 id="paddingBottom">Development</h1>
+        <div ng-repeat="message in data track by $index">
+          <div class="slackCardHolder">
+            <div class="slackSideDetails">
+              <div id="slackGravatarHolder{{$index}}"></div>
+              <div class="slackNameChannelHolder">
+                <p class="slackName">{{returnName(message.id)}}</p>
+                <p class="slackChannel">#{{message.channelName}}</p>
+              </div>
+            </div>
+            <div class="slackMessageHolder">{{message.message}}</div>
+          </div>
+        </div>
       </div>
   </div>
 
@@ -509,7 +521,7 @@
 
     <div id="pieChartContainer3" ng-show="tab == 18">
           <h2 class="clientTrialHeader2">Active</h2>
-          <p class="donutPercentage">{{active}}</p>
+          <p class="donutPercentage2">{{active}}</p>
       <nvd3-pie-chart
     	  data="pieData3"
         id="pieChart4"
@@ -559,7 +571,43 @@
   <!-- SYNERGY 5 CLIENT SHAPES COUNT -->
 
   <div ng-controller="KPI20" class="kpi animate" ng-show="tab == 20">
-    <h1>Synergy 5 Cirlce/Rectangles</h1>
+    <h2 class="activeHeader">ACTIVE</h2>
+    <h2 class="trialHeader">TRIAL</h2>
+    <div class="activeCircle1">
+      <div class="circle1">
+        <p class="shapeNumbers1">{{rawNumbers[0]}}</p>
+      </div>
+    </div>
+    <div class="activeCircle2">
+      <div class="circle2">
+        <p class="shapeNumbers2">{{rawNumbers[1]}}</p>
+      </div>
+    </div>
+    <div class="activeCircle3">
+      <div class="circle3">
+        <p class="shapeNumbers3">{{rawNumbers[2]}}</p>
+      </div>
+    </div>
+    <div class="basicProfessionalEnterprise">
+      <h4 class="activeTrialMiddleText">BASIC</h4>
+      <h4 class="activeTrialMiddleText2">PROFESSIONAL</h4>
+      <h4 class="activeTrialMiddleText3">ENTERPRISE</h4>
+    </div>
+    <div class="trialSquare1">
+      <div class="square1">
+          <p class="shapeNumbers4">172</p>
+      </div>
+    </div>
+    <div class="trialSquare2">
+      <div class="square2">
+          <p class="shapeNumbers5">{{rawNumbers[4]}}</p>
+      </div>
+    </div>
+    <div class="trialSquare3">
+      <div class="square3">
+          <p class="shapeNumbers6">{{rawNumbers[5]}}</p>
+      </div>
+    </div>
   </div>
 
 
@@ -568,6 +616,89 @@
   <div ng-controller="KPI21" class="kpi animate" ng-show="tab == 21">
     <h1>Synergy 5 Clients</h1>
     <div id="heatMapContainer2"></div>
+  </div>
+
+  <div ng-controller="KPI22" class="kpi animate" ng-show="tab == 22">
+    <h1>Synergy 5 Industries</h1>
+    <div ng-repeat="sub in subscribers">
+      <div class="transparentImageHolder">
+        <img src="assets/TransparentWorker.png" id="transparentWorker"/>
+        <div class="fillingDiv{{$index}}"></div>
+        <div class="subscriberCategoryHolder">
+          <p class="subscriberCategory">{{sub.Name}}</p>
+        </div>
+        <p class="subscriberCategoryPercentage">{{sub.Percent}}%</p>
+      </div>
+    </div>
+    <!--<div class="transparentImageHolder">
+      <img src="assets/TransparentWorker.png" id="transparentWorker"/>
+      <div class="fillingDiv"></div>
+      <div class="subscriberCategoryHolder">
+        <p class="subscriberCategory">General</p>
+      </div>
+      <p class="subscriberCategoryPercentage">27%</p>
+    </div>
+    <div class="transparentImageHolder2">
+      <img src="assets/TransparentWorker.png" id="transparentWorker"/>
+      <div class="fillingDiv"></div>
+      <div class="subscriberCategoryHolder">
+        <p class="subscriberCategory">Environ.</p>
+      </div>
+      <p class="subscriberCategoryPercentage bumpUp">12%</p>
+    </div>
+    <div class="transparentImageHolder3">
+      <img src="assets/TransparentWorker.png" id="transparentWorker"/>
+      <div class="fillingDiv"></div>
+      <div class="subscriberCategoryHolder">
+        <p class="subscriberCategory">Engineer</p>
+      </div>
+      <p class="subscriberCategoryPercentage">1%</p>
+    </div>
+    <div class="transparentImageHolder4">
+      <img src="assets/TransparentWorker.png" id="transparentWorker"/>
+      <div class="fillingDiv"></div>
+      <div class="subscriberCategoryHolder">
+        <p class="subscriberCategory">Construction</p>
+      </div>
+      <p class="subscriberCategoryPercentage bumpUp">64%</p>
+    </div>
+    <div class="transparentImageHolder5">
+      <img src="assets/TransparentWorker.png" id="transparentWorker"/>
+      <div class="fillingDiv"></div>
+      <div class="subscriberCategoryHolder">
+        <p class="subscriberCategory">Architect</p>
+      </div>
+      <p class="subscriberCategoryPercentage">17%</p>
+    </div>
+    <div class="transparentImageHolder6">
+      <img src="assets/TransparentWorker.png" id="transparentWorker"/>
+      <div class="fillingDiv"></div>
+      <div class="subscriberCategoryHolder">
+        <p class="subscriberCategory">Urban</p>
+      </div>
+      <p class="subscriberCategoryPercentage bumpUp">27%</p>
+    </div>
+    <div class="transparentImageHolder7">
+      <img src="assets/TransparentWorker.png" id="transparentWorker"/>
+      <div class="fillingDiv"></div>
+      <div class="subscriberCategoryHolder">
+        <p class="subscriberCategory">Project Management</p>
+      </div>
+      <p class="subscriberCategoryPercentage">11%</p>
+    </div>
+    <div class="transparentImageHolder8">
+      <img src="assets/TransparentWorker.png" id="transparentWorker"/>
+      <div class="fillingDiv"></div>
+      <div class="subscriberCategoryHolder">
+        <p class="subscriberCategory">Survey</p>
+      </div>
+      <p class="subscriberCategoryPercentage bumpUp">3%</p>
+    </div> -->
+
+  </div>
+
+  <div ng-controller="KPI23" class="kpi animate" ng-show="tab == 23">
+    <h1>Synergy 5 Staff Distribution</h1>
   </div>
 
 
@@ -587,33 +718,9 @@ IN SETTINGS RESTORE-->
   <div ng-controller="SettingsController as settings" ng-show="tab == 99" ng-init="initSlider()">
     <div class="container">
       <h1>Settings</h1>
-      <div class="keyRow">
-      <label for="inputEmail3" class="col-md-1 control-label">EventBrite</label>
-      <div class="col-md-3 col-sm-5">
-        <input type="text" class="form-control" id="inputEmail3" ng-model="eventBriteKey" placeholder="EventBrite Key" name="text">
-      </div>
-      <label for="inputEmail3" class="col-md-1 control-label">Synergy4</label>
-      <div class="col-md-3">
-        <input type="text" class="form-control" id="inputEmail3" placeholder="Synergy Key" ng-model="totalSynergyKey">
-      </div>
-      <label for="inputEmail3" class="col-md-1 control-label">Slack</label>
-      <div class="col-md-3">
-        <input type="text" class="form-control" id="inputEmail3" placeholder="Slack Key" ng-model="slackKey">
-      </div>
-      </div>
-      <div class="keyRow">
-      <label for="inputEmail3" class="col-md-1 control-label">Trello</label>
-      <div class="col-md-3">
-        <input type="text" class="form-control" id="inputEmail3" placeholder="Application Key (-) Token" ng-model="trelloKeys">
-      </div>
-      <label for="inputEmail3" class="col-md-1 control-label">Synergy5</label>
-      <div class="col-md-3">
-        <input type="text" class="form-control" id="inputEmail3" placeholder="Future Key" ng-model="totalSynergy5Key">
-      </div>
-      <label for="inputEmail3" class="col-md-1 control-label">Future </label>
-      <div class="col-md-3">
-        <input type="email" class="form-control" id="inputEmail3" placeholder="Future Key" >
-      </div>
+      <div class="paddingTop">
+        <h2><span class="label label-default">Master Key</span></h2>
+        <input type="text" class="form-control" id="inputEmail3" ng-model="masterKey" placeholder="Master Key" name="text">
       </div>
       <div  class="paddingTop">
       <div ng-repeat="page in pages">
