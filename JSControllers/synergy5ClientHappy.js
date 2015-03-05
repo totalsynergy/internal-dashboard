@@ -2,41 +2,12 @@
 app.controller('KPI24', function($scope, Service, $timeout, $http){
 
     $scope.clientNames1 = [
-      "ransnfdsfdfdsfydsa",
-      "ransnfdsfdfdstfdsa",
-      "ransnfdsfdfdrsfdsa",
-      "ransnfdsfdfedsfdsa",
-      "ransnfdsfdwfdsfdsa",
-      "ransnfdssqfdfdsfdsa",
-      "ransnfdasfdfdsfdsa",
-      "ransnfzdsfdfdsfdsa",
-      "ransnxfdsfdfdsfdsa"
     ];
 
     $scope.clientNames2 = [
-      "ransnxfdsfdfdsfdsa",
-      "ranscnfdsfdfdsfdsa",
-      "ranvsnfdsfdfdsfdsa",
-      "ransnfdsfdfdsfdsab",
-      "ransnfdsfdfdsfdsna",
-      "ransnfdsfdfdsfdmsa",
-      "ransnfdsfdfdsfldsa",
-      "ransnfdsfdfdskfdsa",
-      "ransnfdsfdfdjsfdsa",
-      "ransnfdsfdfhdsfdsa"
       ];
 
       $scope.clientNames3 = [
-      "ransnxfdsfdfdsfdsa",
-      "ranscnfdsfdfdsfdsa",
-      "ranvsnfdsfdfdsfdsa",
-      "ransnfdsfdfdsfdsab",
-      "ransnfdsfdfdsfdsna",
-      "ransnfdsfdfdsfdmsa",
-      "ransnfdsfdfdsfldsa",
-      "ransnfdsfdfdskfdsa",
-      "ransnfdsfdfdjsfdsa",
-      "ransnfdsfdfhdsfdsa"
       ];
 
     $scope.abc123 = [];
@@ -96,19 +67,19 @@ app.controller('KPI24', function($scope, Service, $timeout, $http){
 
     function sortAs(){
       for(var  i = 0; i < $scope.abc123.length; i++){
-        console.log("ATTEMTPING length :" + $scope.abc123.length);
-        console.log($scope.abc123[i].CategoryName);
+        //console.log("ATTEMTPING length :" + $scope.abc123.length);
+        //console.log($scope.abc123[i].CategoryName);
         if($scope.abc123[i].CategoryName == "A1"){
-          console.log("We matched a1's");
+          //console.log("We matched a1's");
           $scope.clientNames1 = $scope.abc123[i].Clients;
         }
         else if($scope.abc123[i].CategoryName == "A2"){
           $scope.clientNames2 = $scope.abc123[i].Clients;
-          console.log("We matched a2's");
+          //console.log("We matched a2's");
         }
         else if($scope.abc123[i].CategoryName == "A3"){
           $scope.clientNames3 = $scope.abc123[i].Clients;
-          console.log("We matched a3's");
+          ///console.log("We matched a3's");
         }
       }
       shuffleClientNames();
@@ -151,6 +122,7 @@ app.controller('KPI24', function($scope, Service, $timeout, $http){
 
 
     function slideUp(){
+      console.log("A1 IS SLIDING");
       var timeToSlide = $scope.speed - 2000;
       $scope.timeout3 = $timeout(function(){
         var percentageToSlide = 110000/($(window).height()); //change the height of the slide here

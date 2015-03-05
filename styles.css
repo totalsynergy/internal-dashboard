@@ -2033,6 +2033,29 @@ left: 55%;
   margin-left:5%;
 }
 
+.lifeTimeValueSentence{
+  font-family:openSansLight;
+  font-size:5vw;
+  text-align:center;
+  margin-top:7%;
+  line-height:100%;
+}
+
+.lifeTimeValue{
+  font-family: openSansBold;
+  text-align: center;
+  color: #009ee3;
+  font-size: 11vw;
+  margin-top: 5%;
+}
+
+#lifeTimeValueChart{
+  position:absolute;
+  z-index:-1;
+  top:4%;
+  left:0;
+  right:0;
+}
 
 
 

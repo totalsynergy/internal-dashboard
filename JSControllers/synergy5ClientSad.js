@@ -87,7 +87,7 @@ app.controller('KPI26', function($scope, Service, $timeout){
         var percentageToSlide = 60000/($(window).height());
         $('.clientNameHolder3').animate({top: '-=' + percentageToSlide + '%'},timeToSlide, function(){
           $timeout(function(){
-            $('.clientNameHolder').css('top', '20%');
+            $('.clientNameHolder3').css('top', '20%');
           },2000);
         });
 

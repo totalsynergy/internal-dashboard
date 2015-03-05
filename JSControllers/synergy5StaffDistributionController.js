@@ -41,7 +41,7 @@ app.controller('KPI23', function($scope, Service, $http){
       for(var  i = 0 ; i < data.length; i++){
         for(var j = 0; j < $scope.categories.length; j++){
           var newString = data[i].StaffSize.replace(/\s/g, '') + " People";
-          console.log($scope.categories[j].Name + " to " + newString);
+          //console.log($scope.categories[j].Name + " to " + newString);
           if($scope.categories[j].Name == newString){
             $scope.categories[j].Percent = data[i].Count;
             total += data[i].Count;

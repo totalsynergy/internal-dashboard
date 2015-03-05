@@ -550,7 +550,24 @@
   <!-- SYNERGY 5 TIMELINE PAGE -->
 
   <div ng-controller="KPI19" class="kpi animate" ng-show="tab == 19"> <!-- change back when instagram page complete -->
-    <h1>Synergy 5 User Types</h1>
+    <p class="lifeTimeValueSentence">
+      AVERAGE LIFETIME VALUE<br>OF SUBSCRIBER
+    </p>
+    <p class="lifeTimeValue">
+      $1.2 MILLION
+    </p>
+    <nvd3-line-chart
+            data="exampleData"
+            id="lifeTimeValueChart"
+            width="550"
+            height="300"
+            color = "colorFunction()"
+            showXAxis="true"
+            showYAxis="true"
+            isArea="true">
+        <svg></svg>
+     </nvd3-line-chart>
+    <!--<h1>Synergy 5 User Types</h1>
     <div class="graphContainer2">
     <nvd3-stacked-area-chart
     	data="exampleData"
@@ -568,7 +585,7 @@
       <p id="monthNames">{month}</p>
       <p id="monthNames">August</p>
       <p id="monthNames">September</p>
-    </div>
+    </div> -->
   </div>
 
   <!-- SYNERGY 5 CLIENT SHAPES COUNT -->

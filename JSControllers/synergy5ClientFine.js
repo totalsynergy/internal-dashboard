@@ -42,21 +42,15 @@ app.controller('KPI25', function($scope, Service, $timeout){
     })
 
     function sortBs(){
-      console.log("SORTING BS");
       for(var  i = 0; i < $scope.abc123.length; i++){
-        console.log("ATTEMTPING length :" + $scope.abc123.length);
-        console.log($scope.abc123[i].CategoryName);
         if($scope.abc123[i].CategoryName == "B1"){
-          console.log("We matched b1's");
           $scope.clientNames1 = $scope.abc123[i].Clients;
         }
         else if($scope.abc123[i].CategoryName == "B2"){
           $scope.clientNames2 = $scope.abc123[i].Clients;
-          console.log("We matched b2's");
         }
         else if($scope.abc123[i].CategoryName == "B3"){
           $scope.clientNames3 = $scope.abc123[i].Clients;
-          console.log("We matched b3's");
         }
       }
       shuffleClientNames();
@@ -87,12 +81,13 @@ app.controller('KPI25', function($scope, Service, $timeout){
 
 
     function slideUp(){
+      console.log("A1 IS SLIDING");
       var timeToSlide = $scope.speed - 2000;
       $scope.timeout3 = $timeout(function(){
         var percentageToSlide = 110000/($(window).height()); //change height of slide here
         $('.clientNameHolder2').animate({top: '-=' + percentageToSlide + '%'},timeToSlide, function(){
           $timeout(function(){
-            $('.clientNameHolder').css('top', '20%');
+            $('.clientNameHolder2').css('top', '20%');
           },2000);
         });
 
@@ -101,7 +96,6 @@ app.controller('KPI25', function($scope, Service, $timeout){
     }
 
     function pageChanged(){
-      console.log("PAGE CHANGED");
       $('.clientNameHolder2').stop();
       $('.clientNameHolder2').css('top', '20%');
       $timeout.cancel($scope.timeout1);

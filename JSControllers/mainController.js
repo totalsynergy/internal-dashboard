@@ -60,10 +60,10 @@ app.controller('mainController', function($scope, Service, $interval, $timeout, 
 
 
     $scope.loop = function(){
-      console.log("IN THE LOOP");
+      //console.log("IN THE LOOP");
       if($scope.tab != 99)
         goRight();
-      console.log("Speed: " + $scope.speed);
+      //console.log("Speed: " + $scope.speed);
       $scope.timer = $timeout($scope.loop, $scope.speed);
       //
     }
@@ -88,7 +88,7 @@ app.controller('mainController', function($scope, Service, $interval, $timeout, 
     }
 
     $scope.$on('settingsClosed', function(){
-      console.log("MAIN CONTROLER PICKEDUP CLOSED");
+      //console.log("MAIN CONTROLER PICKEDUP CLOSED");
       $timeout.cancel($scope.timer);
       $scope.loop();
     })
@@ -136,7 +136,7 @@ app.controller('mainController', function($scope, Service, $interval, $timeout, 
     }
 
     function goRight(){
-      console.log("goRight()");
+      //console.log("goRight()");
       var nextPage = $scope.tab + 1;
       while(nextPage <= $scope.pages.length + 2){
         if(nextPage > $scope.pages.length)
