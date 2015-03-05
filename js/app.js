@@ -15,6 +15,7 @@
     service.progressData = null;
     service.images = [];
     service.synergy5Data = null;
+    service.abc123 = null;
 
      service.updateKeys = function(eventKey, tsKey, sKey, trKey, s5Key, speed, pag){
       this.totalSynergyKey = tsKey;
@@ -22,7 +23,6 @@
       this.slackKey = sKey;
       this.trelloKeys = trKey;
       this.totalSynergy5Key = s5Key;
-      console.log("S5 KEY IS:" + s5Key);
       this.speed = speed;
       this.pages = pag;
       $rootScope.$broadcast("keysUpdated");
@@ -89,6 +89,18 @@
       $rootScope.$broadcast("synergy5DataUpdated");
     }
 
+    service.savePagesAndSpeed = function(pages, speed){
+      this.pages = pages;
+      this.speed = speed;
+      $rootScope.$broadcast("speedUpdated");
+      $rootScope.$broadcast("selectedUpdated");
+    }
+
+    service.updateABC123 = function(data){
+      this.abc123 = data;
+      $rootScope.$broadcast("abc123Updated");
+    }
+
 
 
     return service;
@@ -103,7 +115,7 @@
         + '|chrome-extension:'
         +currentImgSrcSanitizationWhitelist.toString().slice(-1);
 
-        console.log("Changing imgSrcSanitizationWhiteList from "+currentImgSrcSanitizationWhitelist+" to "+newImgSrcSanitizationWhiteList);
+
         $compileProvider.imgSrcSanitizationWhitelist(newImgSrcSanitizationWhiteList);
     }
 ]);
@@ -142,7 +154,10 @@
       {"name" : "Synergy 5 Client Count", "isSelected" : false},
       {"name" : "Synergy 5 World Map", "isSelected" : false},
       {"name" : "Synergy 5 Subscribers", "isSelected" : false},
-      {"name" : "Synergy 5 Staff Distribution", "isSelected" : false}
+      {"name" : "Synergy 5 Staff Distribution", "isSelected" : false},
+      {"name" : "Synergy 5 Client Happy", "isSelected" : false},
+      {"name" : "Synergy 5 Client Fine", "isSelected" : false},
+      {"name" : "Synergy 5 Client Sad", "isSelected" : false}
     ];
 
     var tabOpen = 4;

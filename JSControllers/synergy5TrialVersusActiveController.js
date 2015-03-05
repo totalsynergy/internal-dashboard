@@ -80,7 +80,6 @@ app.controller('KPI18', function($scope, Service, ngAudio, $http){
       $scope.active = active;
       $scope.trialPercentage = Math.floor(trial/(trial + active)*100);
       $scope.activePercentage = Math.floor(active/(trial + active)*100);
-      console.log($scope.trialPercentage);
     }
 
     function sort(clients){
@@ -88,21 +87,17 @@ app.controller('KPI18', function($scope, Service, ngAudio, $http){
       $scope.trialCount = 0;
       for(var i = 0; i < clients.length; i++){
         var type = clients[i].Product;
-        console.log(type);
         increaseType(type, clients[i].Count);
         $scope.originalData.type += clients[i].Count;
       }
-      console.log($scope.originalData);
       Service.updateSynergy5Data($scope.originalData);
     }
 
     function increaseType(type, count){
-      console.log("Increasing: " + type + " by: " + count);
       for(var i = 0; i < $scope.originalData.length; i++){
         if(type == $scope.originalData[i].Name ){
           $scope.originalData[i].Count = 0;
           $scope.originalData[i].Count += count;
-          console.log("Increasing: " + type + " by: " + count);
           break;
         }
       }

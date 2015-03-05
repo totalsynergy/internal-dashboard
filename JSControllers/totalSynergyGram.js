@@ -49,6 +49,7 @@ app.controller('KPI2', function($scope, Service, ngAudio, $http){
       $scope.imageUrls = [];
       $http.get("https://api.instagram.com/v1/users/598377249/media/recent/?client_id=89b41cbb03d149c4af0e7d39e2026f78")
       .success(function(data){
+        console.log("We got insta");
         $scope.data = data;
         //console.log($scope.singleImage);
         var limit = 8;
@@ -83,6 +84,7 @@ app.controller('KPI2', function($scope, Service, ngAudio, $http){
           //console.log("INSTAGRAM IMAGE LOADED");
           var img = document.createElement('img');
           img.src = window.URL.createObjectURL(this.response);
+          console.log(img.src);
           img.setAttribute("class", "instagramImage");
           var div = $scope.divNames[1 + counter];
           //console.log("inserting into: " + $scope.divNames[0]);

@@ -42,6 +42,9 @@
     <script type="text/javascript" src="JSControllers/synergy4InternController.js"></script>
     <script type="text/javascript" src="JSControllers/synergy4VersionsController.js"></script>
     <script type="text/javascript" src="JSControllers/synergy4WorldMap.js"></script>
+    <script type="text/javascript" src="JSControllers/synergy5ClientFine.js"></script>
+    <script type="text/javascript" src="JSControllers/synergy5ClientHappy.js"></script>
+    <script type="text/javascript" src="JSControllers/synergy5ClientSad.js"></script>
     <script type="text/javascript" src="JSControllers/synergy5StaffDistributionController.js"></script>
     <script type="text/javascript" src="JSControllers/synergy5SubscribersController.js"></script>
     <script type="text/javascript" src="JSControllers/synergy5TimelineController.js"></script>
@@ -65,7 +68,7 @@
 <div ng-controller="mainController" ng-init="init()">
   <img src="assets/Eventbrite feed SVG_Logo.svg" ng-show="tab > 2 && tab < 6" class="logo">
   <img src="assets/logo.png" ng-show="tab > 12 && tab < 18" class="logo2">
-  <img src="assets/logoSynergy5.png" ng-show="tab > 17 && tab <= 23" class="logo3">
+  <img src="assets/logoSynergy5.png" ng-show="tab > 17 && tab <= 26" class="logo3">
 
   <div class="leftButton" ng-show="tab != 99" ng-click="leftButton()">
   </div>
@@ -186,7 +189,7 @@
     <div class="greyCover"></div>
     <h1 id="confAten">CONFERENCE ATTENDEES</h1>
     <div class="my-container">
-    <img class="country" src="assets/Eventbrite feed SVG_Map.svg" alt="" />
+    <img class="country" src="assets/CONFMAPSVG.png" alt="" />
     <div class="nsw"><span>{{NSWnACT}}</span></div>
     <div class="qld"><span>{{QLD}}</span></div>
     <div class="wa"><span>{{WA}}</span></div>
@@ -407,7 +410,7 @@
         y="yFunction()"
         objectEquality="true"
         color="colorFunction()">
-        <svg height="250"></svg>
+        <svg></svg>
       </nvd3-pie-chart>
     </div>
   </div>
@@ -431,7 +434,7 @@
         y="yFunction()"
         objectEquality="true"
         color="colorFunction()">
-        <svg height="250"></svg>
+        <svg></svg>
       </nvd3-pie-chart>
     </div>
   </div>
@@ -472,7 +475,7 @@
   <div ng-controller="KPI16" class="kpi animate" ng-show="tab == 16">
       <h1 ng-show="tab == 16">Total Synergy Clients</h1>
       <div class="my-container2" ng-show="tab == 16">
-      <img class="synergy4Map" src="assets/Synergy4Map.svg" alt="" />
+      <img class="synergy4Map" src="assets/Synergy_4_map_Map.png" alt="" />
        <div class="total"><span>{{total}}</span></div>
        <div class="nsw2"><span>{{NSW}}</span></div>
        <div class="qld2"><span>{{QLD}}</span></div>
@@ -595,7 +598,7 @@
     </div>
     <div class="trialSquare1">
       <div class="square1">
-          <p class="shapeNumbers4">172</p>
+          <p class="shapeNumbers4">{{rawNumbers[3]}}</p>
       </div>
     </div>
     <div class="trialSquare2">
@@ -622,7 +625,8 @@
     <h1>Synergy 5 Industries</h1>
     <div ng-repeat="sub in subscribers">
       <div class="transparentImageHolder">
-        <img src="assets/TransparentWorker.png" id="transparentWorker"/>
+        <img ng-src="assets/subscribers/{{sub.Name}}1.png" id="transparentWorker"/>
+        <div class="greyFill"></div>
         <div class="fillingDiv{{$index}}"></div>
         <div class="subscriberCategoryHolder">
           <p class="subscriberCategory">{{sub.Name}}</p>
@@ -630,75 +634,163 @@
         <p class="subscriberCategoryPercentage">{{sub.Percent}}%</p>
       </div>
     </div>
-    <!--<div class="transparentImageHolder">
-      <img src="assets/TransparentWorker.png" id="transparentWorker"/>
-      <div class="fillingDiv"></div>
-      <div class="subscriberCategoryHolder">
-        <p class="subscriberCategory">General</p>
-      </div>
-      <p class="subscriberCategoryPercentage">27%</p>
-    </div>
-    <div class="transparentImageHolder2">
-      <img src="assets/TransparentWorker.png" id="transparentWorker"/>
-      <div class="fillingDiv"></div>
-      <div class="subscriberCategoryHolder">
-        <p class="subscriberCategory">Environ.</p>
-      </div>
-      <p class="subscriberCategoryPercentage bumpUp">12%</p>
-    </div>
-    <div class="transparentImageHolder3">
-      <img src="assets/TransparentWorker.png" id="transparentWorker"/>
-      <div class="fillingDiv"></div>
-      <div class="subscriberCategoryHolder">
-        <p class="subscriberCategory">Engineer</p>
-      </div>
-      <p class="subscriberCategoryPercentage">1%</p>
-    </div>
-    <div class="transparentImageHolder4">
-      <img src="assets/TransparentWorker.png" id="transparentWorker"/>
-      <div class="fillingDiv"></div>
-      <div class="subscriberCategoryHolder">
-        <p class="subscriberCategory">Construction</p>
-      </div>
-      <p class="subscriberCategoryPercentage bumpUp">64%</p>
-    </div>
-    <div class="transparentImageHolder5">
-      <img src="assets/TransparentWorker.png" id="transparentWorker"/>
-      <div class="fillingDiv"></div>
-      <div class="subscriberCategoryHolder">
-        <p class="subscriberCategory">Architect</p>
-      </div>
-      <p class="subscriberCategoryPercentage">17%</p>
-    </div>
-    <div class="transparentImageHolder6">
-      <img src="assets/TransparentWorker.png" id="transparentWorker"/>
-      <div class="fillingDiv"></div>
-      <div class="subscriberCategoryHolder">
-        <p class="subscriberCategory">Urban</p>
-      </div>
-      <p class="subscriberCategoryPercentage bumpUp">27%</p>
-    </div>
-    <div class="transparentImageHolder7">
-      <img src="assets/TransparentWorker.png" id="transparentWorker"/>
-      <div class="fillingDiv"></div>
-      <div class="subscriberCategoryHolder">
-        <p class="subscriberCategory">Project Management</p>
-      </div>
-      <p class="subscriberCategoryPercentage">11%</p>
-    </div>
-    <div class="transparentImageHolder8">
-      <img src="assets/TransparentWorker.png" id="transparentWorker"/>
-      <div class="fillingDiv"></div>
-      <div class="subscriberCategoryHolder">
-        <p class="subscriberCategory">Survey</p>
-      </div>
-      <p class="subscriberCategoryPercentage bumpUp">3%</p>
-    </div> -->
-
   </div>
+
+
 
   <div ng-controller="KPI23" class="kpi animate" ng-show="tab == 23">
     <h1>Synergy 5 Staff Distribution</h1>
+      <div ng-repeat="category in categories track by $index">
+        <div class="transparentCategoryHolder">
+          <p class="staffDistributionPercentage{{$index}}">{{category.Percent}}%</p>
+          <img ng-src="assets/staffSize/{{category.Name}}.png" class="staffSize{{$index}}">
+          <p class="staffDistributionName">{{category.Name}}</p>
+        </div>
+      </div>
+  </div>
+
+  <div ng-controller="KPI24" class="kpi animate" ng-show="tab == 24">
+    <h1>HAPPY CLIENTS</h1>
+    <div class="whiteZIndex"></div>
+    <div class="clientSpenderHolder1 animate" ng-show="a1">
+      <!--<h3 class="clientHappinessLevel1">A1</h3> -->
+      <div class="abcImageHolder">
+        <img src="assets/abc123/rich2.png" class="abcImage">
+        <div class="facialExpressionHolder">
+          <img src="assets/abc123/smile.png" class="facialExpression"/>
+        </div>
+      </div>
+    </div>
+    <div class="clientSpenderHolder2 animate" ng-show="a2">
+      <div class="abcImageHolder">
+        <img src="assets/abc123/midRich.png" class="abcImage" >
+        <div class="facialExpressionHolder2">
+          <img src="assets/abc123/smile.png" class="facialExpression"/>
+        </div>
+      </div>
+    </div>
+    <div class="clientSpenderHolder3 animate" ng-show="a3">
+      <div class="abcImageHolder">
+        <img src="assets/abc123/bankrupt.png" class="abcImage">
+        <div class="facialExpressionHolder3">
+          <img src="assets/abc123/smile.png" class="facialExpression"/>
+        </div>
+      </div>
+    </div>
+    <div class="clientNameHolder slider">
+      <div class="paddingBottom">
+        <h3 class="clientHappinessLevel1">A1</h3>
+      <div ng-repeat="clients in clientNames1 | limitTo: 8" class="level1Clients">
+        <h2 class="clientRankings">{{clients}}</h2>
+      </div>
+      </div>
+      <div class="paddingBottom">
+      <h3 class="clientHappinessLevel2">A2</h3>
+      <div ng-repeat="clients in clientNames2 | limitTo: 8" class="level2Clients">
+        <h2>{{clients}}</h2>
+      </div>
+      </div>
+      <h3 class="clientHappinessLevel3">A3</h3>
+      <div ng-repeat="clients in clientNames3 | limitTo: 8" class="level3Clients">
+        <h2>{{clients}}</h2>
+      </div>
+    </div>
+  </div>
+
+  <div ng-controller="KPI25" class="kpi animate" ng-show="tab == 25">
+    <h1>SATISFIED CLIENTS</h1>
+    <div class="whiteZIndex"></div>
+    <div class="clientSpenderHolder1 animate" ng-show="b1">
+      <!--<h3 class="clientHappinessLevel1">A1</h3> -->
+      <div class="abcImageHolder">
+        <img src="assets/abc123/rich2.png" class="abcImage">
+        <div class="facialExpressionHolder">
+          <img src="assets/abc123/midSmile.png" class="facialExpression"/>
+        </div>
+      </div>
+    </div>
+    <div class="clientSpenderHolder2 animate" ng-show="b2">
+      <div class="abcImageHolder">
+        <img src="assets/abc123/midRich.png" class="abcImage" >
+        <div class="facialExpressionHolder2">
+          <img src="assets/abc123/midSmile.png" class="facialExpression"/>
+        </div>
+      </div>
+    </div>
+    <div class="clientSpenderHolder3 animate" ng-show="b3">
+      <div class="abcImageHolder">
+        <img src="assets/abc123/bankrupt.png" class="abcImage">
+        <div class="facialExpressionHolder3">
+          <img src="assets/abc123/midSmile.png" class="facialExpression"/>
+        </div>
+      </div>
+    </div>
+    <div class="clientNameHolder2 slider">
+      <div class="paddingBottom">
+        <h3 class="clientHappinessLevel1">B1</h3>
+      <div ng-repeat="clients in clientNames1 | limitTo: 8" class="level1Clients">
+        <h2 class="clientRankings">{{clients}}</h2>
+      </div>
+      </div>
+      <div class="paddingBottom">
+      <h3 class="clientHappinessLevel2">B2</h3>
+      <div ng-repeat="clients in clientNames2 | limitTo: 8" class="level2Clients">
+        <h2>{{clients}}</h2>
+      </div>
+      </div>
+      <h3 class="clientHappinessLevel3">B3</h3>
+      <div ng-repeat="clients in clientNames3 | limitTo: 8" class="level3Clients">
+        <h2>{{clients}}</h2>
+      </div>
+    </div>
+  </div>
+
+  <div ng-controller="KPI26" class="kpi animate" ng-show="tab == 26">
+    <h1>UNSATISFIED CLIENTS</h1>
+    <div class="whiteZIndex"></div>
+    <div class="clientSpenderHolder1 animate" ng-show="c1">
+      <!--<h3 class="clientHappinessLevel1">A1</h3> -->
+      <div class="abcImageHolder">
+        <img src="assets/abc123/rich2.png" class="abcImage">
+        <div class="facialExpressionHolder">
+          <img src="assets/abc123/frown.png" class="facialExpression2"/>
+        </div>
+      </div>
+    </div>
+    <div class="clientSpenderHolder2 animate" ng-show="c2">
+      <div class="abcImageHolder">
+        <img src="assets/abc123/midRich.png" class="abcImage" >
+        <div class="facialExpressionHolder2">
+          <img src="assets/abc123/frown.png" class="facialExpression2"/>
+        </div>
+      </div>
+    </div>
+    <div class="clientSpenderHolder3 animate" ng-show="c3">
+      <div class="abcImageHolder">
+        <img src="assets/abc123/bankrupt.png" class="abcImage">
+        <div class="facialExpressionHolder3">
+          <img src="assets/abc123/frown.png" class="facialExpression2"/>
+        </div>
+      </div>
+    </div>
+    <div class="clientNameHolder3 slider">
+      <div class="paddingBottom">
+        <h3 class="clientHappinessLevel1">C1</h3>
+      <div ng-repeat="clients in clientNames1 | limitTo: 8" class="level1Clients">
+        <h2 class="clientRankings">{{clients}}</h2>
+      </div>
+      </div>
+      <div class="paddingBottom">
+      <h3 class="clientHappinessLevel2">C2</h3>
+      <div ng-repeat="clients in clientNames2 | limitTo: 8" class="level2Clients">
+        <h2>{{clients}}</h2>
+      </div>
+      </div>
+      <h3 class="clientHappinessLevel3">C3</h3>
+      <div ng-repeat="clients in clientNames3 | limitTo: 8" class="level3Clients">
+        <h2>{{clients}}</h2>
+      </div>
+    </div>
   </div>
 
 
@@ -720,14 +812,38 @@ IN SETTINGS RESTORE-->
       <h1>Settings</h1>
       <div class="paddingTop">
         <h2><span class="label label-default">Master Key</span></h2>
-        <input type="text" class="form-control" id="inputEmail3" ng-model="masterKey" placeholder="Master Key" name="text">
+        <input type="text" class="form-control" id="inputEmail3" ng-model="masterKey" placeholder="Update Keys With Daily Code" name="text">
       </div>
       <div  class="paddingTop">
-      <div ng-repeat="page in pages">
+        <div class="totalSynergy5SettingPages">
+          <h2>Synergy 5</h2>
+          <div ng-repeat="page in pages" ng-if="$index > 16 && $index < 26">
+            <input type="checkbox" name="page.name" value="page.name" ng-checked="page.isSelected" ng-click="turnOffPage(page)">{{"  " + page.name}}</input>
+          </div>
+        </div>
+        <div class="totalSynergy5SettingPages">
+          <h2>Synergy 4</h2>
+          <div ng-repeat="page in pages" ng-if="$index > 11 && $index < 17">
+            <input type="checkbox" name="page.name" value="page.name" ng-checked="page.isSelected" ng-click="turnOffPage(page)">{{"  " + page.name}}</input>
+          </div>
+        </div>
+        <div class="totalSynergy5SettingPages">
+          <h2>Call Desk</h2>
+          <div ng-repeat="page in pages" ng-if="$index > 4 && $index <= 9">
+            <input type="checkbox" name="page.name" value="page.name" ng-checked="page.isSelected" ng-click="turnOffPage(page)">{{"  " + page.name}}</input>
+          </div>
+        </div>
+        <div class="totalSynergy5SettingPages">
+          <h2>Other</h2>
+          <div ng-repeat="page in pages" ng-if="$index >= 0 && $index <= 4 || ($index > 9 && $index < 12)">
+            <input type="checkbox" name="page.name" value="page.name" ng-checked="page.isSelected" ng-click="turnOffPage(page)">{{"  " + page.name}}</input>
+          </div>
+        </div>
+      <!--<div ng-repeat="page in pages">
         <div class="col-md-3">
             <input type="checkbox" name="page.name" value="page.name" ng-checked="page.isSelected" ng-click="turnOffPage(page)">{{"  " + page.name}}</input>
         </div>
-      </div>
+      </div> -->
       </div>
       <div class="speedHolder">
         <h2 class="speed">Speed: {{speed/1000}} seconds</h2>

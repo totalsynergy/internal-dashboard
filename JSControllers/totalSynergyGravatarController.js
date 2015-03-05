@@ -65,6 +65,9 @@ app.controller('KPI1', function($scope, Service, $http, gravatarService, md5, $t
       }
     }
 
+    //TypeError: Cannot read property 'Email' of undefined
+    //at sortEmails2 (totalSynergyGravatarController.js:85)
+
     function sortEmails2(data, length){
       var counter = 0;
       $scope.trelloImages = [];

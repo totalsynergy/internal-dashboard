@@ -93,7 +93,6 @@ app.controller('KPI6', function($scope, Service, $http, gravatarService){
 
     function weGotKey(){
       //debugger
-      console.log('Getting Feed from Help Desk');
       var currentDate = new Date();
       var currentDateMinusThreeMonths = new Date(new Date(currentDate).setMonth(currentDate.getMonth()-3));
       currentDateMinusThreeMonths.setDate(1);

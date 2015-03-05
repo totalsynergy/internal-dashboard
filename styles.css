@@ -117,8 +117,8 @@ h1{
 
 
 .logo3{
-    width:10%;
-    height:15%;
+    width:150px;
+    height:150px;
     display:block;
     position:fixed;
     bottom:0;
@@ -160,6 +160,7 @@ body{
 
 .country {
     height: 100%;
+    width: 100%;
 }
 
 span {
@@ -178,17 +179,17 @@ div.nsw, div.qld, div.sa, div.nt, div.wa, div.vic{
 
 div.nsw {
     top: 56.3%;
-    left: 77.2%;
+    left: 78.2%;
 }
 
 div.qld {
     top: 24.8%;
-    left: 76.2%;
+    left: 77.2%;
 }
 
 div.wa {
     top: 43.2%;
-    left: 1.7%;
+    left: 0.7%;
 }
 
 div.sa {
@@ -354,7 +355,7 @@ div.earthNumbers{
   width:25%;
   height:25%;
   bottom:60%;
-  left:37.5%;
+  left:36%;
 }
 
 input[type="text"] {
@@ -603,6 +604,7 @@ input[type=checkbox]{
 
 .synergy4Map{
   height:100%;
+  width: 100%;
 }
 
 .my-container2{
@@ -629,42 +631,42 @@ div.act2, div.tas2{
 }
 
 div.nsw2 {
-    top: 58.3%;
-    left: 79.6%;
+    top: 59.3%;
+    left: 80.6%;
 }
 
 div.qld2 {
-    top: 26.8%;
-    left: 76.2%;
+    top: 25.8%;
+    left: 77.2%;
 }
 
 div.wa2 {
     top: 45.2%;
-    left: 1.7%;
+    left: 0.7%;
 }
 
 div.sa2 {
     top: 58%;
-    left: 28%;
+    left: 27%;
 }
 
 div.nt2 {
-    top: 4.8%;
+    top: 2.8%;
     left: 37.65%;
 }
 
 div.vic2 {
-    top: 70.5%;
+    top: 71.5%;
     left: 55%;
 }
 
 div.tas2 {
-    top: 87.5%;
-    left: 76.2%;
+    top: 88%;
+    left: 76.8%;
 }
 div.act2 {
     top: 59.5%;
-    left: 65.2%;
+    left: 65.7%;
 }
 
 div.total{
@@ -1681,10 +1683,9 @@ left: 55%;
   font-family: openSans;
   color: #fff;
   z-index: 999;
-  font-size: 8vw !important;
+  font-size: 6vw;
   text-align: center;
   visibility: visible;
-  line-height: 100%;
   vertical-align: middle;
   text-align: center;
   position: relative;
@@ -1809,14 +1810,14 @@ left: 55%;
 }
 
 .transparentImageHolder{
-  width: 8.5%;
-  background: #c0c0c0;
+  width: 12.5%;
   z-index: -9;
   float: left;
-  margin-right: 0.5%;
-  margin-left: 3%;
+  /* margin-right: 0.5%; */
+  /* margin-left: 3%; */
   position: relative;
   margin-top: 15%;
+  overflow: visible !important;
 }
 
 
@@ -1825,14 +1826,17 @@ left: 55%;
   width: 100%;
   position: absolute;
   background: #009ee3;
-  bottom: 3%;
+  bottom: 10px;
   height: 10%;
 }
 
 #transparentWorker{
-  z-index:999;
+  z-index: 999;
   position: relative;
-  width: 100%
+  left: -8%;
+  width: 113%;
+  top: -10px;
+  display: block;
 }
 
 .subscriberCategoryHolder{
@@ -1855,13 +1859,178 @@ left: 55%;
   color: #009EE3;
   font-size: 3vw;
   position:absolute;
-  top:-30%;
-  right: 10%;
+  top: -37%;
+  right: 24%;
   text-align: center;
+}
+
+.greyFill{
+  z-index: 99;
+  width: 100%;
+  position: absolute;
+  background: #c0c0c0;
+  top: -10px;
+  height: 100%
 }
 
 .bumpUp{
 
+}
+
+.transparentCategoryHolder{
+  width:20%;
+  float: left;
+  margin:2.5%;
+  margin-top:10%;
+}
+
+.staffDistributionPercentage1, .staffDistributionPercentage2, .staffDistributionPercentage3, .staffDistributionPercentage0{
+  text-align: center;
+  font-family:openSansBold;
+  color:#78AD29;
+  font-size:3vw;
+}
+
+.staffDistributionName{
+  text-align: center;
+  font-family:openSansLight;
+  font-size: 3vw;
+}
+
+.staffSize1, .staffSize2, .staffSize3, .staffSize0{
+  width:100%;
+  -webkit-filter: hue-rotate(-113deg);
+}
+
+.clientNameHolder, .clientNameHolder2, .clientNameHolder3{
+  position:absolute;
+  top:20%;
+  right:5%;
+  width:50%;
+  font-family:openSansLight;
+  text-align: center;
+  z-index:-99;
+}
+
+.whiteZIndex{
+  position:fixed;
+  top:0;
+  left:0;
+  height:15%;
+  width:100%;
+  z-index: -9;
+  background: #fff;
+}
+
+.slider{
+
+}
+
+/* BORDERS FOR ABC123
+.level1Clients{
+  /border-top: 2px solid #009ee3;
+}
+
+
+.level2Clients{
+  border-top: 2px solid #78ad29;
+}
+
+
+.level3Clients{
+  border-top: 2px solid #f39200;
+} */
+
+.paddingBottom{
+  margin-bottom:10%;
+}
+
+.clientSpenderHolder1, .clientSpenderHolder2, .clientSpenderHolder3{
+  position: fixed;
+  top:15%;
+  left:5%;
+  height:80%;
+  width:40%;
+}
+
+.clientHappinessLevel1, .clientHappinessLevel2, .clientHappinessLevel3 {
+  font-size: 4vw;
+  font-family: openSansBold;
+  text-align:center;
+  z-index:9;
+}
+
+.clientHappinessLevel1{
+    color: #009ee3;
+}
+
+.clientHappinessLevel2{
+  color: #78Ad29;
+}
+
+.clientHappinessLevel3{
+  color: #f39200;
+}
+
+.clientRankings{
+  font-family:openSansLight;
+}
+
+.abcImageHolder{
+  width:80%;
+  height:80%;
+  position:absolute;
+  top:10%;
+  left: 10%;
+}
+
+.abcImage{
+  width:100%;
+  height: 100%;
+  z-index: -10;
+}
+
+.facialExpressionHolder{
+  position: absolute;
+  top: 0%;
+  left: 21.2%;
+  width: 20%;
+  height: 16%;
+}
+
+.facialExpressionHolder2{
+  position: absolute;
+  top: 0%;
+  left: 19.4%;
+  width: 20%;
+  height: 16%;
+}
+
+.facialExpressionHolder3{
+  position: absolute;
+  top: 0%;
+  left: 41%;
+  width: 18%;
+  height: 16%;
+}
+
+.facialExpression, .facialExpression2{
+  width: 80%;
+  height: 80%;
+  margin-top: 20%;
+  margin-left: 10%;
+  margin-right: auto;
+}
+
+.facialExpression2{
+  width:75% !important;
+  height:75% !important;
+  margin-left:14% !important;
+}
+
+.totalSynergy5SettingPages{
+  float:left;
+  margin-left:5%;
 }
 
 

@@ -21,7 +21,6 @@ app.controller('KPI11', function($scope, Service, ngAudio, $http){
 
     $scope.$on('gravatarsUpdated', function(){
       $scope.images = Service.images;
-      //console.log("Identified the broadcast");
       testImages();
     })
 
@@ -53,7 +52,6 @@ app.controller('KPI11', function($scope, Service, ngAudio, $http){
     function pinImages(){
         for(var x = 0; x < $scope.doingCards.length; x++){
         $('#trello' + x).empty();
-        console.log("PINNING :" + $scope.doingCards[x].Name + " with " + $scope.doingCards[x].Image);
         var img = document.createElement('img');
         img.src = $scope.doingCards[x].Image;
         img.setAttribute("id", "trelloGravatar");
@@ -78,7 +76,6 @@ app.controller('KPI11', function($scope, Service, ngAudio, $http){
          })
         .error(function(data){
            $scope.data = "fail";
-           console.log("MEMBER LIST FAIL");
         });
     }
 

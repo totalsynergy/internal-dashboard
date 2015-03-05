@@ -16,7 +16,7 @@ app.controller('KPI3', function($scope, Service, ngAudio){
         Service.updateTab(3);
       }
       $scope.totalAttendees = Service.totalAttendees;
-      if($scope.totalAttendees >= 112 && $scope.count == 0){
+      if($scope.totalAttendees >= 112 || ($scope.totalAttendees >= 100 && $scope.totalAttendees <= 102) && $scope.count == 0){
         runConfetti();
         $scope.count++;
       }

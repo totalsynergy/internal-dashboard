@@ -8,8 +8,6 @@ app.controller('KPI4', function($scope, Service, $http){
     $scope.international = 0;
     $scope.data = {};
 
-    console.log("conferenceAttendees");
-
     $scope.$on('tabUpdated', function(){
       $scope.tab = Service.tab;
     });

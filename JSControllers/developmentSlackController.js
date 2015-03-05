@@ -17,7 +17,6 @@
 
     $scope.$on('gravatarsUpdated', function(){
       $scope.images = Service.images;
-      //console.log("Identified the broadcast");
       testImages();
     })
 
@@ -31,7 +30,6 @@
         fetchRightChannels(channelList);
       })
       .error(function(){
-        console.log("SLACK FAILED");
       })
     }
 
@@ -56,7 +54,7 @@
         //Service.updateEventData(data);
       })
       .error(function(){
-        console.log("SLACK FAILED")
+
       })
 
       //GETS THE ACTUAL MESSAGES IN THE GIVEN CHANNEL
@@ -69,12 +67,11 @@
               newMessage += "...";
             var object = {"id" : data.messages[i].user, "message" : newMessage, "channelName" : channelName, "image" : null};
             $scope.data.push(object);
-            console.log(object);
           }
         }
       })
       .error(function(){
-        console.log("SLACK FAILED");
+
       })
     }
 
@@ -84,10 +81,8 @@
         for(var j = 0; j < $scope.images.length; j++){
           var slackName = $scope.returnName($scope.data[i].id);
           var imageName = $scope.images[j].Name;
-          console.log("SCLACK NAME: " + slackName + "   IAMGFENAME: " + imageName);
           if(slackName == imageName){
             var image = $scope.images[j].Image;
-            console.log("Image Name: " + imageName + " for image: " + image);
             $scope.data[i].image = image;
             }
           }
@@ -96,15 +91,12 @@
     }
 
     function pinImages(){
-      console.log("PINNING");
         for(var x = 0; x < $scope.data.length; x++){
-          console.log("ACTUALLY ENTERD PINGING");
-        $('#slackGravatarHolder' + x).empty();
-        var img = document.createElement('img');
-        console.log("IMAGE SRC IS: " + $scope.data[x].image);
-        img.src = $scope.data[x].image;
-        img.setAttribute("class", "slackGravatarHolder");
-        $('#slackGravatarHolder' + x).prepend(img);
+          $('#slackGravatarHolder' + x).empty();
+          var img = document.createElement('img');
+          img.src = $scope.data[x].image;
+          img.setAttribute("class", "slackGravatarHolder");
+          $('#slackGravatarHolder' + x).prepend(img);
       }
     }
 

@@ -1,4 +1,4 @@
-  app.controller('SettingsController', function($scope, Service, $rootScope){
+  app.controller('SettingsController', function($scope, Service, $rootScope, $http){
    $scope.eventBriteKey = '';
    $scope.totalSynergyKey = '';
    $scope.slackKey = '';
@@ -31,39 +31,58 @@
     })
 
     $scope.save = function(){
-      /*
       $http({
-         url: 'https://beta.synergycloudapp.com/totalsynergy/InternalKpi/Home/Clients',
-         method: 'POST',
-         headers : {'internal-token' : $scope.masterKey}
+         url: 'https://beta.synergycloudapp.com/totalsynergy/InternalKpi/Home/keys?codefortoday=' + $scope.masterKey,
+         method: 'GET'
          }).success(function(d, status, headers, config){
-           arrangeKeys(d);
+           $scope.masterKey = 'Key Worked'
+           if(d.data != null)
+            arrangeKeys(d.data);
+           else{
+            $scope.masterKey = "Incorrect Key";
+            saveSpeedAndPages();
+           }
          })
         .error(function(data, status, headers, config){
-           $scope.data = "fail";
+           $scope.masterKey = 'Incorrect Key';
         });
-      */
-      arrangeKeys();
+        Service.savePagesAndSpeed($scope.pages, $scope.speed);
     }
 
-    function arrangeKeys(){
-      saveKeysToLocalStorage();
+    function arrangeKeys(data){
+      var trelloApplicationKey, trelloUserTokenKey, trelloCombinedKey = '';
+      var fromAndTo = ["EventBrite Key", "Synergy 4 Key", "Slack", "Trello Application Key", "Trello User Token Key","Synergy 5 Key"];
+      var keysArray = [];
+      for(var j = 0; j < fromAndTo.length; j++){
+        for(var i = 0 ; i < data.length; i++){
+          if(fromAndTo[j] == data[i].Key){
+            keysArray.push(data[i].Value);
+            break;
+          }
+        }
+      }
+      saveKeysToLocalStorage(keysArray);
     }
 
-    function saveKeysToLocalStorage(){
-      chrome.storage.local.set({'eventBriteKey': $scope.eventBriteKey});
-      chrome.storage.local.set({'totalSynergyKey': $scope.totalSynergyKey});
-      chrome.storage.local.set({'slackKey': $scope.slackKey});
+    function saveKeysToLocalStorage(keysArray){
+      chrome.storage.local.set({'eventBriteKey': keysArray[0]});
+      chrome.storage.local.set({'totalSynergyKey': keysArray[1]});
+      chrome.storage.local.set({'slackKey': keysArray[2]});
       chrome.storage.local.set({'speed' : $scope.speed});
-      chrome.storage.local.set({'trelloKeys' : $scope.trelloKeys});
-      chrome.storage.local.set({'synergy5Keys' : $scope.totalSynergy5Key});
+      chrome.storage.local.set({'trelloKeys' : keysArray[3] + '-' + keysArray[4]});
+      chrome.storage.local.set({'synergy5Keys' : keysArray[5]});
       chrome.storage.local.set({'pages' : Service.pages});
-      console.log($scope.totalSynergy5Key);
-      Service.updateKeys($scope.eventBriteKey, $scope.totalSynergyKey, $scope.slackKey, $scope.trelloKeys, $scope.totalSynergy5Key, $scope.speed, $scope.pages);
+      Service.updateKeys(keysArray[0], keysArray[1], keysArray[2], keysArray[3] + '-' + keysArray[4], keysArray[5], $scope.speed, $scope.pages);
       Service.sendForData();
     }
 
+    function saveSpeedAndPages(){
+      chrome.storage.local.set({'speed' : $scope.speed});
+      chrome.storage.local.set({'pages' : Service.pages});
+    }
+
     $scope.restoreDefaults = function(){
+      $scope.pages = restorePages;
       Service.restore(15, restorePages);
     }
 
@@ -116,7 +135,10 @@
       {"name" : "Synergy 5 Client Count", "isSelected" : false},
       {"name" : "Synergy 5 World Map", "isSelected" : false},
       {"name" : "Synergy 5 Subscribers", "isSelected" : false},
-      {"name" : "Synergy 5 Staff Distribution", "isSelected" : false}
+      {"name" : "Synergy 5 Staff Distribution", "isSelected" : false},
+      {"name" : "Synergy 5 Client Happy", "isSelected" : false},
+      {"name" : "Synergy 5 Client Fine", "isSelected" : false},
+      {"name" : "Synergy 5 Client Sad", "isSelected" : false}
     ];
 
   });
