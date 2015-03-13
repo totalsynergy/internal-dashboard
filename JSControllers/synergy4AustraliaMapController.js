@@ -1,4 +1,4 @@
-app.controller('EighthKPI', function($scope, Service, $http, gravatarService){
+app.controller('KPI16', function($scope, Service, $http, gravatarService){
     $scope.stat = "";
     $scope.your_email = "adamhannigan@hotmail.com";
 

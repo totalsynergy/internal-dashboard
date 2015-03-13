@@ -1,4 +1,4 @@
-app.controller('ThirteenthKPI', function($scope, Service, ngAudio){
+app.controller('KPI10', function($scope, Service, ngAudio){
     $scope.totalAttendees = 0;
     $scope.sound = ngAudio.load("assets/bell.mp3");
     $scope.count = 0;
@@ -18,7 +18,7 @@ app.controller('ThirteenthKPI', function($scope, Service, ngAudio){
 
     $scope.$on('tabUpdated', function(){
       $scope.tab = Service.tab;
-      if($scope.tab != 13)
+      if($scope.tab != 10)
         $scope.data = $scope.blankData;
       else
         $scope.data = $scope.chartData;

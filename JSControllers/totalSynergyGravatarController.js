@@ -1,4 +1,4 @@
-app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, md5, $timeout){
+app.controller('KPI1', function($scope, Service, $http, gravatarService, md5, $timeout){
 
 
     $scope.gravatar = 'https://secure.gravatar.com/avatar/db454bee724da405a69c9c7249e71487?s=300&d=mm';
@@ -12,6 +12,7 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, m
     $scope.emailTest = [];
     $scope.isTrue = "false";
     $scope.blankSpots = [];
+    $scope.trelloImages = [];
 
     $scope.$on('tabUpdated', function(){
       $scope.tab = Service.tab;
@@ -64,10 +65,15 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, m
       }
     }
 
+    //TypeError: Cannot read property 'Email' of undefined
+    //at sortEmails2 (totalSynergyGravatarController.js:85)
+
     function sortEmails2(data, length){
       var counter = 0;
+      $scope.trelloImages = [];
       emptyDivs();
       pickNumbersToBeBlanks();
+
       //$("#twitterDiv").empty();
       $scope.arrayOfEmpties = [];
       for(i = 1; i <= 28; i++){
@@ -76,22 +82,27 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, m
         var blank = false;
         if(isEmpty(i)){
           blank = true;
-          console.log('i: ' + i + ' is empty');
+          //console.log('i: ' + i + ' is empty');
         }
         else{
           var hash = md5.createHash(data[counter].Email || '');
           name = data[counter].Name;
           email = data[counter].Email;
+          //console.log("EMAIL: " + email);
           counter++;
-          console.log(i + ' is not empty');
+          //console.log(i + ' is not empty');
         }
         loadAvatar(hash, i, name, blank, counter);
         //$scope.emailTest.push(email);
       }
+      $timeout(function(){
+        //console.log("test gravatsr: " + $scope.trelloImages.length);
+        Service.updateGravatars($scope.trelloImages);
+      }, 5000);
     }
 
       function loadAvatar(hash, index, email, blank){
-        console.log('Looking at index:' + index + ' which is ' + blank);
+        //console.log('Looking at index:' + index + ' which is ' + blank);
         var url = "https://secure.gravatar.com/avatar/" +  hash + "?s=300&d=mm";
         var xhr = new XMLHttpRequest();
         xhr.open('GET', url, true);
@@ -103,11 +114,16 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, m
             img.src = "assets/transparent.png";
           else{
             img.src = window.URL.createObjectURL(this.response);
-            console.log('index is not blank: ' + index);
+            //console.log('index is not blank: ' + index);
           }
           var divName = "#g" + index;
           $(divName).prepend(img);
-          console.log("appending: " + img.src);
+          $(divName).append('<p id="gravatarName">' + email + '</p>');
+          //var newImage = img;
+          var srcClone = img.src;
+          //console.log("appending: " + img.src);
+          $scope.trelloImages.push({"Name": email, "Image" :srcClone});
+          //console.log("Pushed trelloImages " + img);
           //$scope.displayArray.push({photo: img.src, emailAddress: email});
         };
         xhr.send();
@@ -134,7 +150,7 @@ app.controller('SeventhKPI', function($scope, Service, $http, gravatarService, m
       else
         i--;
     }
-    console.log('Blank Spots: ' + $scope.blankSpots);
+    //console.log('Blank Spots: ' + $scope.blankSpots);
   }
 
   function randomDoesNotExist(number){

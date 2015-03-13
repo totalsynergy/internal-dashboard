@@ -14,6 +14,11 @@
     src: url(OpenSans-ExtraBold.ttf);
 }
 
+@font-face {
+    font-family: billabong;
+    src: url(fonts/billabong.ttf);
+}
+
 html, body, .container{
   height:100%;
   min-height: 100%;
@@ -111,6 +116,17 @@ h1{
 }
 
 
+.logo3{
+    width:150px;
+    height:150px;
+    display:block;
+    position:fixed;
+    bottom:0;
+    left:0;
+    z-index:1000;
+}
+
+
 
 .stateFont{
   color:#58595B;
@@ -130,6 +146,11 @@ body{
   height:100%;
 }
 
+
+.container{
+
+}
+
 .my-container{
     position:relative;
     right:3%;
@@ -139,6 +160,7 @@ body{
 
 .country {
     height: 100%;
+    width: 100%;
 }
 
 span {
@@ -157,17 +179,17 @@ div.nsw, div.qld, div.sa, div.nt, div.wa, div.vic{
 
 div.nsw {
     top: 56.3%;
-    left: 77.2%;
+    left: 78.2%;
 }
 
 div.qld {
     top: 24.8%;
-    left: 76.2%;
+    left: 77.2%;
 }
 
 div.wa {
     top: 43.2%;
-    left: 1.7%;
+    left: 0.7%;
 }
 
 div.sa {
@@ -333,23 +355,30 @@ div.earthNumbers{
   width:25%;
   height:25%;
   bottom:60%;
-  left:37.5%;
+  left:36%;
 }
 
 input[type="text"] {
   margin: 0;
-  width: 30%;
+  width: 60%;
   font-family: sans-serif;
   font-size: 18px;
   appearance: none;
   box-shadow: none;
   border-radius: none;
   margin-left:auto;
-  margin-right:auto;
+  margin-right:10%;
 }
 
 input[type="text"]:focus {
 
+}
+
+.label-default{
+  background-color: #777;
+  position: relative;
+  top: 39px;
+  left: 150px;
 }
 #save{
   width:20%;
@@ -357,6 +386,12 @@ input[type="text"]:focus {
 
 #restore{
   width:40%;
+}
+
+.settingsContainer{
+  position:fixed;
+  bottom:3%;
+  width:100%;
 }
 
 .keyInput{
@@ -377,10 +412,12 @@ input[type="text"]:focus {
   font-size:2vw;
   padding-top:2.5%;
   padding-bottom:1%;
+      overflow:hidden;
 }
 
 .pageContainer{
-    width:50%;
+    width:70%;
+    height:40%;
     margin-right:auto;
     margin-left:auto;
 }
@@ -393,13 +430,6 @@ input[type=checkbox]{
 .pageName{
   font-size:1vw;
   padding-right:20px;
-}
-
-.speed{
-  font-size:2vw;
-  padding-top:27%;
-  text-align:center;
-  font-family: openSansLight;
 }
 
 .saveNExit{
@@ -462,10 +492,37 @@ input[type=checkbox]{
 
 }
 
+.graphContainer2{
+  width:80%;
+  height:80%;
+  position:fixed;
+  bottom:5%;
+  left:10%;
+  z-index: 9999;
+
+}
+
 #pieChartContainer{
   position:absolute;
   left:35%;
   top:20%;
+  width:80%;
+  z-index:1000;
+
+}
+
+#pieChartContainer2{
+  position:absolute;
+  top:15%;
+  right:30%;
+  width:80%;
+  z-index:1000;
+}
+
+#pieChartContainer3{
+  position:absolute;
+  top:15%;
+  left:30%;
   width:80%;
   z-index:1000;
 
@@ -547,6 +604,7 @@ input[type=checkbox]{
 
 .synergy4Map{
   height:100%;
+  width: 100%;
 }
 
 .my-container2{
@@ -573,42 +631,42 @@ div.act2, div.tas2{
 }
 
 div.nsw2 {
-    top: 58.3%;
-    left: 79.6%;
+    top: 59.3%;
+    left: 80.6%;
 }
 
 div.qld2 {
-    top: 26.8%;
-    left: 76.2%;
+    top: 25.8%;
+    left: 77.2%;
 }
 
 div.wa2 {
     top: 45.2%;
-    left: 1.7%;
+    left: 0.7%;
 }
 
 div.sa2 {
     top: 58%;
-    left: 28%;
+    left: 27%;
 }
 
 div.nt2 {
-    top: 4.8%;
+    top: 2.8%;
     left: 37.65%;
 }
 
 div.vic2 {
-    top: 70.5%;
+    top: 71.5%;
     left: 55%;
 }
 
 div.tas2 {
-    top: 87.5%;
-    left: 76.2%;
+    top: 88%;
+    left: 76.8%;
 }
 div.act2 {
     top: 59.5%;
-    left: 65.2%;
+    left: 65.7%;
 }
 
 div.total{
@@ -628,6 +686,7 @@ div.total{
 canvas {
 	position:relative;
 	top:-1000px;
+	width:100% !important;
 }
 
 .throwingPercents{
@@ -678,6 +737,7 @@ canvas {
 .fixedContainer{
 }
 
+
 .gravatarLogo{
   position:fixed;
   width:25%;
@@ -685,12 +745,18 @@ canvas {
   left:36%;
 }
 
-.realImageContainer{
-  width:12.5%;
-  height:25%;
-  float:right;
-  size: cover;
+/*INDIVIAL GRAVATAR ID BELOW */
 
+#realImageContainer{
+  width:100%;
+  display:block;
+}
+
+#holdAllTheGravatars{
+  position:relative;
+  height:100%;
+  margin-left:2.3%;
+  margin-right:1%;
 }
 
 
@@ -700,7 +766,17 @@ canvas {
   margin: 0;
   bottom:5%;
   left:5%;
-  text-align:center;
+  font-family:openSansLight;
+  font-size:1vw;
+  z-index:1000;
+  color: #000;
+  text-shadow: 0.5px 0.5px #fff;
+}
+
+#gravatarName{
+  position:relative;
+  bottom: 15%;
+margin-left: 3%;
   font-family:openSansLight;
   font-size:1vw;
   z-index:1000;
@@ -741,7 +817,7 @@ canvas {
   width:80%;
   margin-left:auto;
   margin-right:auto;
-  margin-top:10%;
+  margin-top:5%;
 }
 
 
@@ -865,6 +941,13 @@ svg text {
   position:fixed;
   bottom:20%;
   right:20%;
+  text-align:center;
+}
+
+#threeMonthsDiv2{
+  position:fixed;
+  bottom:20%;
+  right:10%;
   text-align:center;
 }
 
@@ -994,4 +1077,1023 @@ webview{
   z-index:1000;
 
 }
+
+.gravatarNames{
+  z-index:99999999;
+  font-size:5vw;
+  position:fixed;
+  right:200px;
+  top:100px;
+  color: #000;
+}
+
+.testText{
+  z-index:9999999;
+  color: #000;
+  position:absolute;
+  top:10%;
+  right:10%;
+
+}
+
+.gravHolder{
+  position:relative;
+}
+
+#instagram{
+  width:400px;
+  height:400px;
+}
+
+.clientTrialHeader{
+  font-family:openSansLight;
+  font-size: 3vw;
+  position:absolute;
+  left:46%;
+  top:10%;
+}
+
+.clientTrialHeader2{
+  font-family:openSansLight;
+  font-size: 3vw;
+  position:absolute;
+  left:46%;
+  top:10%;
+}
+
+#trialAndActive{
+  position:relative;
+}
+
+#pieChart4{
+  position:relative;
+  top:25px;
+}
+
+.bloodyLegendName{
+  float:left;
+  font-family:openSansLight;
+  font-size:2vw;
+  padding-right:1%;
+  padding-left:3%;
+}
+
+#bloodyLegend{
+  position:absolute;
+  bottom:5%;
+  left:30%;
+  width:50%;
+}
+
+#orangeDiv{
+  width:40px;
+  height:40px;
+  border-radius:2px;
+  background: #F39200;
+  float:left;
+}
+
+#blueDiv{
+  width:40px;
+  height:40px;
+  border-radius:2px;
+  background: #009EE3;
+  float:left;
+}
+
+#greenDiv{
+  width:40px;
+  height:40px;
+  border-radius:2px;
+  background: #78AD29;
+  float:left;
+}
+
+.donutPercentageHolder1{
+  position: absolute;
+  left: 40%;
+  top: 44%;
+  width: 20%;
+}
+
+.donutPercentageHolder2{
+  position: absolute;
+  left: 40%;
+  top: 42.5%;
+  width: 20%;
+}
+
+.donutPercentage{
+  font-size: 6vw;
+  color: #C6C8CA;
+  font-family:openSans;
+  text-align:center;
+}
+
+
+
+#firstInstagram{
+  width:100%;
+  height:37%;
+  border: 1px solid #e6e6e6;
+  box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
+  background: #fff;
+  border-radius:10px;
+  padding:2%;
+  margin:2%;
+  float:right;
+  overflow:hidden;
+  padding-bottom:100px;
+}
+
+#secondInstagram{
+  width:100%;
+  height:37%;
+  border: 1px solid #e6e6e6;
+  box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
+  background: #fff;
+  border-radius:10px;
+  padding:2%;
+  margin:2%;
+  float:right;
+  overflow:hidden;
+}
+#thirdInstagram{
+ width:100%;
+  height:43%;
+  border: 1px solid #e6e6e6;
+  box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
+  background: #fff;
+  border-radius:10px;
+  padding:2%;
+  margin:2%;
+  overflow:hidden;
+}
+#fourthInstagram{
+  width:100%;
+  height:36%;
+  border: 1px solid #e6e6e6;
+  box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
+  background: #fff;
+  border-radius:10px;
+  padding:2%;
+  overflow:hidden;
+  margin:2%;
+}
+#fifthInstagram{
+  width:100%;
+  height:36%;
+  border: 1px solid #e6e6e6;
+  box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
+  background: #fff;
+  border-radius:10px;
+  padding:2%;
+  margin:2%;
+  overflow:hidden;
+}
+#sixthInstagram{
+  width:100%;
+  height:43%;
+  border: 1px solid #e6e6e6;
+  box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
+  background: #fff;
+  border-radius:10px;
+  padding:2%;
+  margin:2%;
+  float:center;
+  overflow: hidden;
+}
+#seventhInstagram{
+  width:100%;
+  height:43%;
+  border: 1px solid #e6e6e6;
+  box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
+  background: #fff;
+  border-radius:10px;
+  padding:2%;
+  margin:2%;
+  float:center;
+  overflow: hidden;
+}
+#eighthInstagram{
+  width:100%;
+  height:36%;
+  border: 1px solid #e6e6e6;
+  box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
+  background: #fff;
+  border-radius:10px;
+  padding:2%;
+  margin:2%;
+  overflow:hidden;
+  }
+
+.instagramController{
+  position:relative;
+  height: 100%;
+
+}
+
+.cols{
+  height:100%;
+  width:22%;
+  float:left;
+  padding-right:1%;
+  margin-left:2%
+  background: #777;
+}
+
+#colsHolder{
+  width:100%;
+  height:100%;
+  margin-left:7%;
+}
+
+.instagramImage{
+  width:90%;
+  border-radius: 7px;
+  overflow: hidden;
+  margin-left:5%;
+}
+
+#synergyGram{
+  width:30%;
+  margin-left:35%;
+}
+
+.caption{
+  text-align:center;
+  font-size:1vw;
+  color:#777;
+  font-family:openSansLight;
+  padding-top:0%;
+  overflow:hidden;
+}
+
+#billabong{
+  font-family: billabong;
+  font-size: 7vw;
+  text-align: center;
+}
+#heart {
+    position: relative;
+    width: 25px;
+    height: 22px;
+    left:30%;
+    top:60%;
+    padding-top:0px;
+}
+#heart:before,
+#heart:after {
+    position: absolute;
+    content: "";
+    left: 12.5px;
+    top: 0;
+    width: 12.5px;
+    height: 20px;
+    background: #777;
+    border-radius: 12.5px 12.5px 0 0;
+    transform: rotate(-45deg);
+    transform-origin: 0 100%;
+}
+#heart:after {
+    left: 0;
+    transform: rotate(45deg);
+    transform-origin :100% 100%;
+}
+
+#likesCount {
+  font-family:openSans;
+  font-size:1.5vw;
+  color: #777;
+  position: absolute;
+  margin-left: 4%;
+  padding-top:0.3%;
+  display: inline;
+}
+
+#talkbubble {
+   width: 24px;
+   height: 18px;
+   background: #777;
+   position: relative;
+  bottom:15px;
+left: 55%;
+  border-radius: 2px;
+  margin-left: 9%;
+}
+#talkbubble:before {
+   content:"";
+   position: absolute;
+   right: 100%;
+   top: 4px;
+   width: 0;
+   height: 0;
+   border-top: 3.9px solid transparent;
+   border-right: 7.8px solid #777;
+   border-bottom: 3.9px solid transparent;
+}
+
+#commentsCount {
+  font-family:openSans;
+  font-size:1.5vw;
+  color: #777;
+  position: absolute;
+  margin-left: 11%;
+  padding-top:0.3%;
+  display: inline;
+}
+
+#instagramStats{
+  width:100%;
+  height:8%;
+  padding-top:5%;
+}
+
+#monthNameHolder{
+  width:72%;
+  position:absolute;
+  height:10%;
+  bottom: 5%;
+/*  background: #c6c8ca; */
+  margin-left:15%;
+}
+
+#monthNames{
+  display: inline;
+  padding-right:19%;
+  font-family: openSansLight;
+  font-size:1vw;
+
+}
+
+#g1, #g2, #g3, #g4, #g5, #g6, #g7, #g8, #g9, #g10, #g11, #g12, #g13, #g14, #g15, #g16, #g17, #g18, #g19, #g20, #g21, #g22, #g23, #g24, #g25, #g26, #g27, #g28{
+  width:14.25%;
+  height:25%;
+  padding:0.75%;
+  float: left;
+}
+
+.gHolder{
+  width:100%;
+  height:100%;
+}
+
+.key{
+}
+
+#mapContainer{
+  width: 100%;
+  position:fixed;
+  height:100%;
+  background: #c0c0c0;
+}
+
+#heatMapContainer{
+  position:fixed;
+  top:30%;
+  padding-left:5%;
+  padding-right:5%;
+}
+
+#heatMapContainer2{
+  position:fixed;
+  top:31%;
+  padding-left:5%;
+  padding-right:5%;
+}
+
+
+.keyRow{
+  padding-bottom: 3%;
+  padding-top:3%;
+}
+
+.paddingTop{
+  padding-top:2%;
+}
+
+.speed{
+  text-align:center;
+}
+
+.speedHolder{
+  position:fixed;
+  bottom:10%;
+  left:15%;
+  width:50%;
+}
+
+.buttonHolder{
+  position:fixed;
+  bottom:10%;
+  right:0%;
+  width:30%;
+}
+
+.btn{
+  margin-right:1%;
+}
+
+.form-control{
+  width: 70%;
+}
+
+.card{
+  background: #c6c8ca;
+  padding-bottom:1%;
+}
+
+#trelloGravatar{
+  width:100%;
+  border-radius: 10%;
+
+}
+
+.cardHolder{
+  box-shadow: 7px 25px 5px 0px rgba(49, 50, 50, 0.5);
+  background: #fff;
+  border-radius:10px;
+  margin: 1.5%;
+  height:35%;
+  width:30%;
+  float: left;
+}
+
+.isDoing{
+  position: relative;
+  padding: 2%;
+}
+
+#trello0, #trello1, #trello2, #trello3, #trello4, #trello5, #trello6, #trello7, #trello8{
+  float:left;
+  width:20%;
+  padding:1%;
+  padding: 0 10px 10px 10px;
+}
+
+.trelloName{
+  font-family:openSansLight;
+  padding-top:3%;
+  padding-bottom:10%;
+}
+
+.trelloName2{
+  font-family:openSansLight;
+  text-align: center;
+  font-size:2vw;
+  padding: 1% 1% 1% 1%;
+}
+
+.blueBackground{
+  background: #0E74AF;
+  height:102%;
+  width:100%;
+  position:fixed;
+  bottom:0%;
+}
+
+.cardContainer{
+  width:80%;
+  height:100%;
+  margin-right:auto;
+  margin-left:auto;
+  padding-top:2%;
+}
+
+#trello{
+  font-family:openSansLight;
+  color: #E2E4E6;
+}
+
+.topDiv{
+  width:100%;
+  height:30%;
+  background: #fff;
+}
+
+.bottomDiv{
+  background: #e4e6e8;
+  height:70%;
+  border-radius: 0px 0px 10px 10px;
+  border-top: 2px solid #c0c0c0;
+}
+
+#mapLegend{
+  position:fixed;
+  width:50%;
+  margin-left: 30%;
+  bottom:10%;
+}
+
+.kineticjs-content{
+  position: relative;
+  top: 1000px;
+  display: inline-block;
+  width: 1455px;
+  height: 388px;
+}
+
+.activeHeader{
+  font-family:openSansLight;
+  color: #009EE3;
+  font-size:5vw;
+  text-align:center;
+}
+
+.trialHeader{
+  font-family: openSansLight;
+  color: #f39200;
+  font-size: 5vw;
+  text-align: center;
+  position: fixed;
+  left: 43%;
+  bottom: 4%;
+}
+
+.activeCircle1, .activeCircle2, .activeCircle3{
+  width:20%;
+  height: 28%;
+  background: #fff;
+  margin: 1%;
+}
+
+.activeCircle1{
+  left: 10%;
+  top: 12%;
+  position: absolute;
+}
+
+.activeCircle2{
+  left: 39%;
+  top: 12%;
+  position: absolute;
+}
+
+.activeCircle3{
+  right: 10%;
+  top: 12%;
+  position: absolute;
+}
+
+.trialSquare1, .trialSquare2, .trialSquare3{
+  width:20%;
+  height: 28%;
+  background: #fff;
+  margin: 1%;
+}
+
+.trialSquare1{
+  left: 10%;
+  bottom: 15%;
+  position: absolute;
+}
+
+.trialSquare2{
+  left: 39%;
+  bottom: 15%;
+  position: absolute;
+}
+
+.trialSquare3{
+  right: 10%;
+  bottom: 15%;
+  position: absolute;
+}
+
+.circle1, .circle2, .circle3{
+  width: 50%;
+  height: 60%;
+  border-radius: 50%;
+  position: relative;
+  top: 50%;
+  margin-top: -25%;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 9;
+}
+
+.square1, .square2, .square3{
+  width: 50%;
+  height: 60%;
+  background: #777;
+  position: relative;
+  border-radius: 5%;
+  top: 50%;
+  margin-top: -25%;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 9;
+}
+
+.shapeNumbers1, .shapeNumbers2, .shapeNumbers3, .shapeNumbers4, .shapeNumbers5, .shapeNumbers6{
+  font-family: openSans;
+  color: #fff;
+  z-index: 999;
+  font-size: 6vw;
+  text-align: center;
+  visibility: visible;
+  vertical-align: middle;
+  text-align: center;
+  position: relative;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.basicProfessionalEnterprise{
+  position: fixed;
+  top: 45%;
+  width: 90%;
+  height: 20px;
+  margin-left: 5%;
+  margin-right: 5%;
+  color: #777;
+  border-bottom: solid 2px #c0c0c0;
+}
+
+.activeTrialMiddleText, .activeTrialMiddleText2, .activeTrialMiddleText3{
+  display: inline;
+  font-size:2vw;
+  padding: 0.5%;
+  background: #fff;
+}
+
+.activeTrialMiddleText{
+  position: relative;
+  top: 25%;
+  margin-top: -1.1%;
+  left:13.8%;
+}
+
+.activeTrialMiddleText2{
+  position: relative;
+  top: 25%;
+  margin-top: -1.1%;
+  left:34%;
+}
+
+
+.activeTrialMiddleText3{
+  position: relative;
+  top: 25%;
+  margin-top: -1.1%;
+  left:49%;
+}
+
+.slackCardHolder{
+  width:100%;
+  height:20%;
+  padding:1%;
+  margin: 1%;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
+}
+
+#slackGravatarHolder0, #slackGravatarHolder1, #slackGravatarHolder2, #slackGravatarHolder3, #slackGravatarHolder4, #slackGravatarHolder5{
+  height:100px;
+  width:100px;
+  margin: 0;
+}
+
+.slackGravatarHolder{
+  border-radius:30%;
+  width:100%;
+  margin-left: 0%;
+
+}
+
+.slackSideDetails{
+  width: 25%;
+  margin: 0;
+  padding: 0;
+}
+
+.slackNameChannelHolder{
+  margin-left: 38%;
+  width: 50%;
+  /* margin-bottom: -24%; */
+  position: relative;
+  top: -100px;
+  margin-top: 0;
+  margin-bottom: -38%;
+}
+
+.slackName{
+  font-family:openSansLight;
+  color: #777;
+  font-size:2vw;
+  text-align: center;
+  margin: 0;
+}
+
+.slackChannel{
+  font-family:openSansLight;
+  color: #c0c0c0;
+  font-size:1.5vw;
+  text-align: center;
+  margin: 0;
+
+}
+
+.slackMessageHolder{
+  width: 75%;
+  float: right;
+  position: relative;
+  top: -100px;
+  font-family: openSansLight;
+  font-size: 2vw;
+  color: #777;
+  border-left: 2px solid #c0c0c0;
+  height: 100px;
+  padding-left: 5%;
+
+}
+
+#paddingBottom{
+  padding-bottom:2.5%;
+}
+
+.transparentImageHolder{
+  width: 12.5%;
+  z-index: -9;
+  float: left;
+  /* margin-right: 0.5%; */
+  /* margin-left: 3%; */
+  position: relative;
+  margin-top: 15%;
+  overflow: visible !important;
+}
+
+
+.fillingDiv0,  .fillingDiv1, .fillingDiv2, .fillingDiv3, .fillingDiv4, .fillingDiv5, .fillingDiv6, .fillingDiv7{
+  z-index: 99;
+  width: 100%;
+  position: absolute;
+  background: #009ee3;
+  bottom: 10px;
+  height: 10%;
+}
+
+#transparentWorker{
+  z-index: 999;
+  position: relative;
+  left: -8%;
+  width: 113%;
+  top: -10px;
+  display: block;
+}
+
+.subscriberCategoryHolder{
+    position: absolute;
+  width: 135%;
+  margin-left: -22%;
+  margin-right: auto;
+}
+
+.subscriberCategory{
+  font-family:openSansLight;
+  color: #777;
+  font-size: 2vw;
+  text-align: center;
+
+}
+
+.subscriberCategoryPercentage{
+  font-family:openSansBold;
+  color: #009EE3;
+  font-size: 3vw;
+  position:absolute;
+  top: -37%;
+  right: 24%;
+  text-align: center;
+}
+
+.greyFill{
+  z-index: 99;
+  width: 100%;
+  position: absolute;
+  background: #c0c0c0;
+  top: -10px;
+  height: 100%
+}
+
+.bumpUp{
+
+}
+
+.transparentCategoryHolder{
+  width:20%;
+  float: left;
+  margin:2.5%;
+  margin-top:10%;
+}
+
+.staffDistributionPercentage1, .staffDistributionPercentage2, .staffDistributionPercentage3, .staffDistributionPercentage0{
+  text-align: center;
+  font-family:openSansBold;
+  color:#78AD29;
+  font-size:3vw;
+}
+
+.staffDistributionName{
+  text-align: center;
+  font-family:openSansLight;
+  font-size: 3vw;
+}
+
+.staffSize1, .staffSize2, .staffSize3, .staffSize0{
+  width:100%;
+  -webkit-filter: hue-rotate(-113deg);
+}
+
+.clientNameHolder, .clientNameHolder2, .clientNameHolder3{
+  position:absolute;
+  top:20%;
+  right:5%;
+  width:50%;
+  font-family:openSansLight;
+  text-align: center;
+  z-index:-99;
+}
+
+.whiteZIndex{
+  position:fixed;
+  top:0;
+  left:0;
+  height:15%;
+  width:100%;
+  z-index: -9;
+  background: #fff;
+}
+
+.slider{
+
+}
+
+/* BORDERS FOR ABC123
+.level1Clients{
+  /border-top: 2px solid #009ee3;
+}
+
+
+.level2Clients{
+  border-top: 2px solid #78ad29;
+}
+
+
+.level3Clients{
+  border-top: 2px solid #f39200;
+} */
+
+.paddingBottom{
+  margin-bottom:10%;
+}
+
+.clientSpenderHolder1, .clientSpenderHolder2, .clientSpenderHolder3{
+  position: fixed;
+  top:15%;
+  left:5%;
+  height:80%;
+  width:40%;
+}
+
+.clientHappinessLevel1, .clientHappinessLevel2, .clientHappinessLevel3 {
+  font-size: 4vw;
+  font-family: openSansBold;
+  text-align:center;
+  z-index:9;
+}
+
+.clientHappinessLevel1{
+    color: #009ee3;
+}
+
+.clientHappinessLevel2{
+  color: #78Ad29;
+}
+
+.clientHappinessLevel3{
+  color: #f39200;
+}
+
+.clientRankings{
+  font-family:openSansLight;
+}
+
+.abcImageHolder{
+  width:80%;
+  height:80%;
+  position:absolute;
+  top:10%;
+  left: 10%;
+}
+
+.abcImage{
+  width:100%;
+  height: 100%;
+  z-index: -10;
+}
+
+.facialExpressionHolder{
+  position: absolute;
+  top: 0%;
+  left: 21.2%;
+  width: 20%;
+  height: 16%;
+}
+
+.facialExpressionHolder2{
+  position: absolute;
+  top: 0%;
+  left: 19.4%;
+  width: 20%;
+  height: 16%;
+}
+
+.facialExpressionHolder3{
+  position: absolute;
+  top: 0%;
+  left: 41%;
+  width: 18%;
+  height: 16%;
+}
+
+.facialExpression, .facialExpression2{
+  width: 80%;
+  height: 80%;
+  margin-top: 20%;
+  margin-left: 10%;
+  margin-right: auto;
+}
+
+.facialExpression2{
+  width:75% !important;
+  height:75% !important;
+  margin-left:14% !important;
+}
+
+.totalSynergy5SettingPages{
+  float:left;
+  margin-left:5%;
+}
+
+.lifeTimeValueSentence{
+  font-family:openSansLight;
+  font-size:5vw;
+  text-align:center;
+  margin-top:7%;
+  line-height:100%;
+}
+
+.lifeTimeValue{
+  font-family: openSansBold;
+  text-align: center;
+  color: #009ee3;
+  font-size: 11vw;
+  margin-top: 5%;
+}
+
+#lifeTimeValueChart{
+  position:absolute;
+  z-index:-1;
+  top:4%;
+  left:0;
+  right:0;
+  width: 95%;
+}
+
+.jokeName{
+  font-size: 5vw;
+  font-family: openSans;
+  text-align: center;
+  margin-top: 5%;
+}
+
+
+.joke{
+  font-size: 4vw;
+  font-family: openSansLight;
+  margin-top: 5%;
+  border-top: 2px solid #FD4602;
+  border-bottom: 2px solid #FD4602;
+  text-align:center;
+  padding:5%;
+}
+
+.redditLogo{
+  position:fixed;
+  width: 12.5%;
+  bottom: 2.5%;
+  left: 0.5%;
+}
+
+
+
+
+
+
+
+
 

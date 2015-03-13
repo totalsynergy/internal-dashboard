@@ -4,7 +4,7 @@
   "short_name": "TSD",
   "description": "Total Synergy Dashboard",
 
-  "version": "0.0.1.16",
+  "version": "0.0.2.9",
 
   "kiosk_enabled": true,
 
@@ -20,26 +20,36 @@
     }
   },
 
-
-
-
   "permissions": [
     "power",
     "webview",
     "https://www.eventbriteapi.com/",
     "storage",
     "https://beta.synergycloudapp.com/",
+    "https://beta.totalsynergy.com/",
     "https://en.gravatar.com/",
     "https://s3-us-west-2.amazonaws.com/",
     "https://secure.gravatar.com/",
-    "http://www.w3schools.com/"
+    "http://www.w3schools.com/",
+    "http://www.twitter.com",
+    "http://cdn.syndication.twimg.com/",
+    "https://platform.twitter.com/",
+    "https://instagramimages-a.akamaihd.net/",
+    "https://api.instagram.com/",
+    "http://www.google.com/",
+    "http://www.joomlaworks.net/",
+    "http://scontent-b.cdninstagram.com/",
+    "http://scontent-a.cdninstagram.com/",
+    "http://www.jokesareawesome.com/",
+    "http://www.reddit.com/"
     ],
 
   "web_accessible_resources": [
     "assets/Eventbrite feed SVG_Cube.svg",
     "assets/Eventbrite feed SVG_Logo.svg",
     "assets/Eventbrite feed SVG_Map.svg",
-    "js/d3.js"
+    "js/d3.js",
+    "https://instagramimages-a.akamaihd.net/"
     ]
 
 }

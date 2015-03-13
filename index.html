@@ -6,23 +6,11 @@
   <script type="text/javascript" src="js/angular.min.js"></script>
   <script type="text/javascript" src="js/jquery-1.11.2.js"></script>
   <script type="text/javascript" src="js/jqfloat.js"></script>
-    <script type="text/javascript" src="js/app.js"></script>
-    <script type="text/javascript" src="JSControllers/firstController.js"></script>
-    <script type="text/javascript" src="JSControllers/attendeeMapController.js"></script>
-    <script type="text/javascript" src="JSControllers/clientMap.js"></script>
-    <script type="text/javascript" src="JSControllers/cloudUsersController.js"></script>
-    <script type="text/javascript" src="JSControllers/eventCountdownController.js"></script>
-    <script type="text/javascript" src="JSControllers/gravatarController.js"></script>
-    <script type="text/javascript" src="JSControllers/helpDeskCallCategoriesController.js"></script>
-    <script type="text/javascript" src="JSControllers/helpDeskCallResponseController.js"></script>
-    <script type="text/javascript" src="JSControllers/helpDeskProgressController.js"></script>
-    <script type="text/javascript" src="JSControllers/internController.js"></script>
-    <script type="text/javascript" src="JSControllers/slackController.js"></script>
-     <script type="text/javascript" src="JSControllers/synergyVersionsController.js"></script>
-     <script type="text/javascript" src="JSControllers/settingsController.js"></script>
-     <script type="text/javascript" src="JSControllers/totalAttendeesController.js"></script>
-     <script type="text/javascript" src="JSControllers/helpDeskCallersController.js"></script>
-     <script type="text/javascript" src="JSControllers/helpDeskCloseTimeController.js"></script>
+  <script type="text/javascript" src="js/app.js"></script>
+
+  <!-- VARIOUS JS FILES USED FOR AUTOMATION/SHORTCUTS -->
+    <script src="js/kinetic-v4.4.1.min.js"></script>
+    <script src="js/heatmap.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
     <script type="text/javascript" src="js/angular-slider.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
@@ -36,6 +24,38 @@
     <script type="text/javascript" src="js/angular.audio.js"></script>
 
 
+    <!-- ALL THE MARVELLOUS CONTROLLERS BELOW -->
+    <script type="text/javascript" src="JSControllers/mainController.js"></script>
+    <script type="text/javascript" src="JSControllers/conferenceAttendeesMap.js"></script>
+    <script type="text/javascript" src="JSControllers/conferenceEventCountdownController.js"></script>
+    <script type="text/javascript" src="JSControllers/conferenceTotalAttendessController.js"></script>
+    <script type="text/javascript" src="JSControllers/developmentSlackController.js"></script>
+    <script type="text/javascript" src="JSControllers/developmentTrelloCards.js"></script>
+    <script type="text/javascript" src="JSControllers/helpDeskCallCategoriesController.js"></script>
+    <script type="text/javascript" src="JSControllers/helpDeskTopCallersController.js"></script>
+    <script type="text/javascript" src="JSControllers/helpDeskCallResponseController.js"></script>
+    <script type="text/javascript" src="JSControllers/helpDeskCloseTimeController.js"></script>
+    <script type="text/javascript" src="JSControllers/helpDeskProgressController.js"></script>
+    <script type="text/javascript" src="JSControllers/settingsController.js"></script>
+    <script type="text/javascript" src="JSControllers/synergy4AustraliaMapController.js"></script>
+    <script type="text/javascript" src="JSControllers/synergy4CloudUsersController.js"></script>
+    <script type="text/javascript" src="JSControllers/synergy4InternController.js"></script>
+    <script type="text/javascript" src="JSControllers/synergy4VersionsController.js"></script>
+    <script type="text/javascript" src="JSControllers/synergy4WorldMap.js"></script>
+    <script type="text/javascript" src="JSControllers/synergy5ClientFine.js"></script>
+    <script type="text/javascript" src="JSControllers/synergy5ClientHappy.js"></script>
+    <script type="text/javascript" src="JSControllers/synergy5ClientSad.js"></script>
+    <script type="text/javascript" src="JSControllers/synergy5StaffDistributionController.js"></script>
+    <script type="text/javascript" src="JSControllers/synergy5SubscribersController.js"></script>
+    <script type="text/javascript" src="JSControllers/synergy5TimelineController.js"></script>
+    <script type="text/javascript" src="JSControllers/synergy5TotalClientsController.js"></script>
+    <script type="text/javascript" src="JSControllers/synergy5TrialVersusActiveController.js"></script>
+    <script type="text/javascript" src="JSControllers/synergy5WorldMap.js"></script>
+    <script type="text/javascript" src="JSControllers/totalSynergyGram.js"></script>
+    <script type="text/javascript" src="JSControllers/totalSynergyGravatarController.js"></script>
+    <script type="text/javascript" src="JSControllers/totalSynergyJokeOfTheDay.js"></script>
+
+
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="angular-csp.css">
     <link rel="stylesheet" href="angular-slider.css">
@@ -43,100 +63,114 @@
     <link rel="stylesheet" href="css/bootstrap-theme.css">
     <link rel="stylesheet" href="css/nv.d3.css">
     <link rel="stylesheet" href="css/animations.css">
-
-
 </head>
 
 <body>
-<div ng-controller="FirstController" ng-init="init()">
-<img src="assets/Eventbrite feed SVG_Logo.svg" ng-show="(tab == 4 || tab == 5 || tab == 6) && tab != 99 " class="logo">
-<img src="assets/logo.png" ng-show="tab < 4 || tab  > 7" class="logo2">
+<div ng-controller="mainController" ng-init="init()">
+  <img src="assets/Eventbrite feed SVG_Logo.svg" ng-show="tab > 2 && tab < 6" class="logo">
+  <img src="assets/logo.png" ng-show="tab > 12 && tab < 18" class="logo2">
+  <img src="assets/logoSynergy5.png" ng-show="tab > 17 && tab <= 26" class="logo3">
+
+  <div class="leftButton" ng-show="tab != 99" ng-click="leftButton()">
+  </div>
+  <div class="rightButton" ng-show="tab != 99" ng-click="rightButton()">
+  </div>
+  <div class="settingsButton" ng-show="tab != 99" ng-click="settingsButtonHit()">
+  </div>
+
 </div>
 
-  <div class="leftButton" ng-controller="FirstController" ng-show="tab != 99" ng-click="leftButton()">
-
-  </div>
-  <div class="rightButton" ng-controller="FirstController" ng-show="tab != 99" ng-click="rightButton()">
-
-  </div>
-  <div class="settingsButton" ng-controller="FirstController" ng-show="tab != 99" ng-click="settingsButtonHit()">
-  </div>
-
-
-  <div class="heightController kpi pieKPI" ng-controller="FirstKPI" ng-show="tab == 1">
-      <div class="container animate" ng-show="tab == 1">
-      <div id="cloudPercentTextContainer">
-      <p id="cloudPercent">{{percentage}}%</p>
-      <p id="cloudPercentText">OF CLIENTS SYNCHRONISE<br>WITH THE CLOUD</p>
+  <div ng-controller="KPI1" class="kpi animate blueBackground throwingHundreds" ng-show="tab == 1">
+      <div class="gHolder">
+      <div id="g1">1</div>
+      <div id="g2">2</div>
+      <div id="g3">3</div>
+      <div id="g4">4</div>
+      <div id="g5">5</div>
+      <div id="g6">6</div>
+      <div id="g7">7</div>
+      <div id="g8">8</div>
+      <div id="g9">9</div>
+      <div id="g10">10</div>
+      <div id="g11">11</div>
+      <div id="g12">12</div>
+      <div id="g13">13</div>
+      <div id="g14">14</div>
+      <div id="g15">15</div>
+      <div id="g16">16</div>
+      <div id="g17">17</div>
+      <div id="g18">18</div>
+      <div id="g19">19</div>
+      <div id="g20">20</div>
+      <div id="g21">21</div>
+      <div id="g22">22</div>
+      <div id="g23">23</div>
+      <div id="g24">24</div>
+      <div id="g25">25</div>
+      <div id="g26">26</div>
+      <div id="g27">27</div>
+      <div id="g28">28</div>
       </div>
+      <img src="assets/logoWhite.svg" class="gravatarLogo"/>
+  </div>
+
+  <!-- INSTAGRAM -->
+
+  <div ng-controller="KPI2" class="kpi animate instagramController greyBackground" ng-show="tab == 2">
+    <p id="billabong">SynergyGram</p>
+    <div id="colsHolder">
+    <div class="cols">
+        <div id="firstInstagram">
+          <div id="first">
+
+          </div>
+        </div>
+        <div id="secondInstagram"></div>
       </div>
-      <div id="pieChartContainer">
-      <nvd3-pie-chart
-    	  data="pieData"
-        id="pieChart"
-        width="550"
-        height="350"
-        x="xFunction()"
-        y="yFunction()"
-        objectEquality="true"
-        color="colorFunction()">
-        <svg height="250"></svg>
-      </nvd3-pie-chart>
+      <div class="cols">
+        <div id="thirdInstagram">
+          <div id="instagramStats">
+            <p id="likesCount">{{totalImageInformation[2].likes}}</p>
+            <p id="commentsCount">{{totalImageInformation[2].comments}}</p>
+            <div id="heart"></div>
+            <div id="talkbubble"></div>
+          </div>
+          <!--<p class="caption">{{totalImageInformation[2].caption | limitTo:70}}</p> -->
+        </div>
+        <div id="fourthInstagram"></div>
+      </div>
+      <div class="cols">
+        <div id="fifthInstagram"></div>
+        <div id="sixthInstagram">
+          <div id="instagramStats">
+            <p id="likesCount">{{totalImageInformation[5].likes}}</p>
+            <p id="commentsCount">{{totalImageInformation[5].comments}}</p>
+            <div id="heart"></div>
+            <div id="talkbubble"></div>
+          </div>
+          <!--<p class="caption">{{totalImageInformation[2].caption | limitTo:70}}</p> -->
+        </div>
+      </div>
+      <div class="cols">
+        <div id="seventhInstagram">
+          <div id="instagramStats">
+            <p id="likesCount">{{totalImageInformation[6].likes}}</p>
+            <p id="commentsCount">{{totalImageInformation[6].comments}}</p>
+            <div id="heart"></div>
+            <div id="talkbubble"></div>
+          </div>
+          <!--<p class="caption">{{totalImageInformation[2].caption | limitTo:70}}</p> -->
+        </div>
+        <div id="eighthInstagram"></div>
+      </div>
     </div>
   </div>
 
-  <div ng-controller="SecondKPI" class="kpi" ng-show="tab ==2">
-    <div class="container animate" ng-show="tab == 2">
-      <div id="cloudPercentTextContainer">
-      <p id="cloudPercent">{{percentage}}%</p>
-      <p id="cloudPercentText">INTERN PRODUCTIVITY</p></p>
-      </div>
-      </div>
-      <div id="pieChartContainer">
-      <nvd3-pie-chart
-    	  data="internPieData"
-        id="internPieChart"
-        width="550"
-        height="350"
-        x="xFunction()"
-        y="yFunction()"
-        objectEquality="true"
-        color="colorFunction()">
-        <svg height="250"></svg>
-      </nvd3-pie-chart>
-    </div>
-  </div>
+  <!-- CONFERENCE TOTAL ATTENDEES -->
 
 
-  <div class="heightController kpi" ng-controller="ThirdKPI" ng-show="tab == 3">
-  <div class="container percentageHeader animate" ng-show="tab==3">
-      <div id="rows">
-         <div class="col-md-4">
-            <p id="percent">{{percentage}}%</p>
-         </div>
-         <div class="colo-md-8">
-            <p id="percentageText">OF CLIENTS ARE ON THE<br> CURRENT DESKTOP VERSION</p>
-         </div>
-      </div>
-  </div>
-  <div class="graphContainer">
-       <nvd3-discrete-bar-chart
-            data="barData"
-            id="barChart"
-            width="800"
-            height="400"
-            tooltips="false"
-            showXAxis="true"
-            showYAxis="false"
-            color="colorFunction()"
-            objectEquality="true">
-        <svg class="smallText"></svg>
-    </nvd3-discrete-bar-chart>
-    </div>
- </div>
 
-
-  <div ng-controller="FourthKPI" class="kpi animate greyBackground" ng-show="tab == 4">
+  <div ng-controller="KPI3" class="kpi animate greyBackground" ng-show="tab == 3">
   <div class="container totalAttendees">
     <img class="cube" src="assets/cubeBlank.png">
     <div class="numberOf"><p class="numberOfAttendees">{{totalAttendees}}</p></div>
@@ -148,12 +182,15 @@
     <canvas id="canvas">    </canvas>
   </div>
 
+  <!-- CONFERENCE ATTENDEE MAP -->
 
-  <div ng-controller="FifthKPI" class="kpi animate greyBackground" ng-show="tab == 5">
+
+
+  <div ng-controller="KPI4" class="kpi animate greyBackground" ng-show="tab == 4">
     <div class="greyCover"></div>
     <h1 id="confAten">CONFERENCE ATTENDEES</h1>
     <div class="my-container">
-    <img class="country" src="assets/Eventbrite feed SVG_Map.svg" alt="" />
+    <img class="country" src="assets/CONFMAPSVG.png" alt="" />
     <div class="nsw"><span>{{NSWnACT}}</span></div>
     <div class="qld"><span>{{QLD}}</span></div>
     <div class="wa"><span>{{WA}}</span></div>
@@ -167,8 +204,10 @@
   </div>
 
 
+<!-- CONFERENCE COUNTDOWN -->
 
-  <div ng-controller="SixthKPI" class="kpi animate greyBackground" ng-show="tab == 6">
+
+  <div ng-controller="KPI5" class="kpi animate greyBackground" ng-show="tab == 5">
   <div class="container greyBackground">
     <h2 class="countDownHeader">SYNERGY2015<br>COUNTDOWN</h2>
     <div class="countDown">
@@ -184,54 +223,10 @@
   </div>
 
 
-
-    <div ng-controller="SeventhKPI" class="kpi animate blueBackground throwingHundreds" ng-show="tab == 7">
-      <img src="assets/logoWhite.svg" class="gravatarLogo animate" ng-show="tab == 7">
-      <div id="gravHolder" class="rows">
-        <div class="imageHolder col-md-4">
-          <div id="gravDiv"></div>
-        </div>
-      </div>
-      <!--<webview src='{{gravatar}}' width="640" height="480"></webview>
-      {{isTrue}}
-      {{displayArray[1].photo}}
-      <div ng-repeat="image in displayArray track by $index" class="realImageContainer" >
-          index: {{$index}}
-          <div class="imageHolder" ng-if="image != null">
-            {{image.photo}}
-           <img ng-src="{{image.photo}}" class="gravatarImage"/>
-
-            <p id="nameAndShameEmployees">{{image.emailAddress}} </p>
-          </div>
-          <div class="imageHolder2" ng-if="image == null">
-            <img src="assets/transparent.png" class="gravatarImage"/>
-          </div>
-
-      </div>
-      <img src="assets/logoWhite.svg" class="gravatarLogo"/> -->
-  </div>
+  <!-- HELP DESK CALL CATEGORIES -->
 
 
-  <div ng-controller="EighthKPI" class="kpi animate" ng-show="tab == 8">
-      <h1 ng-show="tab == 8">Total Synergy Clients</h1>
-      <div class="my-container2" ng-show="tab == 8">
-      <img class="synergy4Map" src="assets/Synergy4Map.svg" alt="" />
-       <div class="total"><span>{{total}}</span></div>
-       <div class="nsw2"><span>{{NSW}}</span></div>
-       <div class="qld2"><span>{{QLD}}</span></div>
-       <div class="wa2"><span>{{WA}}</span></div>
-       <div class="nt2"><span>{{NT}}</span></div>
-       <div class="vic2"><span>{{VIC}}</span></div>
-       <div class="sa2"><span>{{SA}}</span></div>
-       <div class="act2"><span>{{ACT}}</span></div>
-       <div class="tas2"><span>{{TAS}}</span></div>
-      </div>
-      <div class="international">INTERNATIONAL</div>
-    <img class="earth" src="assets/EARTH.svg" alt=""/>
-    <div class="earthNumbers"><span>{{international}}</span></div>
-  </div>
-
-  <div ng-controller="NinthKPI" class="kpi animate" ng-show="tab == 9">
+  <div ng-controller="KPI6" class="kpi animate" ng-show="tab == 6">
       <h1>SUPPORT - BY PRODUCT LINE</h1>
       <div id="helpDeskCategoryContainer">
       <nvd3-multi-bar-horizontal-chart
@@ -262,9 +257,12 @@
       </div>
   </div>
 
-  <div ng-controller="TenthKPI" class="kpi animate hundredHeight" ng-show="tab == 10">
+  <!-- HELP DESK CALL RESPONSE TIME -->
+
+
+  <div ng-controller="KPI7" class="kpi animate hundredHeight" ng-show="tab == 7">
     <!-- CAN TURN THESE 3 INTO STACKED USING MULTIBARCHART 'STACKED MODE' ON -->
-      <h1 ng-show="tab == 10">CALL RESPONSE TIME</h1>
+      <h1 ng-show="tab == 7">CALL RESPONSE TIME</h1>
       <div id="firstChartContainer">
       <nvd3-multi-bar-chart
     	  data="data"
@@ -279,116 +277,23 @@
         stacked="true">
         	<svg></svg>
     </nvd3-multi-bar-chart>
-      <!--<nvd3-discrete-bar-chart
-    	  data="callsDataBarData3"
-        id="tenthKPIChart"
-        showXAxis="true"
-        showYAxis="true"
-        yAxisTickFormat="yAxisTickFormatFunction()"
-        xAxisTickFormat="xAxisTickFormatFunction()"
-        width="800"
-        height="400"
-        forcey="[0, {{maxY}}]"
-        objectEquality="true"
-        color="colorFunction()">
-        	<svg></svg>
-    </nvd3-discrete-bar-chart>
     </div>
-    <div id="secondChartContainer">
-    <nvd3-discrete-bar-chart
-    	  data="callsDataBarData2"
-        id="tenthKPIChart2"
-        showXAxis="false"
-        showYAxis="false"
-        width="800"
-        height="400"
-        forcey="[0,{{maxY}}]"
-        objectEquality="true"
-        color="colorFunction2()">
-        	<svg></svg>
-    </nvd3-discrete-bar-chart>
-    </div>
-    <div id="thirdChartContainer">
-    <nvd3-discrete-bar-chart
-    	  data="callsDataBarData"
-        id="tenthKPIChart3"
-        showXAxis="false"
-        showYAxis="false"
-        width="800"
-        height="400"
-        forcey="[0,{{maxY}}]"
-        objectEquality="true"
-        color="colorFunction3()">
-        	<svg></svg>
-    </nvd3-discrete-bar-chart> -->
-    </div>
-    <div id="callsLegend" ng-show="tab == 10">
+    <div id="callsLegend" ng-show="tab == 7">
       <p class="key">One Hour</p><div id="oneHourKey"></div> <p class="key">Four Hours</p><div id="fourHoursKey"></div> <p class="key">One Day</p><div id="oneDayKey"></div>
     </div>
   </div>
 
-  <div ng-controller="EleventhKPI" class="kpi animate" ng-show="tab == 11">
+
+  <!-- HELP DESK TEST PAGE -->
+
+  <div ng-controller="KPI8" class="kpi animate" ng-show="tab == 8">
 
       <h1>Help Desk Data 3</h1>
-      <!--
-      {{shorterItems}}
-      <div id="firstChartContainer">
-      <nvd3-discrete-bar-chart
-            data="data1"
-            id="firstOfTheCharts"
-            width="800"
-            height="400"
-            tooltips="false"
-            showXAxis="true"
-            showYAxis="true"
-            objectEquality="true">
-        <svg class="smallText"></svg>
-    </nvd3-discrete-bar-chart>
-    </div>
-    <div id="firstChartContainer">
-      <nvd3-discrete-bar-chart
-            data="data2"
-            id="secondOfTheCharts"
-            width="800"
-            height="400"
-            tooltips="false"
-            showXAxis="false"
-            showYAxis="false"
-            objectEquality="true">
-        <svg class="smallText"></svg>
-    </nvd3-discrete-bar-chart>
-    </div>
-    <div id="firstChartContainer">
-      <nvd3-discrete-bar-chart
-            data="data4"
-            id="fourthOfTheCharts"
-            width="800"
-            height="400"
-            tooltips="false"
-            showXAxis="false"
-            showYAxis="false"
-            objectEquality="true">
-        <svg class="smallText"></svg>
-    </nvd3-discrete-bar-chart>
-    </div>
-    <div id="firstChartContainer">
-    <nvd3-cumulative-line-chart
-		data="data3"
-	    id="thirdOfTheCharts"
-	    width="800"
-	    height="400"
-	    showXAxis="false"
-	    showYAxis="false"
-	    tooltips="false"
-	    interactive="false">
-	    <svg></svg>
-	</nvd3-cumulative-line-chart>
-	</div>
-    </div>
-    -->
   </div>
 
-  <div ng-controller="TwelthKPI" class="kpi animate" ng-show="tab == 12">
+  <!-- HELP DESK TOP CALLERS -->
+
+  <div ng-controller="KPI9" class="kpi animate" ng-show="tab == 9">
     <h1>TOP CALLERS</h1>
    <!-- Caller Stats: {{callerStats}}
     Data Test: {{progressData}} -->
@@ -415,15 +320,17 @@
         </div>
       </nvd3-multi-bar-horizontal-chart>
       </div>
-      <div id='threeMonthsDiv'>
+      <div id='threeMonthsDiv2'>
         <p class="normalThree">Top 10 Callers Made</p>
         <p class="numberOfCalls">{{percentage}}%</p>
-        <p class="normalThree">Of Total Calls</p>
+        <p class="normalThree">Of Total Calls Over Last 4 Months</p>
       </div>
   </div>
 
-  <div ng-controller="ThirteenthKPI" class="kpi animate" ng-show="tab == 13">
-    <h1>CLOSED TIMING</h1>
+  <!-- HELP DESK TIME TO CLOSE CALLS -->
+
+  <div ng-controller="KPI10" class="kpi animate" ng-show="tab == 10">
+    <h1>TOTAL TIME TO CLOSE CALLS</h1>
     <div id="weirdGraphContainer">
  	<nvd3-multi-bar-chart
     	data="data"
@@ -438,73 +345,546 @@
         	<svg></svg>
     </nvd3-multi-bar-chart>
     </div>
-    <div id="callsLegend2" ng-show="tab == 13">
+    <div id="callsLegend2" ng-show="tab == 10">
       <p class="key">One Hour</p><div id="oneHourKey"></div> <p class="key">One Day</p><div id="fourHoursKey"></div> <p class="key">More Than 3 Days</p><div id="oneDayKey"></div>
     </div>
   </div>
 
-  <div ng-controller="FourteenthKPI" class="kpi animate" ng-show="tab == 14">
-      <h1>Slack Updates</h1>
-      <div ng-repeat="message in data" class="slackHolder">
-        <div class="slackName">{{returnName(message.user)}}</div>
-        <div class="slackMessage">{{message.text}}</div>
+  <!-- DEVELOPMENT TRELLO CARDS -->
+
+    <div ng-controller="KPI11" class="kpi animate blueBackground" ng-show="tab == 11">
+    <h1 id="trello">Development</h1>
+    <div class="cardContainer">
+      <div class="cardHolder" ng-repeat="card in doingCards track by $index">
+        <div class="topDiv">
+        <div id="trello{{$index}}"></div>
+        <div class="trelloNameDiv">
+          <h3 class="trelloName">{{card.Name}}</h3>
+        </div>
+        </div>
+        <div class="bottomDiv">
+        <div class="isDoing">
+          <h3 class="trelloName2">{{card.CardName | limitTo: 49}}</h3>
+        </div>
+        </div>
+    </div>
+  </div>
+  </div>
+
+  <!--  DEVELOPMENT SLACK PAGE -->
+
+
+  <div ng-controller="KPI12" class="kpi animate greyBackground" ng-show="tab == 12">
+      <div class="container greyBackground">
+        <h1 id="paddingBottom">Development</h1>
+        <div ng-repeat="message in data track by $index">
+          <div class="slackCardHolder">
+            <div class="slackSideDetails">
+              <div id="slackGravatarHolder{{$index}}"></div>
+              <div class="slackNameChannelHolder">
+                <p class="slackName">{{returnName(message.id)}}</p>
+                <p class="slackChannel">#{{message.channelName}}</p>
+              </div>
+            </div>
+            <div class="slackMessageHolder">{{message.message}}</div>
+          </div>
+        </div>
       </div>
   </div>
+
+  <!-- SYNERGY4 CLOUD USERS -->
+
+  <div class="heightController kpi pieKPI" ng-controller="KPI13" ng-show="tab == 13">
+      <div class="container animate" ng-show="tab == 13">
+      <div id="cloudPercentTextContainer">
+      <p id="cloudPercent">{{percentage}}%</p>
+      <p id="cloudPercentText">OF CLIENTS SYNCHRONISE<br>WITH THE CLOUD</p>
+      </div>
+      </div>
+      <div id="pieChartContainer">
+      <nvd3-pie-chart
+    	  data="pieData"
+        id="pieChart"
+        width="550"
+        height="350"
+        x="xFunction()"
+        y="yFunction()"
+        objectEquality="true"
+        color="colorFunction()">
+        <svg></svg>
+      </nvd3-pie-chart>
+    </div>
+  </div>
+
+  <!-- SYNERGY 4 INTERN PRODUCTIVITY -->
+
+  <div ng-controller="KPI14" class="kpi" ng-show="tab == 14">
+    <div class="container animate" ng-show="tab == 14">
+      <div id="cloudPercentTextContainer">
+      <p id="cloudPercent">{{percentage}}%</p>
+      <p id="cloudPercentText">INTERN PRODUCTIVITY</p></p>
+      </div>
+      </div>
+      <div id="pieChartContainer">
+      <nvd3-pie-chart
+    	  data="internPieData"
+        id="internPieChart"
+        width="550"
+        height="350"
+        x="xFunction()"
+        y="yFunction()"
+        objectEquality="true"
+        color="colorFunction()">
+        <svg></svg>
+      </nvd3-pie-chart>
+    </div>
+  </div>
+
+  <!-- SYNERGY 4 DESKTOP VERSION GRAPH -->
+
+  <div class="heightController kpi" ng-controller="KPI15" ng-show="tab == 15">
+  <div class="container percentageHeader animate" ng-show="tab==15">
+      <div id="rows">
+         <div class="col-md-4">
+            <p id="percent">{{percentage}}%</p>
+         </div>
+         <div class="colo-md-8">
+            <p id="percentageText">OF CLIENTS ARE ON THE<br> CURRENT DESKTOP VERSION</p>
+         </div>
+      </div>
+  </div>
+  <div class="graphContainer">
+       <nvd3-discrete-bar-chart
+            data="barData"
+            id="barChart"
+            width="800"
+            height="400"
+            tooltips="false"
+            showXAxis="true"
+            showYAxis="false"
+            color="colorFunction()"
+            objectEquality="true">
+        <svg class="smallText"></svg>
+    </nvd3-discrete-bar-chart>
+    </div>
+ </div>
+
+
+
+  <!-- SYNERGY4 CLIENT AUSTRALIAN MAP -->
+
+  <div ng-controller="KPI16" class="kpi animate" ng-show="tab == 16">
+      <h1 ng-show="tab == 16">Total Synergy Clients</h1>
+      <div class="my-container2" ng-show="tab == 16">
+      <img class="synergy4Map" src="assets/Synergy_4_map_Map.png" alt="" />
+       <div class="total"><span>{{total}}</span></div>
+       <div class="nsw2"><span>{{NSW}}</span></div>
+       <div class="qld2"><span>{{QLD}}</span></div>
+       <div class="wa2"><span>{{WA}}</span></div>
+       <div class="nt2"><span>{{NT}}</span></div>
+       <div class="vic2"><span>{{VIC}}</span></div>
+       <div class="sa2"><span>{{SA}}</span></div>
+       <div class="act2"><span>{{ACT}}</span></div>
+       <div class="tas2"><span>{{TAS}}</span></div>
+      </div>
+      <div class="international">INTERNATIONAL</div>
+    <img class="earth" src="assets/EARTH.svg" alt=""/>
+    <div class="earthNumbers"><span>{{international}}</span></div>
+  </div>
+
+  <!-- SYNERGY 4 WORLD MAP -->
+
+
+  <div ng-controller="KPI17" class="kpi animate" ng-show="tab == 17">
+    <h1>Synergy 4 Clients</h1>
+    <div id="heatMapContainer"></div>
+  </div>
+
+  <!-- SYNERGY 5 TRIAL VERSUS ACTIVE STATS PAGE -->
+
+  <div ng-controller="KPI18" class="kpi animate" ng-show="tab == 18">
+    <div id="trialAndActive" class="animate" ng-show="tab == 18">
+    <div id="pieChartContainer2" >
+      <h2 class="clientTrialHeader">Trial</h2>
+      <div class="donutPercentageHolder2">
+            <p class="donutPercentage">{{trial}}</p>
+          </div>
+      <nvd3-pie-chart
+    	  data="pieData4"
+        id="pieChart3"
+        width="550"
+        height="350"
+        x="xFunction()"
+        y="yFunction()"
+        donut="true"
+        color="colorFunction()">
+        objectEquality="true">
+        <svg height="250"></svg>
+      </nvd3-pie-chart>
+    </div>
+
+    <div id="pieChartContainer3" ng-show="tab == 18">
+          <h2 class="clientTrialHeader2">Active</h2>
+          <div class="donutPercentageHolder1">
+            <p class="donutPercentage">{{active}}</p>
+          </div>
+      <nvd3-pie-chart
+    	  data="pieData3"
+        id="pieChart4"
+        width="550"
+        height="350"
+        x="xFunction()"
+        y="yFunction()"
+        donut="true"
+        donutLabelsOutside="true"
+        objectEquality="true"
+        color="colorFunction()">
+        <svg height="250"></svg>
+      </nvd3-pie-chart>
+    </div>
+    </div>
+    <div id="bloodyLegend">
+      <p class="bloodyLegendName">Basic</p><div id="blueDiv"></div>
+      <p class="bloodyLegendName">Professional</p><div id="greenDiv"></div>
+      <p class="bloodyLegendName">Enterprise</p><div id="orangeDiv"></div>
+    </div>
+  </div>
+
+  <!-- SYNERGY 5 TIMELINE PAGE -->
+
+  <div ng-controller="KPI19" class="kpi animate" ng-show="tab == 19"> <!-- change back when instagram page complete -->
+    <p class="lifeTimeValueSentence">
+      AVERAGE LIFETIME VALUE<br>OF SUBSCRIBER
+    </p>
+    <div ng-repeat="joke in jokes">
+      joke
+    </div>
+    <p class="lifeTimeValue">
+      $1.2 MILLION
+    </p>
+    <nvd3-line-chart
+            data="exampleData"
+            id="lifeTimeValueChart"
+            width="550"
+            height="300"
+            color = "colorFunction()"
+            showXAxis="true"
+            showYAxis="true"
+            isArea="true">
+        <svg></svg>
+     </nvd3-line-chart>
+    <!--<h1>Synergy 5 User Types</h1>
+    <div class="graphContainer2">
+    <nvd3-stacked-area-chart
+    	data="exampleData"
+        id="clientStackedChart"
+        showXAxis="false"
+        showYAxis="true"
+        showLegend="true"
+        width="800"
+        height="400">
+        	<svg></svg>
+    </nvd3-stacked-area-chart>
+    </div>
+    <div id="monthNameHolder">
+      <p id="monthNames">June</p>
+      <p id="monthNames">{month}</p>
+      <p id="monthNames">August</p>
+      <p id="monthNames">September</p>
+    </div> -->
+  </div>
+
+  <!-- SYNERGY 5 CLIENT SHAPES COUNT -->
+
+  <div ng-controller="KPI20" class="kpi animate" ng-show="tab == 20">
+    <h2 class="activeHeader">ACTIVE</h2>
+    <h2 class="trialHeader">TRIAL</h2>
+    <div class="activeCircle1">
+      <div class="circle1">
+        <p class="shapeNumbers1">{{rawNumbers[0]}}</p>
+      </div>
+    </div>
+    <div class="activeCircle2">
+      <div class="circle2">
+        <p class="shapeNumbers2">{{rawNumbers[1]}}</p>
+      </div>
+    </div>
+    <div class="activeCircle3">
+      <div class="circle3">
+        <p class="shapeNumbers3">{{rawNumbers[2]}}</p>
+      </div>
+    </div>
+    <div class="basicProfessionalEnterprise">
+      <h4 class="activeTrialMiddleText">BASIC</h4>
+      <h4 class="activeTrialMiddleText2">PROFESSIONAL</h4>
+      <h4 class="activeTrialMiddleText3">ENTERPRISE</h4>
+    </div>
+    <div class="trialSquare1">
+      <div class="square1">
+          <p class="shapeNumbers4">{{rawNumbers[3]}}</p>
+      </div>
+    </div>
+    <div class="trialSquare2">
+      <div class="square2">
+          <p class="shapeNumbers5">{{rawNumbers[4]}}</p>
+      </div>
+    </div>
+    <div class="trialSquare3">
+      <div class="square3">
+          <p class="shapeNumbers6">{{rawNumbers[5]}}</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- SYNERGY 5 WORLD MAP -->
+
+  <div ng-controller="KPI21" class="kpi animate" ng-show="tab == 21">
+    <h1>Synergy 5 Clients</h1>
+    <div id="heatMapContainer2"></div>
+  </div>
+
+  <div ng-controller="KPI22" class="kpi animate" ng-show="tab == 22">
+    <h1>Synergy 5 Industries</h1>
+    <div ng-repeat="sub in subscribers">
+      <div class="transparentImageHolder">
+        <img ng-src="assets/subscribers/{{sub.Name}}1.png" id="transparentWorker"/>
+        <div class="greyFill"></div>
+        <div class="fillingDiv{{$index}}"></div>
+        <div class="subscriberCategoryHolder">
+          <p class="subscriberCategory">{{sub.Name}}</p>
+        </div>
+        <p class="subscriberCategoryPercentage">{{sub.Percent}}%</p>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div ng-controller="KPI23" class="kpi animate" ng-show="tab == 23">
+    <h1>Synergy 5 Staff Distribution</h1>
+      <div ng-repeat="category in categories track by $index">
+        <div class="transparentCategoryHolder">
+          <p class="staffDistributionPercentage{{$index}}">{{category.Percent}}%</p>
+          <img ng-src="assets/staffSize/{{category.Name}}.png" class="staffSize{{$index}}">
+          <p class="staffDistributionName">{{category.Name}}</p>
+        </div>
+      </div>
+  </div>
+
+  <div ng-controller="KPI24" class="kpi animate" ng-show="tab == 24">
+    <h1>HAPPY CLIENTS</h1>
+    <div class="whiteZIndex"></div>
+    <div class="clientSpenderHolder1 animate" ng-show="a1">
+      <!--<h3 class="clientHappinessLevel1">A1</h3> -->
+      <div class="abcImageHolder">
+        <img src="assets/abc123/rich2.png" class="abcImage">
+        <div class="facialExpressionHolder">
+          <img src="assets/abc123/smile.png" class="facialExpression"/>
+        </div>
+      </div>
+    </div>
+    <div class="clientSpenderHolder2 animate" ng-show="a2">
+      <div class="abcImageHolder">
+        <img src="assets/abc123/midRich.png" class="abcImage" >
+        <div class="facialExpressionHolder2">
+          <img src="assets/abc123/smile.png" class="facialExpression"/>
+        </div>
+      </div>
+    </div>
+    <div class="clientSpenderHolder3 animate" ng-show="a3">
+      <div class="abcImageHolder">
+        <img src="assets/abc123/bankrupt.png" class="abcImage">
+        <div class="facialExpressionHolder3">
+          <img src="assets/abc123/smile.png" class="facialExpression"/>
+        </div>
+      </div>
+    </div>
+    <div class="clientNameHolder slider">
+      <div class="paddingBottom">
+        <h3 class="clientHappinessLevel1">A1</h3>
+      <div ng-repeat="clients in clientNames1 | limitTo: 8" class="level1Clients">
+        <h2 class="clientRankings">{{clients}}</h2>
+      </div>
+      </div>
+      <div class="paddingBottom">
+      <h3 class="clientHappinessLevel2">A2</h3>
+      <div ng-repeat="clients in clientNames2 | limitTo: 8" class="level2Clients">
+        <h2>{{clients}}</h2>
+      </div>
+      </div>
+      <h3 class="clientHappinessLevel3">A3</h3>
+      <div ng-repeat="clients in clientNames3 | limitTo: 8" class="level3Clients">
+        <h2>{{clients}}</h2>
+      </div>
+    </div>
+  </div>
+
+  <div ng-controller="KPI25" class="kpi animate" ng-show="tab == 25">
+    <h1>SATISFIED CLIENTS</h1>
+    <div class="whiteZIndex"></div>
+    <div class="clientSpenderHolder1 animate" ng-show="b1">
+      <!--<h3 class="clientHappinessLevel1">A1</h3> -->
+      <div class="abcImageHolder">
+        <img src="assets/abc123/rich2.png" class="abcImage">
+        <div class="facialExpressionHolder">
+          <img src="assets/abc123/midSmile.png" class="facialExpression"/>
+        </div>
+      </div>
+    </div>
+    <div class="clientSpenderHolder2 animate" ng-show="b2">
+      <div class="abcImageHolder">
+        <img src="assets/abc123/midRich.png" class="abcImage" >
+        <div class="facialExpressionHolder2">
+          <img src="assets/abc123/midSmile.png" class="facialExpression"/>
+        </div>
+      </div>
+    </div>
+    <div class="clientSpenderHolder3 animate" ng-show="b3">
+      <div class="abcImageHolder">
+        <img src="assets/abc123/bankrupt.png" class="abcImage">
+        <div class="facialExpressionHolder3">
+          <img src="assets/abc123/midSmile.png" class="facialExpression"/>
+        </div>
+      </div>
+    </div>
+    <div class="clientNameHolder2 slider">
+      <div class="paddingBottom">
+        <h3 class="clientHappinessLevel1">B1</h3>
+      <div ng-repeat="clients in clientNames1 | limitTo: 8" class="level1Clients">
+        <h2 class="clientRankings">{{clients}}</h2>
+      </div>
+      </div>
+      <div class="paddingBottom">
+      <h3 class="clientHappinessLevel2">B2</h3>
+      <div ng-repeat="clients in clientNames2 | limitTo: 8" class="level2Clients">
+        <h2>{{clients}}</h2>
+      </div>
+      </div>
+      <h3 class="clientHappinessLevel3">B3</h3>
+      <div ng-repeat="clients in clientNames3 | limitTo: 8" class="level3Clients">
+        <h2>{{clients}}</h2>
+      </div>
+    </div>
+  </div>
+
+  <div ng-controller="KPI26" class="kpi animate" ng-show="tab == 26">
+    <h1>UNSATISFIED CLIENTS</h1>
+    <div class="whiteZIndex"></div>
+    <div class="clientSpenderHolder1 animate" ng-show="c1">
+      <!--<h3 class="clientHappinessLevel1">A1</h3> -->
+      <div class="abcImageHolder">
+        <img src="assets/abc123/rich2.png" class="abcImage">
+        <div class="facialExpressionHolder">
+          <img src="assets/abc123/frown.png" class="facialExpression2"/>
+        </div>
+      </div>
+    </div>
+    <div class="clientSpenderHolder2 animate" ng-show="c2">
+      <div class="abcImageHolder">
+        <img src="assets/abc123/midRich.png" class="abcImage" >
+        <div class="facialExpressionHolder2">
+          <img src="assets/abc123/frown.png" class="facialExpression2"/>
+        </div>
+      </div>
+    </div>
+    <div class="clientSpenderHolder3 animate" ng-show="c3">
+      <div class="abcImageHolder">
+        <img src="assets/abc123/bankrupt.png" class="abcImage">
+        <div class="facialExpressionHolder3">
+          <img src="assets/abc123/frown.png" class="facialExpression2"/>
+        </div>
+      </div>
+    </div>
+    <div class="clientNameHolder3 slider">
+      <div class="paddingBottom">
+        <h3 class="clientHappinessLevel1">C1</h3>
+      <div ng-repeat="clients in clientNames1 | limitTo: 8" class="level1Clients">
+        <h2 class="clientRankings">{{clients}}</h2>
+      </div>
+      </div>
+      <div class="paddingBottom">
+      <h3 class="clientHappinessLevel2">C2</h3>
+      <div ng-repeat="clients in clientNames2 | limitTo: 8" class="level2Clients">
+        <h2>{{clients}}</h2>
+      </div>
+      </div>
+      <h3 class="clientHappinessLevel3">C3</h3>
+      <div ng-repeat="clients in clientNames3 | limitTo: 8" class="level3Clients">
+        <h2>{{clients}}</h2>
+      </div>
+    </div>
+  </div>
+
+  <div ng-controller="KPI27" class="kpi animate" ng-show="tab == 27">
+    <p class="jokeName">{{jokeName}}?</p>
+    <div class='container'>
+      <p class="joke">{{jokeContent}}</p>
+    </div>
+    <img src="assets/reddit.png" class="redditLogo"/>
+  </div>
+
 
 
 <!-- TO ADD A NEW KPI - INSERT AT END, ADD A VARIABLE ONTO APP.JS VARIABLE PAGES, CREATE THE RIGHT LISTENERS IN THE CONTROLLER AND MAKE TAB == WHATEVER
 CONTROLLER IT IS. FINALLY, TURN OFF CHROME LOCAL STORAGE - then SAVE PAGES. TUNR OFF APP AND TURN ON LOCAL STORAGE AGAIN + CHANGE THE BACKUP PAGES
 IN SETTINGS RESTORE-->
 
+<!-- tips
+
+  - if svg disappears this is due to animate class bug > add ng-show == whateverTabItIs to the div container of the svg
+
+-->
+
 
 
   <div ng-controller="SettingsController as settings" ng-show="tab == 99" ng-init="initSlider()">
-  <div class="container">
-    <div class="rows">
-    <h1>SETTINGS</h1>
-    </div>
-    <div class="row keyInput">
-    <p class="col-md-3 col-md-offset-3 keyText">EventBrite Key - </p>
-    <input type="text" class = "col-md-3 col-md-offset-3" ng-model="eventBriteKey" name="text" />
-    </div>
-    <div class="rows keyInput">
-    <p class="col-md-3 col-md-offset-3 keyText">TotalSynergy Key -</p>
-    <input type="text" class = "col-md-3 col-md-offset-3" ng-model="totalSynergyKey" name="text" />
-    </div>
-    <div class="rows keyInput">
-    <p class="col-md-3 col-md-offset-3 keyText">Slack Key -</p>
-    <input type="text" class = "col-md-3 col-md-offset-3" ng-model="slackKey" name="text" />
-    </div>
-    </div>
-    <p class="pageSelected">Pages Selected</p>
-    <div class="rows pageContainer">
-      <div ng-repeat="page in pages">
-        <div class="col-md-4 col-lg-4 pageName">
-          <input type="checkbox" name="page.name" value="page.name" ng-checked="page.isSelected" ng-click="turnOffPage(page)">{{"  " + page.name}}</input>
+    <div class="container">
+      <h1>Settings</h1>
+      <div class="paddingTop">
+        <h2><span class="label label-default">Master Key</span></h2>
+        <input type="text" class="form-control" id="inputEmail3" ng-model="masterKey" placeholder="Update Keys With Daily Code" name="text">
+      </div>
+      <div  class="paddingTop">
+        <div class="totalSynergy5SettingPages">
+          <h2>Synergy 5</h2>
+          <div ng-repeat="page in pages" ng-if="$index > 16 && $index < 26">
+            <input type="checkbox" name="page.name" value="page.name" ng-checked="page.isSelected" ng-click="turnOffPage(page)">{{"  " + page.name}}</input>
+          </div>
         </div>
+        <div class="totalSynergy5SettingPages">
+          <h2>Synergy 4</h2>
+          <div ng-repeat="page in pages" ng-if="$index > 11 && $index < 17">
+            <input type="checkbox" name="page.name" value="page.name" ng-checked="page.isSelected" ng-click="turnOffPage(page)">{{"  " + page.name}}</input>
+          </div>
+        </div>
+        <div class="totalSynergy5SettingPages">
+          <h2>Call Desk</h2>
+          <div ng-repeat="page in pages" ng-if="$index > 4 && $index <= 9">
+            <input type="checkbox" name="page.name" value="page.name" ng-checked="page.isSelected" ng-click="turnOffPage(page)">{{"  " + page.name}}</input>
+          </div>
+        </div>
+        <div class="totalSynergy5SettingPages">
+          <h2>Other</h2>
+          <div ng-repeat="page in pages" ng-if="$index <= 4 || ($index > 9 && $index < 12) || $index > 25">
+            <input type="checkbox" name="page.name" value="page.name" ng-checked="page.isSelected" ng-click="turnOffPage(page)">{{"  " + page.name}}</input>
+          </div>
+        </div>
+      <!--<div ng-repeat="page in pages">
+        <div class="col-md-3">
+            <input type="checkbox" name="page.name" value="page.name" ng-checked="page.isSelected" ng-click="turnOffPage(page)">{{"  " + page.name}}</input>
+        </div>
+      </div> -->
+      </div>
+      <div class="speedHolder">
+        <h2 class="speed">Speed: {{speed/1000}} seconds</h2>
+        <slider floor="1000" ceiling="30000" step="1000" ng-model="speed"></slider>
+      </div>
+      <div class="buttonHolder">
+        <button type="button" class="btn btn-primary btn-lg active" ng-click="save()">Save</button>
+        <button type="button" class="btn btn-default btn-lg active" ng-click="settingsClose()"/>Exit</button>
+        <button type="button" class="btn btn-default btn-lg active" ng-click="restoreDefaults()">Restore</button>
       </div>
     </div>
-    <div class="pageContainer">
-    <div class="col md-12">
-    <p class="speed">Speed: {{speed/1000}} seconds</p>
-    <slider floor="1000" ceiling="30000" step="1000" ng-model="speed"></slider>
     </div>
-    </div>
-    <div class="rows pageContainer">
-      <div class="saveNExit">
-          <input type="submit" value="Save" id="save" ng-click="save()"/>
-          <input type="submit" value="Exit" id="save" ng-click="settingsClose()"/>
-          <input type="submit" value="Restore" id="restore" ng-click="restoreDefaults()"/>
-      </div>
-    </div>
-  </div>
-  </div>
-<!--<div class="error-popover" style="display:block; position:absolute; bottom: 100px;">
-  <img alt="blahblah" src="//secure.gravatar.com/avatar/4ba08eadef37b5a2ae8e9949ca726bc8?s=300&d=mm"/>
-  <section ng-repeat="error in errorList">
-  <textarea class="error-message">{{error.message}}</textarea>
-  </section>
-</div> -->
-
-
 </body>

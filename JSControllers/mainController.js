@@ -1,4 +1,4 @@
-app.controller('FirstController', function($scope, Service, $interval, $timeout, ngAudio){
+app.controller('mainController', function($scope, Service, $interval, $timeout, ngAudio){
     var time = 1;
     var counter = 1;
     $scope.speed = 1000;
@@ -9,6 +9,7 @@ app.controller('FirstController', function($scope, Service, $interval, $timeout,
     $scope.amountOfPages = $scope.pages.length;
     $scope.myTimeout = null;
     $scope.timerBoolean = false;
+    $scope.timer;
     var timer = $timeout($scope.onTimeout, $scope.speed);
 
   //fix this loop
@@ -26,7 +27,7 @@ app.controller('FirstController', function($scope, Service, $interval, $timeout,
 
     chrome.storage.local.get(null, function(result){
       if(result.pages != null)
-      Service.updateKeys(result.eventBriteKey, result.totalSynergyKey, result.slackKey, result.speed, result.pages);
+      Service.updateKeys(result.eventBriteKey, result.totalSynergyKey, result.slackKey,  result.trelloKeys, result.synergy5Keys, result.speed, result.pages);
     });
 
     function getTab(){
@@ -53,43 +54,43 @@ app.controller('FirstController', function($scope, Service, $interval, $timeout,
     $scope.onTimeout = function(){
       if($scope.tab != 99){
         goRight();
-        //$scope.sound.play();
       }
-      timer = $timeout($scope.onTimeout, $scope.speed);
+      $scope.timer = $timeout($scope.onTimeout, $scope.speed);
     }
 
 
     $scope.loop = function(){
+      //console.log("IN THE LOOP");
       if($scope.tab != 99)
         goRight();
-      timer = $timeout($scope.loop, $scope.speed);
+      //console.log("Speed: " + $scope.speed);
+      $scope.timer = $timeout($scope.loop, $scope.speed);
       //
     }
 
-    $timeout.cancel($scope.myTimeout);
 
     $scope.$on('selectedUpdated', function(){
       $scope.pages = Service.pages;
     })
-
-    $scope.$on('$destroy', function( event ) {
-        $timeout.cancel(timer);
-     });
-
+/*
     $scope.settingsHit = function(){
+      console.log("SETTINS HIT");
      // $scope.tab = 99;
       //counter = 6;
       Service.updateTab(99);
-      $scope.loop();
+      //$scope.loop();
+      //$timeout.cancel($scope.timer);
     }
-
+ */
     $scope.settingsClose = function(){
-      $scope.updateTab(counter);
+      //$scope.updateTab(counter);
+      //$scope.loop();
     }
 
     $scope.$on('settingsClosed', function(){
-
-      //$scope.loop;
+      //console.log("MAIN CONTROLER PICKEDUP CLOSED");
+      $timeout.cancel($scope.timer);
+      $scope.loop();
     })
 
     $scope.$on('tabUpdated', function(){
@@ -127,12 +128,15 @@ app.controller('FirstController', function($scope, Service, $interval, $timeout,
         else
           nextPage++;
       }
-      Service.updateTab(nextPage);
-      $scope.$broadcast('change');
-      $timeout.cancel(timer);
+      //Below is nextPage - 1 instead of nextPage to combat the need to re-enter the loop (which autmatically gosRight()
+      Service.updateTab(nextPage-1);
+      //$scope.$broadcast('change');
+      $timeout.cancel($scope.timer);
+      $scope.loop();
     }
 
     function goRight(){
+      //console.log("goRight()");
       var nextPage = $scope.tab + 1;
       while(nextPage <= $scope.pages.length + 2){
         if(nextPage > $scope.pages.length)
@@ -143,43 +147,14 @@ app.controller('FirstController', function($scope, Service, $interval, $timeout,
           nextPage++;
       }
       Service.updateTab(nextPage);
-      //$scope.newTime;
     }
 
-
-
-    $scope.leftButtonHit = function(){
-      //if not on settings page
-      var nextPage = $scope.tab - 1;
-      while(pages[nextPage - 1].isSelected = false || nextPage >= 0){
-        if(nextPage == 0)
-          nextPage = pages.length;
-        else
-          nextPage--;
-      }
-      $timeout.cancel($scope.myTimeout);
-      Service.updateTab(nextPage);
-
-
-      //if(counter == 1)
-      //  Service.updateTab(pages.length);
-      //else
-      //  Service.updateTab(counter - 1);
-    }
-
-    $scope.rightButtonHit = function(){
-      //if not on settings page
-      if(counter == pages.length)
-        Service.updateTab(1);
-      else
-        Service.updateTab(counter + 1);
-      $scope.timerBoolean = true;
-    }
 
     $scope.settingsButtonHit = function(){
       Service.updateTab(99);
       $scope.speed = parseInt($scope.speed);
       Service.updateSpeed($scope.speed);
+      $timeout.cancel($scope.timer);
     }
 
     $scope.$on('speedUpdated', function(){

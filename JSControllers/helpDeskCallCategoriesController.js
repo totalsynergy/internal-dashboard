@@ -1,7 +1,8 @@
-app.controller('NinthKPI', function($scope, Service, $http, gravatarService){
+app.controller('KPI6', function($scope, Service, $http, gravatarService){
     $scope.stat = "";
     $scope.your_email = "adamhannigan@hotmail.com";
     $scope.unknown = [];
+    $scope.count = 0;
     $scope.categories = [];
     $scope.barData = [];
     $scope.blankData = [];
@@ -52,17 +53,25 @@ app.controller('NinthKPI', function($scope, Service, $http, gravatarService){
 
     $scope.$on('tabUpdated', function(){
       $scope.tab = Service.tab;
-      if(Service.tab == 9){
+      if(Service.tab == 6){
         $scope.barData = $scope.recoveryData;
       }
-      else if(Service.tab != 8 && Service.tab != 10){
+      else if(Service.tab != 7 && Service.tab != 5){
         $scope.barData = $scope.blankData;
       }
     });
 
     $scope.$on('keysUpdated', function(){
       $scope.totalSynergyKey = Service.totalSynergyKey;
-      weGotKey();
+      if($scope.count == 0){
+        weGotKey();
+        $scope.count++;
+      }
+    })
+
+    $scope.$on('fetchCallsData', function(){
+      if($scope.count > 0)
+        weGotKey();
     })
 
 
