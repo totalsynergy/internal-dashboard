@@ -41,7 +41,11 @@ app.controller('KPI20', function($scope, Service, ngAudio, $http){
         $(divNames[i]).css("height", 60*proportion + "%");
         $(divNames[i]).css("width", 50*proportion + "%");
         //$(".shapeNumbers" + (i + 1) ).css("margin-top", -50*proportion + "%"); //half of height
+<<<<<<< HEAD
         $(shapeNumberNames[i]).css({"font-size": 5*proportion + "vw"}); //half of height
+=======
+        $(shapeNumberNames[i]).css({"font-size": 7*proportion + "vw"}); //half of height
+>>>>>>> origin/master
         $(divNames[i]).css("margin-top", -25*proportion + "%"); //half of height
         if(numbers[i] == 0)
           $(divNames[i]).css("background","#ffffff");

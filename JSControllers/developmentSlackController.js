@@ -23,6 +23,10 @@
 
 
     function weGotKey(){
+<<<<<<< HEAD
+=======
+      //https://slack.com/api/channels.list?token=xoxp-2778174876-3184954930-3668145319-e5c1ea&pretty=1
+>>>>>>> origin/master
       $http.get("https://slack.com/api/channels.list?token=xoxp-2778174876-3184954930-3668145319-e5c1ea&pretty=1")
       .success(function(data){
         var channelList = data.channels;
@@ -36,6 +40,10 @@
 
     function fetchRightChannels(list){
       for(var i = 0; i <  list.length; i++){
+<<<<<<< HEAD
+=======
+        //CHANGE THE FILTER HERE FOR WHICH CHANNELS TO FETCH
+>>>>>>> origin/master
         if(list[i].name == 'random')
           fetchChannelHistory(list[i].id, list[i].name);
       }

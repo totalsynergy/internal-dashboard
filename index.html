@@ -53,7 +53,10 @@
     <script type="text/javascript" src="JSControllers/synergy5WorldMap.js"></script>
     <script type="text/javascript" src="JSControllers/totalSynergyGram.js"></script>
     <script type="text/javascript" src="JSControllers/totalSynergyGravatarController.js"></script>
+<<<<<<< HEAD
     <script type="text/javascript" src="JSControllers/totalSynergyJokeOfTheDay.js"></script>
+=======
+>>>>>>> origin/master
 
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -184,8 +187,13 @@
 
   <!-- CONFERENCE ATTENDEE MAP -->
 
+<<<<<<< HEAD
 
 
+=======
+
+
+>>>>>>> origin/master
   <div ng-controller="KPI4" class="kpi animate greyBackground" ng-show="tab == 4">
     <div class="greyCover"></div>
     <h1 id="confAten">CONFERENCE ATTENDEES</h1>
@@ -205,8 +213,13 @@
 
 
 <!-- CONFERENCE COUNTDOWN -->
+<<<<<<< HEAD
 
 
+=======
+
+
+>>>>>>> origin/master
   <div ng-controller="KPI5" class="kpi animate greyBackground" ng-show="tab == 5">
   <div class="container greyBackground">
     <h2 class="countDownHeader">SYNERGY2015<br>COUNTDOWN</h2>
@@ -495,8 +508,15 @@
   <!-- SYNERGY 4 WORLD MAP -->
 
 
+<<<<<<< HEAD
   <div ng-controller="KPI17" class="kpi animate" ng-show="tab == 17">
     <h1>Synergy 4 Clients</h1>
+=======
+
+  <div ng-controller="KPI17" class="kpi animate" ng-show="tab == 17">
+    <h1>Synergy 4 Clients</h1>
+
+>>>>>>> origin/master
     <div id="heatMapContainer"></div>
   </div>
 
@@ -506,9 +526,13 @@
     <div id="trialAndActive" class="animate" ng-show="tab == 18">
     <div id="pieChartContainer2" >
       <h2 class="clientTrialHeader">Trial</h2>
+<<<<<<< HEAD
       <div class="donutPercentageHolder2">
             <p class="donutPercentage">{{trial}}</p>
           </div>
+=======
+      <p class="donutPercentage">{{trial}}</p>
+>>>>>>> origin/master
       <nvd3-pie-chart
     	  data="pieData4"
         id="pieChart3"
@@ -521,6 +545,7 @@
         objectEquality="true">
         <svg height="250"></svg>
       </nvd3-pie-chart>
+<<<<<<< HEAD
     </div>
 
     <div id="pieChartContainer3" ng-show="tab == 18">
@@ -629,6 +654,111 @@
           <p class="shapeNumbers5">{{rawNumbers[4]}}</p>
       </div>
     </div>
+=======
+    </div>
+
+    <div id="pieChartContainer3" ng-show="tab == 18">
+          <h2 class="clientTrialHeader2">Active</h2>
+          <p class="donutPercentage2">{{active}}</p>
+      <nvd3-pie-chart
+    	  data="pieData3"
+        id="pieChart4"
+        width="550"
+        height="350"
+        x="xFunction()"
+        y="yFunction()"
+        donut="true"
+        donutLabelsOutside="true"
+        objectEquality="true"
+        color="colorFunction()">
+        <svg height="250"></svg>
+      </nvd3-pie-chart>
+    </div>
+    </div>
+    <div id="bloodyLegend">
+      <p class="bloodyLegendName">Basic</p><div id="blueDiv"></div>
+      <p class="bloodyLegendName">Professional</p><div id="greenDiv"></div>
+      <p class="bloodyLegendName">Enterprise</p><div id="orangeDiv"></div>
+    </div>
+  </div>
+
+  <!-- SYNERGY 5 TIMELINE PAGE -->
+
+  <div ng-controller="KPI19" class="kpi animate" ng-show="tab == 19"> <!-- change back when instagram page complete -->
+    <p class="lifeTimeValueSentence">
+      AVERAGE LIFETIME VALUE<br>OF SUBSCRIBER
+    </p>
+    <p class="lifeTimeValue">
+      $1.2 MILLION
+    </p>
+    <nvd3-line-chart
+            data="exampleData"
+            id="lifeTimeValueChart"
+            width="550"
+            height="300"
+            color = "colorFunction()"
+            showXAxis="true"
+            showYAxis="true"
+            isArea="true">
+        <svg></svg>
+     </nvd3-line-chart>
+    <!--<h1>Synergy 5 User Types</h1>
+    <div class="graphContainer2">
+    <nvd3-stacked-area-chart
+    	data="exampleData"
+        id="clientStackedChart"
+        showXAxis="false"
+        showYAxis="true"
+        showLegend="true"
+        width="800"
+        height="400">
+        	<svg></svg>
+    </nvd3-stacked-area-chart>
+    </div>
+    <div id="monthNameHolder">
+      <p id="monthNames">June</p>
+      <p id="monthNames">{month}</p>
+      <p id="monthNames">August</p>
+      <p id="monthNames">September</p>
+    </div> -->
+  </div>
+
+  <!-- SYNERGY 5 CLIENT SHAPES COUNT -->
+
+  <div ng-controller="KPI20" class="kpi animate" ng-show="tab == 20">
+    <h2 class="activeHeader">ACTIVE</h2>
+    <h2 class="trialHeader">TRIAL</h2>
+    <div class="activeCircle1">
+      <div class="circle1">
+        <p class="shapeNumbers1">{{rawNumbers[0]}}</p>
+      </div>
+    </div>
+    <div class="activeCircle2">
+      <div class="circle2">
+        <p class="shapeNumbers2">{{rawNumbers[1]}}</p>
+      </div>
+    </div>
+    <div class="activeCircle3">
+      <div class="circle3">
+        <p class="shapeNumbers3">{{rawNumbers[2]}}</p>
+      </div>
+    </div>
+    <div class="basicProfessionalEnterprise">
+      <h4 class="activeTrialMiddleText">BASIC</h4>
+      <h4 class="activeTrialMiddleText2">PROFESSIONAL</h4>
+      <h4 class="activeTrialMiddleText3">ENTERPRISE</h4>
+    </div>
+    <div class="trialSquare1">
+      <div class="square1">
+          <p class="shapeNumbers4">{{rawNumbers[3]}}</p>
+      </div>
+    </div>
+    <div class="trialSquare2">
+      <div class="square2">
+          <p class="shapeNumbers5">{{rawNumbers[4]}}</p>
+      </div>
+    </div>
+>>>>>>> origin/master
     <div class="trialSquare3">
       <div class="square3">
           <p class="shapeNumbers6">{{rawNumbers[5]}}</p>
@@ -653,6 +783,7 @@
         <div class="fillingDiv{{$index}}"></div>
         <div class="subscriberCategoryHolder">
           <p class="subscriberCategory">{{sub.Name}}</p>
+<<<<<<< HEAD
         </div>
         <p class="subscriberCategoryPercentage">{{sub.Percent}}%</p>
       </div>
@@ -681,9 +812,42 @@
         <img src="assets/abc123/rich2.png" class="abcImage">
         <div class="facialExpressionHolder">
           <img src="assets/abc123/smile.png" class="facialExpression"/>
+=======
+>>>>>>> origin/master
+        </div>
+        <p class="subscriberCategoryPercentage">{{sub.Percent}}%</p>
+      </div>
+    </div>
+<<<<<<< HEAD
+=======
+  </div>
+
+
+
+  <div ng-controller="KPI23" class="kpi animate" ng-show="tab == 23">
+    <h1>Synergy 5 Staff Distribution</h1>
+      <div ng-repeat="category in categories track by $index">
+        <div class="transparentCategoryHolder">
+          <p class="staffDistributionPercentage{{$index}}">{{category.Percent}}%</p>
+          <img ng-src="assets/staffSize/{{category.Name}}.png" class="staffSize{{$index}}">
+          <p class="staffDistributionName">{{category.Name}}</p>
+        </div>
+      </div>
+  </div>
+
+  <div ng-controller="KPI24" class="kpi animate" ng-show="tab == 24">
+    <h1>HAPPY CLIENTS</h1>
+    <div class="whiteZIndex"></div>
+    <div class="clientSpenderHolder1 animate" ng-show="a1">
+      <!--<h3 class="clientHappinessLevel1">A1</h3> -->
+      <div class="abcImageHolder">
+        <img src="assets/abc123/rich2.png" class="abcImage">
+        <div class="facialExpressionHolder">
+          <img src="assets/abc123/smile.png" class="facialExpression"/>
         </div>
       </div>
     </div>
+>>>>>>> origin/master
     <div class="clientSpenderHolder2 animate" ng-show="a2">
       <div class="abcImageHolder">
         <img src="assets/abc123/midRich.png" class="abcImage" >
@@ -691,6 +855,20 @@
           <img src="assets/abc123/smile.png" class="facialExpression"/>
         </div>
       </div>
+<<<<<<< HEAD
+    </div>
+    <div class="clientSpenderHolder3 animate" ng-show="a3">
+      <div class="abcImageHolder">
+        <img src="assets/abc123/bankrupt.png" class="abcImage">
+        <div class="facialExpressionHolder3">
+          <img src="assets/abc123/smile.png" class="facialExpression"/>
+        </div>
+      </div>
+    </div>
+    <div class="clientNameHolder slider">
+      <div class="paddingBottom">
+        <h3 class="clientHappinessLevel1">A1</h3>
+=======
     </div>
     <div class="clientSpenderHolder3 animate" ng-show="a3">
       <div class="abcImageHolder">
@@ -751,17 +929,115 @@
     <div class="clientNameHolder2 slider">
       <div class="paddingBottom">
         <h3 class="clientHappinessLevel1">B1</h3>
+>>>>>>> origin/master
       <div ng-repeat="clients in clientNames1 | limitTo: 8" class="level1Clients">
         <h2 class="clientRankings">{{clients}}</h2>
       </div>
       </div>
       <div class="paddingBottom">
+<<<<<<< HEAD
+      <h3 class="clientHappinessLevel2">A2</h3>
+=======
       <h3 class="clientHappinessLevel2">B2</h3>
+>>>>>>> origin/master
       <div ng-repeat="clients in clientNames2 | limitTo: 8" class="level2Clients">
         <h2>{{clients}}</h2>
       </div>
       </div>
+<<<<<<< HEAD
+      <h3 class="clientHappinessLevel3">A3</h3>
+=======
       <h3 class="clientHappinessLevel3">B3</h3>
+>>>>>>> origin/master
+      <div ng-repeat="clients in clientNames3 | limitTo: 8" class="level3Clients">
+        <h2>{{clients}}</h2>
+      </div>
+    </div>
+  </div>
+
+<<<<<<< HEAD
+  <div ng-controller="KPI25" class="kpi animate" ng-show="tab == 25">
+    <h1>SATISFIED CLIENTS</h1>
+    <div class="whiteZIndex"></div>
+    <div class="clientSpenderHolder1 animate" ng-show="b1">
+=======
+  <div ng-controller="KPI26" class="kpi animate" ng-show="tab == 26">
+    <h1>UNSATISFIED CLIENTS</h1>
+    <div class="whiteZIndex"></div>
+    <div class="clientSpenderHolder1 animate" ng-show="c1">
+>>>>>>> origin/master
+      <!--<h3 class="clientHappinessLevel1">A1</h3> -->
+      <div class="abcImageHolder">
+        <img src="assets/abc123/rich2.png" class="abcImage">
+        <div class="facialExpressionHolder">
+<<<<<<< HEAD
+          <img src="assets/abc123/midSmile.png" class="facialExpression"/>
+        </div>
+      </div>
+    </div>
+    <div class="clientSpenderHolder2 animate" ng-show="b2">
+      <div class="abcImageHolder">
+        <img src="assets/abc123/midRich.png" class="abcImage" >
+        <div class="facialExpressionHolder2">
+          <img src="assets/abc123/midSmile.png" class="facialExpression"/>
+        </div>
+      </div>
+    </div>
+    <div class="clientSpenderHolder3 animate" ng-show="b3">
+      <div class="abcImageHolder">
+        <img src="assets/abc123/bankrupt.png" class="abcImage">
+        <div class="facialExpressionHolder3">
+          <img src="assets/abc123/midSmile.png" class="facialExpression"/>
+        </div>
+      </div>
+    </div>
+    <div class="clientNameHolder2 slider">
+      <div class="paddingBottom">
+        <h3 class="clientHappinessLevel1">B1</h3>
+=======
+          <img src="assets/abc123/frown.png" class="facialExpression2"/>
+        </div>
+      </div>
+    </div>
+    <div class="clientSpenderHolder2 animate" ng-show="c2">
+      <div class="abcImageHolder">
+        <img src="assets/abc123/midRich.png" class="abcImage" >
+        <div class="facialExpressionHolder2">
+          <img src="assets/abc123/frown.png" class="facialExpression2"/>
+        </div>
+      </div>
+    </div>
+    <div class="clientSpenderHolder3 animate" ng-show="c3">
+      <div class="abcImageHolder">
+        <img src="assets/abc123/bankrupt.png" class="abcImage">
+        <div class="facialExpressionHolder3">
+          <img src="assets/abc123/frown.png" class="facialExpression2"/>
+        </div>
+      </div>
+    </div>
+    <div class="clientNameHolder3 slider">
+      <div class="paddingBottom">
+        <h3 class="clientHappinessLevel1">C1</h3>
+>>>>>>> origin/master
+      <div ng-repeat="clients in clientNames1 | limitTo: 8" class="level1Clients">
+        <h2 class="clientRankings">{{clients}}</h2>
+      </div>
+      </div>
+      <div class="paddingBottom">
+<<<<<<< HEAD
+      <h3 class="clientHappinessLevel2">B2</h3>
+=======
+      <h3 class="clientHappinessLevel2">C2</h3>
+>>>>>>> origin/master
+      <div ng-repeat="clients in clientNames2 | limitTo: 8" class="level2Clients">
+        <h2>{{clients}}</h2>
+      </div>
+      </div>
+<<<<<<< HEAD
+      <h3 class="clientHappinessLevel3">B3</h3>
+=======
+      <h3 class="clientHappinessLevel3">C3</h3>
+>>>>>>> origin/master
       <div ng-repeat="clients in clientNames3 | limitTo: 8" class="level3Clients">
         <h2>{{clients}}</h2>
       </div>
@@ -816,6 +1092,7 @@
     </div>
   </div>
 
+<<<<<<< HEAD
   <div ng-controller="KPI27" class="kpi animate" ng-show="tab == 27">
     <p class="jokeName">{{jokeName}}?</p>
     <div class='container'>
@@ -825,6 +1102,8 @@
   </div>
 
 
+=======
+>>>>>>> origin/master
 
 <!-- TO ADD A NEW KPI - INSERT AT END, ADD A VARIABLE ONTO APP.JS VARIABLE PAGES, CREATE THE RIGHT LISTENERS IN THE CONTROLLER AND MAKE TAB == WHATEVER
 CONTROLLER IT IS. FINALLY, TURN OFF CHROME LOCAL STORAGE - then SAVE PAGES. TUNR OFF APP AND TURN ON LOCAL STORAGE AGAIN + CHANGE THE BACKUP PAGES
@@ -866,7 +1145,11 @@ IN SETTINGS RESTORE-->
         </div>
         <div class="totalSynergy5SettingPages">
           <h2>Other</h2>
+<<<<<<< HEAD
           <div ng-repeat="page in pages" ng-if="$index <= 4 || ($index > 9 && $index < 12) || $index > 25">
+=======
+          <div ng-repeat="page in pages" ng-if="$index >= 0 && $index <= 4 || ($index > 9 && $index < 12)">
+>>>>>>> origin/master
             <input type="checkbox" name="page.name" value="page.name" ng-checked="page.isSelected" ng-click="turnOffPage(page)">{{"  " + page.name}}</input>
           </div>
         </div>

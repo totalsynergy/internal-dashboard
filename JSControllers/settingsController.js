@@ -31,6 +31,7 @@
     })
 
     $scope.save = function(){
+<<<<<<< HEAD
       if($scope.masterKey != ''){
         $http({
            url: 'https://beta.synergycloudapp.com/totalsynergy/InternalKpi/Home/keys?codefortoday=' + $scope.masterKey,
@@ -49,6 +50,24 @@
       }
       saveSpeedAndPages();
       Service.savePagesAndSpeed($scope.pages, $scope.speed);
+=======
+      $http({
+         url: 'https://beta.synergycloudapp.com/totalsynergy/InternalKpi/Home/keys?codefortoday=' + $scope.masterKey,
+         method: 'GET'
+         }).success(function(d, status, headers, config){
+           $scope.masterKey = 'Key Worked'
+           if(d.data != null)
+            arrangeKeys(d.data);
+           else{
+            $scope.masterKey = "Incorrect Key";
+            saveSpeedAndPages();
+           }
+         })
+        .error(function(data, status, headers, config){
+           $scope.masterKey = 'Incorrect Key';
+        });
+        Service.savePagesAndSpeed($scope.pages, $scope.speed);
+>>>>>>> origin/master
     }
 
     function arrangeKeys(data){
@@ -115,7 +134,11 @@
 
 
     var restorePages = [
+<<<<<<< HEAD
       {"name" : "Totaltest Synergy Gravatar", "isSelected" : false},
+=======
+      {"name" : "Total Synergy Gravatar", "isSelected" : false},
+>>>>>>> origin/master
       {"name" : "Total SynergyGram", "isSelected" : false},
       {"name" : "Conference Total Attendees", "isSelected" : true},
       {"name" : "Conference Attendee Map", "isSelected" : true},
@@ -140,8 +163,12 @@
       {"name" : "Synergy 5 Staff Distribution", "isSelected" : false},
       {"name" : "Synergy 5 Client Happy", "isSelected" : false},
       {"name" : "Synergy 5 Client Fine", "isSelected" : false},
+<<<<<<< HEAD
       {"name" : "Synergy 5 Client Sad", "isSelected" : false},
       {"name" : "Joke of The Day", "isSelected" : false}
+=======
+      {"name" : "Synergy 5 Client Sad", "isSelected" : false}
+>>>>>>> origin/master
     ];
 
   });

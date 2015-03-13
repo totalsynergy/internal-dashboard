@@ -132,7 +132,11 @@
     var speed = 15000;
 
     var pages = [
+<<<<<<< HEAD
       {"name" : "Totaltest Synergy Gravatar", "isSelected" : false},
+=======
+      {"name" : "Total Synergy Gravatar", "isSelected" : false},
+>>>>>>> origin/master
       {"name" : "Total SynergyGram", "isSelected" : false},
       {"name" : "Conference Total Attendees", "isSelected" : true},
       {"name" : "Conference Attendee Map", "isSelected" : true},
@@ -157,8 +161,12 @@
       {"name" : "Synergy 5 Staff Distribution", "isSelected" : false},
       {"name" : "Synergy 5 Client Happy", "isSelected" : false},
       {"name" : "Synergy 5 Client Fine", "isSelected" : false},
+<<<<<<< HEAD
       {"name" : "Synergy 5 Client Sad", "isSelected" : false},
       {"name" : "Joke of The Day", "isSelected" : false}
+=======
+      {"name" : "Synergy 5 Client Sad", "isSelected" : false}
+>>>>>>> origin/master
     ];
 
     var tabOpen = 4;

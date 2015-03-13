@@ -8,6 +8,10 @@ app.controller('KPI2', function($scope, Service, ngAudio, $http){
 
     $scope.$on('tabUpdated', function(){
       $scope.tab = Service.tab;
+<<<<<<< HEAD
+=======
+      //weGotKey();
+>>>>>>> origin/master
     });
 
     $scope.$on('keysUpdated', function(){
@@ -17,6 +21,12 @@ app.controller('KPI2', function($scope, Service, ngAudio, $http){
 
     $scope.$on('fetchEventData', function(){
       getInstagramImage();
+<<<<<<< HEAD
+=======
+      //console.log('Fetching Data for insta');
+      //pickNumbers();
+      //pickDecisiveNumbers();
+>>>>>>> origin/master
     })
 
 
@@ -45,13 +55,28 @@ app.controller('KPI2', function($scope, Service, ngAudio, $http){
       $scope.imageUrls = [];
       $http.get("https://api.instagram.com/v1/users/598377249/media/recent/?client_id=89b41cbb03d149c4af0e7d39e2026f78")
       .success(function(data){
+<<<<<<< HEAD
         $scope.data = data;
+=======
+        console.log("We got insta");
+        $scope.data = data;
+        //console.log($scope.singleImage);
+>>>>>>> origin/master
         var limit = 8;
         pickInstagramImages(data.data.length);
         for(var i =0; i < limit; i++){
           var number = $scope.randomNumbers[i];
+<<<<<<< HEAD
             var object = {"caption" : data.data[number].caption.text, "likes" : data.data[number].likes.count, "image" : data.data[number].images.low_resolution.url, "comments" : data.data[number].comments.count, "tags" : data.data[number].tags};
             $scope.totalImageInformation.push(object);
+=======
+          //if(data.data[number].type != 'video'){
+            var object = {"caption" : data.data[number].caption.text, "likes" : data.data[number].likes.count, "image" : data.data[number].images.low_resolution.url, "comments" : data.data[number].comments.count, "tags" : data.data[number].tags};
+            $scope.totalImageInformation.push(object);
+          //}
+          //else
+          //  limit++;
+>>>>>>> origin/master
         }
         storeImages();
       })
@@ -66,16 +91,33 @@ app.controller('KPI2', function($scope, Service, ngAudio, $http){
       var counter = 1;
       for(var i = 0; i < 8; i++){
         var imageSrc = $scope.totalImageInformation[i].image;
+<<<<<<< HEAD
+=======
+        //console.log('src is ..... ' + imageSrc);
+>>>>>>> origin/master
         var xhr = new XMLHttpRequest();
         xhr.open('GET', imageSrc, true);
         xhr.responseType = 'blob';
         xhr.onload = function(e) {
+<<<<<<< HEAD
           var img = document.createElement('img');
           img.src = window.URL.createObjectURL(this.response);
           img.setAttribute("class", "instagramImage");
 
           var div = $scope.divNames[1 + counter];
           $scope.imageHolder.push(img);
+=======
+          //console.log("INSTAGRAM IMAGE LOADED");
+          var img = document.createElement('img');
+          img.src = window.URL.createObjectURL(this.response);
+          console.log(img.src);
+          img.setAttribute("class", "instagramImage");
+          var div = $scope.divNames[1 + counter];
+          //console.log("inserting into: " + $scope.divNames[0]);
+          $scope.imageHolder.push(img);
+          //$('#' + div).prepend(img);  //PREPENDING
+
+>>>>>>> origin/master
         };
         xhr.send();
       }
