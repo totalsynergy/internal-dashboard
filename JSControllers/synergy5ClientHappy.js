@@ -67,29 +67,14 @@ app.controller('KPI24', function($scope, Service, $timeout, $http){
 
     function sortAs(){
       for(var  i = 0; i < $scope.abc123.length; i++){
-<<<<<<< HEAD
         if($scope.abc123[i].CategoryName == "A1"){
-=======
-        //console.log("ATTEMTPING length :" + $scope.abc123.length);
-        //console.log($scope.abc123[i].CategoryName);
-        if($scope.abc123[i].CategoryName == "A1"){
-          //console.log("We matched a1's");
->>>>>>> origin/master
           $scope.clientNames1 = $scope.abc123[i].Clients;
         }
         else if($scope.abc123[i].CategoryName == "A2"){
           $scope.clientNames2 = $scope.abc123[i].Clients;
-<<<<<<< HEAD
         }
         else if($scope.abc123[i].CategoryName == "A3"){
           $scope.clientNames3 = $scope.abc123[i].Clients;
-=======
-          //console.log("We matched a2's");
-        }
-        else if($scope.abc123[i].CategoryName == "A3"){
-          $scope.clientNames3 = $scope.abc123[i].Clients;
-          ///console.log("We matched a3's");
->>>>>>> origin/master
         }
       }
       shuffleClientNames();
@@ -118,11 +103,7 @@ app.controller('KPI24', function($scope, Service, $timeout, $http){
       $scope.abc123.push(jsonCategoryObject);
     }
 
-<<<<<<< HEAD
     function changeBooleans(){
-=======
-    function changeBooleans(){  //CHANGE THIS TO THE VARIABLE SERVICE.SPEED
->>>>>>> origin/master
       $scope.a1 = true;
       $scope.a2 = false;
       $scope.a3 = false;
@@ -140,29 +121,16 @@ app.controller('KPI24', function($scope, Service, $timeout, $http){
       var timeToSlide = $scope.speed - 2000;
       $scope.timeout3 = $timeout(function(){
         var percentageToSlide = 110000/($(window).height()); //change the height of the slide here
-<<<<<<< HEAD
         $('.clientNameHolder').animate({top: '-=' + percentageToSlide + '%'},timeToSlide);
-=======
-        $('.clientNameHolder').animate({top: '-=' + percentageToSlide + '%'},timeToSlide, function(){
-          $timeout(function(){
-            $('.clientNameHolder').css('top', '20%');
-          },2000);
-        });
-
->>>>>>> origin/master
       }, 2000);
 
     }
 
     function pageChanged(){
       $('.clientNameHolder').stop();
-<<<<<<< HEAD
       $timeout(function(){
           $('.clientNameHolder').css('top', '20%');
       },5000);
-=======
-      $('.clientNameHolder').css('top', '20%');
->>>>>>> origin/master
       $timeout.cancel($scope.timeout1);
       $timeout.cancel($scope.timeout2);
       $timeout.cancel($scope.timeout3);

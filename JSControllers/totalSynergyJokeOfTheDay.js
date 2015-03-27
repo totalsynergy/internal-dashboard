@@ -1,4 +1,4 @@
-app.controller('KPI27', function($scope, Service, ngAudio, $http){
+app.controller('KPI28', function($scope, Service, ngAudio, $http){
 
     $scope.$on('tabUpdated', function(){
       $scope.tab = Service.tab;
@@ -27,9 +27,13 @@ app.controller('KPI27', function($scope, Service, ngAudio, $http){
 
     function findShortestJoke(posts){
       for(var i = 0; i< posts.length; i++){
-        console.log("Length of is " + posts[i].data.selftext.length);
-        if(posts[i].data.selftext.length < 150){
-          formatJoke(posts[i].data);
+        var postUrl = posts[i].data.url;
+        var commentsIndex = postUrl.indexOf("comments");
+        var jokeNameWithUnderScores = postUrl.slice(commentsIndex + 16, postUrl.length - 1);
+        var jokeName = jokeNameWithUnderScores.replace(/_/g, ' ');
+        if(jokeName.length < 40 && posts[i].data.selftext.length < 100){
+          $scope.jokeName = jokeName.toUpperCase();
+          $scope.jokeContent = posts[i].data.selftext;
           break;
         }
       }
@@ -40,7 +44,6 @@ app.controller('KPI27', function($scope, Service, ngAudio, $http){
       var commentsIndex = postUrl.indexOf("comments");
       var jokeNameWithUnderScores = postUrl.slice(commentsIndex + 16, postUrl.length - 1);
       var jokeName = jokeNameWithUnderScores.replace(/_/g, ' ');
-      console.log("Joke name is: " + jokeName);
       $scope.jokeName = jokeName.toUpperCase();
       $scope.jokeContent = jokeInformation.selftext;
     }

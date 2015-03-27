@@ -4,11 +4,7 @@
   "short_name": "TSD",
   "description": "Total Synergy Dashboard",
 
-<<<<<<< HEAD
-  "version": "0.0.2.9",
-=======
-  "version": "0.0.2.6",
->>>>>>> origin/master
+  "version": "0.0.2.12",
 
   "kiosk_enabled": true,
 
@@ -43,13 +39,9 @@
     "http://www.google.com/",
     "http://www.joomlaworks.net/",
     "http://scontent-b.cdninstagram.com/",
-<<<<<<< HEAD
     "http://scontent-a.cdninstagram.com/",
     "http://www.jokesareawesome.com/",
     "http://www.reddit.com/"
-=======
-    "http://scontent-a.cdninstagram.com/"
->>>>>>> origin/master
     ],
 
   "web_accessible_resources": [

@@ -26,6 +26,7 @@ app.controller('KPI5', function($scope, $http, Service, $interval){
     function timerUpdate(d){
       $interval(function(){
         var currentDate = new Date().getTime();
+        if($scope.eventDate > currentDate){
         var secondsDate = (d - currentDate) / 1000;
 
         $scope.days = parseInt(secondsDate / 86400);
@@ -36,6 +37,7 @@ app.controller('KPI5', function($scope, $http, Service, $interval){
 
         $scope.minutes = parseInt(secondsLeft / 60);
         $scope.seconds = parseInt(secondsLeft % 60);
+        }
       },1000);  //change this to minutes
     }
 
@@ -45,10 +47,9 @@ app.controller('KPI5', function($scope, $http, Service, $interval){
         $scope.eventDate = new Date(data.start.utc).getTime();
         timerUpdate($scope.eventDate);
         $scope.eventData = data;
-        $scope.eventBriteKey= "Key Works";
       })
       .error(function(){
-        $scope.eventBriteKey = "Invalid Key";
+        //
       })
     }
 

@@ -102,6 +102,8 @@ app.controller('KPI11', function($scope, Service, ngAudio, $http){
         });
     }
 
+    //WILL ITERATE THROUGH CARDS IN DOING LIST (4FF4e26....) & RANDOMLY PICK ONE FOR EACH EMPLOYEE
+
     function pickCardToShow(data, name){
 
       var maxNumber = data.length;
@@ -110,7 +112,7 @@ app.controller('KPI11', function($scope, Service, ngAudio, $http){
         if(data[i].idList == "4ff4e26b97a6411d1c392800")
           doingCards.push(data[i].name);
       }
-     var randomCardNumber = Math.floor((Math.random() * doingCards.length));
+     var randomCardNumber = 0;    //THIS WAS PREVIOUSLY AT MATH.FLOOR - KEEP HERE IF RANDOMISED FUNCTION IS LATER REQUIRED
      if(doingCards[randomCardNumber] != undefined){
       $scope.doingCards.push({"Name" : name, "CardName" : doingCards[randomCardNumber], "Image" : "Trello Name Does not Match Synergy Records"});
      }

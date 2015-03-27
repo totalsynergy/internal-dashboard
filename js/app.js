@@ -16,6 +16,7 @@
     service.images = [];
     service.synergy5Data = null;
     service.abc123 = null;
+    service.staffInfo = null;
 
      service.updateKeys = function(eventKey, tsKey, sKey, trKey, s5Key, speed, pag){
       this.totalSynergyKey = tsKey;
@@ -46,6 +47,11 @@
       this.images = images;
       console.log("Gravatar update");
       $rootScope.$broadcast("gravatarsUpdated");
+    }
+    
+    service.updateStaffInfo = function(d){
+      this.staffInfo = d;
+      $rootScope.$broadcast("staffInfoUpdated");
     }
 
 
@@ -132,11 +138,7 @@
     var speed = 15000;
 
     var pages = [
-<<<<<<< HEAD
       {"name" : "Totaltest Synergy Gravatar", "isSelected" : false},
-=======
-      {"name" : "Total Synergy Gravatar", "isSelected" : false},
->>>>>>> origin/master
       {"name" : "Total SynergyGram", "isSelected" : false},
       {"name" : "Conference Total Attendees", "isSelected" : true},
       {"name" : "Conference Attendee Map", "isSelected" : true},
@@ -161,12 +163,10 @@
       {"name" : "Synergy 5 Staff Distribution", "isSelected" : false},
       {"name" : "Synergy 5 Client Happy", "isSelected" : false},
       {"name" : "Synergy 5 Client Fine", "isSelected" : false},
-<<<<<<< HEAD
       {"name" : "Synergy 5 Client Sad", "isSelected" : false},
-      {"name" : "Joke of The Day", "isSelected" : false}
-=======
-      {"name" : "Synergy 5 Client Sad", "isSelected" : false}
->>>>>>> origin/master
+      {"name" : "Synergy 5 Average Client Life", "isSelected" : false},
+      {"name" : "Joke of The Day", "isSelected" : false},
+      {"name" : "Leaderboard", "isSelected" : false}
     ];
 
     var tabOpen = 4;

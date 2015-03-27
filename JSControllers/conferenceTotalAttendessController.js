@@ -10,10 +10,6 @@ app.controller('KPI3', function($scope, Service, ngAudio){
     });
 
     $scope.$on('attendeesUpdated', function() {
-<<<<<<< HEAD
-=======
-      //console.log("TOTAL UPDATED");
->>>>>>> origin/master
       if($scope.totalAttendees != Service.totalAttendees && $scope.totalAttendees != 0){
         $scope.sound.play();
         Service.updateTab(3);
@@ -25,20 +21,11 @@ app.controller('KPI3', function($scope, Service, ngAudio){
       }
     });
 
-<<<<<<< HEAD
    });
 
 
 
    //Below is the function to run confettit
-=======
-    //WHEN EVER WE WANT CONFETTI TO FLY
-    //$scope.brokeEven = function(){
-    //  return $scope.totalAttendees >= 80;
-    //}
-
-   });
->>>>>>> origin/master
 
    function runConfetti(){
    var canvas = document.getElementById("canvas");

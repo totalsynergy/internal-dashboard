@@ -50,6 +50,7 @@ app.controller('KPI1', function($scope, Service, $http, gravatarService, md5, $t
            sortEmails2(d.data, d.data.length);
            $scope.count++;
            $scope.dataLength = d.data.length;
+           Service.updateStaffInfo(d);
          })
         .error(function(data, status, headers, config){
            $scope.data = "fail";

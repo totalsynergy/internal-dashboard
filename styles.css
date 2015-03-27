@@ -19,6 +19,10 @@
     src: url(fonts/billabong.ttf);
 }
 
+html{
+
+}
+
 html, body, .container{
   height:100%;
   min-height: 100%;
@@ -1169,7 +1173,6 @@ webview{
   float:left;
 }
 
-<<<<<<< HEAD
 .donutPercentageHolder1{
   position: absolute;
   left: 40%;
@@ -1184,32 +1187,14 @@ webview{
   width: 20%;
 }
 
-=======
->>>>>>> origin/master
 .donutPercentage{
   font-size: 6vw;
   color: #C6C8CA;
   font-family:openSans;
-<<<<<<< HEAD
   text-align:center;
 }
 
 
-=======
-  position:absolute;
-  left:47.5%;
-  top:42%;
-}
-
-.donutPercentage2{
-  font-size: 6vw;
-  color: #C6C8CA;
-  font-family:openSans;
-  position:absolute;
-  left:47.5%;
-  top:44%;
-}
->>>>>>> origin/master
 
 #firstInstagram{
   width:100%;
@@ -2080,7 +2065,6 @@ left: 55%;
   top:4%;
   left:0;
   right:0;
-<<<<<<< HEAD
   width: 95%;
 }
 
@@ -2095,7 +2079,7 @@ left: 55%;
 .joke{
   font-size: 4vw;
   font-family: openSansLight;
-  margin-top: 5%;
+  margin: 5% 2.5% 0% 2.5%;
   border-top: 2px solid #FD4602;
   border-bottom: 2px solid #FD4602;
   text-align:center;
@@ -2107,8 +2091,312 @@ left: 55%;
   width: 12.5%;
   bottom: 2.5%;
   left: 0.5%;
-=======
->>>>>>> origin/master
+}
+
+.aprilFoolsHolder{
+  width:600px;
+  background:#c0c0c0;
+  margin:100px auto 100% auto;
+}
+
+.aprilFools{
+  font-size:4vw;
+  font-family:openSansLight;
+  text-align:center;
+}
+
+.googleAdvisor{
+  font-size:2vw;
+  font-family:openSansBold;
+  text-align: center;
+}
+
+#averageLifeChart{
+  position:absolute;
+  z-index:-1;
+  top:4%;
+  left:0;
+  right:0;
+  width: 95%;
+}
+
+.avLifeChartHolder{
+  position: fixed;
+  width: 90%;
+  height: 75%;
+  margin-left: 5%;
+  margin-top:5%;
+}
+
+.averageLifeSquare{
+  position:absolute;
+  width:50px;
+  height:50px;
+  background: #78ad29;
+  right:11.5%;
+  top:0;
+  border-radius:50%;
+}
+
+.averageLifeIs{
+  text-align:center;
+}
+
+.averageLifeText{
+  font-family: openSansLight;
+  font-size:3vw;
+  display:inline;
+}
+
+.averageLifeTimeText{
+  font-family: openSansBold;
+  font-size:3vw;
+  color:#78ad29;
+  display:inline;
+}
+
+.buttonHolders{
+  width:50%;
+  position:fixed;
+  bottom:0;
+  left:25%;
+  z-index:9999;
+  opacity:0;
+}
+
+.buttonHolders:hover{
+  background-color: #e5e5e5;
+  opacity:1;
+  border-radius:5px;
+  z-index:9999;
+  visibility:visible;
+}
+
+.rightButtonAllPages, .settingsButtonAllPages, .leftButtonAllPages, .pauseButtonAllPages, .playButtonAllPages{
+  width:20%;
+  float:left;
+  opacity: 0.5;
+}
+
+.rightButtonAllPages:hover, .settingsButtonAllPages:hover, .leftButtonAllPages:hover, .pauseButtonAllPages:hover, .playButtonAllPages:hover{
+  opacity:1;
+}
+
+.leaderBoard{
+  position:fixed;
+  width:90%;
+  margin: 3.5% 5% 3.5% 5%;
+  border: solid 4px #009ee3;
+  border-radius:10px;
+}
+
+.leaderboardHeader{
+  width:100%;
+  background: #009ee3;
+}
+
+.leaderboardText{
+  font-size:5vw;
+  text-align:center;
+  color:#fff;
+  margin: 0 !important;
+}
+
+.leaderboardFirstPlace{
+  width:100%;
+  background: rgba(229, 247, 255, 0.66);
+  height:100px;
+  padding-top:0.5px;
+}
+
+.leaderFirstPlaceRanking{
+  color: #000;
+  font-size:4vw;
+  border-radius:50%;
+  width:50px;
+  height:50px;
+  margin:25px 0px 25px 25px;
+  text-align:center;
+  font-family:openSansBold;
+  float:left;
+}
+
+.leaderboardLeft{
+  width:50%;
+  float:left;
+}
+
+.leaderboardRight{
+  width:25%;
+  float:right;
+}
+
+.leaderboardFirstPlaceName{
+  width: 54%;
+  float: left;
+  height: 100%;
+}
+
+.leaderboardFirstPlaceGravatarHolder{
+  width:75px;
+  height:75px;
+  background: #c0c0c0;
+  border-radius:5px;
+  float:left;
+  margin: 12.5px 50px;
+}
+
+.leaderboardFirstPlaceNameText{
+  font-family:openSans;
+  font-size:2.5vw;
+  float:right;
+  margin:0 !important;
+  
+}
+
+.employeePosition{
+  font-family:openSansLight;
+  font-size:1.5vw;
+  text-align: center;
+  float: right;
+}
+
+.leaderBoardFirstPlaceTime{
+  text-align:center;
+  font-size: 4vw;
+  font-family: openSans;
+}
+
+.leaderboardSecondPlace{
+  width:100%;
+  height:75px;
+  padding-top:0.5px;
+}
+
+.leaderSecondPlaceRanking{
+  color: #000;
+  font-size:2.5vw;
+  border-radius:50%;
+  width:40px;
+  height:40px;
+  margin:20px 0px 10px 30px;
+  text-align:center;
+  font-family:openSansBold;
+  float:left;
+}
+
+
+.leaderboardSecondPlaceName{
+  width: 54%;
+  float: left;
+  height: 100%;
+}
+
+.leaderBoardSecondPlaceTime{
+  text-align:center;
+  font-size: 3vw;
+  font-family: openSans;
+}
+
+.leaderboardSecondPlaceGravatarHolder{
+  width:60px;
+  height:60px;
+  background: #c0c0c0;
+  border-radius:5px;
+  float:left;
+  margin: 5px 60px;
+}
+
+.leaderboardSecondPlaceNameText{
+  font-family:openSans;
+  font-size:2vw;
+  float:right;
+  margin:0 !important;
+  
+}
+
+.leaderBoardTopTenIndividual{
+  width:50%;
+  float:left;
+}
+
+.leaderBoardLastIndividual{
+    width:50%;
+  float:left;
+  border-top: dashed 5px;
+}
+
+.leaderRanking0, .leaderRanking1, .leaderRanking2,.leaderRanking99{
+  color: #000;
+  font-size:30px;
+  border-radius:50%;
+  width:40px;
+  height:40px;
+  margin: 5px 5px 0 15px;
+  text-align:center;
+  font-family:openSansBold;
+  float:left;
+}
+
+.leaderRanking99{
+  margin-left:-20px !important;
+}
+
+
+.leaderboardGravatarHolder{
+  width:45px;
+  height:45px;
+  background: #c0c0c0;
+  border-radius:5px;
+  float:left;
+  margin:5px;
+}
+
+.marginLeftGrav{
+  margin-left:40px !important;
+}
+
+.leaderboardName{
+  
+}
+
+.leaderboardNameText{
+  
+}
+
+.leaderBoardTime{
+  font-size:30px;
+  font-family:openSans;
+}
+
+.leaderboardTopTen{
+  margin-top:1%;
+}
+
+
+.leaderboardLeft2{
+  width:60%;
+  float:left;
+}
+
+.leaderboardRight2{
+  width:25%;
+  float:right;
+}
+
+
+.winner{
+  width: 150px;
+  position: relative;
+  right: 37.5px;
+  bottom: 20px;
+}
+
+.silver{
+  width: 42px;
+  position: relative;
+  right: -31.5px;
+  bottom: -30px;
 }
 
 

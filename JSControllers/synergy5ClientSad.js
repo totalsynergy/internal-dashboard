@@ -85,15 +85,7 @@ app.controller('KPI26', function($scope, Service, $timeout){
       var timeToSlide = $scope.speed - 2000;
       $scope.timeout3 = $timeout(function(){
         var percentageToSlide = 60000/($(window).height());
-<<<<<<< HEAD
         $('.clientNameHolder3').animate({top: '-=' + percentageToSlide + '%'},timeToSlide);
-=======
-        $('.clientNameHolder3').animate({top: '-=' + percentageToSlide + '%'},timeToSlide, function(){
-          $timeout(function(){
-            $('.clientNameHolder3').css('top', '20%');
-          },2000);
-        });
->>>>>>> origin/master
 
       }, 2000);
 
@@ -101,13 +93,9 @@ app.controller('KPI26', function($scope, Service, $timeout){
 
     function pageChanged(){
       $('.clientNameHolder3').stop();
-<<<<<<< HEAD
       $timeout(function(){
           $('.clientNameHolder3').css('top', '20%');
       },5000);
-=======
-      $('.clientNameHolder3').css('top', '20%');
->>>>>>> origin/master
       $timeout.cancel($scope.timeout1);
       $timeout.cancel($scope.timeout2);
       $timeout.cancel($scope.timeout3);

@@ -72,23 +72,8 @@ app.controller('mainController', function($scope, Service, $interval, $timeout, 
     $scope.$on('selectedUpdated', function(){
       $scope.pages = Service.pages;
     })
-/*
-    $scope.settingsHit = function(){
-      console.log("SETTINS HIT");
-     // $scope.tab = 99;
-      //counter = 6;
-      Service.updateTab(99);
-      //$scope.loop();
-      //$timeout.cancel($scope.timer);
-    }
- */
-    $scope.settingsClose = function(){
-      //$scope.updateTab(counter);
-      //$scope.loop();
-    }
 
     $scope.$on('settingsClosed', function(){
-      //console.log("MAIN CONTROLER PICKEDUP CLOSED");
       $timeout.cancel($scope.timer);
       $scope.loop();
     })
@@ -102,8 +87,6 @@ app.controller('mainController', function($scope, Service, $interval, $timeout, 
       $timeout($scope.newTime, $scope.speed);
       goRight();
     }
-
-    //kind of works
 
     $scope.leftButton = function(){
       var nextPage = $scope.tab - 1;
@@ -135,6 +118,16 @@ app.controller('mainController', function($scope, Service, $interval, $timeout, 
       $scope.loop();
     }
 
+    $scope.playClick = function(){
+      $timeout.cancel($scope.timer);
+      $scope.onTimeout();
+    }
+
+    $scope.pauseClick = function(){
+      console.log("Cancelling timer");
+      $timeout.cancel($scope.timer);
+    }
+
     function goRight(){
       //console.log("goRight()");
       var nextPage = $scope.tab + 1;
@@ -164,5 +157,43 @@ app.controller('mainController', function($scope, Service, $interval, $timeout, 
     $scope.$watch('speed', function() {
         Service.updateSpeed($scope.speed);
     });
+
+    $scope.dateIsApril1st = function(){
+      var date = new Date();
+      return date.getMonth() == 3 && date.getDate() == 1;
+    }
+
+    $scope.runAprilFools = function(){
+      /*   BELOW IS THE APRIL FOOLS FUNCTION WHICH DISPLAYS A APRIL FOOLS JOKE
+      $timeout(function(){
+        $('.aprilFools').html("APRIL FOOLS");
+        $('.googleAdvisor').html("From the number 1 intern - Adam In. Tern");
+        $timeout(function(){
+          $('.aprilFoolsHolder').remove();
+        },1200000);
+      },600000)
+      */
+    }
+    
+    /*
+    $("*").css('cursor', 'none');
+      var mouseTimer;
+      
+    $(document).mousemove(function() {
+      console.log("mouse move");
+      //mouseTimeout();     
+    });
+
+    function mouseTimeout(){
+      mouseTimer = $timeout(function(){
+            console.log("Timeout Reached");
+            changeMouse()
+          },2000)
+    }
+    
+    function changeMouse(){
+      $("*").css('cursor', 'none');
+    }
+    */
 
   });
