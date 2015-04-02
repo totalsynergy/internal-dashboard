@@ -1,4 +1,4 @@
-app.controller('KPI18', function($scope, Service, ngAudio, $http){
+app.controller('KPI24', function($scope, Service, ngAudio, $http){
 
     $scope.activeCount = 0;
     $scope.trialCount = 0;

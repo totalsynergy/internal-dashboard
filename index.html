@@ -30,6 +30,7 @@
     <script type="text/javascript" src="JSControllers/conferenceEventCountdownController.js"></script>
     <script type="text/javascript" src="JSControllers/conferenceTotalAttendessController.js"></script>
     <script type="text/javascript" src="JSControllers/developmentSlackController.js"></script>
+    <script type="text/javascript" src="JSControllers/developmentNewRelicController.js"></script>
     <script type="text/javascript" src="JSControllers/developmentTrelloCards.js"></script>
     <script type="text/javascript" src="JSControllers/helpDeskCallCategoriesController.js"></script>
     <script type="text/javascript" src="JSControllers/helpDeskTopCallersController.js"></script>
@@ -40,11 +41,13 @@
     <script type="text/javascript" src="JSControllers/synergy4AustraliaMapController.js"></script>
     <script type="text/javascript" src="JSControllers/synergy4CloudUsersController.js"></script>
     <script type="text/javascript" src="JSControllers/synergy4InternController.js"></script>
+    <script type="text/javascript" src="JSControllers/synergy4Placeholder1.js"></script>
+    <script type="text/javascript" src="JSControllers/synergy4Placeholder2.js"></script>
     <script type="text/javascript" src="JSControllers/synergy4VersionsController.js"></script>
     <script type="text/javascript" src="JSControllers/synergy4WorldMap.js"></script>
-    <script type="text/javascript" src="JSControllers/synergy5ClientFine.js"></script>
-    <script type="text/javascript" src="JSControllers/synergy5ClientHappy.js"></script>
-    <script type="text/javascript" src="JSControllers/synergy5ClientSad.js"></script>
+    <script type="text/javascript" src="JSControllers/synergy4ClientFine.js"></script>
+    <script type="text/javascript" src="JSControllers/synergy4ClientHappy.js"></script>
+    <script type="text/javascript" src="JSControllers/synergy4ClientSad.js"></script>
     <script type="text/javascript" src="JSControllers/synergy5StaffDistributionController.js"></script>
     <script type="text/javascript" src="JSControllers/synergy5SubscribersController.js"></script>
     <script type="text/javascript" src="JSControllers/synergy5TimelineController.js"></script>
@@ -55,7 +58,7 @@
     <script type="text/javascript" src="JSControllers/totalSynergyGram.js"></script>
     <script type="text/javascript" src="JSControllers/totalSynergyGravatarController.js"></script>
     <script type="text/javascript" src="JSControllers/totalSynergyJokeOfTheDay.js"></script>
-    <script type="text/javascript" src="JSControllers/totalSynergyLeaderboardController.js"></script>
+    <script type="text/javascript" src="JSControllers/totalSynergyLeaderBoardController.js"></script>
 
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -70,8 +73,8 @@
 <body>
 <div ng-controller="mainController" ng-init="init()">
   <img src="assets/Eventbrite feed SVG_Logo.svg" ng-show="tab > 2 && tab < 6" class="logo">
-  <img src="assets/logo.png" ng-show="tab > 12 && tab < 18" class="logo2">
-  <img src="assets/logoSynergy5.png" ng-show="tab > 17 && tab <= 27" class="logo3">
+  <img src="assets/logo.png" ng-show="tab > 13 && tab < 24" class="logo2">
+  <img src="assets/logoSynergy5.png" ng-show="tab > 23 && tab <= 30" class="logo3">
 
   <!--<div class="leftButton" ng-show="tab != 99" ng-click="leftButton()">
   </div>
@@ -415,11 +418,17 @@
         </div>
       </div>
   </div>
+  
+  <!-- NEW RELIC DEVELOPMENT WEB ANALYTICS -->
+  
+  <div ng-controller="KPI13" class="kpi animate" ng-show="tab == 13">
+    <div class="relicFrame"></div>
+   </div>
 
   <!-- SYNERGY4 CLOUD USERS -->
 
-  <div class="heightController kpi pieKPI" ng-controller="KPI13" ng-show="tab == 13">
-      <div class="container animate" ng-show="tab == 13">
+  <div class="heightController kpi pieKPI" ng-controller="KPI14" ng-show="tab == 14">
+      <div class="container animate" ng-show="tab == 14">
       <div id="cloudPercentTextContainer">
       <p id="cloudPercent">{{percentage}}%</p>
       <p id="cloudPercentText">OF CLIENTS SYNCHRONISE<br>WITH THE CLOUD</p>
@@ -442,8 +451,8 @@
 
   <!-- SYNERGY 4 INTERN PRODUCTIVITY -->
 
-  <div ng-controller="KPI14" class="kpi" ng-show="tab == 14">
-    <div class="container animate" ng-show="tab == 14">
+  <div ng-controller="KPI15" class="kpi" ng-show="tab == 15">
+    <div class="container animate" ng-show="tab == 15">
       <div id="cloudPercentTextContainer">
       <p id="cloudPercent">{{percentage}}%</p>
       <p id="cloudPercentText">INTERN PRODUCTIVITY</p></p>
@@ -466,8 +475,8 @@
 
   <!-- SYNERGY 4 DESKTOP VERSION GRAPH -->
 
-  <div class="heightController kpi" ng-controller="KPI15" ng-show="tab == 15">
-  <div class="container percentageHeader animate" ng-show="tab==15">
+  <div class="heightController kpi" ng-controller="KPI16" ng-show="tab == 16">
+  <div class="container percentageHeader animate" ng-show="tab==16">
       <div id="rows">
          <div class="col-md-4">
             <p id="percent">{{percentage}}%</p>
@@ -497,9 +506,9 @@
 
   <!-- SYNERGY4 CLIENT AUSTRALIAN MAP -->
 
-  <div ng-controller="KPI16" class="kpi animate" ng-show="tab == 16">
-      <h1 ng-show="tab == 16">Total Synergy Clients</h1>
-      <div class="my-container2" ng-show="tab == 16">
+  <div ng-controller="KPI17" class="kpi animate" ng-show="tab == 17">
+      <h1 ng-show="tab == 17">Total Synergy Clients</h1>
+      <div class="my-container2" ng-show="tab == 17">
       <img class="synergy4Map" src="assets/Synergy_4_map_Map.png" alt="" />
        <div class="total"><span>{{total}}</span></div>
        <div class="nsw2"><span>{{NSW}}</span></div>
@@ -519,181 +528,20 @@
   <!-- SYNERGY 4 WORLD MAP -->
 
 
-  <div ng-controller="KPI17" class="kpi animate" ng-show="tab == 17">
+  <div ng-controller="KPI18" class="kpi animate" ng-show="tab == 18">
     <h1>Synergy 4 Clients</h1>
     <div id="heatMapContainer"></div>
   </div>
-
-  <!-- SYNERGY 5 TRIAL VERSUS ACTIVE STATS PAGE -->
-
-  <div ng-controller="KPI18" class="kpi animate" ng-show="tab == 18">
-    <div id="trialAndActive" class="animate" ng-show="tab == 18">
-    <div id="pieChartContainer2" >
-      <h2 class="clientTrialHeader">Trial</h2>
-      <div class="donutPercentageHolder2">
-            <p class="donutPercentage">{{trial}}</p>
-          </div>
-      <nvd3-pie-chart
-    	  data="pieData4"
-        id="pieChart3"
-        width="550"
-        height="350"
-        x="xFunction()"
-        y="yFunction()"
-        donut="true"
-        color="colorFunction()">
-        objectEquality="true">
-        <svg height="250"></svg>
-      </nvd3-pie-chart>
-    </div>
-
-    <div id="pieChartContainer3" ng-show="tab == 18">
-          <h2 class="clientTrialHeader2">Active</h2>
-          <div class="donutPercentageHolder1">
-            <p class="donutPercentage">{{active}}</p>
-          </div>
-      <nvd3-pie-chart
-    	  data="pieData3"
-        id="pieChart4"
-        width="550"
-        height="350"
-        x="xFunction()"
-        y="yFunction()"
-        donut="true"
-        donutLabelsOutside="true"
-        objectEquality="true"
-        color="colorFunction()">
-        <svg height="250"></svg>
-      </nvd3-pie-chart>
-    </div>
-    </div>
-    <div id="bloodyLegend">
-      <p class="bloodyLegendName">Basic</p><div id="blueDiv"></div>
-      <p class="bloodyLegendName">Professional</p><div id="greenDiv"></div>
-      <p class="bloodyLegendName">Enterprise</p><div id="orangeDiv"></div>
-    </div>
+  
+  <div ng-controller="KPI19" class="kpi animate" ng-show="tab == 19">
+    <h1>Synergy 4 PlaceHolder1</h1>
   </div>
-
-  <!-- SYNERGY 5 TIMELINE PAGE -->
-
-  <div ng-controller="KPI19" class="kpi animate" ng-show="tab == 19"> <!-- change back when instagram page complete -->
-    <p class="lifeTimeValueSentence">
-      AVERAGE LIFETIME VALUE<br>OF SUBSCRIBER
-    </p>
-    <p class="lifeTimeValue">
-      $1.2 MILLION
-    </p>
-    <nvd3-line-chart
-            data="exampleData"
-            id="lifeTimeValueChart"
-            width="550"
-            height="300"
-            color = "colorFunction()"
-            showXAxis="true"
-            showYAxis="true"
-            isArea="true">
-        <svg></svg>
-     </nvd3-line-chart>
-    <!--<h1>Synergy 5 User Types</h1>
-    <div class="graphContainer2">
-    <nvd3-stacked-area-chart
-    	data="exampleData"
-        id="clientStackedChart"
-        showXAxis="false"
-        showYAxis="true"
-        showLegend="true"
-        width="800"
-        height="400">
-        	<svg></svg>
-    </nvd3-stacked-area-chart>
-    </div>
-    <div id="monthNameHolder">
-      <p id="monthNames">June</p>
-      <p id="monthNames">{month}</p>
-      <p id="monthNames">August</p>
-      <p id="monthNames">September</p>
-    </div> -->
-  </div>
-
-  <!-- SYNERGY 5 CLIENT SHAPES COUNT -->
-
+  
   <div ng-controller="KPI20" class="kpi animate" ng-show="tab == 20">
-    <h2 class="activeHeader">ACTIVE</h2>
-    <h2 class="trialHeader">TRIAL</h2>
-    <div class="activeCircle1">
-      <div class="circle1">
-        <p class="shapeNumbers1">{{rawNumbers[0]}}</p>
-      </div>
-    </div>
-    <div class="activeCircle2">
-      <div class="circle2">
-        <p class="shapeNumbers2">{{rawNumbers[1]}}</p>
-      </div>
-    </div>
-    <div class="activeCircle3">
-      <div class="circle3">
-        <p class="shapeNumbers3">{{rawNumbers[2]}}</p>
-      </div>
-    </div>
-    <div class="basicProfessionalEnterprise">
-      <h4 class="activeTrialMiddleText">BASIC</h4>
-      <h4 class="activeTrialMiddleText2">PROFESSIONAL</h4>
-      <h4 class="activeTrialMiddleText3">ENTERPRISE</h4>
-    </div>
-    <div class="trialSquare1">
-      <div class="square1">
-          <p class="shapeNumbers4">{{rawNumbers[3]}}</p>
-      </div>
-    </div>
-    <div class="trialSquare2">
-      <div class="square2">
-          <p class="shapeNumbers5">{{rawNumbers[4]}}</p>
-      </div>
-    </div>
-    <div class="trialSquare3">
-      <div class="square3">
-          <p class="shapeNumbers6">{{rawNumbers[5]}}</p>
-      </div>
-    </div>
+    <h1>Synergy 4 PlaceHolder2</h1>
   </div>
-
-
-  <!-- SYNERGY 5 WORLD MAP -->
-
-  <div ng-controller="KPI21" class="kpi animate" ng-show="tab == 21">
-    <h1>Synergy 5 Clients</h1>
-    <div id="heatMapContainer2"></div>
-  </div>
-
-  <div ng-controller="KPI22" class="kpi animate" ng-show="tab == 22">
-    <h1>Synergy 5 Industries</h1>
-    <div ng-repeat="sub in subscribers">
-      <div class="transparentImageHolder">
-        <img ng-src="assets/subscribers/{{sub.Name}}1.png" id="transparentWorker"/>
-        <div class="greyFill"></div>
-        <div class="fillingDiv{{$index}}"></div>
-        <div class="subscriberCategoryHolder">
-          <p class="subscriberCategory">{{sub.Name}}</p>
-        </div>
-        <p class="subscriberCategoryPercentage">{{sub.Percent}}%</p>
-      </div>
-    </div>
-  </div>
-
-
-
-  <div ng-controller="KPI23" class="kpi animate" ng-show="tab == 23">
-    <h1>Synergy 5 Staff Distribution</h1>
-      <div ng-repeat="category in categories track by $index">
-        <div class="transparentCategoryHolder">
-          <p class="staffDistributionPercentage{{$index}}">{{category.Percent}}%</p>
-          <img ng-src="assets/staffSize/{{category.Name}}.png" class="staffSize{{$index}}">
-          <p class="staffDistributionName">{{category.Name}}</p>
-        </div>
-      </div>
-  </div>
-
-  <div ng-controller="KPI24" class="kpi animate" ng-show="tab == 24">
+  
+    <div ng-controller="KPI21" class="kpi animate" ng-show="tab == 21">
     <h1>HAPPY CLIENTS</h1>
     <div class="whiteZIndex"></div>
     <div class="clientSpenderHolder1 animate" ng-show="a1">
@@ -741,7 +589,7 @@
     </div>
   </div>
 
-  <div ng-controller="KPI25" class="kpi animate" ng-show="tab == 25">
+  <div ng-controller="KPI22" class="kpi animate" ng-show="tab == 22">
     <h1>SATISFIED CLIENTS</h1>
     <div class="whiteZIndex"></div>
     <div class="clientSpenderHolder1 animate" ng-show="b1">
@@ -789,7 +637,7 @@
     </div>
   </div>
 
-  <div ng-controller="KPI26" class="kpi animate" ng-show="tab == 26">
+  <div ng-controller="KPI23" class="kpi animate" ng-show="tab == 23">
     <h1>UNSATISFIED CLIENTS</h1>
     <div class="whiteZIndex"></div>
     <div class="clientSpenderHolder1 animate" ng-show="c1">
@@ -837,7 +685,158 @@
     </div>
   </div>
 
+  <!-- SYNERGY 5 TRIAL VERSUS ACTIVE STATS PAGE -->
+
+  <div ng-controller="KPI24" class="kpi animate" ng-show="tab == 24">
+    <div id="trialAndActive" class="animate" ng-show="tab == 24">
+    <div id="pieChartContainer2" >
+      <h2 class="clientTrialHeader">Trial</h2>
+      <div class="donutPercentageHolder2">
+            <p class="donutPercentage">{{trial}}</p>
+          </div>
+      <nvd3-pie-chart
+    	  data="pieData4"
+        id="pieChart3"
+        width="550"
+        height="350"
+        x="xFunction()"
+        y="yFunction()"
+        donut="true"
+        color="colorFunction()">
+        objectEquality="true">
+        <svg height="250"></svg>
+      </nvd3-pie-chart>
+    </div>
+
+    <div id="pieChartContainer3" ng-show="tab == 24">
+          <h2 class="clientTrialHeader2">Active</h2>
+          <div class="donutPercentageHolder1">
+            <p class="donutPercentage">{{active}}</p>
+          </div>
+      <nvd3-pie-chart
+    	  data="pieData3"
+        id="pieChart4"
+        width="550"
+        height="350"
+        x="xFunction()"
+        y="yFunction()"
+        donut="true"
+        donutLabelsOutside="true"
+        objectEquality="true"
+        color="colorFunction()">
+        <svg height="250"></svg>
+      </nvd3-pie-chart>
+    </div>
+    </div>
+    <div id="bloodyLegend">
+      <p class="bloodyLegendName">Basic</p><div id="blueDiv"></div>
+      <p class="bloodyLegendName">Professional</p><div id="greenDiv"></div>
+      <p class="bloodyLegendName">Enterprise</p><div id="orangeDiv"></div>
+    </div>
+  </div>
+
+  <!-- SYNERGY 5 TIMELINE PAGE -->
+
+  <div ng-controller="KPI25" class="kpi animate" ng-show="tab == 25"> <!-- change back when instagram page complete -->
+    <p class="lifeTimeValueSentence">
+      AVERAGE LIFETIME VALUE<br>OF SUBSCRIBER
+    </p>
+    <p class="lifeTimeValue">
+      $1.2 MILLION
+    </p>
+    <nvd3-line-chart
+            data="exampleData"
+            id="lifeTimeValueChart"
+            width="550"
+            height="300"
+            color = "colorFunction()"
+            showXAxis="true"
+            showYAxis="true"
+            isArea="true">
+        <svg></svg>
+     </nvd3-line-chart>
+  </div>
+
+  <!-- SYNERGY 5 CLIENT SHAPES COUNT -->
+
+  <div ng-controller="KPI26" class="kpi animate" ng-show="tab == 26">
+    <h2 class="activeHeader">ACTIVE</h2>
+    <h2 class="trialHeader">TRIAL</h2>
+    <div class="activeCircle1">
+      <div class="circle1">
+        <p class="shapeNumbers1">{{rawNumbers[0]}}</p>
+      </div>
+    </div>
+    <div class="activeCircle2">
+      <div class="circle2">
+        <p class="shapeNumbers2">{{rawNumbers[1]}}</p>
+      </div>
+    </div>
+    <div class="activeCircle3">
+      <div class="circle3">
+        <p class="shapeNumbers3">{{rawNumbers[2]}}</p>
+      </div>
+    </div>
+    <div class="basicProfessionalEnterprise">
+      <h4 class="activeTrialMiddleText">BASIC</h4>
+      <h4 class="activeTrialMiddleText2">PROFESSIONAL</h4>
+      <h4 class="activeTrialMiddleText3">ENTERPRISE</h4>
+    </div>
+    <div class="trialSquare1">
+      <div class="square1">
+          <p class="shapeNumbers4">{{rawNumbers[3]}}</p>
+      </div>
+    </div>
+    <div class="trialSquare2">
+      <div class="square2">
+          <p class="shapeNumbers5">{{rawNumbers[4]}}</p>
+      </div>
+    </div>
+    <div class="trialSquare3">
+      <div class="square3">
+          <p class="shapeNumbers6">{{rawNumbers[5]}}</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- SYNERGY 5 WORLD MAP -->
+
   <div ng-controller="KPI27" class="kpi animate" ng-show="tab == 27">
+    <h1>Synergy 5 Clients</h1>
+    <div id="heatMapContainer2"></div>
+  </div>
+
+  <div ng-controller="KPI28" class="kpi animate" ng-show="tab == 28">
+    <h1>Synergy 5 Industries</h1>
+    <div ng-repeat="sub in subscribers">
+      <div class="transparentImageHolder">
+        <img ng-src="assets/subscribers/{{sub.Name}}1.png" id="transparentWorker"/>
+        <div class="greyFill"></div>
+        <div class="fillingDiv{{$index}}"></div>
+        <div class="subscriberCategoryHolder">
+          <p class="subscriberCategory">{{sub.Name}}</p>
+        </div>
+        <p class="subscriberCategoryPercentage">{{sub.Percent}}%</p>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div ng-controller="KPI29" class="kpi animate" ng-show="tab == 29">
+    <h1>Synergy 5 Staff Distribution</h1>
+      <div ng-repeat="category in categories track by $index">
+        <div class="transparentCategoryHolder">
+          <p class="staffDistributionPercentage{{$index}}">{{category.Percent}}%</p>
+          <img ng-src="assets/staffSize/{{category.Name}}.png" class="staffSize{{$index}}">
+          <p class="staffDistributionName">{{category.Name}}</p>
+        </div>
+      </div>
+  </div>
+
+
+  <div ng-controller="KPI30" class="kpi animate" ng-show="tab == 30">
     <div class="avLifeChartHolder">
       <div class="averageLifeIs">
         <p class="averageLifeText">AVERAGE LIFETIME OF CLIENTS IS </p>
@@ -857,16 +856,16 @@
     </div>
   </div>
 
-  <div ng-controller="KPI28" class="kpi animate" ng-show="tab == 28">
-    <p class="jokeName animate" ng-show="tab == 28">{{jokeName}}?</p>
+  <div ng-controller="KPI31" class="kpi animate" ng-show="tab == 31">
+    <p class="jokeName animate" ng-show="tab == 31">{{jokeName}}?</p>
     <div class='container animate'>
       <p class="joke">{{jokeContent}}</p>
     </div>
     <img src="assets/reddit.png" class="redditLogo"/>
   </div>
   
-  <div ng-controller="KPI29" class="kpi animate hundredHeight" ng-show="tab == 29">
-    <div class="leaderBoard animate" ng-show= "tab == 29" >
+  <div ng-controller="KPI32" class="kpi animate hundredHeight" ng-show="tab == 32">
+    <div class="leaderBoard animate" ng-show= "tab == 32" >
       <div class="leaderboardHeader">
         <p class="leaderboardText">Time Sheet Heroes</p>
       </div>
@@ -970,16 +969,16 @@ IN SETTINGS RESTORE-->
         <h2><span class="label label-default">Master Key</span></h2>
         <input type="text" class="form-control" id="inputEmail3" ng-model="masterKey" placeholder="Update Keys With Daily Code" name="text">
       </div>
-      <div  class="paddingTop">
+      <div  class="paddingTop synergyPages">
         <div class="totalSynergy5SettingPages">
           <h2>Synergy 5</h2>
-          <div ng-repeat="page in pages" ng-if="$index > 16 && $index < 27">
+          <div ng-repeat="page in pages" ng-if="$index > 22 && $index < 30">
             <input type="checkbox" name="page.name" value="page.name" ng-checked="page.isSelected" ng-click="turnOffPage(page)">{{"  " + page.name}}</input>
           </div>
         </div>
         <div class="totalSynergy5SettingPages">
           <h2>Synergy 4</h2>
-          <div ng-repeat="page in pages" ng-if="$index > 11 && $index < 17">
+          <div ng-repeat="page in pages" ng-if="$index > 12 && $index < 23">
             <input type="checkbox" name="page.name" value="page.name" ng-checked="page.isSelected" ng-click="turnOffPage(page)">{{"  " + page.name}}</input>
           </div>
         </div>
@@ -991,7 +990,7 @@ IN SETTINGS RESTORE-->
         </div>
         <div class="totalSynergy5SettingPages">
           <h2>Other</h2>
-          <div ng-repeat="page in pages" ng-if="$index <= 4 || ($index > 9 && $index < 12) || $index > 26">
+          <div ng-repeat="page in pages" ng-if="$index <= 4 || ($index > 9 && $index < 13) || $index > 29">
             <input type="checkbox" name="page.name" value="page.name" ng-checked="page.isSelected" ng-click="turnOffPage(page)">{{"  " + page.name}}</input>
           </div>
         </div>
@@ -1008,7 +1007,7 @@ IN SETTINGS RESTORE-->
       <div class="buttonHolder">
         <button type="button" class="btn btn-primary btn-lg active" ng-click="save()">Save</button>
         <button type="button" class="btn btn-default btn-lg active" ng-click="settingsClose()"/>Exit</button>
-        <button type="button" class="btn btn-default btn-lg active" ng-click="restoreDefaults()">Restore</button>
+        <!--<button type="button" class="btn btn-default btn-lg active" ng-click="restoreDefaults()">Restore</button> -->
       </div>
     </div>
     </div>

@@ -1,7 +1,7 @@
 //FOR LOGICAL REASONS THE NAME WILL REMAIN FIRSTKPI INSTEAD OF CLOUDUPTAKE PAGE
 
 
-app.controller('KPI13', function($scope, $http, Service, $interval){
+app.controller('KPI14', function($scope, $http, Service, $interval){
     $scope.keyAvailable = false;
     $scope.totalSynergyKey = "empty";
     $scope.cloudUptakeData = null;
@@ -12,7 +12,7 @@ app.controller('KPI13', function($scope, $http, Service, $interval){
 
     $scope.$on('tabUpdated', function(){
       $scope.tab = Service.tab;
-      if(Service.tab == 13){
+      if(Service.tab == 14){
         $scope.pieData = $scope.originalData;
       }
       else{

@@ -1,4 +1,4 @@
-app.controller('KPI20', function($scope, Service, ngAudio, $http){
+app.controller('KPI26', function($scope, Service, ngAudio, $http){
 
     $scope.synergy5Data = "nothingYet";
 

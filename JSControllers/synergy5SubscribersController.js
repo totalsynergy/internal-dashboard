@@ -1,5 +1,5 @@
 
-app.controller('KPI22', function($scope, Service, $http){
+app.controller('KPI28', function($scope, Service, $http){
 
 
     $scope.subscribers = [

@@ -1,4 +1,4 @@
-app.controller('KPI15', function($scope, $http, Service, $interval){
+app.controller('KPI16', function($scope, $http, Service, $interval){
     $scope.keyAvailable = false;
     $scope.data2 = "nothing yet";
     $scope.totalSynergyKey = "";
@@ -12,15 +12,15 @@ app.controller('KPI15', function($scope, $http, Service, $interval){
     $scope.$on('keysUpdated', function(){
       $scope.totalSynergyKey = Service.totalSynergyKey;
       weGotKey();
-    })
+    });
 
     $scope.$on('fetchEventData', function(){
       weGotKey();
-    })
+    });
 
     $scope.$on('tabUpdated', function(){
       $scope.tab = Service.tab;
-      if(Service.tab == 15){
+      if(Service.tab == 16){
         $scope.barData = $scope.rawData;
         //countUpPercentage();
       }
@@ -48,14 +48,17 @@ app.controller('KPI15', function($scope, $http, Service, $interval){
     function sortData(dataPassed){
         var dataToPass = [];
         var blankData = [];
+        var data = [];
         var percentageSum = 0;
-       for(i = 0; i < dataPassed.length; i++){
-         var versionObject = [dataPassed[i].Version, dataPassed[i].Count];
-         var blankVersionObject = [dataPassed[i].Version, 0];
-         dataToPass.push(versionObject);
-         blankData.push(blankVersionObject);
-         percentageSum += dataPassed[i].Count;
-          }
+       if(dataPassed.length >= 3){
+         for(i = 0; i < dataPassed.length; i++){
+           var versionObject = [dataPassed[i].Version, dataPassed[i].Count];
+           var blankVersionObject = [dataPassed[i].Version, 0];
+           dataToPass.push(versionObject);
+           blankData.push(blankVersionObject);
+           percentageSum += dataPassed[i].Count;
+            }
+       }
         $scope.percentage = parseInt((dataPassed[i-2].Count + dataPassed[i-1].Count)/percentageSum*100);
 
         var data = [

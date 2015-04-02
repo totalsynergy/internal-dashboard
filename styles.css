@@ -26,6 +26,7 @@ html{
 html, body, .container{
   height:100%;
   min-height: 100%;
+  cursor: none;
   /*background-color: #F0EFF4;  FIX PNG + SVG WHITE BACKGROUNDS FIRST */
 }
 
@@ -409,6 +410,30 @@ input[type="text"]:focus {
   margin-right:5%;
   font-family: openSansLight;
 }
+
+@media screen and (min-height: 400px) {
+    .synergyPages{
+  height:300px;
+  overflow-y:scroll;
+  }
+}
+
+@media screen and (min-height: 750px) {
+    .synergyPages{
+  height:350px;
+  overflow-y:scroll;
+  }
+}
+
+@media screen and (min-height: 900px) {
+    .synergyPages{
+  height:500px;
+  overflow-y:scroll;
+  }
+}
+
+
+
 
 .pageSelected{
   text-align:center;
@@ -2397,6 +2422,14 @@ left: 55%;
   position: relative;
   right: -31.5px;
   bottom: -30px;
+}
+
+#relicWebView{
+  background: #c0c0c0;
+  position:fixed;
+  height:100%;
+  width:100%;
+  border: solid 2px;
 }
 
 

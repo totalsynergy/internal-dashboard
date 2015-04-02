@@ -4,7 +4,7 @@
   "short_name": "TSD",
   "description": "Total Synergy Dashboard",
 
-  "version": "0.0.2.12",
+  "version": "0.0.2.14",
 
   "kiosk_enabled": true,
 
@@ -41,7 +41,10 @@
     "http://scontent-b.cdninstagram.com/",
     "http://scontent-a.cdninstagram.com/",
     "http://www.jokesareawesome.com/",
-    "http://www.reddit.com/"
+    "http://www.reddit.com/",
+    "http://www.google.com/",
+    "http://www.w3schools.com"
+    
     ],
 
   "web_accessible_resources": [
@@ -49,7 +52,8 @@
     "assets/Eventbrite feed SVG_Logo.svg",
     "assets/Eventbrite feed SVG_Map.svg",
     "js/d3.js",
-    "https://instagramimages-a.akamaihd.net/"
+    "https://instagramimages-a.akamaihd.net/",
+    "http://www.w3schools.com"
     ]
 
 }

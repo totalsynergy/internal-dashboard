@@ -1,4 +1,4 @@
-app.controller('KPI17', function($scope, Service, ngAudio, $http){
+app.controller('KPI18', function($scope, Service, ngAudio, $http){
 
     $scope.countries = [];
     $scope.count = 0;

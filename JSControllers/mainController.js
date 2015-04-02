@@ -9,7 +9,8 @@ app.controller('mainController', function($scope, Service, $interval, $timeout, 
     $scope.amountOfPages = $scope.pages.length;
     $scope.myTimeout = null;
     $scope.timerBoolean = false;
-    $scope.timer;
+    $scope.timer = 0;
+    $scope.mouseTimer = 0;
     var timer = $timeout($scope.onTimeout, $scope.speed);
 
   //fix this loop
@@ -24,12 +25,6 @@ app.controller('mainController', function($scope, Service, $interval, $timeout, 
 
 
   $scope.errorList = [];
-
-    chrome.storage.local.get(null, function(result){
-      if(result.pages != null)
-      Service.updateKeys(result.eventBriteKey, result.totalSynergyKey, result.slackKey,  result.trelloKeys, result.synergy5Keys, result.speed, result.pages);
-    });
-
     function getTab(){
       for(i = 0; i < pages.length; i++){
         if($scope.pages[i].isSelected){
@@ -66,20 +61,25 @@ app.controller('mainController', function($scope, Service, $interval, $timeout, 
       //console.log("Speed: " + $scope.speed);
       $scope.timer = $timeout($scope.loop, $scope.speed);
       //
-    }
+    };
 
 
     $scope.$on('selectedUpdated', function(){
       $scope.pages = Service.pages;
-    })
+      $scope.speed = Service.speed;
+    });
 
     $scope.$on('settingsClosed', function(){
       $timeout.cancel($scope.timer);
       $scope.loop();
-    })
+    });
 
     $scope.$on('tabUpdated', function(){
       $scope.tab = Service.tab;
+    });
+    
+    $scope.$on('pagesUpdated', function(){
+      $scope.pages = Service.pages;
     });
 
     $scope.newTime = function(){
@@ -124,7 +124,6 @@ app.controller('mainController', function($scope, Service, $interval, $timeout, 
     }
 
     $scope.pauseClick = function(){
-      console.log("Cancelling timer");
       $timeout.cancel($scope.timer);
     }
 
@@ -148,7 +147,7 @@ app.controller('mainController', function($scope, Service, $interval, $timeout, 
       $scope.speed = parseInt($scope.speed);
       Service.updateSpeed($scope.speed);
       $timeout.cancel($scope.timer);
-    }
+    };
 
     $scope.$on('speedUpdated', function(){
       $scope.speed = Service.speed;
@@ -157,43 +156,28 @@ app.controller('mainController', function($scope, Service, $interval, $timeout, 
     $scope.$watch('speed', function() {
         Service.updateSpeed($scope.speed);
     });
-
-    $scope.dateIsApril1st = function(){
-      var date = new Date();
-      return date.getMonth() == 3 && date.getDate() == 1;
-    }
-
-    $scope.runAprilFools = function(){
-      /*   BELOW IS THE APRIL FOOLS FUNCTION WHICH DISPLAYS A APRIL FOOLS JOKE
-      $timeout(function(){
-        $('.aprilFools').html("APRIL FOOLS");
-        $('.googleAdvisor').html("From the number 1 intern - Adam In. Tern");
-        $timeout(function(){
-          $('.aprilFoolsHolder').remove();
-        },1200000);
-      },600000)
-      */
-    }
     
-    /*
-    $("*").css('cursor', 'none');
-      var mouseTimer;
-      
-    $(document).mousemove(function() {
-      console.log("mouse move");
-      //mouseTimeout();     
+    $(document).mousemove(function(){
+      $timeout.cancel($scope.mouseTimer);
+      $("body").css("cursor", "default");
+      $("html").css("cursor", "default");
+      $(".container").css("cursor", "default");
+      makeMouseTimeout();
     });
-
-    function mouseTimeout(){
-      mouseTimer = $timeout(function(){
-            console.log("Timeout Reached");
-            changeMouse()
-          },2000)
-    }
     
-    function changeMouse(){
-      $("*").css('cursor', 'none');
+    function makeMouseTimeout(){
+      
+      $scope.mouseTimer = $timeout(function(){
+        $("body").css("cursor", "none");
+        $("html").css("cursor", "none");
+        $(".container").css("cursor", "none");
+        $("body").blur();
+        $("body").focus();
+        $("html").blur();
+        $("html").focus();
+        $(".container").blur();
+        $(".container").focus();
+      },2000);
     }
-    */
 
   });

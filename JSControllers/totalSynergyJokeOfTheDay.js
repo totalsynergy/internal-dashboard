@@ -1,9 +1,7 @@
-app.controller('KPI28', function($scope, Service, ngAudio, $http){
+app.controller('KPI31', function($scope, Service, ngAudio, $http){
 
     $scope.$on('tabUpdated', function(){
       $scope.tab = Service.tab;
-      if($scope.tab == 27)
-      console.log("Controller 27 accessed tab 27");
     });
 
     $scope.$on('keysUpdated', function(){
@@ -16,7 +14,6 @@ app.controller('KPI28', function($scope, Service, ngAudio, $http){
              method: 'GET',
              headers: {'Content-Type': 'application/json', 'internal-token' : $scope.totalSynergy5Key}
              }).success(function(d, status, headers, config){
-               console.log("Got Joke Data");
                findShortestJoke(d.data.children);
                $scope.jokes = d.data.children[2];
              })

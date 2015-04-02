@@ -17,7 +17,41 @@
     service.synergy5Data = null;
     service.abc123 = null;
     service.staffInfo = null;
+    
+    chrome.storage.local.get(null, function(result){
+      if(result.pages != null)
+      updateKeys(result.eventBriteKey, result.totalSynergyKey, result.slackKey,  result.trelloKeys, result.synergy5Keys, result.speed, result.pages);
+      
+    });
 
+    function updateKeys(eventKey, tsKey, sKey, trKey, s5Key, speed2, pag){
+      service.totalSynergyKey = tsKey;
+      service.eventBriteKey = eventKey;
+      service.slackKey = sKey;
+      service.trelloKeys = trKey;
+      service.totalSynergy5Key = s5Key;
+      this.speed = speed2;
+      service.speed = speed2;
+      //this.pages = pag;
+      changePagesSelected(pag);
+      $rootScope.$broadcast("keysUpdated");
+      $rootScope.$broadcast("speedUpdated");
+    }
+    
+    function changePagesSelected(pageData){
+      for(var i = 0; i < pageData.length; i++){
+        for(var j = 0; i < pages.length; j++){
+          if(pageData[i].name == pages[j].name){
+            pages[j].isSelected = pageData[i].isSelected;
+            break;
+          }
+        }
+      }
+      this.pages = pages;
+      service.pages = pages;
+      $rootScope.$broadcast("selectedUpdated");
+    }
+    
      service.updateKeys = function(eventKey, tsKey, sKey, trKey, s5Key, speed, pag){
       this.totalSynergyKey = tsKey;
       this.eventBriteKey = eventKey;
@@ -45,7 +79,6 @@
 
     service.updateGravatars = function(images){
       this.images = images;
-      console.log("Gravatar update");
       $rootScope.$broadcast("gravatarsUpdated");
     }
     
@@ -95,9 +128,11 @@
       $rootScope.$broadcast("synergy5DataUpdated");
     }
 
-    service.savePagesAndSpeed = function(pages, speed){
-      this.pages = pages;
-      this.speed = speed;
+    service.savePagesAndSpeed = function(pages2, speed2){
+      this.pages = pages2;
+      this.speed = speed2;
+      service.pages = pages2;
+      service.speed = speed2;
       $rootScope.$broadcast("speedUpdated");
       $rootScope.$broadcast("selectedUpdated");
     }
@@ -150,20 +185,23 @@
       {"name" : "Help Desk Time To Close Calls", "isSelected" : false},
       {"name" : "Development Trello Cards", "isSelected" : false},
       {"name" : "Development SlackPage", "isSelected" : false},
+      {"name" : "Development Relic", "isSelected" : false},
       {"name" : "Synergy 4 Cloud Users", "isSelected" : false},
       {"name" : "Synergy 4 Intern PieChart", "isSelected" : false},
       {"name" : "Synergy 4 Desktop Version Graph", "isSelected" : true},
       {"name" : "Synergy 4 Client Aus Map", "isSelected" : false},
       {"name" : "Synergy 4 World Map", "isSelected" : false},
+      {"name" : "Synergy 4 PlaceHolder 1", "isSelected" : false},
+      {"name" : "Synergy 4 PlaceHolder 2", "isSelected" : false},
+      {"name" : "Synergy 4 Client Happy", "isSelected" : false},
+      {"name" : "Synergy 4 Client Fine", "isSelected" : false},
+      {"name" : "Synergy 4 Client Sad", "isSelected" : false},
       {"name" : "Synergy 5 Trial vs Active", "isSelected" : false},
       {"name" : "Synergy 5 Timeline", "isSelected" : false},
       {"name" : "Synergy 5 Client Count", "isSelected" : false},
       {"name" : "Synergy 5 World Map", "isSelected" : false},
       {"name" : "Synergy 5 Subscribers", "isSelected" : false},
       {"name" : "Synergy 5 Staff Distribution", "isSelected" : false},
-      {"name" : "Synergy 5 Client Happy", "isSelected" : false},
-      {"name" : "Synergy 5 Client Fine", "isSelected" : false},
-      {"name" : "Synergy 5 Client Sad", "isSelected" : false},
       {"name" : "Synergy 5 Average Client Life", "isSelected" : false},
       {"name" : "Joke of The Day", "isSelected" : false},
       {"name" : "Leaderboard", "isSelected" : false}

@@ -1,4 +1,4 @@
-app.controller('KPI27', function($scope, Service, ngAudio, $http){
+app.controller('KPI30', function($scope, Service, ngAudio, $http){
 
          $scope.exampleData = [
          	{
@@ -23,7 +23,6 @@ app.controller('KPI27', function($scope, Service, ngAudio, $http){
       var lastValue = 2.3;
       var highestValue = 2.3;
       var difference = highestValue - lastValue;
-      console.log(lastValue);
       var percentageToMove = difference*20;
       $('.averageLifeSquare').css("top",percentageToMove + 20 + "%");
     }

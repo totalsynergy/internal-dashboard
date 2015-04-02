@@ -1,4 +1,4 @@
-app.controller('KPI19', function($scope, Service, ngAudio, $http){
+app.controller('KPI25', function($scope, Service, ngAudio, $http){
 
          $scope.exampleData = [
          	{

@@ -1,5 +1,5 @@
 
-app.controller('KPI23', function($scope, Service, $http){
+app.controller('KPI29', function($scope, Service, $http){
 
     $scope.totalSynergyKey = '';
 
@@ -22,6 +22,7 @@ app.controller('KPI23', function($scope, Service, $http){
     })
 
     function weGotKey(){
+      //console.log("Before we gett staffDistribution lets check the key which is :" + $scope.totalSynergyKey);
       $http({
          url: 'https://beta.totalsynergy.com/internalkpi/totalsynergy/summary/staffSize',
          method: 'POST',

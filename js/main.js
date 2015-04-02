@@ -13,6 +13,11 @@ var chartData2 =   [
   {x: 1, y: 1},
   {x: 2, y:2}
   ];
+  
+  $(document).ready(function(){
+    
+   // $("*").css('cursor', 'none');
+  });
 /*
 $(document).ready(function() {  
         var idleMouseTimer;
