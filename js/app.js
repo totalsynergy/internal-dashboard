@@ -19,9 +19,8 @@
     service.staffInfo = null;
     
     chrome.storage.local.get(null, function(result){
-      if(result.pages != null)
+      if(result.pages != null && result.speed != null) //added the speed here for future checks
       updateKeys(result.eventBriteKey, result.totalSynergyKey, result.slackKey,  result.trelloKeys, result.synergy5Keys, result.speed, result.pages);
-      
     });
 
     function updateKeys(eventKey, tsKey, sKey, trKey, s5Key, speed2, pag){
@@ -110,6 +109,7 @@
 
     service.sendForData = function(){
       $rootScope.$broadcast("fetchEventData");
+      $rootScope.$broadcast("5minuteDataFetch");
     }
 
     service.sendForCallsData = function(){
@@ -204,7 +204,10 @@
       {"name" : "Synergy 5 Staff Distribution", "isSelected" : false},
       {"name" : "Synergy 5 Average Client Life", "isSelected" : false},
       {"name" : "Joke of The Day", "isSelected" : false},
-      {"name" : "Leaderboard", "isSelected" : false}
+      {"name" : "Leaderboard", "isSelected" : false},
+      {"name" : "Marketing Values 1", "isSelected" : false},
+      {"name" : "Marketing Values 2", "isSelected" : false},
+      {"name" : "Total Synergy Structure", "isSelected" : false}
     ];
 
     var tabOpen = 4;

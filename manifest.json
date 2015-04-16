@@ -4,7 +4,7 @@
   "short_name": "TSD",
   "description": "Total Synergy Dashboard",
 
-  "version": "0.0.2.14",
+  "version": "0.0.2.22",
 
   "kiosk_enabled": true,
 
@@ -23,6 +23,7 @@
   "permissions": [
     "power",
     "webview",
+    "http://profileimages.azurewebsites.net/",
     "https://www.eventbriteapi.com/",
     "storage",
     "https://beta.synergycloudapp.com/",

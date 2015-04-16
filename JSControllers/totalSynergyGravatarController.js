@@ -86,9 +86,11 @@ app.controller('KPI1', function($scope, Service, $http, gravatarService, md5, $t
           //console.log('i: ' + i + ' is empty');
         }
         else{
-          var hash = md5.createHash(data[counter].Email || '');
-          name = data[counter].Name;
-          email = data[counter].Email;
+          if(data[counter] != undefined){
+            var hash = md5.createHash(data[counter].Email || '');
+            name = data[counter].Name;
+            email = data[counter].Email;
+          }
           //console.log("EMAIL: " + email);
           counter++;
           //console.log(i + ' is not empty');
@@ -101,31 +103,58 @@ app.controller('KPI1', function($scope, Service, $http, gravatarService, md5, $t
         Service.updateGravatars($scope.trelloImages);
       }, 5000);
     }
-
-      function loadAvatar(hash, index, email, blank){
-        //console.log('Looking at index:' + index + ' which is ' + blank);
-        var url = "https://secure.gravatar.com/avatar/" +  hash + "?s=300&d=mm";
+    
+    function loadInitials(name, index){
+      var initials = name.replace(/\W*(\w)\w*/g, '$1').toUpperCase();
+      console.log("Initials:" + initials);
+        var url = "http://profileimages.azurewebsites.net/Image/300/" + initials;
         var xhr = new XMLHttpRequest();
         xhr.open('GET', url, true);
         xhr.responseType = 'blob';
         xhr.onload = function(e) {
           var img = document.createElement('img');
           img.setAttribute("id", "realImageContainer");
-          if(blank)
-            img.src = "assets/transparent.png";
-          else{
-            img.src = window.URL.createObjectURL(this.response);
-            //console.log('index is not blank: ' + index);
-          }
+          img.src = window.URL.createObjectURL(this.response);
+            
           var divName = "#g" + index;
           $(divName).prepend(img);
-          $(divName).append('<p id="gravatarName">' + email + '</p>');
-          //var newImage = img;
+          $(divName).append('<p id="gravatarName">' + name + '</p>');
+
           var srcClone = img.src;
-          //console.log("appending: " + img.src);
-          $scope.trelloImages.push({"Name": email, "Image" :srcClone});
-          //console.log("Pushed trelloImages " + img);
-          //$scope.displayArray.push({photo: img.src, emailAddress: email});
+          $scope.trelloImages.push({"Name": name, "Image" :srcClone});
+        };
+        xhr.send();
+    }
+
+      function loadAvatar(hash, index, email, blank){
+        var count = 0;
+        var url = "https://secure.gravatar.com/avatar/" +  hash + "?s=300&d=404";
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+        xhr.responseType = 'blob';
+        xhr.onload = function(e) {
+            var img = document.createElement('img');
+            img.setAttribute("id", "realImageContainer");
+            if(blank)
+              img.src = "assets/transparent.png";
+            else{
+
+              if(xhr.status == 404 && count == 0){
+                count++;
+                loadInitials(email,index);
+              }
+                
+              else{
+                img.src = window.URL.createObjectURL(this.response);
+                 
+                var divName = "#g" + index;
+                $(divName).prepend(img);
+                $(divName).append('<p id="gravatarName">' + email + '</p>');
+      
+                var srcClone = img.src;
+                $scope.trelloImages.push({"Name": email, "Image" :srcClone});
+              }
+            }
         };
         xhr.send();
       }

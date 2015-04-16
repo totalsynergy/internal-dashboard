@@ -2207,31 +2207,35 @@ left: 55%;
   opacity:1;
 }
 
+
+
 .leaderBoard{
   position:fixed;
-  width:90%;
-  margin: 3.5% 5% 3.5% 5%;
-  border: solid 4px #009ee3;
-  border-radius:10px;
+  width:100%;
+  height:100%;
+  overflow: hidden;
+
 }
 
 .leaderboardHeader{
   width:100%;
+  height:15%;
   background: #009ee3;
 }
 
 .leaderboardText{
-  font-size:5vw;
+  font-size: 4vw;
   text-align:center;
   color:#fff;
   margin: 0 !important;
+  padding-top: 20px;
 }
 
 .leaderboardFirstPlace{
   width:100%;
-  background: rgba(229, 247, 255, 0.66);
-  height:100px;
+  background: #EDF9FE;
   padding-top:0.5px;
+  height:100px;
 }
 
 .leaderFirstPlaceRanking{
@@ -2239,16 +2243,18 @@ left: 55%;
   font-size:4vw;
   border-radius:50%;
   width:50px;
-  height:50px;
-  margin:25px 0px 25px 25px;
+  height:15%;
+  margin:5px 0px 25px 25px;
   text-align:center;
   font-family:openSansBold;
   float:left;
 }
 
 .leaderboardLeft{
-  width:50%;
+  width:51%;
   float:left;
+  position:relative;
+  height:100%;
 }
 
 .leaderboardRight{
@@ -2262,20 +2268,26 @@ left: 55%;
   height: 100%;
 }
 
-.leaderboardFirstPlaceGravatarHolder{
-  width:75px;
-  height:75px;
-  background: #c0c0c0;
-  border-radius:5px;
-  float:left;
-  margin: 12.5px 50px;
+.firstPlaceGravHolder{
+  width: 75px;
+  height: 75px;
+  float: left;
+  position:relative;
+}
+
+.lbGrav0{
+  width: 75px;
+  height: 75px;
+  float: left;
+  margin: 12.5px 46px;
 }
 
 .leaderboardFirstPlaceNameText{
   font-family:openSans;
   font-size:2.5vw;
-  float:right;
-  margin:0 !important;
+  float:left;
+  margin-top:25px;
+  margin-left: 96px;
   
 }
 
@@ -2283,7 +2295,9 @@ left: 55%;
   font-family:openSansLight;
   font-size:1.5vw;
   text-align: center;
-  float: right;
+  float: left;
+  margin-left:8%;
+  margin-top:15px;
 }
 
 .leaderBoardFirstPlaceTime{
@@ -2296,6 +2310,7 @@ left: 55%;
   width:100%;
   height:75px;
   padding-top:0.5px;
+  background: #fff;
 }
 
 .leaderSecondPlaceRanking{
@@ -2321,34 +2336,54 @@ left: 55%;
   text-align:center;
   font-size: 3vw;
   font-family: openSans;
+  position: relative;
+  margin-bottom:0px;
 }
 
-.leaderboardSecondPlaceGravatarHolder{
+.lbGrav2, .lbGrav1{
   width:60px;
   height:60px;
   background: #c0c0c0;
   border-radius:5px;
   float:left;
-  margin: 5px 60px;
+  margin: 5px 58px;
+  position:relative;
 }
 
 .leaderboardSecondPlaceNameText{
   font-family:openSans;
-  font-size:2vw;
-  float:right;
+  font-size:1.5vw;
+  float:left;
   margin:0 !important;
+  position:relative;
+  top:20px;
   
 }
 
 .leaderBoardTopTenIndividual{
+  width:100%;
+  height:14%;
+  float:left;
+}
+
+
+.leaderBoardTopTenIndividual0{
   width:50%;
+  height:25%;
+  float:right;
+}
+
+.leaderBoardTopTenIndividual1{
+  width:50%;
+  height:25%;
   float:left;
 }
 
 .leaderBoardLastIndividual{
-    width:50%;
+  width:50%;
   float:left;
   border-top: dashed 5px;
+  padding-top: 7px
 }
 
 .leaderRanking0, .leaderRanking1, .leaderRanking2,.leaderRanking99{
@@ -2357,7 +2392,7 @@ left: 55%;
   border-radius:50%;
   width:40px;
   height:40px;
-  margin: 5px 5px 0 15px;
+  margin: 15px 5px 0 30px;
   text-align:center;
   font-family:openSansBold;
   float:left;
@@ -2368,13 +2403,21 @@ left: 55%;
 }
 
 
-.leaderboardGravatarHolder{
+.standardlbGrav{
   width:45px;
   height:45px;
   background: #c0c0c0;
   border-radius:5px;
   float:left;
   margin:5px;
+    margin-left: 62px;
+    margin-top:12px;
+}
+
+
+.lbGravatar{
+  width:100%;
+  height:100%;
 }
 
 .marginLeftGrav{
@@ -2392,16 +2435,29 @@ left: 55%;
 .leaderBoardTime{
   font-size:30px;
   font-family:openSans;
+  margin-left:185px;
+  margin-top:12px;
 }
 
 .leaderboardTopTen{
-  margin-top:1%;
+  height:60%;
+  position:relative;
+  z-index:-1;
+}
+
+.blueBackground0{
+  border-bottom: 2px dashed #c0c0c0;
+}
+
+.blueBackground1{
+  border-bottom: 2px dashed #c0c0c0;
 }
 
 
 .leaderboardLeft2{
-  width:60%;
+  width:65%;
   float:left;
+  overflow:hidden;
 }
 
 .leaderboardRight2{
@@ -2411,17 +2467,17 @@ left: 55%;
 
 
 .winner{
-  width: 150px;
-  position: relative;
-  right: 37.5px;
-  bottom: 20px;
+  width: 120px;
+  position: absolute;
+  top: 0px;
+  left:23px;
 }
 
 .silver{
   width: 42px;
-  position: relative;
-  right: -31.5px;
-  bottom: -30px;
+  position: absolute;
+  top: 38px;
+  left: 161px;
 }
 
 #relicWebView{

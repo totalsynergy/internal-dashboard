@@ -6,7 +6,7 @@
    $scope.trelloKeys = '';
    $scope.masterKey ='';
     $scope.speed = 10000;
-    $scope.pages = null;
+    $scope.pages = pages;
     $scope.practiceNumber = 10;
 
     $scope.speedChange = function(){
@@ -83,10 +83,6 @@
       chrome.storage.local.set({'pages' : Service.pages});
     }
 
-    $scope.restoreDefaults = function(){
-      $scope.pages = restorePages;
-      Service.restore(15, restorePages);
-    }
 
     $scope.settingsClose = function(){
       for(i = 0; i < pages.length; i++)
@@ -113,40 +109,5 @@
       $scope.pages = Service.pages;
     })
 
-
-    var restorePages = [
-      {"name" : "Totaltest Synergy Gravatar", "isSelected" : false},
-      {"name" : "Total SynergyGram", "isSelected" : false},
-      {"name" : "Conference Total Attendees", "isSelected" : true},
-      {"name" : "Conference Attendee Map", "isSelected" : true},
-      {"name" : "Conference CountDown", "isSelected" : true},
-      {"name" : "Help Desk Calls Categories", "isSelected" : false},
-      {"name" : "Help Desk Call Response Time", "isSelected" : false},
-      {"name" : "Help Desk Test Page", "isSelected" : false},
-      {"name" : "Help Desk Top Callers", "isSelected" : false},
-      {"name" : "Help Desk Time To Close Calls", "isSelected" : false},
-      {"name" : "Development Trello Cards", "isSelected" : false},
-      {"name" : "Development SlackPage", "isSelected" : false},
-      {"name" : "Development Relic", "isSelected" : false},
-      {"name" : "Synergy 4 Cloud Users", "isSelected" : false},
-      {"name" : "Synergy 4 Intern PieChart", "isSelected" : false},
-      {"name" : "Synergy 4 Desktop Version Graph", "isSelected" : true},
-      {"name" : "Synergy 4 Client Aus Map", "isSelected" : false},
-      {"name" : "Synergy 4 World Map", "isSelected" : false},
-      {"name" : "Synergy 4 PlaceHolder 1", "isSelected" : false},
-      {"name" : "Synergy 4 PlaceHolder 2", "isSelected" : false},
-      {"name" : "Synergy 4 Client Happy", "isSelected" : false},
-      {"name" : "Synergy 4 Client Fine", "isSelected" : false},
-      {"name" : "Synergy 4 Client Sad", "isSelected" : false},
-      {"name" : "Synergy 5 Trial vs Active", "isSelected" : false},
-      {"name" : "Synergy 5 Timeline", "isSelected" : false},
-      {"name" : "Synergy 5 Client Count", "isSelected" : false},
-      {"name" : "Synergy 5 World Map", "isSelected" : false},
-      {"name" : "Synergy 5 Subscribers", "isSelected" : false},
-      {"name" : "Synergy 5 Staff Distribution", "isSelected" : false},
-      {"name" : "Synergy 5 Average Client Life", "isSelected" : false},
-      {"name" : "Joke of The Day", "isSelected" : false},
-      {"name" : "Leaderboard", "isSelected" : false}
-    ];
 
   });

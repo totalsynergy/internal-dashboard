@@ -7,6 +7,10 @@ app.controller('KPI31', function($scope, Service, ngAudio, $http){
     $scope.$on('keysUpdated', function(){
       weGotKey();
     });
+    
+    $scope.$on('5minuteDataFetch', function(){
+      weGotKey();
+    })
 
     function weGotKey(){
           $http({

@@ -59,6 +59,9 @@
     <script type="text/javascript" src="JSControllers/totalSynergyGravatarController.js"></script>
     <script type="text/javascript" src="JSControllers/totalSynergyJokeOfTheDay.js"></script>
     <script type="text/javascript" src="JSControllers/totalSynergyLeaderBoardController.js"></script>
+    <script type="text/javascript" src="JSControllers/totalSynergyMarketingValues1.js"></script>
+    <script type="text/javascript" src="JSControllers/totalSynergyMarketingValues2.js"></script>
+    <script type="text/javascript" src="JSControllers/totalSynergyStructure.js"></script>
 
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -867,87 +870,92 @@
   <div ng-controller="KPI32" class="kpi animate hundredHeight" ng-show="tab == 32">
     <div class="leaderBoard animate" ng-show= "tab == 32" >
       <div class="leaderboardHeader">
-        <p class="leaderboardText">Time Sheet Heroes</p>
+        <p class="leaderboardText">Time Sheet Leaderboard</p>
       </div>
       
       <div class="leaderboardFirstPlace">
         <div class="leaderboardLeft">
           <div class="leaderFirstPlaceRanking">1</div>
-          <div class="leaderboardFirstPlaceGravatarHolder">
+          <div class="firstPlaceGravHolder">
+            <div class="lbGrav0">
+            </div>
             <img src="assets/winner.png" class="winner"/>
           </div>
           <div class="leaderboardFirstPlaceName">
-            <p class="leaderboardFirstPlaceNameText">Adam Hannigan</p>
-            <p><span class ="employeePosition">Head Intern</span></p>
+            <p class="leaderboardFirstPlaceNameText">{{leaderBoardRankings[0].Name}}</p>
+            <!--<p><span class ="employeePosition">Head Intern</span></p> -->
           </div>
         </div>
         <div class="leaderboardRight">
-          <p class="leaderBoardFirstPlaceTime">0.97</p>
+          <p class="leaderBoardFirstPlaceTime">{{leaderBoardRankings[0].Ranking}}</p>
         </div>
       </div>
       
       <div class="leaderboardSecondPlace">
         <div class="leaderboardLeft">
           <div class="leaderSecondPlaceRanking">2</div>
-          <div class="leaderboardSecondPlaceGravatarHolder">
-             <img src="assets/silver.png" class="silver"/>
+          <div class="secondPlaceGravHolder">
+            <div class="lbGrav1">
+            </div>
+            <img src="assets/silver.png" class="silver"/>
           </div>
           <div class="leaderboardSecondPlaceName">
-            <p class="leaderboardSecondPlaceNameText">Greg Swanson</p>
+            <p class="leaderboardSecondPlaceNameText">{{leaderBoardRankings[1].Name}}</p>
           </div>
         </div>
         <div class="leaderboardRight">
-          <p class="leaderBoardSecondPlaceTime">0.78</p>
+          <p class="leaderBoardSecondPlaceTime">{{leaderBoardRankings[1].Ranking}}</p>
         </div>
       </div>
       
       <div class="leaderboardSecondPlace">
         <div class="leaderboardLeft">
           <div class="leaderSecondPlaceRanking">3</div>
-          <div class="leaderboardSecondPlaceGravatarHolder">
-             <img src="assets/bronze.png" class="silver"/>
+          <div class="secondPlaceGravHolder">
+            <div class="lbGrav2">
+            </div>
+            <img src="assets/bronze.png" class="silver"/>
           </div>
           <div class="leaderboardSecondPlaceName">
-            <p class="leaderboardSecondPlaceNameText">Jon Devine</p>
+            <p class="leaderboardSecondPlaceNameText">{{leaderBoardRankings[2].Name}}</p>
           </div>
         </div>
         <div class="leaderboardRight">
-          <p class="leaderBoardSecondPlaceTime">0.65</p>
+          <p class="leaderBoardSecondPlaceTime">{{leaderBoardRankings[2].Ranking}}</p>
         </div>
       </div>
       
       <div class="leaderboardTopTen">
-        <div ng-repeat = "employee in employees">
-          <div class="leaderBoardTopTenIndividual">
+        <div ng-repeat = "ranking in leaderBoardRankings" ng-if = "$index > 2" class="leaderBoardTopTenIndividual blueBackground{{$index%2}}">
             <div class="leaderboardLeft2">
-              <div class="leaderRanking{{getColumn($index)}}">{{employee.Number}}</div>
-              <div class="leaderboardGravatarHolder"></div>
+              <div class="leaderRanking1">{{$index + 1}}</div>
+              <div class="standardlbGrav">
+              <div class="lbGrav{{$index}}"></div>
+              </div>
               <div class="leaderboardName">
-                <span class ="employeePosition">Joe Blogg</span>
+                <span class ="employeePosition">{{ranking.Name}}</span>
               </div>
             </div>
             <div class="leaderboardRight2">
-              <p class="leaderBoardTime">0.97</p>
+              <p class="leaderBoardTime">{{ranking.Ranking}}</p>
             </div>
-          </div>
         </div>
-        <div class="leaderBoardLastIndividual">
-            <div class="leaderboardLeft2">
-              <div class="leaderRanking99">Last</div>
-              <div class="leaderboardGravatarHolder marginLeftGrav"></div>
-              <div class="leaderboardName">
-                <span class ="employeePosition">Joe Blogg</span>
-              </div>
-            </div>
-            <div class="leaderboardRight2">
-              <p class="leaderBoardTime">0.97</p>
-            </div>
-          </div>
       </div>
     </div>
   </div>
 
-
+  
+  <div ng-controller="KPI33" class="kpi animate" ng-show="tab == 33">
+    <h1>Total Synery Marketing Values</h1>
+  </div>
+  
+  <div ng-controller="KPI34" class="kpi animate" ng-show="tab == 34">
+    <h1>Total Synery Marketing Values 2</h1>
+  </div>
+  
+  <div ng-controller="KPI35" class="kpi animate" ng-show="tab == 35">
+    <h1>Total Synery Marketing Structure</h1>
+  </div>
 
 
 <!-- TO ADD A NEW KPI - INSERT AT END, ADD A VARIABLE ONTO APP.JS VARIABLE PAGES, CREATE THE RIGHT LISTENERS IN THE CONTROLLER AND MAKE TAB == WHATEVER
