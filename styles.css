@@ -1,4 +1,7 @@
-/* CSS file placeholder. */
+/* CSS STYLESHEET FOR DASHBOARD APPLICATION */
+
+
+
 @font-face {
     font-family: openSans;
     src: url(OpenSans-Bold.ttf);
@@ -49,6 +52,8 @@ h1{
   font-size: 5vw;
   text-align:center;
   color:#58595B;
+  margin-top: 0 !important;
+  padding-top: 20px !important;
 }
 
 .sliderWrapper{
@@ -2301,9 +2306,11 @@ left: 55%;
 }
 
 .leaderBoardFirstPlaceTime{
-  text-align:center;
-  font-size: 4vw;
+  margin-right: 150px;
+  float: right;
+  font-size: 66px;
   font-family: openSans;
+  margin-bottom: 0;
 }
 
 .leaderboardSecondPlace{
@@ -2333,8 +2340,9 @@ left: 55%;
 }
 
 .leaderBoardSecondPlaceTime{
-  text-align:center;
-  font-size: 3vw;
+    margin-right: 150px;
+  float: right;
+  font-size: 40px;
   font-family: openSans;
   position: relative;
   margin-bottom:0px;
@@ -2437,6 +2445,8 @@ left: 55%;
   font-family:openSans;
   margin-left:185px;
   margin-top:12px;
+    margin-right: 150px;
+  float: right;
 }
 
 .leaderboardTopTen{
@@ -2488,10 +2498,215 @@ left: 55%;
   border: solid 2px;
 }
 
+.orgChart{
+  width:100%;
+  height:100%;
+  position:fixed;
+}
+
+/* MARKETING VISION AND VALUES */
+ul{
+  list-style: none;
+  padding: 0;
+}
+
+li:before {
+  content: "•";
+  font-size: 50px;
+  line-height:50px;
+  padding-right:10px;
+}
+
+.valuesLogoHolder{
+  position:fixed;
+  bottom:50px;
+  left:50px;
+}
+
+.valuesLogo{
+  font-family:openSansBold;
+  font-size:50px;
+  color:#009ee3;
+}
+
+.valuesLogoSubtext{
+  font-family:openSansLight;
+  font-size:50px;
+}
+
+.valuesLogo2{
+  font-family:openSansBold;
+  font-size:50px;
+  color:#78ad29;
+}
+
+.valuesLogoSubtext2{
+  font-family:openSansLight;
+  font-size:50px;
+}
+
+.visionOrValueHolder{
+  height:500px;
+}
+
+.visionOrValueHolder{
+  
+}
+
+.valueImageHolder{
+  width:300px;
+  height: 300px;
+}
+
+.synergyValueImage{
+  width:100%;
+  height:100%;
+}
 
 
+.visionTitle, .valueTitle{
+  font-family:openSansBold;
+  float:left;
+  font-size:4vw;
+}
 
+.visionTitle ,.valueHolder li:before{
+    color: #009ee3;
+}
 
+.valueTitle, .visionHolder li:before{
+    color: #78ad29;
+}
+
+.visionDotPoint, .valueDotPoint{
+  color: #2d2d2d;
+  font-size:30px;
+  font-family: openSansBold;
+  display:inline;
+  white-space: nowrap;
+}
+
+.visionOrValueSubText{
+  color : #000;
+  font-size: 30px;
+  font-family: openSansLight;
+  display:inline;
+}
+
+/*OUTER TO APPEND #bomRadarWebView to*/
+.bomRadarWebView{
+  width:515px;
+  height:480px;
+  overflow: hidden;
+  margin-top: 14px;
+
+}
+
+#northSyndneyPosition{
+  position: absolute;
+}
+/* INNER */
+#bomRadarWebView{
+  width: 1200px;
+  height: 1200px;
+  position: relative;
+  bottom: 265px;
+  right: 122px;
+}
+
+.dayOfWeek{
+  font-family: openSansLight;
+  color: #525252;
+  font-size:30px;
+}
+
+.inline{
+    display:inline;
+}
+
+.temperature{
+  font-size: 100px;
+  color: #2d2d2d;
+  font-family:openSans;
+  line-height:200px;
+}
+
+.miniTemperature{
+  display: inline;
+  font-family: openSans;
+  color: #252525;
+  font-size: 29px;
+  margin: 0 5%;
+}
+
+.weatherHolder{
+  height:200px;
+  width:200px;
+}
+
+.miniWeatherHolder1, .miniWeatherHolder2, .miniWeatherHolder3, .miniWeatherHolder4{
+  width:50px;
+  height:35px;
+  margin: 0 10%;
+}
+
+.marginBottom2{
+  margin-bottom: 2%;
+}
+
+.yammerCard{
+  border-bottom: solid 2px #e2e2e2;
+  margin-top:2%;
+  padding-bottom:1%;
+  height:30%;
+  overflow: hidden;
+}
+
+.yammerClip{
+  font-family: openSansLight;
+  color: #717171;
+  border-left: solid 10px #009ee3;
+  font-size: 1.3vw;
+  padding-left: 5px;
+  margin-bottom: 15px;
+}
+
+.yammerGrav{
+  width:70px;
+}
+
+.yammerBody{
+  font-size: 1.2vw;
+  font-family:openSansLight;
+  margin-top: 0.5%;
+}
+
+.positonRelative{
+  position:relative;
+}
+
+.yammerCreated{
+  position:absolute;
+  bottom:0;
+  right:0;
+  font-family:openSansLight;
+  color: #777;
+}
+
+.marginTop0{
+  margin-top:0;
+}
+
+.yammerLogo{
+  width: 70px;
+  position: fixed;
+  bottom: 20px;
+  left: 25px;
+}
+
+.hundredHeight{
+  height:100%;
+}
 
 
 

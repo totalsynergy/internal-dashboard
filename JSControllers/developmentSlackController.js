@@ -1,112 +1,158 @@
   app.controller('KPI12', function($scope, Service, $http, gravatarService){
-    $scope.data = [];
-    $scope.people = null;
-    $scope.slackKey = '';
-    $scope.imageNameAndMessage = [];
-    $scope.images = [];
-
-
-    $scope.$on('tabUpdated', function(){
+    
+   $scope.users = [];
+   $scope.message = [];
+   
+   $scope.$on('tabUpdated', function(){
       $scope.tab = Service.tab;
     });
-
-    $scope.$on('keysUpdated', function(){
-      $scope.slackKey = Service.slackKey;
+    
+    $scope.$on('5minuteDataFetch', function(){
       weGotKey();
-    })
+    });
 
+    
     $scope.$on('gravatarsUpdated', function(){
-      $scope.images = Service.images;
-      testImages();
-    })
-
-
-
+      weGotKey();
+    });
+    
+    //IF NEW ACCESS TOKEN NEEDED - FOLLOW STEPS FOR OAUTH LOCALHOST ACCESS CODE ONLINE 
+    //currently 7FPAj1DeqTJylDNWlGzJg
     function weGotKey(){
-      $http.get("https://slack.com/api/channels.list?token=xoxp-2778174876-3184954930-3668145319-e5c1ea&pretty=1")
-      .success(function(data){
-        var channelList = data.channels;
-        fetchRightChannels(channelList);
-      })
-      .error(function(){
-      })
+
+      $http({
+        // url: 'https://www.yammer.com/api/v1/messages/my_feed.json',
+         url : 'https://www.yammer.com/api/v1/users.json',
+         method: 'GET',
+         headers: {'Content-Type': 'application/json', 'Authorization' : 'Bearer 7FPAj1DeqTJylDNWlGzJg' }
+         }).success(function(d, status, headers, config){
+           sortUsers(d);
+           getGroups();
+         })
+        .error(function(data, status, headers, config){
+           $scope.data = "fail";
+        });
     }
-
-
-
-    function fetchRightChannels(list){
-      for(var i = 0; i <  list.length; i++){
-        if(list[i].name == 'random')
-          fetchChannelHistory(list[i].id, list[i].name);
+    
+    function sortUsers(data){
+      $scope.users = [];
+      
+      for(var i = 0; i < data.length; i++)
+      {
+          var user = {FullName : data[i].full_name, Position: data[i].job_title, Id : data[i].id};
+          $scope.users.push(user);
       }
+
     }
+    
+    function getGroups(){
+      $http({
+         url: 'https://www.yammer.com/api/v1/users/current.json?include_group_memberships=true',
+         method: 'GET',
+         headers: {'Content-Type': 'application/json', 'Authorization' : 'Bearer 7FPAj1DeqTJylDNWlGzJg' }
+         }).success(function(d, status, headers, config){
+           $scope.groups = [];
 
-    function fetchChannelHistory(channelId, channelName){
-
-      $scope.data = [];
-
-      //SCANS NAMES IN GENERAL - SO TO MATCH USER ID WITH FULL NAME
-      $http.get("https://slack.com/api/users.list?token=" + $scope.slackKey + "&channel=" + channelId + "&pretty=1")
-      .success(function(data){
-        $scope.people = data.members;
-        //Service.updateEventData(data);
-      })
-      .error(function(){
-
-      })
-
-      //GETS THE ACTUAL MESSAGES IN THE GIVEN CHANNEL
-      $http.get("https://slack.com/api/channels.history?token=" + $scope.slackKey + "&channel=" + channelId + "&pretty=1")
-      .success(function(data){
-        for(var i = 0; i < data.messages.length; i++){
-          if(data.messages[i].type == 'message' && data.messages[i].text.charAt(0) != '<'){
-            var newMessage = data.messages[i].text.substr(0,95);
-            if(newMessage.length >= 95)
-              newMessage += "...";
-            var object = {"id" : data.messages[i].user, "message" : newMessage, "channelName" : channelName, "image" : null};
-            $scope.data.push(object);
-          }
+           for(var i = 0; i < d.group_memberships.length; i++)
+           {
+             var group = {Name: d.group_memberships[i].name, Id: d.group_memberships[i].id};
+             $scope.groups.push(group);
+           }
+           
+           getMessages();
+         })
+        .error(function(data, status, headers, config){
+           $scope.data = "fail";
+        });
+    }
+    
+    function getMessages(){
+      $http({
+         url: 'https://www.yammer.com/api/v1/messages/my_feed.json',
+         method: 'GET',
+         headers: {'Content-Type': 'application/json', 'Authorization' : 'Bearer 7FPAj1DeqTJylDNWlGzJg' }
+         }).success(function(d, status, headers, config){
+           sortMessages(d.messages);
+           getImages();
+           pinImages();
+         })
+        .error(function(data, status, headers, config){
+           $scope.data = "fail";
+        });
+    }
+    
+    //converts userId to userName
+    function getName(id){
+      for(var i = 0; i < $scope.users.length; i++)
+      {
+        if(id == $scope.users[i].Id)
+        {
+          return $scope.users[i];
         }
-      })
-      .error(function(){
-
-      })
-    }
-
-
-    function testImages(){
-      for(var i = 0; i < $scope.data.length; i++){
-        for(var j = 0; j < $scope.images.length; j++){
-          var slackName = $scope.returnName($scope.data[i].id);
-          var imageName = $scope.images[j].Name;
-          if(slackName == imageName){
-            var image = $scope.images[j].Image;
-            $scope.data[i].image = image;
-            }
-          }
+        
       }
-      pinImages();
+      
+      return 'No Match';
     }
+    
+    //converts groupId to groupName
+    function getGroup(id){
+      for(var i = 0; i < $scope.groups.length; i++)
+      {
+        if(id == $scope.groups[i].Id)
+        {
+          return $scope.groups[i].Name;
+        }
+        
+      }
 
+      return id;
+    }
+    
+    function sortMessages(data){
+      $scope.messages = [];
+      
+      for(var i = 0; i < data.length; i++)
+      {
+        var property = "group_id";
+        if(data[i].replied_to_id === null && data[i].body.plain != ""){
+         var user = getName(data[i].sender_id);
+         var message = {User : user.FullName, Position : user.Position, Message : data[i].body.plain, Group : getGroup(data[i].group_id), Created: new Date(data[i].created_at)};
+         $scope.messages.push(message);
+        }
+      }
+    }
+    
+    
+    //SORTING IMAGES BELOW
+    
+    function getImageSource(name){
+      
+      for(var i = 0; i < Service.images.length; i++){
+        if(name == Service.images[i].Name){
+          return Service.images[i].Image;
+        }
+      }
+    }
+    
+    //ORGANISING IMAGES FOR LEADERBOARD
+    function getImages(){
+      for(var j = 0 ; j < $scope.messages.length; j++){
+        var imageSource = getImageSource($scope.messages[j].User);
+        $scope.messages[j].Image = imageSource;
+      }
+    }
+    
+    //PIN THE IMAGES ONTO THE ACTUALL DIVS
     function pinImages(){
-        for(var x = 0; x < $scope.data.length; x++){
-          $('#slackGravatarHolder' + x).empty();
-          var img = document.createElement('img');
-          img.src = $scope.data[x].image;
-          img.setAttribute("class", "slackGravatarHolder");
-          $('#slackGravatarHolder' + x).prepend(img);
-      }
-    }
 
-    $scope.returnName = function(id){
-      if($scope.people != null){
-      for(i = 0; i < $scope.people.length; i++){
-        if($scope.people[i].id == id){
-          return $scope.people[i].real_name;
+        for(var x = 0; x < $scope.messages.length; x++){
+            $('.yammerGrav' + x).empty();
+            var img = document.createElement('img');
+            img.src = $scope.messages[x].Image;
+            img.setAttribute("class", "yammerGrav");
+            $('.yammerGrav' + x).prepend(img);
         }
-      }
-      return "didnt work";
-      }
     }
-
+    
   });

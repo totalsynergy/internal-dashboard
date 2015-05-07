@@ -4,7 +4,7 @@
   "short_name": "TSD",
   "description": "Total Synergy Dashboard",
 
-  "version": "0.0.2.22",
+  "version": "0.0.4.2",
 
   "kiosk_enabled": true,
 
@@ -44,8 +44,9 @@
     "http://www.jokesareawesome.com/",
     "http://www.reddit.com/",
     "http://www.google.com/",
-    "http://www.w3schools.com"
-    
+    "http://www.w3schools.com",
+    "http://www.bom.gov.au/",
+    "https://www.yammer.com/"
     ],
 
   "web_accessible_resources": [

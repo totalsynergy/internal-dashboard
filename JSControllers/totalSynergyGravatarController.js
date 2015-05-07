@@ -83,7 +83,6 @@ app.controller('KPI1', function($scope, Service, $http, gravatarService, md5, $t
         var blank = false;
         if(isEmpty(i)){
           blank = true;
-          //console.log('i: ' + i + ' is empty');
         }
         else{
           if(data[counter] != undefined){
@@ -91,22 +90,18 @@ app.controller('KPI1', function($scope, Service, $http, gravatarService, md5, $t
             name = data[counter].Name;
             email = data[counter].Email;
           }
-          //console.log("EMAIL: " + email);
           counter++;
-          //console.log(i + ' is not empty');
         }
         loadAvatar(hash, i, name, blank, counter);
         //$scope.emailTest.push(email);
       }
       $timeout(function(){
-        //console.log("test gravatsr: " + $scope.trelloImages.length);
         Service.updateGravatars($scope.trelloImages);
       }, 5000);
     }
     
     function loadInitials(name, index){
       var initials = name.replace(/\W*(\w)\w*/g, '$1').toUpperCase();
-      console.log("Initials:" + initials);
         var url = "http://profileimages.azurewebsites.net/Image/300/" + initials;
         var xhr = new XMLHttpRequest();
         xhr.open('GET', url, true);
@@ -139,7 +134,7 @@ app.controller('KPI1', function($scope, Service, $http, gravatarService, md5, $t
               img.src = "assets/transparent.png";
             else{
 
-              if(xhr.status == 404 && count == 0){
+              if(xhr.status == 404 && email != ''){
                 count++;
                 loadInitials(email,index);
               }
@@ -180,7 +175,6 @@ app.controller('KPI1', function($scope, Service, $http, gravatarService, md5, $t
       else
         i--;
     }
-    //console.log('Blank Spots: ' + $scope.blankSpots);
   }
 
   function randomDoesNotExist(number){

@@ -50,13 +50,6 @@ app.controller('KPI10', function($scope, Service, ngAudio){
                     "values": [ [$scope.monthData[3].CompleteDate, $scope.monthData[3].MoreThanThreeDays] , [$scope.monthData[2].CompleteDate, $scope.monthData[2].MoreThanThreeDays] , [$scope.monthData[1].CompleteDate, $scope.monthData[1].MoreThanThreeDays] , [$scope.monthData[0].CompleteDate, $scope.monthData[0].MoreThanThreeDays] ]
                 },
             ];
-          for(var i = 0; i < chartData.length; i++)
-            console.log("Chart data: " + chartData[i].values[0][1]);
-        //var object = { "values" : [ [$scope.monthData[i].CompleteDate, $scope.monthData[i].OneHour], [$scope.monthData[i].CompleteDate, $scope.monthData[i].OneDay], [$scope.monthData[i].CompleteDate, $scope.monthData[i].MoreThanThreeDays] ];
-        //var object = [{
-                //    "values": [ [$scope.monthData[i].CompleteDate, $scope.monthData[i].OneHour], [$scope.monthData[i].CompleteDate, $scope.monthData[i].OneDay], [$scope.monthData[i].CompleteDate, $scope.monthData[i].MoreThanThreeDays] ]
-                //};
-        //chartData.push(object);
 
       $scope.chartData = chartData;
       $scope.blankData = [

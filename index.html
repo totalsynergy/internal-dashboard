@@ -62,6 +62,7 @@
     <script type="text/javascript" src="JSControllers/totalSynergyMarketingValues1.js"></script>
     <script type="text/javascript" src="JSControllers/totalSynergyMarketingValues2.js"></script>
     <script type="text/javascript" src="JSControllers/totalSynergyStructure.js"></script>
+    <script type="text/javascript" src="JSControllers/bomRadarController.js"></script>
 
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -238,7 +239,7 @@
 
 
   <div ng-controller="KPI5" class="kpi animate greyBackground" ng-show="tab == 5">
-  <div class="container greyBackground">
+  <div class="container grey">
     <h2 class="countDownHeader">SYNERGY2015<br>COUNTDOWN</h2>
     <div class="countDown">
     <h3 class="time">{{days}}</h3><p class="period">DAYS</p>
@@ -404,22 +405,68 @@
   <!--  DEVELOPMENT SLACK PAGE -->
 
 
-  <div ng-controller="KPI12" class="kpi animate greyBackground" ng-show="tab == 12">
-      <div class="container greyBackground">
-        <h1 id="paddingBottom">Development</h1>
-        <div ng-repeat="message in data track by $index">
-          <div class="slackCardHolder">
-            <div class="slackSideDetails">
-              <div id="slackGravatarHolder{{$index}}"></div>
-              <div class="slackNameChannelHolder">
-                <p class="slackName">{{returnName(message.id)}}</p>
-                <p class="slackChannel">#{{message.channelName}}</p>
-              </div>
+  <div ng-controller="KPI12" class="kpi animate greyBackground hundredHeight" ng-show="tab == 12">
+      <div class="container grey">
+        <div class = "row hundredHeight" style="margin-top : 3%">
+          
+          <div class = "col-md-offset-1 col-md-10 yammerCard">
+            <div class="yammerClip">
+              {{messages[0].Group}}
             </div>
-            <div class="slackMessageHolder">{{message.message}}</div>
+            <div class="row positonRelative">
+              <div class="col-md-1">
+                <div class="yammerGrav0"></div>
+              </div>
+              <div class="col-md-4">
+                <h3 class="marginTop0">{{messages[0].User}} <br><small>{{messages[0].Position}}</small></h3>
+              </div>
+              <p class="yammerCreated">{{messages[0].Created | date:'medium'}}</p>
+            </div>
+            <div class="col-md-offset-1 yammerBody">
+              {{messages[0].Message}}
+            </div>
           </div>
+          
+          <div class = "col-md-offset-1 col-md-10 yammerCard">
+            <div class="yammerClip">
+              {{messages[1].Group}}
+            </div>
+            <div class="row positonRelative">
+              <div class="col-md-1">
+                <div class="yammerGrav1"></div>
+              </div>
+              <div class="col-md-4">
+                <h3 class="marginTop0">{{messages[1].User}} <br><small>{{messages[1].Position}}</small></h3>
+              </div>
+              <p class="yammerCreated">{{messages[1].Created | date:'medium' }}</p>
+            </div>
+            <div class="col-md-offset-1 yammerBody">
+              {{messages[1].Message}}
+            </div>
+          </div>
+          
+          <div class = "col-md-offset-1 col-md-10 yammerCard">
+            <div class="yammerClip">
+              {{messages[2].Group}}
+            </div>
+            <div class="row positonRelative">
+              <div class="col-md-1">
+                <div class="yammerGrav2"></div>
+              </div>
+              <div class="col-md-4">
+                <h3 class="marginTop0">{{messages[2].User}} <br><small>{{messages[2].Position}}</small></h3>
+              </div>
+              <p class="yammerCreated">{{messages[2].Created | date:'medium' }}</p>
+            </div>
+            <div class="col-md-offset-1 yammerBody">
+              {{messages[2].Message}}
+            </div>
+          </div>
+          
         </div>
+        
       </div>
+      <img class="yammerLogo" src="assets/Yammer.png"/>
   </div>
   
   <!-- NEW RELIC DEVELOPMENT WEB ANALYTICS -->
@@ -867,6 +914,8 @@
     <img src="assets/reddit.png" class="redditLogo"/>
   </div>
   
+  <!-- LEADERBOARD -->
+  
   <div ng-controller="KPI32" class="kpi animate hundredHeight" ng-show="tab == 32">
     <div class="leaderBoard animate" ng-show= "tab == 32" >
       <div class="leaderboardHeader">
@@ -924,7 +973,6 @@
           <p class="leaderBoardSecondPlaceTime">{{leaderBoardRankings[2].Ranking}}</p>
         </div>
       </div>
-      
       <div class="leaderboardTopTen">
         <div ng-repeat = "ranking in leaderBoardRankings" ng-if = "$index > 2" class="leaderBoardTopTenIndividual blueBackground{{$index%2}}">
             <div class="leaderboardLeft2">
@@ -945,16 +993,245 @@
   </div>
 
   
-  <div ng-controller="KPI33" class="kpi animate" ng-show="tab == 33">
-    <h1>Total Synery Marketing Values</h1>
+  <div ng-controller="KPI33" class="kpi animate greyBackground" ng-show="tab == 33">
+    <h1><br></h1>
+    <div class="valuesLogoHolder">
+      <p class="valuesLogo2">SYNERGY <span class="valuesLogoSubtext2">VISION</span></p>
+    </div>
+    <div class="container" style="margin-top:10%">
+      
+      <div class="row visionHolder animate" ng-show="valueActive == 1">
+        <div class = "col-md-4">
+          <div class="valueImageHolder">
+            <img src="assets/marketingValues/Communication.png" class="synergyValueImage">
+          </div>    <!-- to be replaced by image -->
+        </div>
+        <div class="col-md-8">
+          <div class="row">
+            <div class="col-md-12">
+              <p class="valueTitle">COMMUNICATION</p>
+            </div>
+            <div class="col-md-12">
+              <ul>
+                <li><p class="valueDotPoint">CLEAR AND SIMPLE</p></li>
+                <li><p class="valueDotPoint">CONSISTENT MESSAGES</p><p class="visionOrValueSubText"> (CHECK IN INTERNALLY)</p> </li>
+                <li><p class="valueDotPoint">ORIO</p> <p class="visionOrValueSubText"> (ORGINAL, RELEVANT, INSIGHTFUL, OBJECTIVE)</p></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="row visionHolder animate" ng-show="valueActive == 2">
+        <div class = "col-md-4">
+          <div class="valueImageHolder">
+            <img src="assets/marketingValues/Synergy.png" class="synergyValueImage">
+          </div>     <!-- to be replaced by image -->
+        </div>
+        <div class="col-md-8">
+          <div class="row">
+            <div class="col-md-12">
+              <p class="valueTitle">SYNERGY</p>
+            </div>
+            <div class="col-md-12">
+              <ul>
+                <li><p class="valueDotPoint">CONNECTED</p></li>
+                <li><p class="valueDotPoint">UNIFIED</p><p class="visionOrValueSubText"> (ALIGNED)</p> </li>
+                <li><p class="valueDotPoint">UNDERSTANDING</p></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="row visionHolder animate" ng-show="valueActive == 3">
+        <div class = "col-md-4">
+          <div class="valueImageHolder">
+            <img src="assets/marketingValues/Smart.png" class="synergyValueImage">
+          </div>    <!-- to be replaced by image -->
+        </div>
+        <div class="col-md-8">
+          <div class="row">
+            <div class="col-md-12">
+              <p class="valueTitle">SMART</p>
+            </div>
+            <div class="col-md-12">
+              <ul>
+                <li><p class="valueDotPoint">INTUITIVE</p></li>
+                <li><p class="valueDotPoint">QUALITY</p></li>
+                <li><p class="valueDotPoint">CHALLENGE<span class="visionOrValueSubText"> (NEW, FRESH, CHALLENGE THE "NORM")</span></p></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   
-  <div ng-controller="KPI34" class="kpi animate" ng-show="tab == 34">
-    <h1>Total Synery Marketing Values 2</h1>
+  
+  
+  <div ng-controller="KPI34" class="kpi animate greyBackground" ng-show="tab == 34">
+    <h1><br></h1>
+    <div class="valuesLogoHolder">
+      <p class="valuesLogo">SYNERGY <span class="valuesLogoSubtext">VALUES</span></p>
+    </div>
+    <div class="container" style="margin-top:10%">
+      
+      <div class="row valueHolder animate" ng-show="valueActive == 1">
+        <div class = "col-md-4">
+          <div class="valueImageHolder">
+            <img src="assets/marketingValues/Care.png" class="synergyValueImage">
+          </div>     <!-- to be replaced by image -->
+        </div>
+        <div class="col-md-8">
+          <div class="row">
+            <div class="col-md-12">
+              <p class="visionTitle">CARE</p>
+            </div>
+            <div class="col-md-12">
+              <ul>
+                <li><p class="visionDotPoint">TO SHOW EMPATHY AT ALL TIMES</p></li>
+                <li><p class="visionDotPoint">BE CONSIDERATE AT ALL TIMES</p></li>
+                <li><p class="visionDotPoint">WE ARE HERE TO HELP</p> </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="row valueHolder animate" ng-show="valueActive == 2">
+        <div class = "col-md-4">
+          <div class="valueImageHolder">
+            <img src="assets/marketingValues/Integrity.png" class="synergyValueImage">
+          </div>     <!-- to be replaced by image -->
+        </div>
+        <div class="col-md-8">
+          <div class="row">
+            <div class="col-md-12">
+              <p class="visionTitle">INTEGRITY</p>
+            </div>
+            <div class="col-md-12">
+              <ul>
+                <li><p class="visionDotPoint">NO BULL</p><p class="visionOrValueSubText"> (DON'T TAKE IT PERSONALLY)</p></li>
+                <li><p class="visionDotPoint">TREAT OTHERS HOW YOU WANT TO BE TREATED</p></li>
+                <li><p class="visionDotPoint">BEHAVE ETHICALLY</p></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="row valueHolder animate" ng-show="valueActive == 3">
+        <div class = "col-md-4">
+          <div class="valueImageHolder">
+            <img src="assets/marketingValues/Respect.png" class="synergyValueImage">
+          </div>      <!-- to be replaced by image -->
+        </div>
+        <div class="col-md-8">
+          <div class="row">
+            <div class="col-md-12">
+              <p class="visionTitle">RESPECT</p>
+            </div>
+            <div class="col-md-12">
+              <ul>
+                <li><p class="visionDotPoint">DON'T HOLD A GRUDGE</p><p class="visionOrValueSubText"> (FORGIVE AND FORGET)</p></p></li>
+                <li><p class="visionDotPoint">DON'T ASSUME</p><p class="visionOrValueSubText">(ASK QUESTIONS)</li>
+                <li><p class="visionDotPoint">LISTEN FIRST</p></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   
-  <div ng-controller="KPI35" class="kpi animate" ng-show="tab == 35">
-    <h1>Total Synery Marketing Structure</h1>
+  <div ng-controller="KPI35" class="kpi animate greyBackground" ng-show="tab == 35">
+    <img src="assets/orgChart.png" class="orgChart"/>
+  </div>
+  
+  <div ng-controller="KPI36" class="kpi animate" ng-show="tab == 36">
+    <h1> <br> </h1>
+    <div class="container" style="margin-top : 5%;">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="bomRadarWebView"></div>          
+        </div>
+        <div class="col-md-6">
+          <div class="row marginBottom2">
+            <div class="col-md-12">
+              <p class="text-center dayOfWeek">{{forecast[0].Day}}</p>              
+            </div>
+            <div class="col-md-6">
+              <div class="weatherHolder pull-right"></div>
+            </div>
+            <div class="col-md-6">
+              <p class="temperature pull-left">{{forecast[0].Temperature}}°C</p>
+            </div>
+            
+            <div class = "col-md-12" style="margin-top: 5%;">
+              <div class="row marginBottom2">
+                <div class="col-md-4">
+                  <p class="dayOfWeek inline">Tomorrow:</p>                  
+                </div>
+                <div class="col-md-3">
+                  <p class="miniTemperature">{{forecast[1].Temperature}}°C</p>      
+                </div>
+                <div class="col-md-3">
+                  <div class="miniWeatherHolder1">  
+                   </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class = "col-md-12">
+              <div class="row marginBottom2">
+                <div class="col-md-4">
+                  <p class="dayOfWeek inline">{{forecast[2].Day}}:</p>                  
+                </div>
+                <div class="col-md-3">
+                  <p class="miniTemperature">{{forecast[2].Temperature}}°C</p>      
+                </div>
+                <div class="col-md-3">
+                  <div class="miniWeatherHolder2">  
+                   </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class = "col-md-12">
+              <div class="row marginBottom2">
+                <div class="col-md-4">
+                  <p class="dayOfWeek inline">{{forecast[3].Day}}:</p>                  
+                </div>
+                <div class="col-md-3">
+                  <p class="miniTemperature">{{forecast[3].Temperature}}°C</p>      
+                </div>
+                <div class="col-md-3">
+                  <div class="miniWeatherHolder3">  
+                   </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class = "col-md-12">
+              <div class="row marginBottom2">
+                <div class="col-md-4">
+                  <p class="dayOfWeek inline">{{forecast[4].Day}}:</p>                  
+                </div>
+                <div class="col-md-3">
+                  <p class="miniTemperature">{{forecast[4].Temperature}}°C</p>      
+                </div>
+                <div class="col-md-3">
+                  <div class="miniWeatherHolder4">  
+                   </div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
 
@@ -1020,3 +1297,9 @@ IN SETTINGS RESTORE-->
     </div>
     </div>
 </body>
+
+
+
+<!-- FLAT ICONS CREDITATION
+<div>Icons made by <a href="http://www.flaticon.com/authors/icon-works" title="Icon Works">Icon Works</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>        
+is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></div>-->

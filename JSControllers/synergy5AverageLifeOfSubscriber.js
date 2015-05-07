@@ -24,7 +24,6 @@ app.controller('KPI30', function($scope, Service, ngAudio, $http){
       var highestValue = 2.3;
       var difference = highestValue - lastValue;
       var percentageToMove = difference*20;
-      console.log("difference to move is: " + percentageToMove);
       $('.averageLifeSquare').css("top",percentageToMove + 19 + "%");
     }
 

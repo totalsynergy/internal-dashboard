@@ -1,10 +1,8 @@
-app.controller('KPI2', function($scope, Service, ngAudio, $http){
+app.controller('KPI2', function($scope, Service, ngAudio, $http, $timeout){
 
-    $scope.imageUrls = [];
-    $scope.divNames = ['firstInstagram','secondInstagram','thirdInstagram','fourthInstagram','fifthInstagram','sixthInstagram','seventhInstagram','eighthInstagram']
-    $scope.imageHolder = [];
     $scope.totalImageInformation = [];
     $scope.randomNumbers = [];
+    $scope.divNames = ['firstInstagram','secondInstagram','thirdInstagram','fourthInstagram','fifthInstagram','sixthInstagram','seventhInstagram','eighthInstagram'];
 
     $scope.$on('tabUpdated', function(){
       $scope.tab = Service.tab;
@@ -15,7 +13,8 @@ app.controller('KPI2', function($scope, Service, ngAudio, $http){
       getInstagramImage();
     })
 
-    $scope.$on('fetchEventData', function(){
+    $scope.$on('5minuteDataFetch', function(){
+      console.log("Get instagram");
       getInstagramImage();
     })
 
@@ -43,50 +42,48 @@ app.controller('KPI2', function($scope, Service, ngAudio, $http){
 
     function getInstagramImage(){
       $scope.imageUrls = [];
-      $http.get("https://api.instagram.com/v1/users/598377249/media/recent/?client_id=89b41cbb03d149c4af0e7d39e2026f78")
+      
+      $http.get("https://api.instagram.com/v1/tags/totalSynergy/media/recent?access_token=20776276.0c90f58.1b3974ff4a9842da90dd430e665f40b8&count=20")
       .success(function(data){
         $scope.data = data;
+        $scope.totalImageInformation = [];
+        $scope.randomNumbers = [];
+    
         var limit = 8;
-        pickInstagramImages(data.data.length);
-        for(var i =0; i < limit; i++){
-          var number = $scope.randomNumbers[i];
-            var object = {"caption" : data.data[number].caption.text, "likes" : data.data[number].likes.count, "image" : data.data[number].images.low_resolution.url, "comments" : data.data[number].comments.count, "tags" : data.data[number].tags};
+        //pickInstagramImages(data.data.length);
+        for(var i =0; i < limit; i++)
+        {
+            var object = {"caption" : data.data[i].caption.text, "likes" : data.data[i].likes.count, "image" : data.data[i].images.low_resolution.url, "comments" : data.data[i].comments.count, "tags" : data.data[i].tags};
             $scope.totalImageInformation.push(object);
         }
-        storeImages();
+        for(var i = 0; i < 8; i++)
+        {
+          storeImage(i);
+        }
       })
       .error(function(data){
-        $scope.totalSynergyFeed = "failed";
+        //console.log("Instagram failed");
       });
-
     }
-
-    function storeImages(){
+    
+    function storeImage(index){
       $(".instagramImage").remove();
-      var counter = 1;
-      for(var i = 0; i < 8; i++){
-        var imageSrc = $scope.totalImageInformation[i].image;
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', imageSrc, true);
-        xhr.responseType = 'blob';
-        xhr.onload = function(e) {
-          var img = document.createElement('img');
-          img.src = window.URL.createObjectURL(this.response);
-          img.setAttribute("class", "instagramImage");
+      
+      var imageSrc = $scope.totalImageInformation[index].image;
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', imageSrc, true);
+      xhr.responseType = 'blob';
+      
+      xhr.onload = function(e) {
+        var img = document.createElement('img');
+        img.src = window.URL.createObjectURL(this.response);
+        img.setAttribute("class", "instagramImage");
+  
+        $('#' + $scope.divNames[index]).prepend(img);
 
-          var div = $scope.divNames[1 + counter];
-          $scope.imageHolder.push(img);
-        };
-        xhr.send();
-      }
-      pinToDivs();
-    }
-
-    function pinToDivs(){
-      for(var i = 0; i < 8; i++){
-        $('#' + $scope.divNames[i]).prepend($scope.imageHolder[i]);
-
-      }
+      };
+      
+      xhr.send();
     }
 
 });

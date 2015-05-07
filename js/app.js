@@ -17,6 +17,7 @@
     service.synergy5Data = null;
     service.abc123 = null;
     service.staffInfo = null;
+    service.bomBeginningPageState = null;
     
     chrome.storage.local.get(null, function(result){
       if(result.pages != null && result.speed != null) //added the speed here for future checks
@@ -48,6 +49,8 @@
       }
       this.pages = pages;
       service.pages = pages;
+      service.bomBeginningPageState  = this.pages[findBombPage()].isSelected;
+      $rootScope.$broadcast("stateOfBomUpdated");
       $rootScope.$broadcast("selectedUpdated");
     }
     
@@ -59,6 +62,10 @@
       this.totalSynergy5Key = s5Key;
       this.speed = speed;
       this.pages = pag;
+      
+      this.bomBeginningPageState  = this.pages[findBombPage()].isSelected;
+      $rootScope.$broadcast("stateOfBomUpdated");
+      
       $rootScope.$broadcast("keysUpdated");
       $rootScope.$broadcast("speedUpdated");
       $rootScope.$broadcast("selectedUpdated");
@@ -114,6 +121,7 @@
 
     service.sendForCallsData = function(){
       $rootScope.$broadcast("fetchCallsData");
+      $rootScope.$broadcast("hourlyDataCall");
     }
 
     service.restore = function(speed, page){
@@ -131,15 +139,36 @@
     service.savePagesAndSpeed = function(pages2, speed2){
       this.pages = pages2;
       this.speed = speed2;
+      this.bomBeginningPageState  = this.pages[findBombPage()].isSelected;
       service.pages = pages2;
       service.speed = speed2;
       $rootScope.$broadcast("speedUpdated");
+      $rootScope.$broadcast("stateOfBomUpdated");
       $rootScope.$broadcast("selectedUpdated");
     }
 
     service.updateABC123 = function(data){
       this.abc123 = data;
       $rootScope.$broadcast("abc123Updated");
+    }
+    
+    service.changeIndividualPage = function(name, boolean){
+      for(var i = 0; i < this.pages.length; i++){
+        if(name == this.pages[i].name){
+          this.pages[i].isSelected = boolean;
+          break;
+        }
+      }
+      $rootScope.$broadcast("selectedUpdated");
+    }
+    
+    function findBombPage(){
+      for(var i = 0; i < this.pages.length; i++){
+        if('Bom Radar' == this.pages[i].name){
+          return i;
+        }
+      }
+      return "Page does not exist";
     }
 
 
@@ -207,7 +236,8 @@
       {"name" : "Leaderboard", "isSelected" : false},
       {"name" : "Marketing Values 1", "isSelected" : false},
       {"name" : "Marketing Values 2", "isSelected" : false},
-      {"name" : "Total Synergy Structure", "isSelected" : false}
+      {"name" : "Total Synergy Structure", "isSelected" : false},
+      {"name" : "Bom Radar", "isSelected" : false}
     ];
 
     var tabOpen = 4;
