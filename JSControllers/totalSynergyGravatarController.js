@@ -6,49 +6,44 @@ app.controller('KPI1', function($scope, Service, $http, gravatarService, md5, $t
 
     //BE CAREFUL BELOW
     $scope.dataLength = 20;
-    $scope.count = 0;
-    $scope.displayArray = [];
+    $scope.keysObtained = false;
     $scope.arrayOfEmpties = [];
-    $scope.emailTest = [];
     $scope.isTrue = "false";
     $scope.blankSpots = [];
     $scope.trelloImages = [];
+    //IMPORTANT variable - keeps track of compelted xml requests, when this reaches 28 we can perform other operations
+    $scope.completedXMLRequests = 0;
 
     $scope.$on('tabUpdated', function(){
       $scope.tab = Service.tab;
     });
 
-
+    
+    //Only call this for the first keysUpdated, otherwise only fetch on 'fetchEventData' to avoid issues of multiple async
     $scope.$on('keysUpdated', function(){
       $scope.totalSynergyKey = Service.totalSynergyKey;
-      if($scope.count == 0)
-      //initialiseArray();
-      $scope.count = 0;
-      weGotKey();
-      $scope.count++;
-    })
+      
+      //Avoid duplicate calls at the beginning of the program and clashes with 5 minute data fetch
+      if(!$scope.keysObtained)
+        getStaff();
+      $scope.keysObtained = true;
+    });
 
     $scope.$on('fetchEventData', function(){
-      $scope.displayArray = [];
-      $scope.count = 0;
-      weGotKey();
-      //pickNumbers();
-      //pickDecisiveNumbers();
-    })
+      getStaff();
+    });
 
-    function weGotKey(){
-      //debugger
-
-      if($scope.count < 1){
-
+    //Get the list of total synergy staff so we can access their gravatars
+    function getStaff(){
        $http({
          url: 'https://beta.synergycloudapp.com/totalsynergy/InternalKpi/Home/staff',
          method: 'POST',
          headers : {'internal-token' : $scope.totalSynergyKey}
          }).success(function(d, status, headers, config){
            $scope.data = d.data;
+           
            sortEmails2(d.data, d.data.length);
-           $scope.count++;
+           
            $scope.dataLength = d.data.length;
            Service.updateStaffInfo(d);
          })
@@ -56,7 +51,6 @@ app.controller('KPI1', function($scope, Service, $http, gravatarService, md5, $t
            $scope.data = "fail";
         });
         $scope.count++;
-      }
     }
 
     function emptyDivs(){
@@ -68,38 +62,46 @@ app.controller('KPI1', function($scope, Service, $http, gravatarService, md5, $t
 
     //TypeError: Cannot read property 'Email' of undefined
     //at sortEmails2 (totalSynergyGravatarController.js:85)
-
     function sortEmails2(data, length){
       var counter = 0;
       $scope.trelloImages = [];
+      
       emptyDivs();
+      
       pickNumbersToBeBlanks();
 
-      //$("#twitterDiv").empty();
       $scope.arrayOfEmpties = [];
+      $scope.completedXMLRequests = 0;
+      
+      //Fill the '32' blocks on the screen with either blanks or gravatars
       for(i = 1; i <= 28; i++){
         var name = '';
         var email = '';
         var blank = false;
+        
+        //Load a blank rectangle instead - keeps proportions
         if(isEmpty(i)){
           blank = true;
         }
         else{
+          
           if(data[counter] != undefined){
             var hash = md5.createHash(data[counter].Email || '');
             name = data[counter].Name;
             email = data[counter].Email;
           }
+
           counter++;
+          
         }
         loadAvatar(hash, i, name, blank, counter);
-        //$scope.emailTest.push(email);
+        
       }
-      $timeout(function(){
-        Service.updateGravatars($scope.trelloImages);
-      }, 5000);
+      //Update the gravatars that are used in other areas of the application.
     }
     
+    //Load Initials as an alertnate to mystery man using Gregs initial web service
+    //Append these to the appropriate divs
     function loadInitials(name, index){
       var initials = name.replace(/\W*(\w)\w*/g, '$1').toUpperCase();
         var url = "http://profileimages.azurewebsites.net/Image/300/" + initials;
@@ -117,12 +119,20 @@ app.controller('KPI1', function($scope, Service, $http, gravatarService, md5, $t
 
           var srcClone = img.src;
           $scope.trelloImages.push({"Name": name, "Image" :srcClone});
+          $scope.completedXMLRequests++;
+          
+          //Check if all xml requests are done and send
+          if($scope.completedXMLRequests == 28){
+              Service.updateGravatars($scope.trelloImages);
+          }
         };
         xhr.send();
     }
 
+      //XMLHTTP request to get individual gravatars - If 404 is thrown load initials instead.
       function loadAvatar(hash, index, email, blank){
         var count = 0;
+
         var url = "https://secure.gravatar.com/avatar/" +  hash + "?s=300&d=404";
         var xhr = new XMLHttpRequest();
         xhr.open('GET', url, true);
@@ -130,8 +140,10 @@ app.controller('KPI1', function($scope, Service, $http, gravatarService, md5, $t
         xhr.onload = function(e) {
             var img = document.createElement('img');
             img.setAttribute("id", "realImageContainer");
-            if(blank)
+            if(blank){
               img.src = "assets/transparent.png";
+              $scope.completedXMLRequests++;
+            }
             else{
 
               if(xhr.status == 404 && email != ''){
@@ -143,12 +155,21 @@ app.controller('KPI1', function($scope, Service, $http, gravatarService, md5, $t
                 img.src = window.URL.createObjectURL(this.response);
                  
                 var divName = "#g" + index;
-                $(divName).prepend(img);
+
+                if(email)
+                   $(divName).prepend(img);
+
                 $(divName).append('<p id="gravatarName">' + email + '</p>');
       
                 var srcClone = img.src;
                 $scope.trelloImages.push({"Name": email, "Image" :srcClone});
+                $scope.completedXMLRequests++;
+
               }
+            }
+            //Check if all xml requests are done and send
+            if($scope.completedXMLRequests == 28){
+                Service.updateGravatars($scope.trelloImages);
             }
         };
         xhr.send();
@@ -167,7 +188,8 @@ app.controller('KPI1', function($scope, Service, $http, gravatarService, md5, $t
     $scope.blankSpots = [];
     $scope.blankSpots.push(12,10,11,19,18,17);
     var emptiesNeeded = 23 - $scope.data.length;
-    for(var i = 1; i < emptiesNeeded; i++){
+
+    for(var i = 1; i < emptiesNeeded; i+= 1){
       var randomNum = Math.floor((Math.random() * 28));
       if(randomDoesNotExist(randomNum)){
         $scope.blankSpots.push(randomNum);

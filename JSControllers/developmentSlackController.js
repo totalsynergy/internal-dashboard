@@ -16,6 +16,10 @@
       weGotKey();
     });
     
+    $scope.$on('keysUpdated', function(){
+      $scope.yammerKey = Service.yammerKey;
+    })
+    
     //IF NEW ACCESS TOKEN NEEDED - FOLLOW STEPS FOR OAUTH LOCALHOST ACCESS CODE ONLINE 
     //currently 7FPAj1DeqTJylDNWlGzJg
     function weGotKey(){
@@ -24,7 +28,7 @@
         // url: 'https://www.yammer.com/api/v1/messages/my_feed.json',
          url : 'https://www.yammer.com/api/v1/users.json',
          method: 'GET',
-         headers: {'Content-Type': 'application/json', 'Authorization' : 'Bearer 7FPAj1DeqTJylDNWlGzJg' }
+         headers: {'Content-Type': 'application/json', 'Authorization' : 'Bearer '  + $scope.yammerKey }
          }).success(function(d, status, headers, config){
            sortUsers(d);
            getGroups();

@@ -4,7 +4,7 @@ app.controller('KPI28', function($scope, Service, $http){
 
     $scope.subscribers = [
         {"Name" : "General", "Percent" : 0},
-        {"Name" : "Environ", "Percent" : 0},
+        {"Name" : "Environmental", "Percent" : 0},
         {"Name" : "Engineer", "Percent" : 0},
         {"Name" : "Construction", "Percent" : 0},
         {"Name" : "Architect", "Percent" : 0},
@@ -50,13 +50,14 @@ app.controller('KPI28', function($scope, Service, $http){
 
     function sort(data){
       var total = 0;
+      console.log("Data for industries is: " + JSON.stringify(data));
       for(var j = 0; j < data.length; j++){
         total += data[j].Count;
       }
       for(var h = 0; h < data.length; h++){
         for(var i = 0; i  < $scope.subscribers.length; i++){
           if(data[h].Name == $scope.subscribers[i].Name){
-            $scope.subscribers[i].Percent = Math.floor((data[h].Count/total)*100);
+            $scope.subscribers[i].Percent = Math.round( data[h].Count/total * 100 * 10) / 10 // Math.floor((data[h].Count/total)*100);
           }
         }
       }

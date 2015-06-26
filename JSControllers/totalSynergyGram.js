@@ -41,25 +41,28 @@ app.controller('KPI2', function($scope, Service, ngAudio, $http, $timeout){
 
 
     function getInstagramImage(){
-      $scope.imageUrls = [];
-      
+
       $http.get("https://api.instagram.com/v1/tags/totalSynergy/media/recent?access_token=20776276.0c90f58.1b3974ff4a9842da90dd430e665f40b8&count=20")
       .success(function(data){
-        $scope.data = data;
-        $scope.totalImageInformation = [];
-        $scope.randomNumbers = [];
-    
-        var limit = 8;
-        //pickInstagramImages(data.data.length);
-        for(var i =0; i < limit; i++)
+        if(data.data[0].caption != undefined) //If not the Request Worked, but returned wrong response
         {
-            var object = {"caption" : data.data[i].caption.text, "likes" : data.data[i].likes.count, "image" : data.data[i].images.low_resolution.url, "comments" : data.data[i].comments.count, "tags" : data.data[i].tags};
-            $scope.totalImageInformation.push(object);
+            $scope.data = data;
+            $scope.totalImageInformation = [];
+            $scope.randomNumbers = [];
+        
+            var limit = 8;
+            //pickInstagramImages(data.data.length);
+            for(var i =0; i < limit; i++)
+            {
+                var object = {"caption" : data.data[i].caption.text, "likes" : data.data[i].likes.count, "image" : data.data[i].images.low_resolution.url, "comments" : data.data[i].comments.count, "tags" : data.data[i].tags};
+                $scope.totalImageInformation.push(object);
+            }
+            for(var i = 0; i < 8; i++)
+            {
+              storeImage(i);
+            }
         }
-        for(var i = 0; i < 8; i++)
-        {
-          storeImage(i);
-        }
+
       })
       .error(function(data){
         //console.log("Instagram failed");
@@ -78,8 +81,9 @@ app.controller('KPI2', function($scope, Service, ngAudio, $http, $timeout){
         var img = document.createElement('img');
         img.src = window.URL.createObjectURL(this.response);
         img.setAttribute("class", "instagramImage");
-  
-        $('#' + $scope.divNames[index]).prepend(img);
+        
+        if(imageSrc)
+          $('#' + $scope.divNames[index]).prepend(img);
 
       };
       

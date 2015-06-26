@@ -1,6 +1,6 @@
 
 
-  angular.module('appService', []).factory('Service' , function($rootScope){
+  angular.module('appService', []).factory('Service' , function($rootScope, $http){
     var service = {};
     service.tab = 3;
     service.second = 0;
@@ -11,6 +11,7 @@
     service.totalSynergyKey = "";
     service.eventBriteKey = "";
     service.slackKey = "";
+    service.yammerKey = "";
     service.callsData = null;
     service.progressData = null;
     service.images = [];
@@ -18,25 +19,20 @@
     service.abc123 = null;
     service.staffInfo = null;
     service.bomBeginningPageState = null;
+    service.trelloLists = [];
+    service.trelloListSelected = '';
+    service.twitterBearerToken = '';
     
     chrome.storage.local.get(null, function(result){
-      if(result.pages != null && result.speed != null) //added the speed here for future checks
-      updateKeys(result.eventBriteKey, result.totalSynergyKey, result.slackKey,  result.trelloKeys, result.synergy5Keys, result.speed, result.pages);
+      if(result.pages != null && result.speed != null) {//added the speed here for future checks
+        this.trelloUserAuth = result.trelloUserAuth;
+        service.updateKeys(result.eventBriteKey, result.totalSynergyKey, result.slackKey,  result.trelloKeys, result.synergy5Keys, result.yammer, result.speed, result.pages);
+        service.trelloListSelected = result.trelloListSelected;
+        service.getTrelloBoards(result.trelloKeys, result.trelloUserAuth);
+        //service.authenticateTwitter(); //pass the keys from local storage
+      }
     });
 
-    function updateKeys(eventKey, tsKey, sKey, trKey, s5Key, speed2, pag){
-      service.totalSynergyKey = tsKey;
-      service.eventBriteKey = eventKey;
-      service.slackKey = sKey;
-      service.trelloKeys = trKey;
-      service.totalSynergy5Key = s5Key;
-      this.speed = speed2;
-      service.speed = speed2;
-      //this.pages = pag;
-      changePagesSelected(pag);
-      $rootScope.$broadcast("keysUpdated");
-      $rootScope.$broadcast("speedUpdated");
-    }
     
     function changePagesSelected(pageData){
       for(var i = 0; i < pageData.length; i++){
@@ -54,12 +50,13 @@
       $rootScope.$broadcast("selectedUpdated");
     }
     
-     service.updateKeys = function(eventKey, tsKey, sKey, trKey, s5Key, speed, pag){
+     service.updateKeys = function(eventKey, tsKey, sKey, trKey, s5Key, yam, speed, pag){
       this.totalSynergyKey = tsKey;
       this.eventBriteKey = eventKey;
       this.slackKey = sKey;
       this.trelloKeys = trKey;
       this.totalSynergy5Key = s5Key;
+      this.yammerKey = yam;
       this.speed = speed;
       this.pages = pag;
       
@@ -69,6 +66,13 @@
       $rootScope.$broadcast("keysUpdated");
       $rootScope.$broadcast("speedUpdated");
       $rootScope.$broadcast("selectedUpdated");
+
+    }
+    
+    service.saveTrelloListId = function(listId){
+      chrome.storage.local.set({'trelloListSelected' : listId});
+      service.trelloListSelected = listId;
+      $rootScope.$broadcast('trelloListUpdated');
     }
 
     service.passCallsData = function(callsData, progressData){
@@ -135,6 +139,11 @@
       this.synergy5Data = data;
       $rootScope.$broadcast("synergy5DataUpdated");
     }
+    
+    service.updateTrelloSelectedName = function(name){
+      service.trelloSelectedName = name;
+      $rootScope.$broadcast("trelloSelectedNameUpdate");
+    }
 
     service.savePagesAndSpeed = function(pages2, speed2){
       this.pages = pages2;
@@ -146,6 +155,7 @@
       $rootScope.$broadcast("stateOfBomUpdated");
       $rootScope.$broadcast("selectedUpdated");
     }
+
 
     service.updateABC123 = function(data){
       this.abc123 = data;
@@ -160,6 +170,107 @@
         }
       }
       $rootScope.$broadcast("selectedUpdated");
+    }
+    
+    //Use the user auth to get the list of boards they are assigned to
+    service.getTrelloBoards = function(keys, userAuth){
+      
+      var trelloSplitKeys = keys.split("-");
+      var url = 'https://api.trello.com/1/tokens/' + userAuth + '/member/idBoards?key=' + trelloSplitKeys[0] + '&token=' + userAuth;
+      var modifiedUrl = url.replace(/\s/g, '');
+
+      $http.get(modifiedUrl)
+      .success(function(data){
+          service.getTrelloLists(data,trelloSplitKeys[0], userAuth);
+      })
+      .error(function(data){
+        
+          console.log("Could not get trello boards :(");
+      });
+    }
+    
+    //batch call with the board id's to get potential lists to show
+    service.getTrelloLists = function(boards, appKey, userKey){
+      
+      var batchString = '';
+      
+      for(var i =0; i < boards.length; i++){
+        if(i !== 0)
+          batchString += ",";
+        batchString += "/1/boards/" + boards[i] + "?lists=open";
+      }
+      
+      var batchUrl = 'https://api.trello.com/1/batch/?urls=' + batchString + '&key=' + appKey + '&token=' + userKey;
+      var modUrl = batchUrl.replace(/\s/g, '');
+      
+            
+      var trelloInfo = [];
+      var that = this;
+      
+      
+      $http.get(modUrl)
+      .success(function(success){
+
+          for (var i = 0; i < success.length; i++) {
+            
+            var board = success[i][200];
+        
+            var boardObject = {
+                "id": board.id,
+                "name": board.name,
+                "lists": []
+            };
+        
+            for (var j = 0; j < board.lists.length; j++) {
+                var list = board.lists[j];
+        
+                var listObject = {
+                    "listId": list.id,
+                    "listName": list.name,
+                };
+        
+                boardObject.lists.push(listObject);
+            }
+            trelloInfo.push(boardObject);
+
+            //this.boardsInformation.push(boardObject);
+          }
+          that.trelloList = trelloInfo;
+          $rootScope.$broadcast('trelloListUpdated');
+      })
+      .error(function(data){
+          console.log("Could not get trello lists :(");
+      });
+    }
+    
+    service.authenticateTwitter = function(){
+      //var key = '?' Go online and get
+      //var secretKey = '???';
+      
+      //Twitter Basic Ouath requires this step for future updates.
+      var encodedKey = encodeURIComponent(key);
+      var encodedSecretKey = encodeURIComponent(secretKey);
+      
+      var concatenatedKey = encodedKey + ":" + encodedSecretKey;
+      var base64String = btoa(concatenatedKey);
+      
+      
+      $http({
+           url: 'https://api.twitter.com/oauth2/token',
+           method: 'POST',
+           headers: {
+             'Authorization' : 'Basic '+ base64String,
+             'Content-Type' : 'application/x-www-form-urlencoded;charset=UTF-8'
+           },
+           data : 'grant_type=client_credentials'
+        })
+        .success(function(successData){
+          service.twitterBearerToken = successData.access_token;
+          $rootScope.$broadcast("Twitter Authenticated");
+        })
+        .error(function(errorData){
+          console.log("Did not get bearer token: " + JSON.stringify(errorData));
+        });
     }
     
     function findBombPage(){
@@ -213,8 +324,8 @@
       {"name" : "Help Desk Top Callers", "isSelected" : false},
       {"name" : "Help Desk Time To Close Calls", "isSelected" : false},
       {"name" : "Development Trello Cards", "isSelected" : false},
-      {"name" : "Development SlackPage", "isSelected" : false},
-      {"name" : "Development Relic", "isSelected" : false},
+      {"name" : "Yammer", "isSelected" : false},
+      {"name" : "Twitter", "isSelected" : false},
       {"name" : "Synergy 4 Cloud Users", "isSelected" : false},
       {"name" : "Synergy 4 Intern PieChart", "isSelected" : false},
       {"name" : "Synergy 4 Desktop Version Graph", "isSelected" : true},

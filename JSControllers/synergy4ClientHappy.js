@@ -24,7 +24,6 @@ app.controller('KPI21', function($scope, Service, $timeout, $http){
     $scope.$on('tabUpdated', function(){
       $scope.tab = Service.tab;
       if($scope.tab == 21){
-        changeBooleans();
         slideUp();
         $scope.count = 0;
       }
@@ -103,17 +102,6 @@ app.controller('KPI21', function($scope, Service, $timeout, $http){
       $scope.abc123.push(jsonCategoryObject);
     }
 
-    function changeBooleans(){
-      $scope.a1 = true;
-      $scope.a2 = false;
-      $scope.a3 = false;
-      $scope.timeout1 = $timeout(function(){
-        $scope.a1 = false; $scope.a2 = true;
-      },2000 + $scope.speed/3);  //need at 7000
-      $scope.timeout2 = $timeout(function(){
-        $scope.a2 = false; $scope.a3 = true;
-      },2000 + $scope.speed/1.5); // need at 12000
-    }
 
 
     function slideUp(){

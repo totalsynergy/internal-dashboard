@@ -1558,6 +1558,7 @@ left: 55%;
   padding: 2%;
 }
 
+
 #trello0, #trello1, #trello2, #trello3, #trello4, #trello5, #trello6, #trello7, #trello8{
   float:left;
   width:20%;
@@ -1586,17 +1587,32 @@ left: 55%;
   bottom:0%;
 }
 
+.trelloBackground{
+  background: #F0EFF4;
+  height:102%;
+  width:100%;
+  position:fixed;
+  bottom:0%;
+}
+
 .cardContainer{
   width:80%;
   height:100%;
   margin-right:auto;
   margin-left:auto;
-  padding-top:2%;
 }
 
 #trello{
   font-family:openSansLight;
-  color: #E2E4E6;
+  color: #777777;
+}
+
+#watching{
+  font-size:2vw;
+  margin-top:-0.5%;
+  color:#999999;
+  text-align:center;
+  font-family:openSansLight;
 }
 
 .topDiv{
@@ -1949,37 +1965,9 @@ left: 55%;
   width:50%;
   font-family:openSansLight;
   text-align: center;
-  z-index:-99;
+  z-index:5;
 }
 
-.whiteZIndex{
-  position:fixed;
-  top:0;
-  left:0;
-  height:15%;
-  width:100%;
-  z-index: -9;
-  background: #fff;
-}
-
-.slider{
-
-}
-
-/* BORDERS FOR ABC123
-.level1Clients{
-  /border-top: 2px solid #009ee3;
-}
-
-
-.level2Clients{
-  border-top: 2px solid #78ad29;
-}
-
-
-.level3Clients{
-  border-top: 2px solid #f39200;
-} */
 
 .paddingBottom{
   margin-bottom:10%;
@@ -1998,6 +1986,31 @@ left: 55%;
   font-family: openSansBold;
   text-align:center;
   z-index:9;
+}
+
+.clientFallBehind{
+  position: fixed;
+  top: 0;
+  
+  width: 100%;
+  height: 15%;
+  
+  z-index: 10;
+  background: #F0EFF4;
+}
+
+.clientTypeheader{
+  font-family:openSansLight;
+  text-align:center;
+  color:#58595B;
+  z-index: 12;
+  position: relative;
+}
+
+.clientTypeHolder{
+    font-size: 5vw;
+      margin-top: 0 !important;
+  padding-top: 20px !important;
 }
 
 .clientHappinessLevel1{
@@ -2026,7 +2039,6 @@ left: 55%;
 
 .abcImage{
   width:100%;
-  height: 100%;
   z-index: -10;
 }
 
@@ -2511,6 +2523,8 @@ ul{
 }
 
 li:before {
+  position: relative;
+  top:5px;
   content: "•";
   font-size: 50px;
   line-height:50px;
@@ -2591,6 +2605,7 @@ li:before {
   font-size: 30px;
   font-family: openSansLight;
   display:inline;
+  margin-left: 5px;
 }
 
 /*OUTER TO APPEND #bomRadarWebView to*/
@@ -2676,7 +2691,7 @@ li:before {
 }
 
 .yammerBody{
-  font-size: 1.2vw;
+  font-size: 1.6vw;
   font-family:openSansLight;
   margin-top: 0.5%;
 }
@@ -2706,6 +2721,89 @@ li:before {
 
 .hundredHeight{
   height:100%;
+}
+
+#trelloSelect{
+  float: left;
+  margin-left: 4%;
+  width: 50%;
+}
+
+#trelloAuthHolder{
+  margin-top:5%;
+}
+
+#trelloList{
+
+    display: inline;
+  font-size: 1.5vw;
+  float: left;
+}
+
+#twitterTitle{
+  width: 50%;
+  margin-left: 25%;
+}
+
+#twitterTotalSynergy{
+  float:left;
+}
+
+#twitterBird{
+  width: 14%;
+  margin: 3%;
+}
+
+.tweet{
+  margin-top: 5%;
+  border-top: 7px solid #009ee3;
+}
+
+
+.tweetStatsHolder{
+  width: 50%;
+  height: 50px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tweetText{
+  font-family: openSansLight;
+  font-size: 2vw;
+}
+
+.tweetStat{
+  font-size:40px;
+}
+
+.tweetStatValue{
+  font-size: 30px;
+  line-height: 40px;
+  width: 40px;
+  float: right;
+}
+
+.tweetRetweets{
+  width: 100px;
+  height: 50px;
+  float: left;
+  margin-left:10%;
+}
+
+.tweetFavourites{
+  width: 100px;
+  height: 50px;
+  float: left;
+  margin-left:10%;
+}
+
+.tweetTime{
+  font-size: 20px;
+  font-family: openSansLight;
+  color: #777777;
+  float: left;
+  margin-left: 10%;
+  line-height: 40px;
 }
 
 

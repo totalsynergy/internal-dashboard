@@ -4,7 +4,7 @@
   "short_name": "TSD",
   "description": "Total Synergy Dashboard",
 
-  "version": "0.0.4.2",
+  "version": "0.0.4.10",
 
   "kiosk_enabled": true,
 
@@ -44,9 +44,10 @@
     "http://www.jokesareawesome.com/",
     "http://www.reddit.com/",
     "http://www.google.com/",
-    "http://www.w3schools.com",
     "http://www.bom.gov.au/",
-    "https://www.yammer.com/"
+    "https://www.yammer.com/",
+    "https://api.trello.com/",
+    "https://api.twitter.com/"
     ],
 
   "web_accessible_resources": [
@@ -54,8 +55,7 @@
     "assets/Eventbrite feed SVG_Logo.svg",
     "assets/Eventbrite feed SVG_Map.svg",
     "js/d3.js",
-    "https://instagramimages-a.akamaihd.net/",
-    "http://www.w3schools.com"
+    "https://instagramimages-a.akamaihd.net/"
     ]
 
 }

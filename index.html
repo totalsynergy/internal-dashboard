@@ -77,7 +77,7 @@
 <body>
 <div ng-controller="mainController" ng-init="init()">
   <img src="assets/Eventbrite feed SVG_Logo.svg" ng-show="tab > 2 && tab < 6" class="logo">
-  <img src="assets/logo.png" ng-show="tab > 13 && tab < 24" class="logo2">
+  <img src="assets/logo.png" ng-show="tab > 13 && tab < 21" class="logo2">
   <img src="assets/logoSynergy5.png" ng-show="tab > 23 && tab <= 30" class="logo3">
 
   <!--<div class="leftButton" ng-show="tab != 99" ng-click="leftButton()">
@@ -383,8 +383,9 @@
 
   <!-- DEVELOPMENT TRELLO CARDS -->
 
-    <div ng-controller="KPI11" class="kpi animate blueBackground" ng-show="tab == 11">
+    <div ng-controller="KPI11" class="kpi animate trelloBackground" ng-show="tab == 11">
     <h1 id="trello">Development</h1>
+    <p id="watching">Watching: {{trelloSelectedName}}</p>
     <div class="cardContainer">
       <div class="cardHolder" ng-repeat="card in doingCards track by $index">
         <div class="topDiv">
@@ -472,8 +473,30 @@
   <!-- NEW RELIC DEVELOPMENT WEB ANALYTICS -->
   
   <div ng-controller="KPI13" class="kpi animate" ng-show="tab == 13">
-    <div class="relicFrame"></div>
-   </div>
+    
+    <div id="twitterTitle">
+      <h1 id="twitterTotalSynergy">@totalSynergy</h1>
+      <img src="assets/synergyBird.png" id="twitterBird">
+    </div>
+    
+    <div class="container">
+      <div class="tweet" ng-repeat="tweet in tweets">
+        <p class="tweetText">{{tweet.Text}}</p>
+        <div class="tweetStatsHolder">
+          <div class="tweetRetweets">
+            <span class="glyphicon glyphicon-retweet tweetStat" style="color : {{tweet.RetweetsColor}}"></span>
+            <p class="tweetStatValue">{{tweet.Retweets}}</p>
+          </div>
+          <div class="tweetFavourites">
+            <span class="glyphicon glyphicon-star tweetStat" style="color : {{tweet.FavouritesColor}}"></span>
+            <p class="tweetStatValue">{{tweet.Favourites}}</p>
+          </div>
+          <p class="tweetTime">{{tweet.Date}}</p>
+        </div>
+      </div>
+    </div>
+    
+  </div>
 
   <!-- SYNERGY4 CLOUD USERS -->
 
@@ -591,34 +614,18 @@
     <h1>Synergy 4 PlaceHolder2</h1>
   </div>
   
-    <div ng-controller="KPI21" class="kpi animate" ng-show="tab == 21">
-    <h1>HAPPY CLIENTS</h1>
-    <div class="whiteZIndex"></div>
-    <div class="clientSpenderHolder1 animate" ng-show="a1">
-      <!--<h3 class="clientHappinessLevel1">A1</h3> -->
+    <div ng-controller="KPI21" class="kpi animate greyBackground" ng-show="tab == 21">
+      <div class="clientTypeHolder">
+        <p class="clientTypeheader">PROMOTORS</p>
+      </div>
+      <div class="clientFallBehind"></div>
+    
+    <div class="clientSpenderHolder1 animate">
       <div class="abcImageHolder">
-        <img src="assets/abc123/rich2.png" class="abcImage">
-        <div class="facialExpressionHolder">
-          <img src="assets/abc123/smile.png" class="facialExpression"/>
-        </div>
+        <img src="assets/abc123/Promotion---Mobile.png" class="abcImage">
       </div>
     </div>
-    <div class="clientSpenderHolder2 animate" ng-show="a2">
-      <div class="abcImageHolder">
-        <img src="assets/abc123/midRich.png" class="abcImage" >
-        <div class="facialExpressionHolder2">
-          <img src="assets/abc123/smile.png" class="facialExpression"/>
-        </div>
-      </div>
-    </div>
-    <div class="clientSpenderHolder3 animate" ng-show="a3">
-      <div class="abcImageHolder">
-        <img src="assets/abc123/bankrupt.png" class="abcImage">
-        <div class="facialExpressionHolder3">
-          <img src="assets/abc123/smile.png" class="facialExpression"/>
-        </div>
-      </div>
-    </div>
+
     <div class="clientNameHolder slider">
       <div class="paddingBottom">
         <h3 class="clientHappinessLevel1">A1</h3>
@@ -639,34 +646,18 @@
     </div>
   </div>
 
-  <div ng-controller="KPI22" class="kpi animate" ng-show="tab == 22">
-    <h1>SATISFIED CLIENTS</h1>
-    <div class="whiteZIndex"></div>
-    <div class="clientSpenderHolder1 animate" ng-show="b1">
-      <!--<h3 class="clientHappinessLevel1">A1</h3> -->
+  <div ng-controller="KPI22" class="kpi animate greyBackground" ng-show="tab == 22">
+    <div class="clientTypeHolder">
+        <p class="clientTypeheader">PASSIVE</p>
+      </div>
+      <div class="clientFallBehind"></div>
+    
+     <div class="clientSpenderHolder1 animate">
       <div class="abcImageHolder">
-        <img src="assets/abc123/rich2.png" class="abcImage">
-        <div class="facialExpressionHolder">
-          <img src="assets/abc123/midSmile.png" class="facialExpression"/>
-        </div>
+        <img src="assets/abc123/Passive--Mobile.png" class="abcImage">
       </div>
     </div>
-    <div class="clientSpenderHolder2 animate" ng-show="b2">
-      <div class="abcImageHolder">
-        <img src="assets/abc123/midRich.png" class="abcImage" >
-        <div class="facialExpressionHolder2">
-          <img src="assets/abc123/midSmile.png" class="facialExpression"/>
-        </div>
-      </div>
-    </div>
-    <div class="clientSpenderHolder3 animate" ng-show="b3">
-      <div class="abcImageHolder">
-        <img src="assets/abc123/bankrupt.png" class="abcImage">
-        <div class="facialExpressionHolder3">
-          <img src="assets/abc123/midSmile.png" class="facialExpression"/>
-        </div>
-      </div>
-    </div>
+    
     <div class="clientNameHolder2 slider">
       <div class="paddingBottom">
         <h3 class="clientHappinessLevel1">B1</h3>
@@ -687,34 +678,19 @@
     </div>
   </div>
 
-  <div ng-controller="KPI23" class="kpi animate" ng-show="tab == 23">
-    <h1>UNSATISFIED CLIENTS</h1>
-    <div class="whiteZIndex"></div>
-    <div class="clientSpenderHolder1 animate" ng-show="c1">
+  <div ng-controller="KPI23" class="kpi animate greyBackground" ng-show="tab == 23">
+    <div class="clientTypeHolder">
+        <p class="clientTypeheader">DETRACTORS</p>
+      </div>
+      <div class="clientFallBehind"></div>
+      
+    <div class="clientSpenderHolder1 animate">
       <!--<h3 class="clientHappinessLevel1">A1</h3> -->
       <div class="abcImageHolder">
-        <img src="assets/abc123/rich2.png" class="abcImage">
-        <div class="facialExpressionHolder">
-          <img src="assets/abc123/frown.png" class="facialExpression2"/>
-        </div>
+        <img src="assets/abc123/Distractor---Mobile.png" class="abcImage">
       </div>
     </div>
-    <div class="clientSpenderHolder2 animate" ng-show="c2">
-      <div class="abcImageHolder">
-        <img src="assets/abc123/midRich.png" class="abcImage" >
-        <div class="facialExpressionHolder2">
-          <img src="assets/abc123/frown.png" class="facialExpression2"/>
-        </div>
-      </div>
-    </div>
-    <div class="clientSpenderHolder3 animate" ng-show="c3">
-      <div class="abcImageHolder">
-        <img src="assets/abc123/bankrupt.png" class="abcImage">
-        <div class="facialExpressionHolder3">
-          <img src="assets/abc123/frown.png" class="facialExpression2"/>
-        </div>
-      </div>
-    </div>
+
     <div class="clientNameHolder3 slider">
       <div class="paddingBottom">
         <h3 class="clientHappinessLevel1">C1</h3>
@@ -926,7 +902,7 @@
         <div class="leaderboardLeft">
           <div class="leaderFirstPlaceRanking">1</div>
           <div class="firstPlaceGravHolder">
-            <div class="lbGrav0">
+            <div class="{{removeWhiteSpace(leaderBoardRankings[0].Name)}} lbGrav0">lbGrav{{leaderBoardRankings[0].Name}}
             </div>
             <img src="assets/winner.png" class="winner"/>
           </div>
@@ -944,7 +920,7 @@
         <div class="leaderboardLeft">
           <div class="leaderSecondPlaceRanking">2</div>
           <div class="secondPlaceGravHolder">
-            <div class="lbGrav1">
+            <div class="{{removeWhiteSpace(leaderBoardRankings[1].Name)}} lbGrav1">
             </div>
             <img src="assets/silver.png" class="silver"/>
           </div>
@@ -961,7 +937,7 @@
         <div class="leaderboardLeft">
           <div class="leaderSecondPlaceRanking">3</div>
           <div class="secondPlaceGravHolder">
-            <div class="lbGrav2">
+            <div class="{{removeWhiteSpace(leaderBoardRankings[2].Name)}} lbGrav2">
             </div>
             <img src="assets/bronze.png" class="silver"/>
           </div>
@@ -978,7 +954,7 @@
             <div class="leaderboardLeft2">
               <div class="leaderRanking1">{{$index + 1}}</div>
               <div class="standardlbGrav">
-              <div class="lbGrav{{$index}}"></div>
+              <div class="{{removeWhiteSpace(ranking.Name)}}"></div>
               </div>
               <div class="leaderboardName">
                 <span class ="employeePosition">{{ranking.Name}}</span>
@@ -996,7 +972,7 @@
   <div ng-controller="KPI33" class="kpi animate greyBackground" ng-show="tab == 33">
     <h1><br></h1>
     <div class="valuesLogoHolder">
-      <p class="valuesLogo2">SYNERGY <span class="valuesLogoSubtext2">VISION</span></p>
+      <p class="valuesLogo2">SYNERGY ETHOS<span class="valuesLogoSubtext2"> (FOCUS POINTS) </span></p>
     </div>
     <div class="container" style="margin-top:10%">
       
@@ -1014,7 +990,7 @@
             <div class="col-md-12">
               <ul>
                 <li><p class="valueDotPoint">CLEAR AND SIMPLE</p></li>
-                <li><p class="valueDotPoint">CONSISTENT MESSAGES</p><p class="visionOrValueSubText"> (CHECK IN INTERNALLY)</p> </li>
+                <li><p class="valueDotPoint">CONSISTENT MESSAGES</p><p class="visionOrValueSubText">  (CHECK IN INTERNALLY)</p> </li>
                 <li><p class="valueDotPoint">ORIO</p> <p class="visionOrValueSubText"> (ORGINAL, RELEVANT, INSIGHTFUL, OBJECTIVE)</p></li>
               </ul>
             </div>
@@ -1059,7 +1035,7 @@
               <ul>
                 <li><p class="valueDotPoint">INTUITIVE</p></li>
                 <li><p class="valueDotPoint">QUALITY</p></li>
-                <li><p class="valueDotPoint">CHALLENGE<span class="visionOrValueSubText"> (NEW, FRESH, CHALLENGE THE "NORM")</span></p></li>
+                <li><p class="valueDotPoint">CHALLENGE <span class="visionOrValueSubText"> (NEW, FRESH, CHALLENGE THE "NORM")</span></p></li>
               </ul>
             </div>
           </div>
@@ -1073,7 +1049,7 @@
   <div ng-controller="KPI34" class="kpi animate greyBackground" ng-show="tab == 34">
     <h1><br></h1>
     <div class="valuesLogoHolder">
-      <p class="valuesLogo">SYNERGY <span class="valuesLogoSubtext">VALUES</span></p>
+      <p class="valuesLogo">SYNERGY VALUES<span class="valuesLogoSubtext"> (MORAL COMPASS)</span></p>
     </div>
     <div class="container" style="margin-top:10%">
       
@@ -1112,7 +1088,7 @@
             </div>
             <div class="col-md-12">
               <ul>
-                <li><p class="visionDotPoint">NO BULL</p><p class="visionOrValueSubText"> (DON'T TAKE IT PERSONALLY)</p></li>
+                <li><p class="visionDotPoint">NO BULL </p><p class="visionOrValueSubText">  (DON'T TAKE IT PERSONALLY)</p></li>
                 <li><p class="visionDotPoint">TREAT OTHERS HOW YOU WANT TO BE TREATED</p></li>
                 <li><p class="visionDotPoint">BEHAVE ETHICALLY</p></li>
               </ul>
@@ -1134,9 +1110,13 @@
             </div>
             <div class="col-md-12">
               <ul>
-                <li><p class="visionDotPoint">DON'T HOLD A GRUDGE</p><p class="visionOrValueSubText"> (FORGIVE AND FORGET)</p></p></li>
-                <li><p class="visionDotPoint">DON'T ASSUME</p><p class="visionOrValueSubText">(ASK QUESTIONS)</li>
+                <!--<li><p class="visionDotPoint">DON'T HOLD A GRUDGE</p><p class="visionOrValueSubText"> (FORGIVE AND FORGET)</p></p></li>
+                <li><p class="visionDotPoint">DON'T ASSUME</p><p class="visionOrValueSubText"> (ASK QUESTIONS)</li>
                 <li><p class="visionDotPoint">LISTEN FIRST</p></li>
+                -->
+                <li><p class="visionDotPoint">DON'T HOLD A GRUDGE </p><p class="visionOrValueSubText">  (FORGIVE AND FORGET)</p></li>
+                <li><p class="visionDotPoint">DON'T ASSUME </p><p class="visionOrValueSubText">  (ASK QUESTIONS)</p></li>
+                <li><p class="visionDotPoint">LISTEN FIRST</p></li> 
               </ul>
             </div>
           </div>
@@ -1279,21 +1259,32 @@ IN SETTINGS RESTORE-->
             <input type="checkbox" name="page.name" value="page.name" ng-checked="page.isSelected" ng-click="turnOffPage(page)">{{"  " + page.name}}</input>
           </div>
         </div>
-      <!--<div ng-repeat="page in pages">
-        <div class="col-md-3">
-            <input type="checkbox" name="page.name" value="page.name" ng-checked="page.isSelected" ng-click="turnOffPage(page)">{{"  " + page.name}}</input>
-        </div>
-      </div> -->
+        
+      <button type="button" class="btn btn-primary btn-lg active" ng-click="authorizeTrello()" ng-show = "!trelloAuthWorks">Authorize Trello</button>
+      <div ng-show = "trelloAuthWorks" id="trelloAuthHolder">
+        <span id = "trelloList">Trello List: </span>
+         <select ng-model="trelloListSelected.listId" id="trelloSelect" class="form-control">
+          <optgroup label="{{board.name}}" ng-repeat="board in trelloLists">
+            <option value="{{list.listId}}" ng-repeat="list in board.lists">
+              {{list.listName}}
+            </option>
+          </optgroup>
+        </select>       
       </div>
+      
+      </div>
+      
       <div class="speedHolder">
         <h2 class="speed">Speed: {{speed/1000}} seconds</h2>
         <slider floor="1000" ceiling="30000" step="1000" ng-model="speed"></slider>
       </div>
+      
       <div class="buttonHolder">
         <button type="button" class="btn btn-primary btn-lg active" ng-click="save()">Save</button>
         <button type="button" class="btn btn-default btn-lg active" ng-click="settingsClose()"/>Exit</button>
         <!--<button type="button" class="btn btn-default btn-lg active" ng-click="restoreDefaults()">Restore</button> -->
       </div>
+      
     </div>
     </div>
 </body>

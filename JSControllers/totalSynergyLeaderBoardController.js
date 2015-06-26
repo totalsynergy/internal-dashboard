@@ -24,32 +24,34 @@ app.controller('KPI32', function($scope, Service, $http, $timeout){
       }
     });
 
-    $scope.$on('staffInfoUpdated', function(){
-      $scope.staffInfo = Service.staffInfo;
+    $scope.$on('gravatarsUpdated', function(){
+      //$scope.staffInfo = Service.staffInfo;
+      getLeaderBoardStats();
     });
     
+    /*
     $scope.$on('5minuteDataFetch', function(){
       weGotKey();
     });
+    */
     
     $scope.$on('keysUpdated', function(){
       $scope.synergy4Key = Service.totalSynergyKey;
     });
     
-    $scope.$on('gravatarsUpdated', function(){
-      weGotKey();
-    });
     
-    function weGotKey(){
+    function getLeaderBoardStats(){
+
       $http({
          url: 'https://beta.synergycloudapp.com/totalsynergy/InternalKpi/Home/timeSheetLeaderboard',
          method: 'POST',
          headers : {'internal-token' : $scope.synergy4Key}
          }).success(function(d, status, headers, config){
+           
            sortData(d.data);
-           getnonTimeSheets(Service.images);
+           
            getImages(Service.images);
-           pinImages();
+           
          })
         .error(function(data, status, headers, config){
            $scope.data = "fail";
@@ -67,61 +69,58 @@ app.controller('KPI32', function($scope, Service, $http, $timeout){
       }
     }
     
-    //For those who have not filled in Time Sheets - Potential Redundancy with new feed
-    function getnonTimeSheets(images){
-      $scope.missingTimeSheets = [];
-
-      for(var i = 0; i < images.length; i++){
-        for(var j = 0 ; j < $scope.leaderBoardRankings.length; j++){
-          
-          if(images[i].Name == $scope.leaderBoardRankings[j].Name){
-            break;
-          }
-          if(j == $scope.leaderBoardRankings.length - 1 && images[i].Name != ''){
-            var fullName = images[i].Name;
-            $scope.missingTimeSheets.push({"Name" : fullName, "Score" : "Missing", "Ranking" : "Missing", "Image" : null});
-          }
-
-        }
-      }
-      for(y = 0; y < $scope.missingTimeSheets.length; y++){
-          $scope.leaderBoardRankings.push($scope.missingTimeSheets[y]);
-        }
+    //Remove any nonaplhanumeric characters
+    $scope.removeWhiteSpace = function(string){
+      if(string)
+        return string.replace(/\W/g,'');
+      else
+        return ' ';
     }
     
-    function getImageSource(name, images){
-      for(var i = 0; i < images.length; i++){
-        if(name == images[i].Name){
-          return images[i].Image;
-        }
-      }
-    }
-    
+        
     //ORGANISING IMAGES FOR LEADERBOARD
     function getImages(images){
       for(var j = 0 ; j < $scope.leaderBoardRankings.length; j++){
-        var imageSource = getImageSource($scope.leaderBoardRankings[j].Name,images);
-        $scope.leaderBoardRankings[j].Image = imageSource;
+        storeImageSource(j ,images);
       }
+      
+      pinImages();
     }
     
+    
+    //Returns the image source for a person. N.B can not save images only their source
+    function storeImageSource(index, images){
+      for(var i = 0; i < images.length; i++){
+        
+        if($scope.leaderBoardRankings[index].Name == images[i].Name){
+          $scope.leaderBoardRankings[index].Image = images[i].Image;
+          break;
+        }
+      }
+
+    }
+
     //PIN THE IMAGES ONTO THE ACTUALL DIVS
     function pinImages(){
       //make sure ng-repeat has fully run and assigned div's there dynamic $index
         angular.element(document).ready(function () {
-            console.log("listener called");
             pin();
         });
       
     }
     
+    
+    //Something wrong in the pins //if ng-repeat assigning strange div names
     function pin(){
+
       for(var x = 0; x < $scope.leaderBoardRankings.length; x++){
-                $('.lbGrav' + x).empty();
+                var className = "." + $scope.removeWhiteSpace($scope.leaderBoardRankings[x].Name);
+                console.log("Lets append to class: " + className);
+                $(className).empty();
                 var img = document.createElement('img');
                 img.src = $scope.leaderBoardRankings[x].Image;
                 img.setAttribute("class", "lbGravatar");
-                $('.lbGrav' + x).prepend(img);
+                $(className).prepend(img);
             }
     }
 
