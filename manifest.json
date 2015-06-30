@@ -4,14 +4,14 @@
   "short_name": "TSD",
   "description": "Total Synergy Dashboard",
 
-  "version": "0.0.4.10",
+  "version": "0.0.5.2",
 
   "kiosk_enabled": true,
 
   "icons": {
     "16": "assets/favicon-16x16.png",
     "128": "assets/Small-128x128.png",
-    "Logo" : "Eventbrite feed SVG_Logo.svg"
+    "Logo" : "bronze.png"
   },
 
   "app": {
@@ -51,9 +51,6 @@
     ],
 
   "web_accessible_resources": [
-    "assets/Eventbrite feed SVG_Cube.svg",
-    "assets/Eventbrite feed SVG_Logo.svg",
-    "assets/Eventbrite feed SVG_Map.svg",
     "js/d3.js",
     "https://instagramimages-a.akamaihd.net/"
     ]

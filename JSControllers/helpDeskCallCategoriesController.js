@@ -114,27 +114,37 @@ app.controller('KPI6', function($scope, Service, $http, gravatarService){
 
     function newSort(){
       $scope.categories = [];
-      for(i=0; i < $scope.data.length; i++){
-        var group = $scope.data[i].Category;
-        group = findGroup(group);
-        incrementCategory(group);
+      
+      if($scope.data && $scope.data != null){
+        for(i=0; i < $scope.data.length; i++){
+          var group = $scope.data[i].Category;
+          group = findGroup(group);
+          incrementCategory(group);
+        }
+        formatForGraph();
       }
-      formatForGraph();
     }
 
     function responseClassificationSort(){
       $scope.callsData = [];
-      for(var i =0; i < $scope.data.length; i++){
-        if($scope.data[i].ResponseDate != ""){
-        var month = $scope.data[i].ResponseDate;
-        var slicedMonth = month.substr(0,7);
-        $scope.month = slicedMonth;
-        var classification = $scope.data[i].ResponseClassification;
-        $scope.classification = classification;
-        incrementCategoryForResponse(slicedMonth, classification);
-        //var index = getIndexOfMonth(month);
-        //$scope.index = index;
-        //count(index,classifcation);
+      
+      if($scope.data && $scope.data != null){
+        
+        for(var i =0; i < $scope.data.length; i++){
+          
+          if($scope.data[i].ResponseDate != ""){
+            
+            var month = $scope.data[i].ResponseDate;
+            var slicedMonth = month.substr(0,7);
+            
+            $scope.month = slicedMonth;
+            
+            var classification = $scope.data[i].ResponseClassification;
+            $scope.classification = classification;
+            
+            incrementCategoryForResponse(slicedMonth, classification);
+          }
+          
         }
       }
       Service.passCallsData($scope.callsData, $scope.data);

@@ -14,9 +14,6 @@ app.controller('KPI15', function($scope, Service){
           {key: "UnProductive Time", y: 98.35}
         ];
       }
-      else{
-        $scope.internPieData = cloudConversionData;
-      }
     });
 
     $scope.$on('attendeesUpdated', function() {

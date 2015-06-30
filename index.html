@@ -30,7 +30,7 @@
     <script type="text/javascript" src="JSControllers/conferenceEventCountdownController.js"></script>
     <script type="text/javascript" src="JSControllers/conferenceTotalAttendessController.js"></script>
     <script type="text/javascript" src="JSControllers/developmentSlackController.js"></script>
-    <script type="text/javascript" src="JSControllers/developmentNewRelicController.js"></script>
+    <script type="text/javascript" src="JSControllers/twitterController.js"></script>
     <script type="text/javascript" src="JSControllers/developmentTrelloCards.js"></script>
     <script type="text/javascript" src="JSControllers/helpDeskCallCategoriesController.js"></script>
     <script type="text/javascript" src="JSControllers/helpDeskTopCallersController.js"></script>
@@ -66,9 +66,9 @@
 
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="angular-csp.css">
-    <link rel="stylesheet" href="angular-slider.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/angular-csp.css">
+    <link rel="stylesheet" href="css/angular-slider.css">
+    <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/bootstrap-theme.css">
     <link rel="stylesheet" href="css/nv.d3.css">
     <link rel="stylesheet" href="css/animations.css">
@@ -76,7 +76,7 @@
 
 <body>
 <div ng-controller="mainController" ng-init="init()">
-  <img src="assets/Eventbrite feed SVG_Logo.svg" ng-show="tab > 2 && tab < 6" class="logo">
+  <img src="assets/conference/conferenceLogo.png" ng-show="tab > 2 && tab < 6" class="logo">
   <img src="assets/logo.png" ng-show="tab > 13 && tab < 21" class="logo2">
   <img src="assets/logoSynergy5.png" ng-show="tab > 23 && tab <= 30" class="logo3">
 
@@ -203,11 +203,11 @@
 
   <div ng-controller="KPI3" class="kpi animate greyBackground" ng-show="tab == 3">
   <div class="container totalAttendees">
-    <img class="cube" src="assets/cubeBlank.png">
+    <img class="cube" src="assets/conference/conferenceNumHolder.png">
     <div class="numberOf"><p class="numberOfAttendees">{{totalAttendees}}</p></div>
     <h2 class="totalAttendeesHeader">TOTAL<br>ATTENDEES</h2>
     <p class="normal">LAST YEAR</p>
-    <p class="yellowBold">96</p>
+    <p class="yellowBold">106</p>
     <p class="normal"> ATTENDEES</p>
     </div>
     <canvas id="canvas">    </canvas>
@@ -221,7 +221,7 @@
     <div class="greyCover"></div>
     <h1 id="confAten">CONFERENCE ATTENDEES</h1>
     <div class="my-container">
-    <img class="country" src="assets/CONFMAPSVG.png" alt="" />
+    <img class="country" src="assets/conference/conferenceMap.png" alt="" />
     <div class="nsw"><span>{{NSWnACT}}</span></div>
     <div class="qld"><span>{{QLD}}</span></div>
     <div class="wa"><span>{{WA}}</span></div>

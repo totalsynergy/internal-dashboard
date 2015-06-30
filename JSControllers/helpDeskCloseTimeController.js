@@ -25,11 +25,15 @@ app.controller('KPI10', function($scope, Service, ngAudio){
     });
 
      $scope.$on('callsDataUpdated', function(){
-      $scope.progressData = Service.progressData;
-      $scope.show = $scope.progressData[$scope.progressData.length - 2];
-      initiateMonths();
-      formatForGraph();
-      putIntoGraph();
+      
+      if(Service.progressData && Service.progressData != null){
+        $scope.progressData = Service.progressData;
+        $scope.show = $scope.progressData[$scope.progressData.length - 2];
+        
+        initiateMonths();
+        formatForGraph();
+        putIntoGraph();
+      }
     })
 
     $scope.xAxisTickFormatFunction = function(){

@@ -47,13 +47,12 @@ app.controller('KPI8', function($scope, Service, $http, gravatarService){
 
     $scope.$on('callsDataUpdated', function(){
       $scope.progressData = Service.progressData;
-      firstSort();
-      sort();
+      //firstSort();
     })
 
     function firstSort(){
       for(var j = 20; j < 25; j++){
-      $scope.shorterItems.push($scope.progressData[j]);
+        $scope.shorterItems.push($scope.progressData[j]);
       }
       for(var i = 0; i < $scope.progressData.length; i+= 3){
         var item = $scope.progressData[$scope.progressData.length - (i + 1)]
@@ -63,12 +62,6 @@ app.controller('KPI8', function($scope, Service, $http, gravatarService){
       }
     }
 
-    function sort(){
-      for(var i = 0; i < $scope.progressData.length; i++){
-        if($scope.progressData[i].Status != 'Development' && $scope.progressData[i].Status != 'Closed' && $scope.progressData[i].Status != 'Support' && $scope.progressData[i] != undefined){
-          //scope.slightlySortedData.push($scope.progressData[i]);
-        }
-      }
-    }
+
 
   });

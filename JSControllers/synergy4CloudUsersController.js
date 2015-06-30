@@ -2,6 +2,7 @@
 
 
 app.controller('KPI14', function($scope, $http, Service, $interval){
+  
     $scope.keyAvailable = false;
     $scope.totalSynergyKey = "empty";
     $scope.cloudUptakeData = null;
@@ -34,9 +35,12 @@ app.controller('KPI14', function($scope, $http, Service, $interval){
          url: 'https://beta.synergycloudapp.com/totalsynergy/InternalKpi/Home/CloudUptake',
          method: 'POST',
          headers : {'internal-token' : $scope.totalSynergyKey}
-         }).success(function(d, status, headers, config){
+         })
+         .success(function(d, status, headers, config){
+           
            $scope.cloudUptakeData = d.data;
            sortData(d.data);
+           
          })
         .error(function(data, status, headers, config){
            $scope.data2 = "fail";
@@ -51,15 +55,22 @@ app.controller('KPI14', function($scope, $http, Service, $interval){
     }
 
     function sortData(data){
-      $scope.percentage = parseInt((data[0].Count / (data[0].Count + data[1].Count ))*100);
-      var dataToPass = [];
-      var dataArray = {key: "Not On Cloud", y: data[1].Count};
-      dataToPass.push(dataArray);
-      var dataArray2 = {key: "On Cloud", y: data[0].Count};
-      dataToPass.push(dataArray2);
-      cloudConversionData = dataToPass;
-      $scope.pieData = dataToPass;
-      $scope.originalData = dataToPass;
+      
+      if(data && data !== null){
+        $scope.percentage = parseInt((data[0].Count / (data[0].Count + data[1].Count ))*100);
+        
+        var dataToPass = [];
+        var dataArray = {key: "Not On Cloud", y: data[1].Count};
+        
+        dataToPass.push(dataArray);
+        
+        var dataArray2 = {key: "On Cloud", y: data[0].Count};
+        
+        dataToPass.push(dataArray2);
+        
+        $scope.pieData = dataToPass;
+        $scope.originalData = dataToPass;
+      }
     }
 
     $scope.xFunction = function(){

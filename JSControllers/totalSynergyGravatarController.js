@@ -40,12 +40,16 @@ app.controller('KPI1', function($scope, Service, $http, gravatarService, md5, $t
          method: 'POST',
          headers : {'internal-token' : $scope.totalSynergyKey}
          }).success(function(d, status, headers, config){
-           $scope.data = d.data;
            
-           sortEmails2(d.data, d.data.length);
-           
-           $scope.dataLength = d.data.length;
-           Service.updateStaffInfo(d);
+           //check if successful return
+           if(d.data){
+             $scope.data = d.data;
+             
+             sortEmails2(d.data, d.data.length);
+             
+             $scope.dataLength = d.data.length;
+             Service.updateStaffInfo(d);
+           }
          })
         .error(function(data, status, headers, config){
            $scope.data = "fail";

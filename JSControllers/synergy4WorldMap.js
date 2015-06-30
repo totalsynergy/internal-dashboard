@@ -25,16 +25,19 @@ app.controller('KPI18', function($scope, Service, ngAudio, $http){
          method: 'POST',
          headers : {'internal-token' : $scope.totalSynergyKey}
          }).success(function(d, status, headers, config){
-           $scope.data = d.data[10].Country;
-           $scope.countries = [];
-           for(var i = 0; i < d.data.length; i++){
-              //$scope.countryNames.push(data[i].Country);
-              incrementCategory(d.data[i].Country);
-            }
-           if($scope.count == 0){
-            loadMap();
-            //$scope.count++;
-          }
+           
+           if(d.data && d.data != null){
+               $scope.data = d.data[10].Country;
+               $scope.countries = [];
+               for(var i = 0; i < d.data.length; i++){
+                  //$scope.countryNames.push(data[i].Country);
+                  incrementCategory(d.data[i].Country);
+                }
+               if($scope.count == 0){
+                loadMap();
+                //$scope.count++;
+              }
+           }
 
          })
         .error(function(data, status, headers, config){

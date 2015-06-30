@@ -3,7 +3,7 @@ app.controller('KPI5', function($scope, $http, Service, $interval){
     $scope.days = 0;
     $scope.hours = 0;
     $scope.minutes = 0;
-    $scope.keyTester = eventBriteKey;
+    $scope.keyTester = '';
 
     $scope.$on('tabUpdated', function(){
       $scope.tab = Service.tab;
@@ -12,7 +12,7 @@ app.controller('KPI5', function($scope, $http, Service, $interval){
     $scope.$on('keysUpdated', function(){
       $scope.eventBriteKey = Service.eventBriteKey;
       $scope.totalSynergyKey = Service.totalSynergyKey;
-      weGotKey();
+      //weGotKey();
     })
 
     $scope.$on('selectedUpdated', function(){
@@ -42,11 +42,16 @@ app.controller('KPI5', function($scope, $http, Service, $interval){
     }
 
     function weGotKey(){
+      
       $http.get("https://www.eventbriteapi.com/v3/events/13747447987/?token=" + $scope.eventBriteKey)
       .success(function(data){
+        
         $scope.eventDate = new Date(data.start.utc).getTime();
+        
         timerUpdate($scope.eventDate);
+        
         $scope.eventData = data;
+        
       })
       .error(function(){
         //

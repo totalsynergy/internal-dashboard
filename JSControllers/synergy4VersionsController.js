@@ -50,16 +50,21 @@ app.controller('KPI16', function($scope, $http, Service, $interval){
         var blankData = [];
         var data = [];
         var percentageSum = 0;
-       if(dataPassed.length >= 3){
+       if(dataPassed && dataPassed != null && dataPassed.length >= 3){
+         
          for(i = 0; i < dataPassed.length; i++){
+           
            var versionObject = [dataPassed[i].Version, dataPassed[i].Count];
            var blankVersionObject = [dataPassed[i].Version, 0];
+           
            dataToPass.push(versionObject);
            blankData.push(blankVersionObject);
+           
            percentageSum += dataPassed[i].Count;
-            }
+          }
+          
+          $scope.percentage = parseInt((dataPassed[i-2].Count + dataPassed[i-1].Count)/percentageSum*100);
        }
-        $scope.percentage = parseInt((dataPassed[i-2].Count + dataPassed[i-1].Count)/percentageSum*100);
 
         var data = [
                 {

@@ -20,13 +20,16 @@ app.controller('KPI9', function($scope, Service, ngAudio){
     function sortData(){
       $scope.barData = [];
       $scope.callerStats = [];
-      for(var i = 0; i < $scope.progressData.length; i++){
-        feedThrough($scope.progressData[i]);
+      
+      if($scope.progressData && $scope.progressData != null){
+        for(var i = 0; i < $scope.progressData.length; i++){
+          feedThrough($scope.progressData[i]);
+        }
+        $scope.callerStats.sort(function(a,b) {
+          return b.Count - a.Count;
+        });
+        formatForGraph();
       }
-      $scope.callerStats.sort(function(a,b) {
-        return b.Count - a.Count;
-      });
-      formatForGraph();
     }
 
     function feedThrough(dataInstance){

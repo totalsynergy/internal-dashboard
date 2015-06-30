@@ -1,7 +1,11 @@
 
 
   angular.module('appService', []).factory('Service' , function($rootScope, $http){
+    
+    //The service object
     var service = {};
+    
+    //Service Variables 
     service.tab = 3;
     service.second = 0;
     service.speed = 15000;
@@ -22,41 +26,39 @@
     service.trelloLists = [];
     service.trelloListSelected = '';
     service.twitterBearerToken = '';
+    service.twitterKey = '';
+    service.twitterSecret = '';
+    
+    //functions
+    
     
     chrome.storage.local.get(null, function(result){
-      if(result.pages != null && result.speed != null) {//added the speed here for future checks
+      
+      //If Chrome get local storage is successful
+      if(result.speed != null) {//added the speed here for future checks
+      
+          service.updateKeys(result.eventBriteKey, result.totalSynergyKey, result.slackKey,  result.trelloKeys, result.synergy5Keys, result.yammer, result.twitterKey, result.twitterSecret, result.speed, result.pages);
+
+        
         this.trelloUserAuth = result.trelloUserAuth;
-        service.updateKeys(result.eventBriteKey, result.totalSynergyKey, result.slackKey,  result.trelloKeys, result.synergy5Keys, result.yammer, result.speed, result.pages);
         service.trelloListSelected = result.trelloListSelected;
         service.getTrelloBoards(result.trelloKeys, result.trelloUserAuth);
-        //service.authenticateTwitter(); //pass the keys from local storage
+        
+        service.authenticateTwitter(result.twitterKey, result.twitterSecret); //pass the keys from local storage
       }
     });
 
-    
-    function changePagesSelected(pageData){
-      for(var i = 0; i < pageData.length; i++){
-        for(var j = 0; i < pages.length; j++){
-          if(pageData[i].name == pages[j].name){
-            pages[j].isSelected = pageData[i].isSelected;
-            break;
-          }
-        }
-      }
-      this.pages = pages;
-      service.pages = pages;
-      service.bomBeginningPageState  = this.pages[findBombPage()].isSelected;
-      $rootScope.$broadcast("stateOfBomUpdated");
-      $rootScope.$broadcast("selectedUpdated");
-    }
-    
-     service.updateKeys = function(eventKey, tsKey, sKey, trKey, s5Key, yam, speed, pag){
+    //Saves the Keys in the Service and sends a broadcast to all controllers
+    service.updateKeys = function(eventKey, tsKey, sKey, trKey, s5Key, yam, twitterK, twitterS, speed, pag){
+      
       this.totalSynergyKey = tsKey;
       this.eventBriteKey = eventKey;
       this.slackKey = sKey;
       this.trelloKeys = trKey;
       this.totalSynergy5Key = s5Key;
       this.yammerKey = yam;
+      this.twitterKey = twitterK;
+      this.twitterS = twitterS;
       this.speed = speed;
       this.pages = pag;
       
@@ -69,45 +71,51 @@
 
     }
     
+    //Retains the trello List selected in local storage
     service.saveTrelloListId = function(listId){
       chrome.storage.local.set({'trelloListSelected' : listId});
       service.trelloListSelected = listId;
       $rootScope.$broadcast('trelloListUpdated');
     }
-
+    
+    //Help Desk data - passing from one controller to the other
     service.passCallsData = function(callsData, progressData){
       this.callsData = callsData;
       this.progressData = progressData;
       $rootScope.$broadcast('callsDataUpdated');
     }
 
-
+    //Update the current Page we are looking at
     service.updateTab = function(value){
         this.tab = value;
         $rootScope.$broadcast("tabUpdated");
     }
-
+    
+    //Update the gravatars to be used in trello/leaderboard etc.
     service.updateGravatars = function(images){
       this.images = images;
       $rootScope.$broadcast("gravatarsUpdated");
     }
     
+    //Shares the list of staff names/emails
     service.updateStaffInfo = function(d){
       this.staffInfo = d;
       $rootScope.$broadcast("staffInfoUpdated");
     }
 
-
+    //When Settings speed is changed
     service.updateSpeed = function(value){
         this.speed = value;
         $rootScope.$broadcast("speedUpdated")
     }
-
+    
+    //Setting pages changed
     service.updatePages = function(value){
       this.pages = value;
       $rootScope.$broadcast("selectedUpdated")
     }
-
+    
+    //Event Brite Data is been updated
     service.updateEventData = function(value){
       this.eventData = value;
       $rootScope.$broadcast("eventDataUpdated")
@@ -117,24 +125,28 @@
       this.totalAttendees = value;
       $rootScope.$broadcast("attendeesUpdated");
     }
-
+    
+    //A data fetch message called every 5 minutes - used for controllers which need frequent data fetch such as conference
     service.sendForData = function(){
       $rootScope.$broadcast("fetchEventData");
       $rootScope.$broadcast("5minuteDataFetch");
     }
-
+    
+    //Slower data fetch called once an hour
     service.sendForCallsData = function(){
       $rootScope.$broadcast("fetchCallsData");
       $rootScope.$broadcast("hourlyDataCall");
     }
-
+    
+    //Previously used function to restore pages used
     service.restore = function(speed, page){
       this.pages = page;
       this.speed = 15000;
       $rootScope.$broadcast("speedUpdated");
       $rootScope.$broadcast("selectedUpdated");
     }
-
+    
+    //Share/Update the synergy 5 statistics
     service.updateSynergy5Data = function(data){
       this.synergy5Data = data;
       $rootScope.$broadcast("synergy5DataUpdated");
@@ -145,6 +157,7 @@
       $rootScope.$broadcast("trelloSelectedNameUpdate");
     }
 
+    //Simple Save function when a user does not make any page changes
     service.savePagesAndSpeed = function(pages2, speed2){
       this.pages = pages2;
       this.speed = speed2;
@@ -156,37 +169,44 @@
       $rootScope.$broadcast("selectedUpdated");
     }
 
-
+    //Slower Call used to independently update ABC123 clients - for testing with help desk speeds
     service.updateABC123 = function(data){
       this.abc123 = data;
       $rootScope.$broadcast("abc123Updated");
     }
     
+    //Change a single page status - used to dynamically change BOM page
     service.changeIndividualPage = function(name, boolean){
+      
       for(var i = 0; i < this.pages.length; i++){
+        
         if(name == this.pages[i].name){
           this.pages[i].isSelected = boolean;
           break;
         }
+        
       }
+      
       $rootScope.$broadcast("selectedUpdated");
     }
     
     //Use the user auth to get the list of boards they are assigned to
     service.getTrelloBoards = function(keys, userAuth){
       
-      var trelloSplitKeys = keys.split("-");
-      var url = 'https://api.trello.com/1/tokens/' + userAuth + '/member/idBoards?key=' + trelloSplitKeys[0] + '&token=' + userAuth;
-      var modifiedUrl = url.replace(/\s/g, '');
-
-      $http.get(modifiedUrl)
-      .success(function(data){
-          service.getTrelloLists(data,trelloSplitKeys[0], userAuth);
-      })
-      .error(function(data){
-        
-          console.log("Could not get trello boards :(");
-      });
+      if(keys && keys != ''){
+        var trelloSplitKeys = keys.split("-");
+        var url = 'https://api.trello.com/1/tokens/' + userAuth + '/member/idBoards?key=' + trelloSplitKeys[0] + '&token=' + userAuth;
+        var modifiedUrl = url.replace(/\s/g, '');
+  
+        $http.get(modifiedUrl)
+        .success(function(data){
+            service.getTrelloLists(data,trelloSplitKeys[0], userAuth);
+        })
+        .error(function(data){
+          
+            console.log("Could not get trello boards :(");
+        });
+      }
     }
     
     //batch call with the board id's to get potential lists to show
@@ -243,9 +263,11 @@
       });
     }
     
-    service.authenticateTwitter = function(){
-      //var key = '?' Go online and get
-      //var secretKey = '???';
+    //Use Basic Auth to get a 'bearer-token' from Twitter to use in HTTP GET requests
+    service.authenticateTwitter = function(twitterKey, twitterSecret){
+      
+      var key = twitterKey;
+      var secretKey = twitterSecret;
       
       //Twitter Basic Ouath requires this step for future updates.
       var encodedKey = encodeURIComponent(key);
@@ -271,8 +293,9 @@
         .error(function(errorData){
           console.log("Did not get bearer token: " + JSON.stringify(errorData));
         });
-    }
+    };
     
+    //Return the index of the Bom Radar page
     function findBombPage(){
       for(var i = 0; i < this.pages.length; i++){
         if('Bom Radar' == this.pages[i].name){
@@ -280,13 +303,16 @@
         }
       }
       return "Page does not exist";
-    }
+    };
 
-
-
+    //Return the service object with the 
     return service;
 });
 
+
+
+
+//Create the application and apply white listing configuration to comply with chrome app policies
   var app = angular.module('myApp', ['appService', 'uiSlider', 'nvd3ChartDirectives', 'ngAnimate', 'gravatarModule', 'ngAudio', 'ngMd5'])
   .config( [
     '$compileProvider',
@@ -295,23 +321,12 @@
         var newImgSrcSanitizationWhiteList = currentImgSrcSanitizationWhitelist.toString().slice(0,-1)
         + '|chrome-extension:'
         +currentImgSrcSanitizationWhitelist.toString().slice(-1);
-
-
         $compileProvider.imgSrcSanitizationWhitelist(newImgSrcSanitizationWhiteList);
     }
 ]);
 
 
-
-
-    var synergyApiKey = "";
-
-    var eventBriteKey = "?";
-
-    var test = 1;
-
-    var speed = 15000;
-
+//Global Variable to access page names
     var pages = [
       {"name" : "Totaltest Synergy Gravatar", "isSelected" : false},
       {"name" : "Total SynergyGram", "isSelected" : false},
@@ -325,7 +340,7 @@
       {"name" : "Help Desk Time To Close Calls", "isSelected" : false},
       {"name" : "Development Trello Cards", "isSelected" : false},
       {"name" : "Yammer", "isSelected" : false},
-      {"name" : "Twitter", "isSelected" : false},
+      {"name" : "Twitter", "isSelected" : true},
       {"name" : "Synergy 4 Cloud Users", "isSelected" : false},
       {"name" : "Synergy 4 Intern PieChart", "isSelected" : false},
       {"name" : "Synergy 4 Desktop Version Graph", "isSelected" : true},
@@ -333,9 +348,9 @@
       {"name" : "Synergy 4 World Map", "isSelected" : false},
       {"name" : "Synergy 4 PlaceHolder 1", "isSelected" : false},
       {"name" : "Synergy 4 PlaceHolder 2", "isSelected" : false},
-      {"name" : "Synergy 4 Client Happy", "isSelected" : false},
-      {"name" : "Synergy 4 Client Fine", "isSelected" : false},
-      {"name" : "Synergy 4 Client Sad", "isSelected" : false},
+      {"name" : "Synergy 4 Promotors", "isSelected" : false},
+      {"name" : "Synergy 4 Passive", "isSelected" : false},
+      {"name" : "Synergy 4 DetractorsY", "isSelected" : false},
       {"name" : "Synergy 5 Trial vs Active", "isSelected" : false},
       {"name" : "Synergy 5 Timeline", "isSelected" : false},
       {"name" : "Synergy 5 Client Count", "isSelected" : false},
@@ -350,15 +365,3 @@
       {"name" : "Total Synergy Structure", "isSelected" : false},
       {"name" : "Bom Radar", "isSelected" : false}
     ];
-
-    var tabOpen = 4;
-
-    var cloudConversionData = "";
-
-
-
-
-
-
-
-// Maybe place settings tabs at default 99 - just for memory

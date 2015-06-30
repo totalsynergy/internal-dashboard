@@ -1,4 +1,5 @@
-  app.controller('SettingsController', function($scope, Service, $rootScope, $http){
+app.controller('SettingsController', function($scope, Service, $rootScope, $http){
+    
    $scope.eventBriteKey = '';
    $scope.totalSynergyKey = '';
    $scope.slackKey = '';
@@ -11,11 +12,8 @@
    $scope.trelloListSelected = {"listId":"556b9a17dd087e37aac39776","listName":"Sprint Backlog"};
    $scope.trelloAuthWorks = false;
 
-    $scope.speedChange = function(){
-      $scope.speed = parseInt($scope.speed);
-    }
 
-     $scope.$on('tabUpdated', function(){
+    $scope.$on('tabUpdated', function(){
       $scope.tab = Service.tab;
     });
 
@@ -26,12 +24,24 @@
       $scope.trelloKeys = Service.trelloKeys;
       $scope.totalSynergy5Key = Service.totalSynergy5Key;
       $scope.pages = Service.pages;
-    })
+    });
 
     $scope.$on('speedUpdated', function(){
       $scope.speed = Service.speed;
-    })
+    });
     
+    
+
+    $scope.$watch('speed', function(){
+      Service.updateSpeed($scope.speed);
+    });
+
+
+    $scope.$on('selectedUpdated', function(){
+      $scope.pages = Service.pages;
+    });
+    
+    //Save the listID and sort the order of lists so user knows which list was previously selected
     $scope.$on('trelloListUpdated', function(){
 
       $scope.trelloAuthWorks = true;
@@ -39,11 +49,12 @@
       $scope.trelloLists = Service.trelloList;
       
       $scope.trelloListSelected.listId = Service.trelloListSelected;
-      $scope.trelloListSelected.listName = getDefaultList();
-    })
+      $scope.trelloListSelected.listName = $scope.getDefaultList();
+      
+    });
     
-    //Goes through List and finds the previously selected one - puts this as default in select ng-options
-    function getDefaultList(){
+    //Goes through Trello Lists and finds the previously selected one - puts this as default in select ng-options
+    $scope.getDefaultList = function(){
       
       //even though scope not within blocks still declare
       var selectedObject= {};
@@ -75,7 +86,7 @@
       
     }
     
-
+    //Saves pages and Speed. If syenrgy call was successful save these keys
     $scope.save = function(){
       if($scope.masterKey != ''){
         $http({
@@ -105,12 +116,15 @@
       
     }
     
-    
+    //Arranges the keys 
     //removed trello user token key from list so it does not use the one feed gives
     function arrangeKeys(data){
+      
       var trelloApplicationKey, trelloUserTokenKey, trelloCombinedKey = '';
-      var fromAndTo = ["EventBrite Key", "Synergy 4 Key", "Slack", "Trello Application Key","Synergy 5 Key", "yammer"];
+      var fromAndTo = ["EventBrite Key", "Synergy 4 Key", "Slack", "Trello Application Key","Synergy 5 Key", "yammer", "TwitterKey", "TwitterSecret"];
       var keysArray = [];
+      
+      
       for(var j = 0; j < fromAndTo.length; j++){
         
         for(var i = 0 ; i < data.length; i++){
@@ -122,9 +136,11 @@
           
         }
       }
+
       saveKeysToLocalStorage(keysArray);
     }
-
+    
+    //Save keys and then notify service of the change
     function saveKeysToLocalStorage(keysArray){
       chrome.storage.local.set({'eventBriteKey': keysArray[0]});
       chrome.storage.local.set({'totalSynergyKey': keysArray[1]});
@@ -133,8 +149,10 @@
       chrome.storage.local.set({'trelloKeys' : keysArray[3]});
       chrome.storage.local.set({'synergy5Keys' : keysArray[4]});
       chrome.storage.local.set({'yammer' : keysArray[5]});
+      chrome.storage.local.set({'twitterKey' : keysArray[6]});
+      chrome.storage.local.set({'twitterSecret' : keysArray[7]});
       chrome.storage.local.set({'pages' : Service.pages});
-      Service.updateKeys(keysArray[0], keysArray[1], keysArray[2], keysArray[3], keysArray[4], keysArray[5], $scope.speed, $scope.pages);
+      Service.updateKeys(keysArray[0], keysArray[1], keysArray[2], keysArray[3], keysArray[4], keysArray[5], keysArray[6], keysArray[7], $scope.speed, $scope.pages);
       Service.sendForData();
     }
 
@@ -143,14 +161,16 @@
       chrome.storage.local.set({'pages' : Service.pages});
     }
 
-    
+    //Make sure the page we go back to is selected
     $scope.settingsClose = function(){
+      
       for(i = 0; i < pages.length; i++)
         if($scope.pages[i].isSelected){
           $scope.tab = i + 1;
           Service.updateTab(i + 1);
           $rootScope.$broadcast('settingsClosed')
         }
+        
     }
     
     //load the trello authorization
@@ -161,16 +181,21 @@
 
     };
     
+    //Check whether the current webview contains the key we need
     $scope.trelloChange = function(){
         
        var webview = document.getElementById("trelloAuthorize");
+       
        webview.executeScript(
         {code: 'document.getElementsByTagName ("PRE")[0].firstChild.data'},
         function(results) {
-        // results[0] would have the webview's innerHTML.
+
           if(results && results != ''){
+            
             var key = results[0].replace(/(\r\n|\n|\r)/gm," ");
+            
             $("#trelloAuthorize").remove();
+            
             chrome.storage.local.set({'trelloUserAuth' : key });
             
             $scope.trelloAuthWorks = true;
@@ -184,16 +209,6 @@
       Service.updatePages($scope.pages);
     }
 
-    //when ever a pages state is changed > run updatePagesCount
-
-    $scope.$watch('speed', function(){
-      Service.updateSpeed($scope.speed);
-    })
-
-
-    $scope.$on('selectedUpdated', function(){
-      $scope.pages = Service.pages;
-    })
 
 
   });

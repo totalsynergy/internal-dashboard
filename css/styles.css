@@ -4,22 +4,22 @@
 
 @font-face {
     font-family: openSans;
-    src: url(OpenSans-Bold.ttf);
+    src: url(../fonts/OpenSans-Bold.ttf);
 }
 
 @font-face {
     font-family: openSansLight;
-    src: url(OpenSans-Light.ttf);
+    src: url(../fonts/OpenSans-Light.ttf);
 }
 
 @font-face {
     font-family: openSansBold;
-    src: url(OpenSans-ExtraBold.ttf);
+    src: url(../fonts/OpenSans-ExtraBold.ttf);
 }
 
 @font-face {
     font-family: billabong;
-    src: url(fonts/billabong.ttf);
+    src: url(../fonts/billabong.ttf);
 }
 
 html{
@@ -108,7 +108,6 @@ h1{
 
 .logo{
     width:20%;
-    height:20%;
     display:block;
     position:fixed;
     bottom:0;
@@ -182,7 +181,7 @@ div.nsw, div.qld, div.sa, div.nt, div.wa, div.vic{
     width: 18.3%;
     height: 18.3%;
     text-align: center;
-    color:#58595B;
+    color:#fff;
      /*mess around */
     font-family:openSans;
 }
@@ -312,7 +311,7 @@ div.earthNumbers{
 
 .startDate{
   font-family:openSans;
-  color:#FDCE1D;
+  color:#33989B;
   font-size:3vw;
   position: relative;
   bottom:2.5%;
@@ -336,7 +335,7 @@ div.earthNumbers{
 
 .yellowBold{
   font-family:openSans;
-  color:#FDCE1D;
+  color:#33989B;
   font-size:3vw;
   padding-left:1%;
   padding-right:1%;
@@ -358,14 +357,14 @@ div.earthNumbers{
 
 .numberOf{
   position:absolute;
-  color:#58595B;
+  color:#F0EFF4;
   font-family: openSans;
   text-align:center;
   font-size:16vw;
   width:25%;
   height:25%;
   bottom:60%;
-  left:36%;
+  left:37%;
 }
 
 input[type="text"] {
@@ -2540,7 +2539,7 @@ li:before {
 .valuesLogo{
   font-family:openSansBold;
   font-size:50px;
-  color:#009ee3;
+  color: #78ad29;
 }
 
 .valuesLogoSubtext{
@@ -2551,7 +2550,7 @@ li:before {
 .valuesLogo2{
   font-family:openSansBold;
   font-size:50px;
-  color:#78ad29;
+  color:#009ee3;
 }
 
 .valuesLogoSubtext2{
@@ -2585,11 +2584,11 @@ li:before {
 }
 
 .visionTitle ,.valueHolder li:before{
-    color: #009ee3;
+    color: #78ad29;
 }
 
 .valueTitle, .visionHolder li:before{
-    color: #78ad29;
+    color: #009ee3;
 }
 
 .visionDotPoint, .valueDotPoint{

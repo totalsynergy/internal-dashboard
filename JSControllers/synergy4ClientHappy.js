@@ -55,13 +55,15 @@ app.controller('KPI21', function($scope, Service, $timeout, $http){
     }
 
     function sortData(data){
-      for(var i = 0; i < data.length; i++){
-        var category = data[i].ClientRanking;
-        var clientName = data[i].LicenseName;
-        addNameToCategory(category, clientName);
+      if(data && data != null){
+        for(var i = 0; i < data.length; i++){
+          var category = data[i].ClientRanking;
+          var clientName = data[i].LicenseName;
+          addNameToCategory(category, clientName);
+        }
+        sortAs();
+        Service.updateABC123($scope.abc123);
       }
-      sortAs();
-      Service.updateABC123($scope.abc123);
     }
 
     function sortAs(){

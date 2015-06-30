@@ -97,18 +97,6 @@ app.controller('KPI36', function($scope, Service, $http, $timeout){
         
       return returnString.replace(/\s+/g, '');
     }
-    
-    /*function mapDay(shortDay){
-      switch(shortDay){
-        case 'Mon' : return "Monday";
-        case 'Tue' : return "Tuesday";
-        case 'Wed' : return "Wednesday";
-        case 'Thu' : return "Thursday";
-        case 'Fri' : return "Friday";
-        case 'Sat' : return "Saturday";
-        case 'Sun' : return "Sunday";
-        default: break;
-      }
-    } */
+
 
 });

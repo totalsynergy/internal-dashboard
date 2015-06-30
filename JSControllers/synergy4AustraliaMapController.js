@@ -39,33 +39,36 @@ app.controller('KPI17', function($scope, Service, $http, gravatarService){
       $scope.WA = 0;
       $scope.SA = 0;
       $scope.international = 0;
-      for(i = 0; i < data.length; i++){
-        if(data[i].Active && !data[i].NoUpgrades && !data[i].Testing){
-            switch(data[i].State){
-             case 'NSW': $scope.NSW++;
-                         break;
-             case 'ACT': $scope.ACT++;
-                         break;
-             case 'QLD': $scope.QLD += 1;
-                         break;
-             case 'VIC': $scope.VIC++;
-                         break;
-             case 'TAS': $scope.TAS += 1;
-                         break;
-             case 'NT': $scope.NT += 1;
-                         break;
-             case 'WA': $scope.WA += 1;
-                        break;
-             case 'SA': $scope.SA += 1;
-                        break;
-              default: ;
+      
+      if(data && data != null){
+        for(i = 0; i < data.length; i++){
+          if(data[i].Active && !data[i].NoUpgrades && !data[i].Testing){
+              switch(data[i].State){
+               case 'NSW': $scope.NSW++;
+                           break;
+               case 'ACT': $scope.ACT++;
+                           break;
+               case 'QLD': $scope.QLD += 1;
+                           break;
+               case 'VIC': $scope.VIC++;
+                           break;
+               case 'TAS': $scope.TAS += 1;
+                           break;
+               case 'NT': $scope.NT += 1;
+                           break;
+               case 'WA': $scope.WA += 1;
+                          break;
+               case 'SA': $scope.SA += 1;
+                          break;
+                default: ;
+                }
+             if(data[i].Country != 'Australia')
+              $scope.international++;
+             else
+              $scope.total++;
               }
-           if(data[i].Country != 'Australia')
-            $scope.international++;
-           else
-            $scope.total++;
-            }
-        }
-       }
+          }
+      }
+    }
 
   });
