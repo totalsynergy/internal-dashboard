@@ -4,6 +4,8 @@ app.controller('KPI5', function($scope, $http, Service, $interval){
     $scope.hours = 0;
     $scope.minutes = 0;
     $scope.keyTester = '';
+    
+    //Event Brite ID = 17562070626
 
     $scope.$on('tabUpdated', function(){
       $scope.tab = Service.tab;
@@ -12,7 +14,7 @@ app.controller('KPI5', function($scope, $http, Service, $interval){
     $scope.$on('keysUpdated', function(){
       $scope.eventBriteKey = Service.eventBriteKey;
       $scope.totalSynergyKey = Service.totalSynergyKey;
-      //weGotKey();
+      weGotKey();
     })
 
     $scope.$on('selectedUpdated', function(){
@@ -43,7 +45,7 @@ app.controller('KPI5', function($scope, $http, Service, $interval){
 
     function weGotKey(){
       
-      $http.get("https://www.eventbriteapi.com/v3/events/13747447987/?token=" + $scope.eventBriteKey)
+      $http.get("https://www.eventbriteapi.com/v3/events/17562070626/?token=" + $scope.eventBriteKey)
       .success(function(data){
         
         $scope.eventDate = new Date(data.start.utc).getTime();

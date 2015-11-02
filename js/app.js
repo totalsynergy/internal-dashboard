@@ -36,7 +36,7 @@
       
       //If Chrome get local storage is successful
       if(result.speed != null) {//added the speed here for future checks
-      
+          
           service.updateKeys(result.eventBriteKey, result.totalSynergyKey, result.slackKey,  result.trelloKeys, result.synergy5Keys, result.yammer, result.twitterKey, result.twitterSecret, result.speed, result.pages);
 
         
@@ -60,10 +60,14 @@
       this.twitterKey = twitterK;
       this.twitterS = twitterS;
       this.speed = speed;
+
       this.pages = pag;
+
       
+      /*
       this.bomBeginningPageState  = this.pages[findBombPage()].isSelected;
       $rootScope.$broadcast("stateOfBomUpdated");
+      */
       
       $rootScope.$broadcast("keysUpdated");
       $rootScope.$broadcast("speedUpdated");
@@ -159,13 +163,18 @@
 
     //Simple Save function when a user does not make any page changes
     service.savePagesAndSpeed = function(pages2, speed2){
-      this.pages = pages2;
-      this.speed = speed2;
-      this.bomBeginningPageState  = this.pages[findBombPage()].isSelected;
-      service.pages = pages2;
-      service.speed = speed2;
+      
+      
+      if(pages2){
+        this.pages = pages2;
+        this.speed = speed2;
+        
+       // this.bomBeginningPageState  = this.pages[findBombPage()].isSelected;
+        service.pages = pages2;
+        service.speed = speed2;
+      }
       $rootScope.$broadcast("speedUpdated");
-      $rootScope.$broadcast("stateOfBomUpdated");
+      //$rootScope.$broadcast("stateOfBomUpdated");
       $rootScope.$broadcast("selectedUpdated");
     }
 

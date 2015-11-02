@@ -16,7 +16,7 @@ app.controller('KPI4', function($scope, Service, $http){
     $scope.$on('keysUpdated', function(){
       $scope.eventBriteKey = Service.eventBriteKey;
       $scope.totalSynergyKey = Service.totalSynergyKey;
-     // weGotKey();
+      weGotKey();
     })
     
     //Count Attendees in each state - N.B NSW and ACT counted as one so fall through in switch
@@ -77,8 +77,10 @@ app.controller('KPI4', function($scope, Service, $http){
     });
 
     $scope.getPagedData = function(page, event) {
-      $http.get("https://www.eventbriteapi.com/v3/events/13747447987/attendees/?page=" + page  + "&token=" + $scope.eventBriteKey)
+      $http.get("https://www.eventbriteapi.com/v3/events/17562070626/attendees/?page=" + page  + "&token=" + $scope.eventBriteKey)
       .success(function(data){
+        
+        console.log("Got attendee data: " + JSON.stringify(data));
         for(i = 0; i < data.attendees.length; i++){
           event.attendees.push(data.attendees[i]);
         }

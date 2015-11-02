@@ -66,7 +66,15 @@ app.controller('mainController', function($scope, Service, $interval, $timeout, 
     //Watchers to see any updates being applied
     
     $scope.$on('selectedUpdated', function(){
-      $scope.pages = Service.pages;
+      
+      console.log("Service pages were: " + JSON.stringify(Service.pages));
+      
+      //Check If Service Pages exist
+      if(Service.pages)
+      {
+        $scope.pages = Service.pages;
+      }
+      
       $scope.speed = Service.speed;
     });
 
@@ -80,7 +88,12 @@ app.controller('mainController', function($scope, Service, $interval, $timeout, 
     });
     
     $scope.$on('pagesUpdated', function(){
-      $scope.pages = Service.pages;
+      
+      if(Service.pages)
+      {
+        $scope.pages = Service.pages;
+      }
+      
     });
     
     $scope.$on('speedUpdated', function(){
@@ -153,6 +166,7 @@ app.controller('mainController', function($scope, Service, $interval, $timeout, 
     //Different to $scope.goRight - generic function used by the loop
     function goRight(){
 
+
       var nextPage = $scope.tab + 1;
       
       while(nextPage <= $scope.pages.length + 2){
@@ -165,6 +179,10 @@ app.controller('mainController', function($scope, Service, $interval, $timeout, 
         else
           nextPage++;
       }
+      
+            
+      console.log("Lets go right to: " + nextPage);
+      
       Service.updateTab(nextPage);
     }
 
@@ -173,11 +191,15 @@ app.controller('mainController', function($scope, Service, $interval, $timeout, 
       
       Service.updateTab(99);
       
+      console.log("Settings Hit");
+      
       $scope.speed = parseInt($scope.speed);
       
       Service.updateSpeed($scope.speed);
       
       $timeout.cancel($scope.timer);
+      
+      console.log("Timer is: " + JSON.stringify($scope.timer));
     };
 
     //Cancels the current mouse timer and makes the mouse appear again

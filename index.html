@@ -203,14 +203,18 @@
 
   <div ng-controller="KPI3" class="kpi animate greyBackground" ng-show="tab == 3">
   <div class="container totalAttendees">
-    <img class="cube" src="assets/conference/conferenceNumHolder.png">
-    <div class="numberOf"><p class="numberOfAttendees">{{totalAttendees}}</p></div>
+    
+    <div class="attendeeCircleHolder">
+      <img class="cube" src="assets/conference/conferenceNumHolder.png">
+      <div class="numberOf"><p>{{totalAttendees}}</p></div>
+    </div>
+    
     <h2 class="totalAttendeesHeader">TOTAL<br>ATTENDEES</h2>
     <p class="normal">LAST YEAR</p>
     <p class="yellowBold">106</p>
     <p class="normal"> ATTENDEES</p>
-    </div>
-    <canvas id="canvas">    </canvas>
+  </div>
+  <canvas id="canvas">    </canvas>
   </div>
 
   <!-- CONFERENCE ATTENDEE MAP -->
@@ -218,20 +222,40 @@
 
 
   <div ng-controller="KPI4" class="kpi animate greyBackground" ng-show="tab == 4">
-    <div class="greyCover"></div>
+
     <h1 id="confAten">CONFERENCE ATTENDEES</h1>
     <div class="my-container">
     <img class="country" src="assets/conference/conferenceMap.png" alt="" />
-    <div class="nsw"><span>{{NSWnACT}}</span></div>
-    <div class="qld"><span>{{QLD}}</span></div>
-    <div class="wa"><span>{{WA}}</span></div>
-    <div class="nt"><span>{{NT}}</span></div>
-    <div class="vic"><span>{{VICnTAS}}</span></div>
-    <div class="sa"><span>{{SA}}</span></div>
+    <div class="nsw">
+      <img class="cubeHolder" src="assets/conference/conferenceNumHolder.png">
+      <span>{{NSWnACT}}</span>
     </div>
-    <div class="international">INTERNATIONAL</div>
-    <img class="earth" src="assets/EARTH.svg" alt=""/>
-    <div class="earthNumbers"><span>{{international}}</span></div>
+    <div class="qld">
+      <img class="cubeHolder" src="assets/conference/conferenceNumHolder.png">
+      <span>{{QLD}}</span>
+    </div>
+    <div class="wa">
+      <img class="cubeHolder" src="assets/conference/conferenceNumHolder.png">
+      <span>{{WA}}</span>
+    </div>
+    <div class="nt">
+      <img class="cubeHolder" src="assets/conference/conferenceNumHolder.png">
+      <span>{{NT}}</span>
+    </div>
+    <div class="vic">
+      <img class="cubeHolder" src="assets/conference/conferenceNumHolder.png">
+      <span>{{VICnTAS}}</span>
+    </div>
+    <div class="sa">
+      <img class="cubeHolder" src="assets/conference/conferenceNumHolder.png">
+      <span>{{SA}}</span>
+    </div>
+    </div>
+    <div class="internationalHolder">
+        <p class="international">INTERNATIONAL</p>
+        <img class="earth" src="assets/EARTH.svg" alt=""/>
+        <div class="earthNumbers"><span>{{international}}</span></div>
+    </div>
   </div>
 
 
@@ -240,7 +264,7 @@
 
   <div ng-controller="KPI5" class="kpi animate greyBackground" ng-show="tab == 5">
   <div class="container grey">
-    <h2 class="countDownHeader">SYNERGY2015<br>COUNTDOWN</h2>
+    <h2 class="countDownHeader">SYNERGY2016<br>COUNTDOWN</h2>
     <div class="countDown">
     <h3 class="time">{{days}}</h3><p class="period">DAYS</p>
     <h3 class="time">{{hours}}</h3><p class="period">HOURS</p>
@@ -248,7 +272,7 @@
     </div>
     <div class="conferenceStarts">
       <p class="starts">CONFERENCE STARTS</p>
-      <p class="startDate">19 MARCH 2015</p>
+      <p class="startDate">17 MARCH 2016</p>
     </div>
   </div>
   </div>
@@ -593,9 +617,13 @@
        <div class="act2"><span>{{ACT}}</span></div>
        <div class="tas2"><span>{{TAS}}</span></div>
       </div>
-      <div class="international">INTERNATIONAL</div>
-    <img class="earth" src="assets/EARTH.svg" alt=""/>
-    <div class="earthNumbers"><span>{{international}}</span></div>
+      
+      <div class="internationalHolder">
+        <p class="international">INTERNATIONAL</p>
+        <img class="earth" src="assets/EARTH.svg" alt=""/>
+        <div class="earthNumbers"><span>{{international}}</span></div>
+    </div>
+
   </div>
 
   <!-- SYNERGY 4 WORLD MAP -->

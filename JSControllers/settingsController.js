@@ -15,6 +15,8 @@ app.controller('SettingsController', function($scope, Service, $rootScope, $http
 
     $scope.$on('tabUpdated', function(){
       $scope.tab = Service.tab;
+      
+
     });
 
     $scope.$on('keysUpdated', function(){
@@ -23,7 +25,13 @@ app.controller('SettingsController', function($scope, Service, $rootScope, $http
       $scope.slackKey = Service.slackKey;
       $scope.trelloKeys = Service.trelloKeys;
       $scope.totalSynergy5Key = Service.totalSynergy5Key;
-      $scope.pages = Service.pages;
+
+      
+      //check if pages are there
+      if(Service.pages)
+      {
+        $scope.pages = Service.pages;
+      }
     });
 
     $scope.$on('speedUpdated', function(){
@@ -38,7 +46,11 @@ app.controller('SettingsController', function($scope, Service, $rootScope, $http
 
 
     $scope.$on('selectedUpdated', function(){
-      $scope.pages = Service.pages;
+      //check if pages are there
+      if(Service.pages)
+      {
+        $scope.pages = Service.pages;
+      }
     });
     
     //Save the listID and sort the order of lists so user knows which list was previously selected
@@ -88,6 +100,8 @@ app.controller('SettingsController', function($scope, Service, $rootScope, $http
     
     //Saves pages and Speed. If syenrgy call was successful save these keys
     $scope.save = function(){
+
+      
       if($scope.masterKey != ''){
         $http({
            url: 'https://beta.synergycloudapp.com/totalsynergy/InternalKpi/Home/keys?codefortoday=' + $scope.masterKey,
@@ -106,6 +120,7 @@ app.controller('SettingsController', function($scope, Service, $rootScope, $http
              $scope.masterKey = 'Error Occured';
           });
       }
+
       saveSpeedAndPages();
       Service.savePagesAndSpeed($scope.pages, $scope.speed);
       
