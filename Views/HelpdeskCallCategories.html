@@ -1,0 +1,28 @@
+      <h1>SUPPORT - BY PRODUCT LINE</h1>
+      <div id="helpDeskCategoryContainer">
+      <nvd3-multi-bar-horizontal-chart
+            data="barData"
+            id="helpDeskCategories"
+            width="500"
+            height="250"
+            tooltips="false"
+            showXAxis="true"
+            showYAxis="false"
+            objectEquality="true"
+            clipEdge="true"
+            forcey="[0,{{maxY}}]"
+            objectEquality="true"
+            showValues="true"
+            valueFormat="valueFormatFunction()"
+            margin="{left:150,top:10,bottom:20,right:50}"
+            noData="Loading Data...">
+        <div id="smallerContainer">
+        <svg id="smallText"></svg>
+        </div>
+      </nvd3-multi-bar-horizontal-chart>
+      </div>
+      <div id='threeMonthsDiv'>
+        <p class="normalThree">Over The Last 4 Months</p>
+        <p class="numberOfCalls">{{numberOfCalls}}</p>
+        <p class="normalThree">Support Issues Have Been Raised</p>
+      </div>

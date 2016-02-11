@@ -1,0 +1,73 @@
+<div class="leaderBoard animate" ng-show= "tab == 32" >
+      <div class="leaderboardHeader">
+        <p class="leaderboardText">Time Sheet Leaderboard</p>
+      </div>
+      
+      <div class="leaderboardFirstPlace">
+        <div class="leaderboardLeft">
+          <div class="leaderFirstPlaceRanking">1</div>
+          <div class="firstPlaceGravHolder">
+            <div class="{{removeWhiteSpace(leaderBoardRankings[0].Name)}} lbGrav0">lbGrav{{leaderBoardRankings[0].Name}}
+            </div>
+            <img src="assets/winner.png" class="winner"/>
+          </div>
+          <div class="leaderboardFirstPlaceName">
+            <p class="leaderboardFirstPlaceNameText">{{leaderBoardRankings[0].Name}}</p>
+            <!--<p><span class ="employeePosition">Head Intern</span></p> -->
+          </div>
+        </div>
+        <div class="leaderboardRight">
+          <p class="leaderBoardFirstPlaceTime">{{leaderBoardRankings[0].Ranking}}</p>
+        </div>
+      </div>
+      
+      <div class="leaderboardSecondPlace">
+        <div class="leaderboardLeft">
+          <div class="leaderSecondPlaceRanking">2</div>
+          <div class="secondPlaceGravHolder">
+            <div class="{{removeWhiteSpace(leaderBoardRankings[1].Name)}} lbGrav1">
+            </div>
+            <img src="assets/silver.png" class="silver"/>
+          </div>
+          <div class="leaderboardSecondPlaceName">
+            <p class="leaderboardSecondPlaceNameText">{{leaderBoardRankings[1].Name}}</p>
+          </div>
+        </div>
+        <div class="leaderboardRight">
+          <p class="leaderBoardSecondPlaceTime">{{leaderBoardRankings[1].Ranking}}</p>
+        </div>
+      </div>
+      
+      <div class="leaderboardSecondPlace">
+        <div class="leaderboardLeft">
+          <div class="leaderSecondPlaceRanking">3</div>
+          <div class="secondPlaceGravHolder">
+            <div class="{{removeWhiteSpace(leaderBoardRankings[2].Name)}} lbGrav2">
+            </div>
+            <img src="assets/bronze.png" class="silver"/>
+          </div>
+          <div class="leaderboardSecondPlaceName">
+            <p class="leaderboardSecondPlaceNameText">{{leaderBoardRankings[2].Name}}</p>
+          </div>
+        </div>
+        <div class="leaderboardRight">
+          <p class="leaderBoardSecondPlaceTime">{{leaderBoardRankings[2].Ranking}}</p>
+        </div>
+      </div>
+      <div class="leaderboardTopTen">
+        <div ng-repeat = "ranking in leaderBoardRankings" ng-if = "$index > 2" class="leaderBoardTopTenIndividual blueBackground{{$index%2}}">
+            <div class="leaderboardLeft2">
+              <div class="leaderRanking1">{{$index + 1}}</div>
+              <div class="standardlbGrav">
+              <div class="{{removeWhiteSpace(ranking.Name)}}"></div>
+              </div>
+              <div class="leaderboardName">
+                <span class ="employeePosition">{{ranking.Name}}</span>
+              </div>
+            </div>
+            <div class="leaderboardRight2">
+              <p class="leaderBoardTime">{{ranking.Ranking}}</p>
+            </div>
+        </div>
+      </div>
+    </div>

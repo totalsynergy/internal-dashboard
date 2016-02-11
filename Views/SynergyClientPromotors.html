@@ -1,0 +1,29 @@
+      <div class="clientTypeHolder">
+        <p class="clientTypeheader">PROMOTORS</p>
+      </div>
+      <div class="clientFallBehind"></div>
+    
+    <div class="clientSpenderHolder1 animate">
+      <div class="abcImageHolder">
+        <img src="assets/abc123/Promotion---Mobile.png" class="abcImage">
+      </div>
+    </div>
+
+    <div class="clientNameHolder slider">
+      <div class="paddingBottom">
+        <h3 class="clientHappinessLevel1">A1</h3>
+      <div ng-repeat="clients in clientNames1 | limitTo: 8" class="level1Clients">
+        <h2 class="clientRankings">{{clients}}</h2>
+      </div>
+      </div>
+      <div class="paddingBottom">
+      <h3 class="clientHappinessLevel2">A2</h3>
+      <div ng-repeat="clients in clientNames2 | limitTo: 8" class="level2Clients">
+        <h2>{{clients}}</h2>
+      </div>
+      </div>
+      <h3 class="clientHappinessLevel3">A3</h3>
+      <div ng-repeat="clients in clientNames3 | limitTo: 8" class="level3Clients">
+        <h2>{{clients}}</h2>
+      </div>
+    </div>

@@ -1,0 +1,46 @@
+
+    <div id="trialAndActive" class="animate" ng-show="tab == 24">
+    <div id="pieChartContainer2" >
+      <h2 class="clientTrialHeader">Trial</h2>
+      <div class="donutPercentageHolder2">
+            <p class="donutPercentage">{{trial}}</p>
+          </div>
+      <nvd3-pie-chart
+    	  data="pieData4"
+        id="pieChart3"
+        width="550"
+        height="350"
+        x="xFunction()"
+        y="yFunction()"
+        donut="true"
+        color="colorFunction()">
+        objectEquality="true">
+        <svg height="250"></svg>
+      </nvd3-pie-chart>
+    </div>
+
+    <div id="pieChartContainer3" ng-show="tab == 24">
+          <h2 class="clientTrialHeader2">Active</h2>
+          <div class="donutPercentageHolder1">
+            <p class="donutPercentage">{{active}}</p>
+          </div>
+      <nvd3-pie-chart
+    	  data="pieData3"
+        id="pieChart4"
+        width="550"
+        height="350"
+        x="xFunction()"
+        y="yFunction()"
+        donut="true"
+        donutLabelsOutside="true"
+        objectEquality="true"
+        color="colorFunction()">
+        <svg height="250"></svg>
+      </nvd3-pie-chart>
+    </div>
+    </div>
+    <div id="bloodyLegend">
+      <p class="bloodyLegendName">Professional</p><div id="greenDiv"></div>
+      <p class="bloodyLegendName">Business</p><div id="blueDiv"></div>
+      <p class="bloodyLegendName">Enterprise</p><div id="orangeDiv"></div>
+    </div>

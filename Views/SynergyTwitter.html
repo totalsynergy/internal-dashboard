@@ -1,0 +1,22 @@
+    
+    <div id="twitterTitle">
+      <h1 id="twitterTotalSynergy">@totalSynergy</h1>
+      <img src="assets/synergyBird.png" id="twitterBird">
+    </div>
+    
+    <div class="container">
+      <div class="tweet" ng-repeat="tweet in tweets">
+        <p class="tweetText">{{tweet.Text}}</p>
+        <div class="tweetStatsHolder">
+          <div class="tweetRetweets">
+            <span class="glyphicon glyphicon-retweet tweetStat" style="color : {{tweet.RetweetsColor}}"></span>
+            <p class="tweetStatValue">{{tweet.Retweets}}</p>
+          </div>
+          <div class="tweetFavourites">
+            <span class="glyphicon glyphicon-star tweetStat" style="color : {{tweet.FavouritesColor}}"></span>
+            <p class="tweetStatValue">{{tweet.Favourites}}</p>
+          </div>
+          <p class="tweetTime">{{tweet.Date}}</p>
+        </div>
+      </div>
+    </div>

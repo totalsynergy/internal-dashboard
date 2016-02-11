@@ -1,0 +1,61 @@
+      <div class="container grey">
+        <div class = "row hundredHeight" style="margin-top : 3%">
+          
+          <div class = "col-md-offset-1 col-md-10 yammerCard">
+            <div class="yammerClip">
+              {{messages[0].Group}}
+            </div>
+            <div class="row positonRelative">
+              <div class="col-md-1">
+                <div class="yammerGrav0"></div>
+              </div>
+              <div class="col-md-4">
+                <h3 class="marginTop0">{{messages[0].User}} <br><small>{{messages[0].Position}}</small></h3>
+              </div>
+              <p class="yammerCreated">{{messages[0].Created | date:'medium'}}</p>
+            </div>
+            <div class="col-md-offset-1 yammerBody">
+              {{messages[0].Message}}
+            </div>
+          </div>
+          
+          <div class = "col-md-offset-1 col-md-10 yammerCard">
+            <div class="yammerClip">
+              {{messages[1].Group}}
+            </div>
+            <div class="row positonRelative">
+              <div class="col-md-1">
+                <div class="yammerGrav1"></div>
+              </div>
+              <div class="col-md-4">
+                <h3 class="marginTop0">{{messages[1].User}} <br><small>{{messages[1].Position}}</small></h3>
+              </div>
+              <p class="yammerCreated">{{messages[1].Created | date:'medium' }}</p>
+            </div>
+            <div class="col-md-offset-1 yammerBody">
+              {{messages[1].Message}}
+            </div>
+          </div>
+          
+          <div class = "col-md-offset-1 col-md-10 yammerCard">
+            <div class="yammerClip">
+              {{messages[2].Group}}
+            </div>
+            <div class="row positonRelative">
+              <div class="col-md-1">
+                <div class="yammerGrav2"></div>
+              </div>
+              <div class="col-md-4">
+                <h3 class="marginTop0">{{messages[2].User}} <br><small>{{messages[2].Position}}</small></h3>
+              </div>
+              <p class="yammerCreated">{{messages[2].Created | date:'medium' }}</p>
+            </div>
+            <div class="col-md-offset-1 yammerBody">
+              {{messages[2].Message}}
+            </div>
+          </div>
+          
+        </div>
+        
+      </div>
+      <img class="yammerLogo" src="assets/Yammer.png"/>

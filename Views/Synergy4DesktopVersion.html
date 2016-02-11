@@ -1,0 +1,24 @@
+  <div class="container percentageHeader animate" ng-show="tab==16">
+      <div id="rows">
+         <div class="col-md-4">
+            <p id="percent">{{percentage}}%</p>
+         </div>
+         <div class="colo-md-8">
+            <p id="percentageText">OF CLIENTS ARE ON THE<br> CURRENT DESKTOP VERSION</p>
+         </div>
+      </div>
+  </div>
+  <div class="graphContainer">
+       <nvd3-discrete-bar-chart
+            data="barData"
+            id="barChart"
+            width="800"
+            height="400"
+            tooltips="false"
+            showXAxis="true"
+            showYAxis="false"
+            color="colorFunction()"
+            objectEquality="true">
+        <svg class="smallText"></svg>
+    </nvd3-discrete-bar-chart>
+    </div>

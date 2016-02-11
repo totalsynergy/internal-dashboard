@@ -1,0 +1,8 @@
+<h1>Synergy 5 Staff Distribution</h1>
+      <div ng-repeat="category in categories track by $index">
+        <div class="transparentCategoryHolder">
+          <p class="staffDistributionPercentage{{$index}}">{{category.Percent}}%</p>
+          <img ng-src="assets/staffSize/{{category.Name}}.png" class="staffSize{{$index}}">
+          <p class="staffDistributionName">{{category.Name}}</p>
+        </div>
+      </div>

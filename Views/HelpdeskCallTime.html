@@ -1,0 +1,18 @@
+    <h1>TOTAL TIME TO CLOSE CALLS</h1>
+    <div id="weirdGraphContainer">
+ 	  <nvd3-multi-bar-chart
+    	data="data"
+        id="unique"
+        width="800"
+        height="400"
+        showXAxis="true"
+        showYAxis="true"
+        color="colorFunction()"
+        objectEquality="true"
+        xAxisTickFormat="xAxisTickFormatFunction()">
+        	<svg></svg>
+    </nvd3-multi-bar-chart>
+    </div>
+    <div id="callsLegend2" ng-show="tab == 10">
+      <p class="key">One Hour</p><div id="oneHourKey"></div> <p class="key">One Day</p><div id="fourHoursKey"></div> <p class="key">More Than 3 Days</p><div id="oneDayKey"></div>
+    </div>

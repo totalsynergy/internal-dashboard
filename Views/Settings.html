@@ -1,0 +1,58 @@
+    <div class="container">
+      <h1>Settings</h1>
+      <div class="paddingTop">
+        <h2><span class="label label-default">Master Key</span></h2>
+        <input type="text" class="form-control" id="inputEmail3" ng-model="masterKey" placeholder="Update Keys With Daily Code" name="text">
+      </div>
+      <div  class="paddingTop synergyPages">
+        <div class="totalSynergy5SettingPages">
+          <h2>Synergy 5</h2>
+          <div ng-repeat="page in pages" ng-if="$index > 22 && $index < 30">
+            <input type="checkbox" name="page.name" value="page.name" ng-checked="page.isSelected" ng-click="turnOffPage(page)">{{"  " + page.name}}</input>
+          </div>
+        </div>
+        <div class="totalSynergy5SettingPages">
+          <h2>Synergy 4</h2>
+          <div ng-repeat="page in pages" ng-if="$index > 12 && $index < 23">
+            <input type="checkbox" name="page.name" value="page.name" ng-checked="page.isSelected" ng-click="turnOffPage(page)">{{"  " + page.name}}</input>
+          </div>
+        </div>
+        <div class="totalSynergy5SettingPages">
+          <h2>Call Desk</h2>
+          <div ng-repeat="page in pages" ng-if="$index > 4 && $index <= 9">
+            <input type="checkbox" name="page.name" value="page.name" ng-checked="page.isSelected" ng-click="turnOffPage(page)">{{"  " + page.name}}</input>
+          </div>
+        </div>
+        <div class="totalSynergy5SettingPages">
+          <h2>Other</h2>
+          <div ng-repeat="page in pages" ng-if="$index <= 4 || ($index > 9 && $index < 13) || $index > 29">
+            <input type="checkbox" name="page.name" value="page.name" ng-checked="page.isSelected" ng-click="turnOffPage(page)">{{"  " + page.name}}</input>
+          </div>
+        </div>
+        
+        <button type="button" class="btn btn-primary btn-lg active" ng-click="authorizeTrello()" ng-show = "!trelloAuthWorks">Authorize Trello</button>
+        <div ng-show = "trelloAuthWorks" id="trelloAuthHolder">
+          <span id = "trelloList">Trello List: </span>
+           <select ng-model="trelloListSelected.listId" id="trelloSelect" class="form-control">
+            <optgroup label="{{board.name}}" ng-repeat="board in trelloLists">
+              <option value="{{list.listId}}" ng-repeat="list in board.lists">
+                {{list.listName}}
+              </option>
+            </optgroup>
+          </select>       
+        </div>
+      
+      </div>
+      
+      <div class="speedHolder">
+        <h2 class="speed">Speed: {{speed/1000}} seconds</h2>
+        <slider floor="1000" ceiling="30000" step="1000" ng-model="speed"></slider>
+      </div>
+      
+      <div class="buttonHolder">
+        <button type="button" class="btn btn-primary btn-lg active" ng-click="save()">Save</button>
+        <button type="button" class="btn btn-default btn-lg active" ng-click="settingsClose()"/>Exit</button>
+        <!--<button type="button" class="btn btn-default btn-lg active" ng-click="restoreDefaults()">Restore</button> -->
+      </div>
+      
+    </div>

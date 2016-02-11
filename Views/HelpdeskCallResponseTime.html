@@ -1,0 +1,20 @@
+    <!-- CAN TURN THESE 3 INTO STACKED USING MULTIBARCHART 'STACKED MODE' ON -->
+      <h1 ng-show="tab == 7">CALL RESPONSE TIME</h1>
+      <div id="firstChartContainer">
+      <nvd3-multi-bar-chart
+    	  data="data"
+        id="unique2"
+        width="800"
+        height="400"
+        showXAxis="true"
+        showYAxis="true"
+        color="colorFunction()"
+        objectEquality="true"
+        xAxisTickFormat="xAxisTickFormatFunction()"
+        stacked="true">
+        	<svg></svg>
+    </nvd3-multi-bar-chart>
+    </div>
+    <div id="callsLegend" ng-show="tab == 7">
+      <p class="key">One Hour</p><div id="oneHourKey"></div> <p class="key">Four Hours</p><div id="fourHoursKey"></div> <p class="key">One Day</p><div id="oneDayKey"></div>
+    </div>

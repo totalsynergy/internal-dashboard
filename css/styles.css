@@ -36,6 +36,8 @@ html, body, .container{
 .greyBackground{
   background-color: #F0EFF4;
   height:100%;
+      width: 100%;
+    position: absolute;
 }
 
 .greyCover{

@@ -1,0 +1,17 @@
+    <h1 id="trello">Development</h1>
+    <p id="watching">Watching: {{trelloSelectedName}}</p>
+    <div class="cardContainer">
+      <div class="cardHolder" ng-repeat="card in doingCards track by $index">
+        <div class="topDiv">
+        <div id="trello{{$index}}"></div>
+        <div class="trelloNameDiv">
+          <h3 class="trelloName">{{card.Name}}</h3>
+        </div>
+        </div>
+        <div class="bottomDiv">
+        <div class="isDoing">
+          <h3 class="trelloName2">{{card.CardName | limitTo: 49}}</h3>
+        </div>
+        </div>
+    </div>
+  </div>

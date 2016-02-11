@@ -1,0 +1,19 @@
+    <div class="container animate" ng-show="tab == 15">
+      <div id="cloudPercentTextContainer">
+      <p id="cloudPercent">{{percentage}}%</p>
+      <p id="cloudPercentText">INTERN PRODUCTIVITY</p></p>
+      </div>
+      </div>
+      <div id="pieChartContainer">
+      <nvd3-pie-chart
+    	  data="internPieData"
+        id="internPieChart"
+        width="550"
+        height="350"
+        x="xFunction()"
+        y="yFunction()"
+        objectEquality="true"
+        color="colorFunction()">
+        <svg></svg>
+      </nvd3-pie-chart>
+    </div>

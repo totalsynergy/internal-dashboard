@@ -1,0 +1,31 @@
+    <h1>TOP CALLERS</h1>
+   <!-- Caller Stats: {{callerStats}}
+    Data Test: {{progressData}} -->
+    <div id="helpDeskCategoryContainer2">
+      <nvd3-multi-bar-horizontal-chart
+            data="data"
+            id="helpDeskCategories2"
+            width="500"
+            height="250"
+            tooltips="false"
+            showXAxis="true"
+            showYAxis="false"
+            objectEquality="true"
+            clipEdge="true"
+            forcey="[0,{{maxY}}]"
+            objectEquality="true"
+            showValues="true"
+            valueFormat="valueFormatFunction()"
+            margin="{left:150,top:10,bottom:20,right:50}"
+            noData="Loading Data..."
+            color="colorFunction()">
+        <div id="smallerContainer">
+        <svg id="smallText"></svg>
+        </div>
+      </nvd3-multi-bar-horizontal-chart>
+      </div>
+      <div id='threeMonthsDiv2'>
+        <p class="normalThree">Top 10 Callers Made</p>
+        <p class="numberOfCalls">{{percentage}}%</p>
+        <p class="normalThree">Of Total Calls Over Last 4 Months</p>
+      </div>

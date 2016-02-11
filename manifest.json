@@ -4,7 +4,7 @@
   "short_name": "TSD",
   "description": "Total Synergy Dashboard",
 
-  "version": "0.0.5.3",
+  "version": "0.0.5.9",
 
   "kiosk_enabled": true,
 
@@ -28,6 +28,7 @@
     "storage",
     "https://beta.synergycloudapp.com/",
     "https://beta.totalsynergy.com/",
+    "https://app.totalsynergy.com/",
     "https://en.gravatar.com/",
     "https://s3-us-west-2.amazonaws.com/",
     "https://secure.gravatar.com/",

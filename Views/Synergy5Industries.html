@@ -1,0 +1,11 @@
+    <h1>Synergy 5 Industries</h1>
+    <div ng-repeat="sub in subscribers">
+      <div class="transparentImageHolder">
+        <img ng-src="assets/subscribers/{{sub.Name}}1.png" id="transparentWorker"/>
+        <div class="greyFill"></div>
+        <div class="fillingDiv{{$index}}"></div>
+        <div class="subscriberCategoryHolder">
+          <p class="subscriberCategory">{{sub.Name}}</p>
+        </div>
+        <p class="subscriberCategoryPercentage">{{sub.Percent}}%</p>
+      </div>
