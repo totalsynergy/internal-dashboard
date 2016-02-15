@@ -54,7 +54,7 @@ app.directive("conferenceCountdown", function(){
   
   return{
     restrict: 'AEC',
-    templateUrl: '../Views/conferenceCountdown.html',
+    templateUrl: '../Views/ConferenceCountdown.html',
     controller: controller,
     scope : {
       tab : "=tab",

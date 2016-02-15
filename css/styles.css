@@ -40,6 +40,13 @@ html, body, .container{
     position: absolute;
 }
 
+.teal-background{
+  background-color: #27B4B9;
+  height:100%;
+      width: 100%;
+    position: absolute;
+}
+
 .greyCover{
   background-color: #F0EFF4;
   position:fixed;
@@ -2820,12 +2827,57 @@ li:before {
   line-height: 40px;
 }
 
+.gSHolder{
+  width:100%;
+  height:100%;
+}
+
 .gSHolder div{
   width:14.25%;
   height:25%;
   padding:0.75%;
   float: left;
+  position:relative;
 }
+
+.gSHolder div img{
+  border-radius: 50%;
+}
+
+
+#synergy5-logo-holder{
+  width: 200px;
+    height: 200px;
+    background: white;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    margin-top: -100px;
+    margin-left: -100px;
+    border-radius: 50%;
+}
+
+#synergy5-logo-holder img{
+    position: absolute;
+    width: 100%;
+    left: 10px;
+}
+
+.gSHolder div p{
+    position: relative;
+    bottom: 25px;
+    background: #58C8DF;
+    border-radius: 27px;
+    padding: 2px 12px;
+    box-shadow: 2px 2px 2px #494949;
+    font-family: openSans;
+    font-size: 1vw;
+    z-index: 1000;
+    color: #FFF;
+    font-weight: bold;
+    display:inline-block;
+}
+
 
 .emptyGrav5{
   width:14.25%;

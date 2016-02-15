@@ -23,7 +23,7 @@ app.directive("conferenceAttendees", function(){
   
   return{
     restrict: 'AEC',
-    templateUrl: '../Views/conferenceAttendees.html',
+    templateUrl: '../Views/ConferenceAttendees.html',
     controller: controller,
     scope: {
       tab : "=tab",

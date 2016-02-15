@@ -24,6 +24,7 @@
     
   function Controller($scope, Service){
     var vm = this;
+    var emptySpots = [];
     vm.title = "Synergy 5 Gravatar Controller";
     vm.gravatars= [];
     
@@ -32,33 +33,88 @@
     function updateGravatars(){
       vm.gravatars = Service.images;
       
+      var empties = 0;
+      var nonempties = [];
       for(var i =0; i < vm.gravatars.length; i++)
       {
-        appendImage(i, vm.gravatars[i]);
+        if(!vm.gravatars[i].Name)
+        {
+          empties++;
+        }
+        else
+        {
+          nonempties.push(vm.gravatars[i]);
+        }
       }
       
+      var emptySpots = makeEmptySpots(empties);
+      fillImages(nonempties, emptySpots);
+      
+    }
+    
+    function fillImages(images, emptySpots){
+      
+      var counter = 0;
+      var imageCounter = 0;
+      while(counter < 28)
+      {
+        if(!existsInArray(counter, emptySpots))
+        {
+          appendImage(counter, images[imageCounter]);
+          imageCounter++
+        }
+        
+        counter++;
+      }
     }
     
     function appendImage(index, grav){
       
       var img = document.createElement('img');
       img.setAttribute("id", "realImageContainer");
-      
-      img.src = grav.Image;
                
       var divName = "#gS" + index;
       
       $(divName).empty();
       
-      if(grav.Name)
+      if(grav)
       {
+                img.src = grav.Image;
         $(divName).prepend(img);
-        $(divName).append('<p id="gravatarName">' + grav.Name + '</p>');
+        $(divName).append('<p>' + grav.Name + '</p>');
       }
-      else
+
+    }
+    
+    function existsInArray(number, array){
+      for(var i = 0; i < array.length; i++)
       {
-        $(divName).css('display', 'none');
+        if(number == array[i])
+          return true;
       }
+      return false;
+    }
+  
+    
+    function makeEmptySpots(amount){
+      var empties = [12,10,11, 19, 17, 18];
+      var moreNeeded = amount - empties.length - 1;
+      
+      console.log("Need to make: " + moreNeeded + " spots");
+      
+      while(moreNeeded > 0)
+      {
+        var random = Math.floor(Math.random() * 28);
+        
+        if(!existsInArray(random, empties))
+        {
+          empties.push(random);
+          moreNeeded--;
+        }
+      }
+      
+      return empties;
+      
     }
     
   }

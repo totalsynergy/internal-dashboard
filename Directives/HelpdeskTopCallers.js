@@ -110,7 +110,7 @@ app.directive("helpdeskTopCallers", function(){
   
   return{
     restrict: 'AEC',
-    templateUrl: '../Views/HelpDeskTopCallers.html',
+    templateUrl: '../Views/HelpdeskTopCallers.html',
     controller: controller,
     scope: {
       tab : "=tab"
