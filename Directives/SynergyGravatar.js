@@ -28,7 +28,7 @@ app.directive("synergyGravatar", function(){
       $scope.keysObtained = true;
     });
 
-    $scope.$on('shortDataFetch', function(){
+    $scope.$on('longDataFetch', function(){
       getStaff();
     });
 
@@ -68,7 +68,7 @@ app.directive("synergyGravatar", function(){
       var counter = 0;
       $scope.trelloImages = [];
       
-      emptyDivs();
+      //emptyDivs();
       
       pickNumbersToBeBlanks();
 
@@ -116,6 +116,7 @@ app.directive("synergyGravatar", function(){
           img.src = window.URL.createObjectURL(this.response);
             
           var divName = "#g" + index;
+          $(divName).empty();
           $(divName).prepend(img);
           $(divName).append('<p id="gravatarName">' + name + '</p>');
 
@@ -140,39 +141,41 @@ app.directive("synergyGravatar", function(){
         xhr.open('GET', url, true);
         xhr.responseType = 'blob';
         xhr.onload = function(e) {
+            
             var img = document.createElement('img');
             img.setAttribute("id", "realImageContainer");
             if(blank){
+              console.log("recieves blanks");
               img.src = "assets/transparent.png";
-              $scope.completedXMLRequests++;
             }
-            else{
-
-              if(xhr.status == 404 && email != ''){
+            
+            if(xhr.status == 404 && email != ''){
                 count++;
                 loadInitials(email,index);
-              }
-                
-              else{
-                img.src = window.URL.createObjectURL(this.response);
-                 
-                var divName = "#g" + index;
+            }
+            else
+            {
+              img.src = window.URL.createObjectURL(this.response);
+               
+              var divName = "#g" + index;
+            
+             $(divName).empty();
+              if(email)
+                 $(divName).prepend(img);
 
-                if(email)
-                   $(divName).prepend(img);
-
-                $(divName).append('<p id="gravatarName">' + email + '</p>');
-      
-                var srcClone = img.src;
-                $scope.trelloImages.push({"Name": email, "Image" :srcClone});
-                $scope.completedXMLRequests++;
-
+              $(divName).append('<p id="gravatarName">' + email + '</p>');
+    
+              var srcClone = img.src;
+              $scope.trelloImages.push({"Name": email, "Image" :srcClone});
+              $scope.completedXMLRequests++;
+              
+              //Check if all xml requests are done and send
+              if($scope.completedXMLRequests == 28){
+                  Service.updateGravatars($scope.trelloImages);
               }
             }
-            //Check if all xml requests are done and send
-            if($scope.completedXMLRequests == 28){
-                Service.updateGravatars($scope.trelloImages);
-            }
+            
+            
         };
         xhr.send();
       }

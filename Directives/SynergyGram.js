@@ -12,7 +12,8 @@ app.directive("synergyGram", function(){
       getInstagramImage();
     });
     
-    $scope.$on('shortDataFetch', function(){
+    $scope.$on('longDataFetch', function(){
+      console.log("You heard the boss");
       getInstagramImage();
     });
 
@@ -68,7 +69,7 @@ app.directive("synergyGram", function(){
     }
     
     function storeImage(index){
-      $(".instagramImage").remove();
+      //$(".instagramImage").remove();
       
       var imageSrc = $scope.totalImageInformation[index].image;
       var xhr = new XMLHttpRequest();
@@ -79,10 +80,14 @@ app.directive("synergyGram", function(){
         var img = document.createElement('img');
         img.src = window.URL.createObjectURL(this.response);
         img.setAttribute("class", "instagramImage");
+        img.setAttribute("id", "instagramImage" + index);
 
         
         if(imageSrc && img.src && img.src != "")
+        {
+          $('#' + $scope.divNames[index]).empty();
           $('#' + $scope.divNames[index]).prepend(img);
+        }
 
       };
       

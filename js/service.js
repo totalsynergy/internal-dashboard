@@ -9,7 +9,7 @@
     service.tab = 3;
     service.second = 0;
     service.speed = 15000;
-    service.pages = null;
+    service.pages = pages;
     service.eventData = {};
     service.totalAttendees = 0;
     service.totalSynergyKey = "";
@@ -72,7 +72,18 @@
     }
     
     service.updatePagesAndSpeed = function(pages, speed){
-      this.pages = pages;
+      for(var i = 0; i < this.pages.length; i++)
+      {
+        for(var j = 0; j < pages.length; j++)
+        {
+          if(pages[j].name == this.pages[i].name)
+          {
+            this.pages[i].isSelected = pages[j].isSelected;
+            break;
+          }
+        }
+      }
+      //this.pages = pages;
       console.log("Service making speed: " + speed);
       this.speed = speed;
       $rootScope.$broadcast("selectedUpdated");
@@ -101,6 +112,8 @@
     //Update the gravatars to be used in trello/leaderboard etc.
     service.updateGravatars = function(images){
       this.images = images;
+      console.log(this.images);
+      console.log(this.images.length)
       $rootScope.$broadcast("gravatarsUpdated");
     }
     

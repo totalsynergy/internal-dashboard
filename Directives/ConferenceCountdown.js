@@ -9,7 +9,6 @@ app.directive("conferenceCountdown", function(){
     
     
     $scope.$watch('keys', function(){
-      console.log("Ntocied key change: " + $scope.keys);
       $scope.eventBriteKey = $scope.keys[1];
       $scope.totalSynergyKey = $scope.keys[0];
       getConferenceData();

@@ -8,6 +8,7 @@ app.directive("helpdeskTopCallers", function(){
     $scope.even = 0;
 
     $scope.$watch('tab', function(){
+      
       if($scope.tab != 9)
         $scope.data = $scope.blankData;
       else

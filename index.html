@@ -3,13 +3,14 @@
 <head>
   <meta charset="utf-8">
   <title>test2</title>
-      <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/angular-csp.css">
     <link rel="stylesheet" href="css/angular-slider.css">
     <link rel="stylesheet" href="css/bootstrap-theme.css">
     <link rel="stylesheet" href="css/nv.d3.css">
     <link rel="stylesheet" href="css/animations.css">
+    
+     <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
@@ -45,40 +46,50 @@
     </div>
 
     <synergy-gravatar class="kpi animate blueBackground throwingHundreds" ng-show="tab == 1" tab = "tab" keys="keys"></synergy-gravatar>
-    <synergy-gram  class="kpi animate instagramController greyBackground" ng-show="tab == 2" tab="tab" keys="keys"></synergy-gram>
+    <synergy-gram  class="kpi animate greyBackground" ng-show="tab == 2" tab="tab" keys="keys"></synergy-gram>
+    
     <conference-attendees class="kpi animate greyBackground" ng-show="tab == 3"></conference-attendees>
     <conference-map class="kpi animate greyBackground" ng-show="tab == 4" tab="tab" keys="keys"></conference-map>
     <conference-countdown class="kpi animate greyBackground" ng-show="tab == 5" tab="tab" keys="keys"></conference-countdown>
+    
     <helpdesk-call-categories class="kpi animate" ng-show="tab == 6" tab="tab" keys="keys"></helpdesk-call-categories>
-    <helpdesk-call-response-time class="kpi animate hundredHeight" ng-show="tab == 7" tab="tab"></helpdesk-call-response-time>    <!-- EMPTY 8 -->
+    <helpdesk-call-response-time class="kpi animate hundredHeight" ng-show="tab == 7" tab="tab"></helpdesk-call-response-time>   
+    <!-- EMPTY 8 -->
     <helpdesk-top-callers class="kpi animate" ng-show="tab == 9" tab="tab"></helpdesk-top-callers>
     <helpdesk-call-time class="kpi animate" ng-show="tab == 10" tab="tab"></helpdesk-call-time>
+    
     <synergy-trello class="kpi animate trelloBackground" ng-show="tab == 11" tab="tab"></synergy-trello>
     <synergy-yammer class="kpi animate greyBackground hundredHeight" ng-show="tab == 12" tab="tab" keys="keys"></synergy-yammer>
     <synergy-twitter class="kpi animate" ng-show="tab == 13" tab="tab"></synergy-twitter>
+    
     <synergy4-cloud class="heightController kpi pieKPI" ng-show="tab == 14" tab="tab" keys="keys"></synergy4-cloud>
     <intern-productivity class="kpi" ng-show="tab == 15" tab="tab"></intern-productivity>
     <synergy4-desktop-version "heightController kpi" ng-show="tab == 16" tab="tab" keys="keys"></synergy4-desktop-version>
     <synergy4-australia-map class="kpi animate" ng-show="tab == 17" tab="tab" keys="keys"></synergy4-australia-map>
-    <synergy4-heat-map class="kpi animate greyBackground" ng-show="tab == 18" tab="tab" keys="keys"></synergy4-heat-map>
+    <synergy4-heat-map class="kpi animate" ng-show="tab == 18" tab="tab" keys="keys"></synergy4-heat-map>
     <!-- EMPTY 19 -->
     <!-- EMPTY 20 -->
     <synergy-client-promotors class="kpi animate greyBackground" ng-show="tab == 21" tab="tab" speed="speed" keys="keys"></synergy-client-promotors>
     <synergy-client-passive class="kpi animate greyBackground" ng-show="tab == 22" tab="tab" speed="speed"></synergy-client-passive>
     <synergy-client-detractors class="kpi animate greyBackground" ng-show="tab == 23" tab="tab" speed="speed"></synergy-client-detractors>
     <synergy-trial-versus-active class="kpi animate" ng-show="tab == 24" tab="tab" keys="keys"></synergy-trial-versus-active>
+    
     <synergy5-lifetime class="kpi animate" ng-show="tab == 25" tab="tab"></synergy5-lifetime>
     <!-- EMPTY 25 -->
     <synergy5-heat-map class="kpi animate greyBackground" ng-show="tab == 27" tab="tab" keys="keys"></synergy5-heat-map>
     <synergy5-industries class="kpi animate" ng-show="tab == 28" tab="tab" keys="keys"></synergy5-industries>
     <synergy5-staff class="kpi animate" ng-show="tab == 29" tab="tab" keys="keys"></synergy5-staff>
     <synergy5-average-life class="kpi animate greyBackground" ng-show="tab == 30" tab="tab"></synergy5-average-life>
+    
     <reddit-joke class="kpi animate greyBackground" ng-show="tab == 31" tab="tab" keys="keys"></reddit-joke>
     <synergy-leaderboard class="kpi animate hundredHeight" ng-show="tab == 32" keys="keys" tab="tab"></synergy-leaderboard>
     <synergy-ethos class="kpi animate greyBackground" ng-show="tab==33" tab ="tab"></synergy-ethos>
     <synergy-values class="kpi animate greyBackground" ng-show="tab == 34" tab="tab"></synergy-values>
     <synergy-organisation-chart class="kpi animate greyBackground" ng-show="tab == 35" tab="tab"></synergy-organisation-chart>
     <bom-radar class="kpi animate" ng-show="tab == 36" tab = "tab" keys="keys"></bom-radar>
+    
+    <synergy5-gravatars class="kpi animate" ng-show="tab == 37" tab = "tab"></synergy5-gravatars>
+    
     
     <settings ng-show="tab == 99" ng-init="initSlider()" pages="pages" speed="speed" keys="keys"></settings>
     
@@ -145,6 +156,7 @@
 <script type="text/javascript" src="Directives/ConferenceAttendees.js"></script> 
 <script type="text/javascript" src="Directives/SynergyGram.js"></script> 
 <script type="text/javascript" src="Directives/SynergyGravatar.js"></script> 
+<script type="text/javascript" src="Directives/Synergy5Gravatars.js"></script> 
 <script type="text/javascript" src="Directives/Settings.js"></script> 
 
 

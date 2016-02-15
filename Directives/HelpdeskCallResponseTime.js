@@ -7,15 +7,6 @@ app.directive("helpdeskCallResponseTime", function(){
     $scope.count = 0;
     $scope.maxY = 200;
     $scope.singularData = [];
-    $scope.blankData = [];
-
-
-    $scope.$watch('tab', function(){
-      if($scope.tab != 7)
-        $scope.data = $scope.blankData;
-      else
-        $scope.data = $scope.singularData;
-    });
 
     $scope.yAxisTickFormatFunction = function(){
       var format = d3.format(',.0f');
@@ -55,17 +46,7 @@ app.directive("helpdeskCallResponseTime", function(){
                     "values": [ [$scope.callsData[0].date, $scope.callsData[0].OneDay], [$scope.callsData[1].date, $scope.callsData[1].OneDay] , [$scope.callsData[2].date, $scope.callsData[2].OneDay], [$scope.callsData[3].date, $scope.callsData[3].OneDay]]
                 }
             ];
-      $scope.blankData = [
-        {
-          "values": [['0',0], ['0',0], ['0',0], ['0',0]]
-        },
-        {
-          "values": [['0',0], ['0',0], ['0',0], ['0',0]]
-        },
-        {
-          "values": [['0',0], ['0',0], ['0',0], ['0',0]]
-        }
-        ];
+    $scope.data = $scope.singularData;
     }
 
     function calculateMaxY(){

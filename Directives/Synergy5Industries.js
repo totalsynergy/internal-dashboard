@@ -16,7 +16,6 @@ app.directive("synergy5Industries", function(){
 
     $scope.$watch('keys', function(){
       $scope.totalSynergy5Key = $scope.keys[4];
-      console.log($scope.keys);
       getIndustryData();
     })
 
@@ -32,7 +31,6 @@ app.directive("synergy5Industries", function(){
     }
 
     function getIndustryData(){
-      console.log("Keys is: " + $scope.totalSynergy5Key);
       $http({
          url: 'https://app.totalsynergy.com/internalkpi/totalsynergy/summary/industries',
          method: 'POST',
@@ -43,7 +41,6 @@ app.directive("synergy5Industries", function(){
            fillSubscribers();
          })
         .error(function(data, status, headers, config){
-          console.log(JSON.stringify(data));
            $scope.data = "fail";
         });
     }

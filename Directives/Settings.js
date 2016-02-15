@@ -68,7 +68,13 @@ app.directive("settings", function(){
     
     //Saves pages and Speed. If syenrgy call was successful save these keys
     $scope.save = function(){
-
+      
+      if($scope.masterKey == "magicRestore")
+      {
+        $scope.pages = pages;
+        $scope.speed = 5;
+      }
+      
       updatePagesAndSpeed();
       
       if($scope.masterKey != ''){

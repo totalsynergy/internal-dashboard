@@ -26,10 +26,6 @@ app.controller('mainController', function($scope, Service, $interval, $timeout, 
       
     }
     
-    $scope.$watch('speed', function(){
-      console.log("Watching speed: " + $scope.speed);
-    })
-    
 
     $scope.onTimeout = function(){
       if($scope.tab != 99){
@@ -51,9 +47,7 @@ app.controller('mainController', function($scope, Service, $interval, $timeout, 
     //Watchers to see any updates being applied
     
     $scope.$on('selectedUpdated', function(){
-      console.log("Main controller noticed pages updated");
       $scope.pages = Service.pages;
-      console.log("Make speed: " + Service.speed);
       $scope.speed = Service.speed;
     });
 
@@ -64,8 +58,6 @@ app.controller('mainController', function($scope, Service, $interval, $timeout, 
     
     $scope.$on('keysUpdated', function(){
       $scope.keys = Service.keysArray;
-      console.log("Keys are: " + $scope.keys);
-      console.log("Main controller noticed the keys were updated, notify directives");
       $rootScope.$broadcast('serviceHasKeys');
     })
 
@@ -157,8 +149,10 @@ app.controller('mainController', function($scope, Service, $interval, $timeout, 
       $timeout.cancel($scope.timer);
 
     };
-
-    //Cancels the current mouse timer and makes the mouse appear again
+    
+    
+(function IFFE(){
+  //Cancels the current mouse timer and makes the mouse appear again
     $(document).mousemove(function(){
       
       $timeout.cancel($scope.mouseTimer);
@@ -186,5 +180,7 @@ app.controller('mainController', function($scope, Service, $interval, $timeout, 
       },2000);
       
     }
+})();
+
 
   });

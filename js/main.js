@@ -37,7 +37,8 @@ var pages = [
   {"name" : "Marketing Values 1", "isSelected" : false},
   {"name" : "Marketing Values 2", "isSelected" : false},
   {"name" : "Total Synergy Structure", "isSelected" : false},
-  {"name" : "Bom Radar", "isSelected" : false}
+  {"name" : "Bom Radar", "isSelected" : false},
+  {"name" : "Synergy 5 Gravatars", "isSelected" : false}
 ];
     
     

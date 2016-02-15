@@ -2820,6 +2820,20 @@ li:before {
   line-height: 40px;
 }
 
+.gSHolder div{
+  width:14.25%;
+  height:25%;
+  padding:0.75%;
+  float: left;
+}
+
+.emptyGrav5{
+  width:14.25%;
+  height:25%;
+  padding:0.75%;
+  float: left;
+}
+
 
 
 

@@ -21,13 +21,14 @@ app.directive("helpdeskCallTime", function(){
             ];
 
     $scope.$watch('tab', function(){
+      
       $scope.tab = Service.tab
       if($scope.tab != 10)
         $scope.data = $scope.blankData;
       else
       {
-        console.log("Lets mak edata: " + JSON.stringify($scope.chartData));
-        $scope.data = $scope.chartData;
+        //console.log("Lets mak edata: " + JSON.stringify($scope.chartData));
+        //$scope.data = $scope.chartData;
       }
     });
 
