@@ -1,7 +1,7 @@
 app.directive("synergy4Cloud", function(){
   
 
-  var controller = function($scope, $http, Service, $interval){
+  var controller = function($scope, Synergy4Service){
   
     $scope.cloudUptakeData = null;
     $scope.pieData = null;
@@ -26,20 +26,13 @@ app.directive("synergy4Cloud", function(){
     })
 
     function getCloudData(){
-       $http({
-         url: 'https://beta.synergycloudapp.com/totalsynergy/InternalKpi/Home/CloudUptake',
-         method: 'POST',
-         headers : {'internal-token' : $scope.totalSynergyKey}
-         })
-         .success(function(d, status, headers, config){
-           
-           $scope.cloudUptakeData = d.data;
-           sortData(d.data);
-           
-         })
-        .error(function(data, status, headers, config){
-           $scope.data2 = "fail";
-        });
+      
+      Synergy4Service.getCloudData($scope.totalSynergyKey).then(function(success){
+        $scope.cloudUptakeData = success.data;
+        sortData(success.data);
+      }, function(error){
+        console.log(error);
+      });
     }
 
     $scope.colorFunction = function() {

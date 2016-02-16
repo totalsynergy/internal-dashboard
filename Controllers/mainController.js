@@ -7,6 +7,9 @@ app.controller('mainController', function($scope, Service, $interval, $timeout, 
 
     $scope.timer = 0;
     $scope.mouseTimer = 0;
+    
+    var vm = $scope;
+
     var timer = $timeout($scope.onTimeout, $scope.speed);
 
     
@@ -62,7 +65,15 @@ app.controller('mainController', function($scope, Service, $interval, $timeout, 
     })
 
     $scope.$on('tabUpdated', function(){
-      $scope.tab = Service.tab;
+
+      if($scope.pages[Service.tab - 1].isSelected)
+      {
+        $scope.tab = Service.tab;
+        if(Service.soundCallback)
+          Service.soundCallback();
+        $timeout.cancel($scope.timer);
+        $scope.timer = $timeout($scope.loop, $scope.speed);
+      }
     });
     
     //Left Button Clicked
@@ -80,7 +91,8 @@ app.controller('mainController', function($scope, Service, $interval, $timeout, 
           nextPage--;
       }
       
-      Service.updateTab(nextPage);
+      $scope.tab = nextPage;
+      Service.tab = nextPage;
     }
     
     //Right Button Clicked
@@ -100,7 +112,8 @@ app.controller('mainController', function($scope, Service, $interval, $timeout, 
           nextPage++;
       }
 
-      Service.updateTab(nextPage-1);
+      $scope.tab = nextPage - 1;
+      Service.tab = nextPage - 1;
 
       //must cancel the current loop to avoid quick page changes
       $timeout.cancel($scope.timer);
@@ -138,13 +151,15 @@ app.controller('mainController', function($scope, Service, $interval, $timeout, 
         }
       }
       
-      Service.updateTab(nextPage);
+      $scope.tab = nextPage;
+      Service.tab = nextPage;
     }
 
 
     $scope.settingsButtonHit = function(){
-      
-      Service.updateTab(99);
+      console.log("Hit");
+      $scope.tab = 99;
+      Service.tab = 99;
       $scope.speed = parseInt($scope.speed);
       $timeout.cancel($scope.timer);
 

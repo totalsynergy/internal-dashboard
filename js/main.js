@@ -38,12 +38,13 @@ var pages = [
   {"name" : "Marketing Values 2", "isSelected" : false},
   {"name" : "Total Synergy Structure", "isSelected" : false},
   {"name" : "Bom Radar", "isSelected" : false},
-  {"name" : "Synergy 5 Gravatars", "isSelected" : false}
+  {"name" : "Synergy 5 Gravatars", "isSelected" : false},
+  {"name" : "Synergy 5 New Client", "isSelected" : false}
 ];
     
     
-function runConfetti() {
-    var canvas = document.getElementById("canvas");
+function runConfetti(id) {
+    var canvas = document.getElementById(id);
     var ctx = canvas.getContext("2d");
 
     //canvas dimensions

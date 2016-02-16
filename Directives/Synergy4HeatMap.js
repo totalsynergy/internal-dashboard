@@ -1,55 +1,30 @@
 app.directive("synergy4HeatMap", function(){
   
 
-  var controller = function($scope, Service, ngAudio, $http){
+  var controller = function($scope, Synergy4Service ){
 
       $scope.countries = [];
       $scope.count = 0;
   
       $scope.$watch('keys', function(){
         $scope.totalSynergyKey = $scope.keys[0];
-        getMapData();
       })
-  
-  
-      $scope.$on('shortDataFetch', function(){
-        getMapData();
-      })
-  
-      function getMapData(){
-        //debugger
-         $http({
-           url: 'https://beta.synergycloudapp.com/totalsynergy/InternalKpi/Home/Clients',
-           method: 'POST',
-           headers : {'internal-token' : $scope.totalSynergyKey}
-           }).success(function(d, status, headers, config){
-                               
-             if(d.data && d.data != null){
-                 $scope.data = d.data[10].Country;
-                 $scope.countries = [];
-                 for(var i = 0; i < d.data.length; i++){
-                    //$scope.countryNames.push(data[i].Country);
-                    incrementCategory(d.data[i].Country);
-                  }
-                  
-
-                  loadMap();
-                  //$scope.count++;
-             }
-  
-           })
-          .error(function(data, status, headers, config){
-             $scope.data = "fail";
-          });
-      }
-  
-      function count(data){
+      
+      $scope.$on('synergy4MapData', function(){
+        
+        var d = Synergy4Service.mapData;
+        
         $scope.countries = [];
-        for(var i = 0; i < data.length; i++){
-          incrementCategory('theBoys');
-        }
-      }
-  
+        
+        for(var i = 0; i < d.data.length; i++){
+           incrementCategory(d.data[i].Country);
+         }
+         
+         console.log($scope.countries);
+         
+        loadMap();
+      })
+
       function incrementCategory(countryName){
         if($scope.countries.length == 0)
           $scope.countries.push({"name" : countryName, "count" : 1});
@@ -91,6 +66,7 @@ app.directive("synergy4HeatMap", function(){
           Heatmap.init(callback);
 
           var values = new Array();
+
           values[7] = 100;
           values [8] = 250;
           values [9] = 250;
@@ -105,12 +81,12 @@ app.directive("synergy4HeatMap", function(){
                 boolTest = false;
                 break;
               }
-              else{}
             }
             if(boolTest)
               values[k] = 0;
           });
-
+          
+          console.log("Create map with: " + values)
           Heatmap.updateMap(values);
 
       }

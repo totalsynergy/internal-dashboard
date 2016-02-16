@@ -2,7 +2,7 @@
 app.directive("helpdeskCallCategories", function(){
   
   
-  var  controller = function($scope, Service, $http, gravatarService){
+  var  controller = function($scope, HelpdeskService){
 
     $scope.count = 0;
     $scope.categories = [];
@@ -51,7 +51,7 @@ app.directive("helpdeskCallCategories", function(){
       if($scope.tab == 6){
         $scope.barData = $scope.recoveryData;
       }
-      else if($scope.tab != 7 && Service.tab != 5){
+      else if($scope.tab != 7 && $scope.tab != 5){
         $scope.barData = $scope.blankData;
       }
     });
@@ -93,20 +93,14 @@ app.directive("helpdeskCallCategories", function(){
       var currentDate = new Date();
       var currentDateMinusThreeMonths = new Date(new Date(currentDate).setMonth(currentDate.getMonth()-3));
       currentDateMinusThreeMonths.setDate(1);
-       $http({
-         url: 'https://beta.synergycloudapp.com/totalsynergy/InternalKpi/Home/helpdeskdata',
-         method: 'POST',
-         headers: {'Content-Type': 'application/json', 'internal-token' : $scope.totalSynergyKey},
-         data: {from:currentDateMinusThreeMonths, to:currentDate}
-         }).success(function(d, status, headers, config){
-           $scope.data = d.data;
-           $scope.rawData = d;
+      
+      HelpdeskService.getCallCategoryData($scope.totalSynergyKey, currentDateMinusThreeMonths, currentDate).then(function(success){
+        $scope.data = success.data;
+           $scope.rawData = success;
            newSort();
            responseClassificationSort();
-         })
-        .error(function(data, status, headers, config){
-           $scope.data = "fail";
-        });
+      })
+
     }
 
     function newSort(){
@@ -144,7 +138,7 @@ app.directive("helpdeskCallCategories", function(){
           
         }
       }
-      Service.passCallsData($scope.callsData, $scope.data);
+      HelpdeskService.passCallsData($scope.callsData, $scope.data);
     }
 
     function incrementCategoryForResponse(month, classification){

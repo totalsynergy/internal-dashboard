@@ -89,9 +89,10 @@
     <bom-radar class="kpi animate" ng-show="tab == 36" tab = "tab" keys="keys"></bom-radar>
     
     <synergy5-gravatars class="kpi animate teal-background" ng-show="tab == 37" tab = "tab"></synergy5-gravatars>
+    <synergy5-new-client class="kpi animate fixed-max" ng-show="tab == 38" tab="tab" keys="keys"></synergy5-new-client>
     
     
-    <settings ng-show="tab == 99" ng-init="initSlider()" pages="pages" speed="speed" keys="keys"></settings>
+    <settings ng-show="tab == 99" ng-init="initSlider()" pages="pages" speed="speed" keys="keys" tab="tab"></settings>
     
   </div>
   
@@ -99,7 +100,8 @@
 
 
 <!-- Vendor JS -->
-<script type="text/javascript" src="js/Vendor/angular.min.js"></script>
+<!-- <script type="text/javascript" src="js/Vendor/angular.min.js"></script> Using Angular 1.5 now -->
+<script type="text/javascript" src="js/Vendor/AngularUpgrade/angular.js"></script>
 <script type="text/javascript" src="js/Vendor/jquery-1.11.2.js"></script>
 <script type="text/javascript" src="js/Vendor/jqfloat.js"></script>
 <script src="js/Vendor/kinetic-v4.4.1.min.js"></script>
@@ -108,7 +110,7 @@
 <script type="text/javascript" src="js/Vendor/bootstrap.js"></script>
 <script type="text/javascript" src="js/Vendor/d3.js"></script>
 <script type="text/javascript" src="js/Vendor/nv.d3.js"></script>
-<script type="text/javascript" src="js/Vendor/angular-animate.js"></script>
+<script type="text/javascript" src="js/Vendor/AngularUpgrade/angular-animate.js"></script>
 <script type="text/javascript" src="js/Vendor/angularjs-nvd3-directives.js"></script>
 <script type="text/javascript" src="js/Vendor/snowstorm.js"></script>
 <script type="text/javascript" src="js/Vendor/angular-md5.js"></script>
@@ -118,10 +120,15 @@
 <!-- MAIN JS FILES + ANGULAR INITS -->
 <script type="text/javascript" src="js/app.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
-<script type="text/javascript" src="js/service.js"></script>
+
+<!-- Services -->
+<script type="text/javascript" src="services/service.js"></script>
+<script type="text/javascript" src="services/Synergy5Service.js"></script>
+<script type="text/javascript" src="services/Synergy4Service.js"></script>
+<script type="text/javascript" src="services/HelpdeskService.js"></script>
 
 <!-- MAIN CONTROLLER -->
-<script type="text/javascript" src="js/mainController.js"></script>
+<script type="text/javascript" src="controllers/mainController.js"></script>
     
 <!-- DIRECTIVES -->
 <script type="text/javascript" src="Directives/Synergy5TrialVersusActive.js"></script>
@@ -157,6 +164,9 @@
 <script type="text/javascript" src="Directives/SynergyGram.js"></script> 
 <script type="text/javascript" src="Directives/SynergyGravatar.js"></script> 
 <script type="text/javascript" src="Directives/Synergy5Gravatars.js"></script> 
-<script type="text/javascript" src="Directives/Settings.js"></script> 
+<script type="text/javascript" src="Directives/Synergy5NewClient.js"></script>
+
+<script type="text/javascript" src="Directives/Settings.js"></script>
 
 
+</html>

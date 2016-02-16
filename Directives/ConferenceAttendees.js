@@ -9,12 +9,13 @@ app.directive("conferenceAttendees", function(){
 
     $scope.$on('attendeesUpdated', function() {
       if($scope.totalAttendees != Service.totalAttendees && $scope.totalAttendees != 0){
-        $scope.sound.play();
-        Service.updateTab(3);
+        Service.updateTab(3, function(){
+          $scope.sound.play();
+        });
       }
       $scope.totalAttendees = Service.totalAttendees;
       if($scope.totalAttendees >= 112 || ($scope.totalAttendees >= 100 && $scope.totalAttendees <= 102) && $scope.count == 0){
-        runConfetti();
+        runConfetti("canvas");
         $scope.count++;
       }
     });

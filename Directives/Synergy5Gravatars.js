@@ -1,5 +1,5 @@
 (function (){
-  console.log("File opened");
+
   angular
     .module('myApp')
     .directive('synergy5Gravatars', Synergy5Gravatars);
@@ -97,10 +97,10 @@
   
     
     function makeEmptySpots(amount){
-      var empties = [12,10,11, 19, 17, 18];
-      var moreNeeded = amount - empties.length - 1;
-      
-      console.log("Need to make: " + moreNeeded + " spots");
+
+      var empties = [10, 17];
+      var moreNeeded = amount - empties.length;
+
       
       while(moreNeeded > 0)
       {

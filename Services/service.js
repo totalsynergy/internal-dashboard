@@ -1,5 +1,12 @@
 
 
+  /*
+  
+  Needs to be factored into smaller more suitable services.
+  Currently controllers handle most AJAX requests - should be moved into service
+  
+  
+  */
   app.factory('Service' , function($rootScope, $http){
     
     //The service object
@@ -83,8 +90,7 @@
           }
         }
       }
-      //this.pages = pages;
-      console.log("Service making speed: " + speed);
+
       this.speed = speed;
       $rootScope.$broadcast("selectedUpdated");
     }
@@ -96,24 +102,16 @@
       $rootScope.$broadcast('trelloListUpdated');
     }
     
-    //Help Desk data - passing from one controller to the other
-    service.passCallsData = function(callsData, progressData){
-      this.callsData = callsData;
-      this.progressData = progressData;
-      $rootScope.$broadcast('callsDataUpdated');
-    }
 
-    //Update the current Page we are looking at
-    service.updateTab = function(value){
+    service.updateTab = function(value, cb){
         this.tab = value;
+        this.soundCallback = cb;
         $rootScope.$broadcast("tabUpdated");
     }
     
     //Update the gravatars to be used in trello/leaderboard etc.
     service.updateGravatars = function(images){
       this.images = images;
-      console.log(this.images);
-      console.log(this.images.length)
       $rootScope.$broadcast("gravatarsUpdated");
     }
     

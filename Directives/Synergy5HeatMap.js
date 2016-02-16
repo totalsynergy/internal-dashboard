@@ -1,7 +1,7 @@
 app.directive("synergy5HeatMap", function(){
   
 
-  var controller = function($scope, Service, ngAudio, $http){
+  var controller = function($scope, Synergy5Service){
 
     $scope.countries = [];
     $scope.count = 0;
@@ -17,25 +17,20 @@ app.directive("synergy5HeatMap", function(){
     })
 
     function getMapData(){
-
-       $http({
-         url: 'https://app.totalsynergy.com/internalkpi/totalsynergy/summary/country',
-         method: 'POST',
-         headers: {'Content-Type': 'application/json', 'internal-token' : $scope.totalSynergy5Key}
-         }).success(function(d, status, headers, config){
-           $scope.data = d.data;
-           $scope.countries = [];
-           
-           for(var i = 0; i < d.data.length; i++){
-              //$scope.countryNames.push(data[i].Country);
-              incrementCategory(d.data[i].Country);
-            }
-            
-           loadMap();
-         })
-        .error(function(data, status, headers, config){
-           $scope.data = "fail";
-        });
+      
+      Synergy5Service.getCountryData($scope.totalSynergy5Key).then(function(success){
+        
+         $scope.data = success.data;
+         $scope.countries = [];
+         
+         for(var i = 0; i < success.data.length; i++){
+            //$scope.countryNames.push(data[i].Country);
+            incrementCategory(success.data[i].Country);
+          }
+          
+         loadMap();
+         
+      });
     }
 
     function count(data){
@@ -105,7 +100,7 @@ app.directive("synergy5HeatMap", function(){
             if(boolTest)
               values[k] = 0;
           });
-
+console.log("Create map with: " + values)
           Heatmap.updateMap(values);
 
       }

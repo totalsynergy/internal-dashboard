@@ -1,7 +1,7 @@
 app.directive("synergy4AustraliaMap", function(){
 
 
-  var controller = function($scope, Service, $http, gravatarService){
+  var controller = function($scope, $http, Synergy4Service){
 
     $scope.$watch('keys', function(){
       $scope.totalSynergyKey = $scope.keys[0];
@@ -11,22 +11,16 @@ app.directive("synergy4AustraliaMap", function(){
     $scope.$on('longDataFetch', function(){
       getMapData();
     })
+    
+    $scope.$on('synergy4MapData', function(){
+      count(Synergy4Service.mapData.data);
+    })
 
     function getMapData(){
-      //debugger
-       $http({
-         url: 'https://beta.synergycloudapp.com/totalsynergy/InternalKpi/Home/Clients',
-         method: 'POST',
-         headers : {'internal-token' : $scope.totalSynergyKey}
-         }).success(function(d, status, headers, config){
-           //$scope.data = d.data
-           count(d.data);
-           $scope.data = d.data;
-         })
-        .error(function(data, status, headers, config){
-           $scope.data = "fail";
-        });
+      Synergy4Service.getMapData($scope.totalSynergyKey);
     }
+    
+    
 
 
     function count(data){

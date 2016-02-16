@@ -12,11 +12,6 @@ app.directive("settings", function(){
    $scope.trelloListSelected = {"listId":"556b9a17dd087e37aac39776","listName":"Sprint Backlog"};
    $scope.trelloAuthWorks = false;
 
-
-    $scope.$watch('tab', function(){
-      $scope.tab = Service.tab;
-    });
-
     $scope.$watch('keys', function(){
     
       $scope.trelloKeys = $scope.keys[3];
@@ -130,7 +125,6 @@ app.directive("settings", function(){
     }
     
     function updatePagesAndSpeed(){
-      console.log("Lets change speed to: " + $scope.speed);
       chrome.storage.local.set({'pages' : $scope.pages});
       chrome.storage.local.set({'speed' : $scope.speed});
       
@@ -160,7 +154,7 @@ app.directive("settings", function(){
       for(i = 0; i < pages.length; i++)
         if($scope.pages[i].isSelected){
           $scope.tab = i + 1;
-          Service.updateTab(i + 1);
+          Service.updateTab(i + 1, null);
           $rootScope.$broadcast('settingsClosed')
         }
         
@@ -220,7 +214,8 @@ app.directive("settings", function(){
     scope : {
       pages: "=pages",
       speed: "=speed",
-      keys: "=keys"
+      keys: "=keys",
+      tab: "="
     }
   }
   

@@ -1,7 +1,7 @@
 app.directive("synergyTrialVersusActive", function(){
   
 
-  var controller = function($scope, Service, ngAudio, $http){
+  var controller = function($scope, Synergy5Service){
   
       $scope.activeCount = 0;
       $scope.trialCount = 0;
@@ -9,17 +9,11 @@ app.directive("synergyTrialVersusActive", function(){
       $scope.activePercentage = 0;
       $scope.trial = 0;
       $scope.active = 0;
-  
-      $scope.pieData = [
-           { key: "Business", y: 5 },
-           { key: "Professional", y: 8 },
-           { key: "Enterprise", y: 4 }
-       ];
-  
-       $scope.pieData2 = [
-       	  { key: "Business", y: 20 },
-           { key: "Professional", y: 30 },
-           { key: "Enterprise", y: 30 },
+      
+      $scope.emptyData = [
+           { key: "Business", y: 0 },
+           { key: "Professional", y: 0 },
+           { key: "Enterprise", y: 0 }
        ];
   
        $scope.originalData = [
@@ -39,27 +33,32 @@ app.directive("synergyTrialVersusActive", function(){
         $scope.totalSynergy5Key = $scope.keys[4];
         getData();
       })
+      
+      $scope.$watch('tab', function(){
+        if($scope.tab == 24)
+        {
+          $scope.pieData3 = $scope.backup3;
+          $scope.pieData4 = $scope.backup4;
+        }
+        else
+        {
+          console.log("Change to fake data");
+          $scope.pieData3  = $scope.emptyData;
+          $scope.pieData4 = $scope.emptyData;
+        }
+      })
   
   
       $scope.$on('longDataFetch', function(){
-        $scope.totalSynergy5Key = Service.totalSynergy5Key;
         getData();
       })
   
       function getData(){
-
-        $http({
-           url: 'https://app.totalsynergy.com/internalkpi/totalsynergy/summary/product',
-           method: 'POST',
-           headers: {'Content-Type': 'application/json', 'internal-token' : $scope.totalSynergy5Key}
-           }).success(function(d, status, headers, config){
-             $scope.data = d.data;
-             sort(d.data);
-             formatForGraph();
-           })
-          .error(function(data, status, headers, config){
-             $scope.data = "fail";
-          });
+        Synergy5Service.getProductData($scope.totalSynergy5Key).then(function(success){
+            $scope.data = success.data;
+            sort(success.data);
+            formatForGraph();
+        })
       }
   
       function formatForGraph(){
@@ -81,6 +80,8 @@ app.directive("synergyTrialVersusActive", function(){
         $scope.active = active;
         $scope.trialPercentage = Math.floor(trial/(trial + active)*100);
         $scope.activePercentage = Math.floor(active/(trial + active)*100);
+        $scope.backup3 = $scope.pieData3;
+        $scope.backup4 = $scope.pieData4;
       }
   
       function sort(clients){
@@ -91,7 +92,6 @@ app.directive("synergyTrialVersusActive", function(){
           increaseType(type, clients[i].Count);
           $scope.originalData.type += clients[i].Count;
         }
-        Service.updateSynergy5Data($scope.originalData);
       }
   
       function increaseType(type, count){

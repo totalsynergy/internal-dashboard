@@ -1,7 +1,7 @@
 app.directive("synergy5Staff", function(){
   
 
-  var controller = function($scope, Service, $http){
+  var controller = function($scope, Synergy5Service){
 
     $scope.categories = [
         {"Name" : "1-5 People", "Percent" : 0},
@@ -22,18 +22,12 @@ app.directive("synergy5Staff", function(){
       })
 
     function getStaffData(){
-
-      $http({
-         url: 'https://app.totalsynergy.com/internalkpi/totalsynergy/summary/staffSize',
-         method: 'POST',
-         headers: {'Content-Type': 'application/json', 'internal-token' : $scope.totalSynergyKey}
-         }).success(function(d, status, headers, config){
-           $scope.data = d.data;
-           formatForGraph(d.data);
-         })
-        .error(function(data, status, headers, config){
-           $scope.data = "fail";
-        });
+      
+      Synergy5Service.getStaffData($scope.totalSynergyKey).then(function(success){
+        $scope.data = success.data;
+        formatForGraph(success.data);
+      });
+      
     }
 
     function formatForGraph(data)

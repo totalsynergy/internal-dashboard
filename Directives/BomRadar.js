@@ -22,12 +22,10 @@ app.directive("bomRadar", function(){
     } 
     
     $scope.$on('longDataFetch', function(){
-      console.log("Long data fetch fired");
       getFeed();
     });
     
     $scope.$watch('keys', function(){
-      console.log("Bom Radar noticed the keys were updated, notify directives");
       if(!appended){
         appendWebView();
         getFeed();
@@ -113,8 +111,8 @@ app.directive("bomRadar", function(){
     templateUrl: '../Views/BomRadar.html',
     controller: controller,
     scope: {
-      tab : "=tab",
-      keys : "=keys"
+      tab : "@tab",
+      keys : "@keys"
     }
   }
   

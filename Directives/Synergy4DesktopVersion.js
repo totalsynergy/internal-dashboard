@@ -1,7 +1,7 @@
 app.directive("synergy4DesktopVersion", function(){
   
 
-  var controller = function($scope, $http, Service, $interval){
+  var controller = function($scope, Synergy4Service){
       $scope.barData = 0;
       $scope.percentage = 0;
       $scope.rawData = 0;
@@ -28,19 +28,12 @@ app.directive("synergy4DesktopVersion", function(){
       });
   
       function getData(){
-  
-        $http({
-          url: 'https://beta.synergycloudapp.com/totalsynergy/InternalKpi/Home/ClientVersions',
-          method: 'POST',
-          headers : {'internal-token' : $scope.totalSynergyKey}
-        }).success(function(d, status, headers, config){
-            $scope.data2 = d.data;
-            $scope.keyAvailable = true;
-            sortData(d.data);
+        
+        Synergy4Service.getDesktopVersionsData($scope.totalSynergyKey).then(function(success){
+          $scope.originalData = success.data;
+          sortData(success.data);
         })
-        .error(function(data, status, headers, config){
-          $scope.data2 = "fail";
-        });
+        
       }
   
       function sortData(dataPassed){
@@ -80,9 +73,9 @@ app.directive("synergy4DesktopVersion", function(){
   
       $scope.colorFunction = function(){
         return function(d, i) {
-          if(i == $scope.data2.length - 1)
+          if(i == $scope.originalData.length - 1)
       	    return '#F39200'
-      	 else if(i == $scope.data2.length - 2)
+      	 else if(i == $scope.originalData.length - 2)
       	    return '#004F93'
       	 else
       	  return '#78AD29'

@@ -19,7 +19,6 @@ app.directive("synergyGravatar", function(){
     
     //Only call this for the first keysUpdated, otherwise only fetch on 'fetchEventData' to avoid issues of multiple async
     $scope.$watch('keys', function(){
-      console.log("KEYS CHANGE");
       $scope.totalSynergyKey = $scope.keys[0];
 
       if(!$scope.keysObtained)
@@ -145,7 +144,6 @@ app.directive("synergyGravatar", function(){
             var img = document.createElement('img');
             img.setAttribute("id", "realImageContainer");
             if(blank){
-              console.log("recieves blanks");
               img.src = "assets/transparent.png";
             }
             

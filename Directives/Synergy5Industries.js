@@ -1,7 +1,7 @@
 app.directive("synergy5Industries", function(){
   
 
-  var controller = function($scope, Service, ngAudio, $http){
+  var controller = function($scope, Synergy5Service){
 
      $scope.subscribers = [
         {"Name" : "General", "Percent" : 0},
@@ -31,18 +31,12 @@ app.directive("synergy5Industries", function(){
     }
 
     function getIndustryData(){
-      $http({
-         url: 'https://app.totalsynergy.com/internalkpi/totalsynergy/summary/industries',
-         method: 'POST',
-         headers: {'Content-Type': 'application/json', 'internal-token' : $scope.totalSynergy5Key}
-         }).success(function(d, status, headers, config){
-           $scope.data = d.data;
-           sort(d.data);
-           fillSubscribers();
-         })
-        .error(function(data, status, headers, config){
-           $scope.data = "fail";
-        });
+      
+      Synergy5Service.getIndustryData($scope.totalSynergy5Key).then(function(success){
+          $scope.data = success.data;
+          sort(success.data);
+          fillSubscribers();
+      });
     }
 
     function sort(data){

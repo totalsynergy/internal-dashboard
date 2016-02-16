@@ -2,7 +2,7 @@
 app.directive("helpdeskCallResponseTime", function(){
   
   
-  var  controller = function($scope, Service){
+  var  controller = function($scope, HelpdeskService){
     $scope.callsData = [];
     $scope.count = 0;
     $scope.maxY = 200;
@@ -22,8 +22,8 @@ app.directive("helpdeskCallResponseTime", function(){
     }
 
     $scope.$on('callsDataUpdated', function(){
-      $scope.callsData = Service.callsData;
-      $scope.test = Service.callsData;
+      $scope.callsData = HelpdeskService.callsData;
+      $scope.test = HelpdeskService.callsData;
       formatForGraph();
     })
 
