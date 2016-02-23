@@ -1,7 +1,7 @@
 app.directive("conferenceMap", function(){
   
 
-  var controller = function($scope, Service, $http){
+  var controller = function($scope, Service, $http, EventbriteService){
   
     $scope.NSWnACT = 0;
     $scope.QLD = 0;
@@ -77,24 +77,31 @@ app.directive("conferenceMap", function(){
         }
         
       }
-      Service.updateTotalAttendees(totalAttendees);
+      EventbriteService.updateTotalAttendees(totalAttendees);
     }
 
 
 
     $scope.getPagedData = function(page, event) {
-      $http.get("https://www.eventbriteapi.com/v3/events/17562070626/attendees/?page=" + page  + "&token=" + $scope.eventBriteKey)
-      .success(function(data){
-        for(i = 0; i < data.attendees.length; i++){
+      
+      EventbriteService.getAttendeesData(page, $scope.eventBriteKey).then(function(success){
+        console.log("Got:",JSON.stringify(success));
+        
+        for(i = 0; i < data.attendees.length; i++)
+        {
           event.attendees.push(data.attendees[i]);
         }
+        
         if(page < data.pagination.page_count)
         {
           $scope.getPagedData(page + 1, event);
-        } else {
+        } 
+        else
+        {
           count(event);
         }
       });
+
     };
     
 

@@ -14,8 +14,8 @@
     service.getProductData = getProductData;
     
     function getLatestClient(key){
-      
-      var clients = ["InternsRUs", "Ned Sneebly", "Footy Heads Incorporated"];
+
+      var clients = ["Footy Heads Incorporated", "Interns R Us", "Mcdonalds Archirtect", "Brucie Boys Long Business Name Pty Ltd"];
       
       return $q(function (resolve, reject){
         
@@ -39,7 +39,7 @@
     }
     
     function getCountryData(key){
-      
+            console.log(key);
       return $q(function(resolve, reject){
         
         $http({

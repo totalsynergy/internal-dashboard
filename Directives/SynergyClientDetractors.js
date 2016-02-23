@@ -1,7 +1,7 @@
 
 app.directive("synergyClientDetractors", function(){
   
-  var  controller = function($scope, Service, $timeout){
+  var  controller = function($scope, Synergy4Service, $timeout){
 
       $scope.clientNames1 = [
       ];
@@ -35,7 +35,7 @@ app.directive("synergyClientDetractors", function(){
       });
   
       $scope.$on('abc123Updated', function(){
-        $scope.abc123 = Service.abc123;
+        $scope.abc123 = Synergy4Service.clientRanks;
         sortCs();
       })
   

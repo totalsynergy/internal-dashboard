@@ -1,7 +1,7 @@
 app.directive("synergyGravatar", function(){
 
 
-  var controller = function($scope, Service, $http, gravatarService, md5, $timeout){
+  var controller = function($scope, Service, $http, gravatarService, md5, $timeout, Synergy4Service){
 
 
     $scope.gravatar = 'https://secure.gravatar.com/avatar/db454bee724da405a69c9c7249e71487?s=300&d=mm';
@@ -33,25 +33,14 @@ app.directive("synergyGravatar", function(){
 
     //Get the list of total synergy staff so we can access their gravatars
     function getStaff(){
-       $http({
-         url: 'https://beta.synergycloudapp.com/totalsynergy/InternalKpi/Home/staff',
-         method: 'POST',
-         headers : {'internal-token' : $scope.totalSynergyKey}
-         }).success(function(d, status, headers, config){
-           
-           //check if successful return
-           if(d.data){
-             $scope.data = d.data;
-             
-             sortEmails2(d.data, d.data.length);
-
-             Service.updateStaffInfo(d);
+      Synergy4Service.getSynergyStaff($scope.totalSynergyKey).then(function(success){
+        if(success.data){
+             $scope.data = success.data;
+             sortEmails2(success.data, success.data.length);
            }
-         })
-        .error(function(data, status, headers, config){
-           $scope.data = "fail";
-        });
-        $scope.count++;
+      });
+      
+      $scope.count++;
     }
 
     function emptyDivs(){

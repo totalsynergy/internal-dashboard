@@ -1,6 +1,6 @@
 app.directive("synergyClientPromotors", function(){
   
-  var controller = function($scope, Service, $timeout, $http){
+  var controller = function($scope, Synergy4Service, $timeout, $http){
 
     $scope.clientNames1 = [
     ];
@@ -37,35 +37,14 @@ app.directive("synergyClientPromotors", function(){
 
     $scope.$watch('keys', function(){
       $scope.totalSynergyKey = $scope.keys[0];
-      getClientData();
+      Synergy4Service.getClientRanks($scope.totalSynergyKey);
+    })
+    
+    $scope.$on('abc123Updated', function(){
+        $scope.abc123 = Synergy4Service.clientRanks;
+        sortAs();
     })
 
-    function getClientData(){
-      $http({
-         url: 'https://beta.synergycloudapp.com/totalsynergy/InternalKpi/Home/ClientRanks',
-         method: 'POST',
-         headers : {'internal-token' : $scope.totalSynergyKey}
-         }).success(function(d, status, headers, config){
-           $scope.data = d.data;
-           sortData(d.data);
-         })
-        .error(function(data, status, headers, config){
-           $scope.data2 = "fail";
-        });
-    }
-
-    function sortData(data){
-      if(data && data != null){
-        for(var i = 0; i < data.length; i++){
-          var category = data[i].ClientRanking;
-          var clientName = data[i].LicenseName;
-          addNameToCategory(category, clientName);
-        }
-        sortAs();
-        
-        Service.updateABC123($scope.abc123);
-      }
-    }
 
     function sortAs(){
       for(var  i = 0; i < $scope.abc123.length; i++){
@@ -92,20 +71,6 @@ app.directive("synergyClientPromotors", function(){
       for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
       return o;
     };
-
-    function addNameToCategory(category, clientName){
-      for(var i = 0; i < $scope.abc123.length; i++){
-        if(category == $scope.abc123[i].CategoryName){
-          $scope.abc123[i].Clients.push(clientName);
-          return;
-        }
-      }
-      var emptyArray = [clientName];
-      var jsonCategoryObject = {"CategoryName" : category, "Clients": emptyArray};
-      $scope.abc123.push(jsonCategoryObject);
-    }
-
-
 
     function slideUp(){
 

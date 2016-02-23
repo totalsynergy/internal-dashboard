@@ -2,7 +2,7 @@
 app.directive("conferenceCountdown", function(){
   
   
-  var  controller = function($scope, $http, Service, $interval){
+  var  controller = function($scope, $http, Service, $interval, EventbriteService){
 
     $scope.days = 0;
     $scope.hours = 0;
@@ -34,17 +34,13 @@ app.directive("conferenceCountdown", function(){
 
     function getConferenceData(){
       
-      $http.get("https://www.eventbriteapi.com/v3/events/17562070626/?token=" + $scope.eventBriteKey)
-      .success(function(data){
-        
-        $scope.eventDate = new Date(data.start.utc).getTime();
+      EventbriteService.getCountdown($scope.eventBriteKey).then(function(success){
+                
+        $scope.eventDate = new Date(success.start.utc).getTime();
         timerUpdate($scope.eventDate);
-
         
-      })
-      .error(function(){
-        //
-      })
+      });
+
     }
 
     this.parseJsonDate = function(jsonDateString) {

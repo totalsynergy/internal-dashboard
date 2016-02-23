@@ -1,7 +1,7 @@
 app.directive("synergyTwitter", function(){
   
 
-  var controller = function($scope, Service, $timeout, $http){
+  var controller = function($scope, Service, $timeout, $http, TwitterService){
 
     $scope.count = 0;
     $scope.tweets = [];
@@ -13,40 +13,43 @@ app.directive("synergyTwitter", function(){
       $scope.count++;
     });
     
+    $scope.$on('keysUpdated', authenticateTwitter);
+    
     $scope.$on('Twitter Authenticated', function(){
       $scope.twitterBearerToken = Service.twitterBearerToken;
       $scope.getTweets();
     });
+    
+    function authenticateTwitter(){
+      $scope.twitterSecret = Service.twitterS;
+      $scope.twitterKey = Service.twitterKey;
+      
+      TwitterService.authenticateTwitter($scope.twitterSecret, $scope.twitterKey).then(function(success){
+        return success.access_token;
+      })
+      .then(function(twitterBearerToken){
+        $scope.twitterBearerToken = Service.twitterBearerToken;
+        getTweets();
+      });
+    }
 
     //Use the authentication (performed in Service) and get totalSynergy tweets - count = last 3
-    $scope.getTweets = function(){
+    function getTweets(){
       
-      $http({
-         url: 'https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=totalsynergy&count=4&trim_user=true&exclude_replies=true',
-         method: 'GET',
-         headers: {
-           'Authorization' : 'Bearer ' + $scope.twitterBearerToken
-           }
-         })
-         .success(function(d, status, headers, config){
-           
-           $scope.sortTweets(d);
-           
-         })
-        .error(function(data, status, headers, config){
-           console.log("Unable to get tweets, error was: " + data);
-        });
-        
+      TwitterService.getTweets($scope.twitterBearerToken).then(function(success){
+        sortTweets(success);
+      });
+      
     }
     
     //Goes through the JSON recieved and formats it into tweet objects
-    $scope.sortTweets = function(tweets){
+    function sortTweets(tweets){
       
       $scope.tweets = [];
       
       for(var i =0; i < tweets.length; i++){
         
-        var formattedDate = $scope.formatDate(tweets[i].created_at);
+        var formattedDate = formatDate(tweets[i].created_at);
         
         //Change the color based on amount of retwees/favourites - used within inline styling
         var retweetsColor = (tweets[i].retweet_count == 0) ? "#f39200" : (tweets[i].retweet_count <= 2) ? "#78ad29" : "#009ee3";
@@ -67,7 +70,7 @@ app.directive("synergyTwitter", function(){
     }
     
     //Changes the recieved date from +0000 to local time and returns a string to reflect when it was posted
-    $scope.formatDate = function(date){
+    function formatDate(date){
 
       var date2 = new Date(date);
       var currentDate = new Date();

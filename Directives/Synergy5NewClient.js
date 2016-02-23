@@ -37,7 +37,7 @@
       setDataFetchTimer();
       
       function setDataFetchTimer(){
-        $interval(getLatestClient, 5000);
+        $interval(getLatestClient, 30000);
       }
       
       function getLatestClient(){
@@ -52,9 +52,9 @@
       }
       
       function setLatest(name, position){
-        var newPosition = getOrdinal(position);
+        var newPosition = position;
         
-        if(vm.latestClientPosition != 0 && position > getInt(vm.latestClientPosition))
+        if(vm.latestClientPosition != 0 && position > vm.latestClientPosition)
         {
           console.log("Looks like we have to try and change page");
           Service.updateTab(38, function(){

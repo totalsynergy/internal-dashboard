@@ -1,7 +1,7 @@
 app.directive("synergyTrello", function(){
 
 
-  var controller = function($scope, Service, ngAudio, $http, $timeout){
+  var controller = function($scope, Service, ngAudio, $http, $timeout, TrelloService){
     $scope.count = 0;
     $scope.tabCount = 0;
     $scope.doingCards = [];
@@ -9,35 +9,48 @@ app.directive("synergyTrello", function(){
     $scope.unShuffledCards = [];
     $scope.trelloKeys = [];
 
-
     $scope.$on('trelloListUpdated', function(){
       
       $scope.trelloKeys = Service.trelloKeys.split("-");
+      $scope.trelloUserAuth = Service.trelloUserAuth;
       $scope.listId = Service.trelloListSelected;
       $scope.listName = Service.trelloListName;
 
-      getCardsInList();
+      getTrelloCards();
 
-    })
+    });
 
     $scope.$on('gravatarsUpdated', function(){
       $scope.images = Service.images;
-      testImages();
-    })
-    
-    $scope.$on('trelloSelectedNameUpdate' , function(){
-      $scope.trelloSelectedName = Service.trelloSelectedName;
-    })
+      addImages();
+    });
 
     $scope.$on('shortDataFetch', function(){
-      if($scope.count == 0){
-        $scope.count++
+      getTrelloCards();
+    });
+    
+    function getTrelloCards(){
+      
+      TrelloService.getTrelloCards($scope.listId, $scope.trelloKeys[0], $scope.trelloUserAuth).then(function(success){
+        
         $scope.doingCards = [];
-        getCardsInList();
-      }
-    })
+                 
+         for(var i = 0; i < data.length; i++){
 
-    function testImages(){
+            if(data[i].members[0] && !nameAlreadyExists(data[i].members[0].fullName)){
+              var card = {"Name" : data[i].members[0].fullName, "CardName" : data[i].name};
+              $scope.doingCards.push(card);
+            }
+         }
+               
+        if($scope.images && $scope.images.length !== 0){
+          addImages();
+        }
+        
+      });
+    }
+    
+    function addImages(){
 
       for(var i = 0; i < $scope.doingCards.length; i++){
         for(var j = 0; j < $scope.images.length; j++){
@@ -57,7 +70,6 @@ app.directive("synergyTrello", function(){
     }
 
     function pinImages(){
-      
       //Ensure that DOM has loaded
       $timeout(function(){
           for(var x = 0; x < $scope.doingCards.length; x++){
@@ -83,43 +95,6 @@ app.directive("synergyTrello", function(){
       return o.slice(0,6);
     }
     
-    function getCardsInList(){
-      
-      var userAuth = "";
-            
-      chrome.storage.local.get(null, function(result){
-          var url = "https://api.trello.com/1/lists/" + $scope.listId + "/cards?members=true&cards=open&attachment_fields=false&card_fields=name,idMembers&key=" 
-          + $scope.trelloKeys[0] + "&token=" + result.trelloUserAuth;
-          var modifiedUrl = url.replace(/\s/g, '');
-          $http.get(modifiedUrl)
-            .success(function(data){
-                 
-                 $scope.doingCards = [];
-                 
-                 for(var i = 0; i < data.length; i++){
-      
-                    if(data[i].members[0] && !nameAlreadyExists(data[i].members[0].fullName)){
-                      var card = {"Name" : data[i].members[0].fullName, "CardName" : data[i].name};
-                      $scope.doingCards.push(card);
-                    }
-                 }
-                 
-                       
-                if($scope.images && $scope.images.length !== 0){
-                  testImages();
-                }
-                 
-                 
-               })
-              .error(function(data){
-                 $scope.data = "fail";
-              });
-      });
-      
-
-
-    }
-    
     function nameAlreadyExists(name){
       for(var i = 0; i < $scope.doingCards.length; i++){
 
@@ -139,6 +114,6 @@ app.directive("synergyTrello", function(){
     templateUrl: '../Views/SynergyTrello.html',
     controller: controller,
     tab: "=tab"
-  }
+  };
   
 });

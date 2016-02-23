@@ -2918,6 +2918,7 @@ li:before {
   font-family: openSans;
   color:#5c5c5c;
   line-height: 7vw;
+  text-align:center;
 }
 #synergy5-new-client-sub{
       font-size: 3vw;
@@ -2945,6 +2946,7 @@ li:before {
 #synergy5-new-client-position #highlight-position{
   font-size:5vw;
   color: #27B4B9;
+  text-transform:lowercase;
 }
 
 .synergy5-new-client-flexbox{

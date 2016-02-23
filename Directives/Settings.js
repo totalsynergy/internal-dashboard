@@ -2,7 +2,7 @@
 app.directive("settings", function(){
   
   
-  var  controller = function($scope, Service, $rootScope, $http){
+  var  controller = function($scope, Service, $rootScope, $http, TrelloService){
 
    $scope.trelloKeys = '';
    $scope.masterKey ='';
@@ -17,20 +17,70 @@ app.directive("settings", function(){
       $scope.trelloKeys = $scope.keys[3];
 
     });
-
+    
     //Save the listID and sort the order of lists so user knows which list was previously selected
     $scope.$on('trelloListUpdated', function(){
-
-      $scope.trelloAuthWorks = true;
-      $scope.trelloLists = Service.trelloList;
       $scope.trelloListSelected.listId = Service.trelloListSelected;
-      $scope.trelloListSelected.listName = $scope.getDefaultList();
-      
     });
+    
+    $scope.$on('keysUpdated', getTrelloLists);
+    
+    function getTrelloLists(){
+      $scope.trelloKeys = Service.trelloKeys.split("-");
+      $scope.trelloUserAuth = Service.trelloUserAuth;
+      getTrelloInformation();
+    };
+    
+    function getTrelloInformation(){
+      
+      TrelloService.getTrelloBoards($scope.trelloKeys, $scope.trelloUserAuth).then(function(success){
+        return success;
+      })
+      .then(function(trelloBoards){
+        TrelloService.getTrelloLists(trelloBoards, $scope.trelloKeys, $scope.trelloUserAuth).then(function(success){
+          return success
+        });     
+      })
+      .then(function(trelloLists){
+        sortTrelloLists(trelloLists);
+      });
+
+    }
+    
+    function sortTrelloLists(listData){
+      
+      var trelloInfo = [];
+      
+      for (var i = 0; i < listData.length; i++) {
+        var board = listData[i][200];
+        var boardObject = {
+            "id": board.id,
+            "name": board.name,
+            "lists": []
+        };
+        
+        for (var j = 0; j < board.lists.length; j++) {
+          var list = board.lists[j];
+          var listObject = {
+              "listId": list.id,
+              "listName": list.name,
+          };
+        
+          boardObject.lists.push(listObject);
+        }
+        
+        trelloInfo.push(boardObject);
+
+      }
+      
+      $scope.trelloLists = trelloInfo;
+      $scope.trelloListSelected.listId = Service.trelloListSelected;
+      getDefaultList();
+    }
     
     
     //Goes through Trello Lists and finds the previously selected one - puts this as default in select ng-options
-    $scope.getDefaultList = function(){
+    function getDefaultList(){
       
       var selectedObject= {};
       
@@ -52,13 +102,13 @@ app.directive("settings", function(){
               ]
             };           // return $scope.trelloLists[i].lists[j].listName;
             Service.updateTrelloSelectedName($scope.trelloLists[i].lists[j].listName);
+            break;
           }
           
         }
       }
       
       $scope.trelloLists.unshift(selectedObject);
-      
     }
     
     //Saves pages and Speed. If syenrgy call was successful save these keys
@@ -156,6 +206,7 @@ app.directive("settings", function(){
           $scope.tab = i + 1;
           Service.updateTab(i + 1, null);
           $rootScope.$broadcast('settingsClosed')
+          
         }
         
     }
