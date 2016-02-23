@@ -39,24 +39,14 @@ app.directive("synergyGravatar", function(){
              sortEmails2(success.data, success.data.length);
            }
       });
-      
-      $scope.count++;
     }
 
-    function emptyDivs(){
-      for(var i = 1; i <= 28; i++){
-        var divName = '#g' + i;
-        $(divName).empty();
-      }
-    }
 
     //TypeError: Cannot read property 'Email' of undefined
     //at sortEmails2 (totalSynergyGravatarController.js:85)
     function sortEmails2(data, length){
       var counter = 0;
       $scope.trelloImages = [];
-      
-      //emptyDivs();
       
       pickNumbersToBeBlanks();
 

@@ -100,7 +100,6 @@ app.directive("synergy5HeatMap", function(){
             if(boolTest)
               values[k] = 0;
           });
-console.log("Create map with: " + values)
           Heatmap.updateMap(values);
 
       }

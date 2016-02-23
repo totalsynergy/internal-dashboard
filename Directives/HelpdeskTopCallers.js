@@ -1,7 +1,7 @@
 app.directive("helpdeskTopCallers", function(){
 
 
-  var controller = function($scope, Service, ngAudio){
+  var controller = function($scope, HelpdeskService, ngAudio){
     $scope.count = 0;
     $scope.callerStats = [];
     $scope.barData = [];
@@ -16,7 +16,8 @@ app.directive("helpdeskTopCallers", function(){
     });
 
      $scope.$on('callsDataUpdated', function(){
-      $scope.progressData = Service.progressData;
+       console.log("Time to!");
+      $scope.progressData = HelpdeskService.progressData;
       sortData();
     })
 

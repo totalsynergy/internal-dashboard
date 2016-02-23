@@ -11,7 +11,8 @@
         controller : Controller,
         controllerAs : 'vm',
         scope : {
-          tab : "="
+          tab : "=",
+          keys: "="
         },
         bindToController: true
       };
@@ -26,13 +27,15 @@
       vm.title = "New Client joined Synergy";
       vm.latestClient = "";
       vm.latestClientPosition = 0;
+      vm.latestClientLocation = "";
       
       var sound = ngAudio.load("assets/cheering.wav");
       var confettiRunning = false;
       
-      $scope.$watch("keys", getLatestClient);
-      
-      $scope.$watch("tab", function(){console.log($scope.tab)});
+      $scope.$watch("keys", function(){
+        $scope.totalSynergyKey = vm.keys[4];
+        getLatestClient();
+      });
       
       setDataFetchTimer();
       
@@ -43,22 +46,24 @@
       function getLatestClient(){
         
         Synergy5Service
-          .getLatestClient()
+          .getLatestClient($scope.totalSynergyKey)
           .then(function(success){
-            console.log(success);
+            if(success.data.data)
+            {
+              var org = success.data.data
+              setLatest(org.Name, org.Position, org.Location);
+            }
           }, function(error){
             setLatest(error.Name, error.Position);
           });
       }
       
-      function setLatest(name, position){
+      function setLatest(name, position, location){
         var newPosition = position;
         
-        if(vm.latestClientPosition != 0 && position > vm.latestClientPosition)
+        if(vm.latestClient != "" && vm.latestClient != name)
         {
-          console.log("Looks like we have to try and change page");
           Service.updateTab(38, function(){
-            console.log("Run callback we on")
              sound.play(); 
           });
         }
@@ -79,6 +84,7 @@
         
         vm.latestClient = name;
         vm.latestClientPosition = newPosition;
+        vm.latestClientLocation = location;
         
       }
       

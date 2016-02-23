@@ -1,15 +1,12 @@
 app.directive("bomRadar", function(){
 
-  console.log("Bom Directive loaded");
   var controller = function($scope, Service, $http, $timeout){
     
-    console.log("Bom controller loaded");
     var appended = false;
     $scope.beginningPageState = null;
 
     
     $scope.$on('serviceHasKeys', function(){
-      console.log("Hit me");
       findBeginningState();
       if(!appended){
         appendWebView();

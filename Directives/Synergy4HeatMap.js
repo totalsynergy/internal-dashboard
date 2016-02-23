@@ -19,8 +19,7 @@ app.directive("synergy4HeatMap", function(){
         for(var i = 0; i < d.data.length; i++){
            incrementCategory(d.data[i].Country);
          }
-         
-         console.log($scope.countries);
+
          
         loadMap();
       })
@@ -85,8 +84,7 @@ app.directive("synergy4HeatMap", function(){
             if(boolTest)
               values[k] = 0;
           });
-          
-          console.log("Create map with: " + values)
+
           Heatmap.updateMap(values);
 
       }

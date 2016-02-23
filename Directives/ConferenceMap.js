@@ -84,15 +84,15 @@ app.directive("conferenceMap", function(){
 
     $scope.getPagedData = function(page, event) {
       
+      
       EventbriteService.getAttendeesData(page, $scope.eventBriteKey).then(function(success){
-        console.log("Got:",JSON.stringify(success));
         
-        for(i = 0; i < data.attendees.length; i++)
+        for(i = 0; i < success.attendees.length; i++)
         {
-          event.attendees.push(data.attendees[i]);
+          event.attendees.push(success.attendees[i]);
         }
         
-        if(page < data.pagination.page_count)
+        if(page < success.pagination.page_count)
         {
           $scope.getPagedData(page + 1, event);
         } 
@@ -112,8 +112,8 @@ app.directive("conferenceMap", function(){
     templateUrl: '../Views/ConferenceMap.html',
     controller: controller,
     scope : {
-      tab: "=tab",
-      keys: "=keys"
+      tab: "=",
+      keys: "="
     }
   }
   

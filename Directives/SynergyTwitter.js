@@ -8,34 +8,29 @@ app.directive("synergyTwitter", function(){
 
 
     $scope.$watch('keys', function(){
-      if($scope.count > 0)
-        $scope.getTweets();
-      $scope.count++;
+      $scope.twitterSecret = $scope.keys[7];
+      $scope.twitterKey = $scope.keys[6];
+      authenticateTwitter();
     });
     
-    $scope.$on('keysUpdated', authenticateTwitter);
+    $scope.$on('longDataFetch', authenticateTwitter);
     
-    $scope.$on('Twitter Authenticated', function(){
-      $scope.twitterBearerToken = Service.twitterBearerToken;
-      $scope.getTweets();
-    });
     
     function authenticateTwitter(){
       $scope.twitterSecret = Service.twitterS;
       $scope.twitterKey = Service.twitterKey;
       
-      TwitterService.authenticateTwitter($scope.twitterSecret, $scope.twitterKey).then(function(success){
+      TwitterService.authenticateTwitter($scope.twitterKey, $scope.twitterSecret).then(function(success){
         return success.access_token;
       })
       .then(function(twitterBearerToken){
-        $scope.twitterBearerToken = Service.twitterBearerToken;
+        $scope.twitterBearerToken = twitterBearerToken;
         getTweets();
       });
     }
 
     //Use the authentication (performed in Service) and get totalSynergy tweets - count = last 3
     function getTweets(){
-      
       TwitterService.getTweets($scope.twitterBearerToken).then(function(success){
         sortTweets(success);
       });

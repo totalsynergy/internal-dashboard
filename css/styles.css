@@ -1203,6 +1203,8 @@ webview{
   bottom:5%;
   left:30%;
   width:50%;
+      display: flex;
+    align-items: center;
 }
 
 #orangeDiv{
@@ -2871,17 +2873,22 @@ li:before {
 .gSHolder div p{
     position: relative;
     bottom: 25px;
-    background: #58C8DF;
-    border-radius: 27px;
+    background: #81D4F5;
+    /* border-radius: 27px; */
     padding: 2px 12px;
-    box-shadow: 1px 1px 1px #494949;
-    border: 1px solid #FFFFFF;
+    text-shadow: 1px 1px 1px #494949;
+    /* border: 1px solid #FFFFFF; */
     font-family: openSans;
     font-size: 1vw;
     z-index: 1000;
     color: #FFF;
     font-weight: bold;
-    display:inline-block;
+    display: inline-block;
+    text-align: center;
+    /* opacity: 0.5; */
+    font-family: openSans;
+    text-transform: uppercase;
+    box-shadow: 1px 1px 1px #717171;
 }
 
 

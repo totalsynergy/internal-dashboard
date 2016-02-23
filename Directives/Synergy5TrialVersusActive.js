@@ -40,12 +40,13 @@ app.directive("synergyTrialVersusActive", function(){
           $scope.pieData3 = $scope.backup3;
           $scope.pieData4 = $scope.backup4;
         }
-        else
+        /*else
         {
           console.log("Change to fake data");
           $scope.pieData3  = $scope.emptyData;
           $scope.pieData4 = $scope.emptyData;
         }
+        */
       })
   
   

@@ -48,7 +48,8 @@
     "http://www.bom.gov.au/",
     "https://www.yammer.com/",
     "https://api.trello.com/",
-    "https://api.twitter.com/"
+    "https://api.twitter.com/",
+    "http://localhost:5000/"
     ],
 
   "web_accessible_resources": [

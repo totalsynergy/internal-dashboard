@@ -13,7 +13,6 @@
     service.getTweets = getTweets;
     
     function authenticateTwitter(twitterKey, twitterSecret){
-      
       var key = twitterKey;
       var secretKey = twitterSecret;
       
