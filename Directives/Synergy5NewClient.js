@@ -40,7 +40,7 @@
       setDataFetchTimer();
       
       function setDataFetchTimer(){
-        $interval(getLatestClient, 30000);
+        $interval(getLatestClient, 3000000);
       }
       
       function getLatestClient(){
@@ -48,13 +48,13 @@
         Synergy5Service
           .getLatestClient($scope.totalSynergyKey)
           .then(function(success){
-            if(success.data.data)
+            if(success.data)
             {
-              var org = success.data.data
+              var org = success.data
               setLatest(org.Name, org.Position, org.Location);
             }
           }, function(error){
-            setLatest(error.Name, error.Position);
+            
           });
       }
       

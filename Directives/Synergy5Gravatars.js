@@ -41,9 +41,9 @@
     //Get the list of total synergy staff so we can access their gravatars
     function getStaff(){
       Synergy5Service.getSynergyStaff($scope.totalSynergyKey).then(function(success){
-        if(success.data){
-             $scope.data = success.data.data;
-             sortEmails2(success.data.data, success.data.data.length);
+        if(success){
+             $scope.data = success.data;
+             sortEmails2(success.data, success.data.length);
            }
       });
     }

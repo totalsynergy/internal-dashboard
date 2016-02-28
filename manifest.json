@@ -4,7 +4,7 @@
   "short_name": "TSD",
   "description": "Total Synergy Dashboard",
 
-  "version": "1.3",
+  "version": "1.7",
 
   "kiosk_enabled": true,
 
@@ -48,8 +48,7 @@
     "http://www.bom.gov.au/",
     "https://www.yammer.com/",
     "https://api.trello.com/",
-    "https://api.twitter.com/",
-    "http://localhost:5000/"
+    "https://api.twitter.com/"
     ],
 
   "web_accessible_resources": [
