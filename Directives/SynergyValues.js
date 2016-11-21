@@ -9,6 +9,8 @@ app.directive("synergyValues", function(){
     $scope.timer2 = null;
     $scope.count = 0;
     
+    $scope.$on("keysUpdated", function(){console.log("atles we found it");})
+    
     $scope.$watch('tab', function(){
 
       if($scope.tab == 34){

@@ -18,8 +18,8 @@
   <div ng-controller="mainController" ng-init="init()" ng-cloak>
   
     <!-- REFACTOR THIS INTO THE VIEWS, OTHERWISE CONFUSING -->
-    <img src="assets/conference/conferenceLogo.png" ng-show="tab > 2 && tab < 6" class="logo">
-    <img src="assets/logo.png" ng-show="tab > 13 && tab < 21" class="logo2">
+    <img src="assets/conference/conference-2017.png" ng-show="tab == 3" class="logo">
+    <img src="assets/logo.png" ng-show="tab > 13 && tab < 19" class="logo2">
     <img src="assets/logoSynergy5.png" ng-show="tab > 23 && tab <= 30" class="logo3">
 
 
@@ -67,15 +67,15 @@
     <synergy4-desktop-version "heightController kpi" ng-show="tab == 16" tab="tab" keys="keys"></synergy4-desktop-version>
     <synergy4-australia-map class="kpi animate" ng-show="tab == 17" tab="tab" keys="keys"></synergy4-australia-map>
     <synergy4-heat-map class="kpi animate" ng-show="tab == 18" tab="tab" keys="keys"></synergy4-heat-map>
-    <!-- EMPTY 19 -->
-    <!-- EMPTY 20 -->
+    <cake-day class="kpi animate" ng-show="tab == 19" tab="tab" keys="keys"></cake-day>
+
+    
     <synergy-client-promotors class="kpi animate greyBackground" ng-show="tab == 21" tab="tab" speed="speed" keys="keys"></synergy-client-promotors>
     <synergy-client-passive class="kpi animate greyBackground" ng-show="tab == 22" tab="tab" speed="speed"></synergy-client-passive>
     <synergy-client-detractors class="kpi animate greyBackground" ng-show="tab == 23" tab="tab" speed="speed"></synergy-client-detractors>
     <synergy-trial-versus-active class="kpi animate" ng-show="tab == 24" tab="tab" keys="keys"></synergy-trial-versus-active>
     
     <synergy5-lifetime class="kpi animate" ng-show="tab == 25" tab="tab"></synergy5-lifetime>
-    <!-- EMPTY 25 -->
     <synergy5-heat-map class="kpi animate greyBackground" ng-show="tab == 27" tab="tab" keys="keys"></synergy5-heat-map>
     <synergy5-industries class="kpi animate" ng-show="tab == 28" tab="tab" keys="keys"></synergy5-industries>
     <synergy5-staff class="kpi animate" ng-show="tab == 29" tab="tab" keys="keys"></synergy5-staff>
@@ -90,6 +90,8 @@
     
     <synergy5-gravatars class="kpi animate teal-background" ng-show="tab == 37" tab="tab" keys="keys"></synergy5-gravatars>
     <synergy5-new-client class="kpi animate fixed-max" ng-show="tab == 38" tab="tab" keys="keys"></synergy5-new-client>
+    <synergy-company-leaderboard class="kpi animate hundredHeight" ng-show="tab == 39" keys="keys" tab="tab"></synergy-company-leaderboard>
+    <yammer-photos class="kpi animate greyBackground hundredHeight" ng-show="tab == 40" tab="tab" keys="keys"></yammer-photos>
     
     
     <settings ng-show="tab == 99" ng-init="initSlider()" pages="pages" speed="speed" keys="keys" tab="tab"></settings>
@@ -122,16 +124,19 @@
 <script type="text/javascript" src="js/main.js"></script>
 
 <!-- Services -->
-<script type="text/javascript" src="services/service.js"></script>
-<script type="text/javascript" src="services/Synergy5Service.js"></script>
-<script type="text/javascript" src="services/Synergy4Service.js"></script>
-<script type="text/javascript" src="services/HelpdeskService.js"></script>
-<script type="text/javascript" src="services/TrelloService.js"></script>
-<script type="text/javascript" src="services/TwitterService.js"></script>
-<script type="text/javascript" src="services/EventbriteService.js"></script>
+<script type="text/javascript" src="Services/service.js"></script>
+<script type="text/javascript" src="Services/Synergy5Service.js"></script>
+<script type="text/javascript" src="Services/Synergy4Service.js"></script>
+<script type="text/javascript" src="Services/HelpdeskService.js"></script>
+<script type="text/javascript" src="Services/TrelloService.js"></script>
+<script type="text/javascript" src="Services/TwitterService.js"></script>
+<script type="text/javascript" src="Services/EventbriteService.js"></script>
+<script type="text/javascript" src="Services/MailchimpService.js"></script>
+<script type="text/javascript" src="Services/BambooHRService.js"></script>
+<script type="text/javascript" src="Services/YammerService.js"></script>
 
 <!-- MAIN CONTROLLER -->
-<script type="text/javascript" src="controllers/mainController.js"></script>
+<script type="text/javascript" src="Controllers/mainController.js"></script>
     
 <!-- DIRECTIVES -->
 <script type="text/javascript" src="Directives/Synergy5TrialVersusActive.js"></script>
@@ -156,6 +161,7 @@
 <script type="text/javascript" src="Directives/Synergy4Cloud.js"></script>
 <script type="text/javascript" src="Directives/SynergyTwitter.js"></script>
 <script type="text/javascript" src="Directives/SynergyYammer.js"></script> 
+<script type="text/javascript" src="Directives/YammerPhotos.js"></script> 
 <script type="text/javascript" src="Directives/SynergyTrello.js"></script> 
 <script type="text/javascript" src="Directives/HelpdeskCallTime.js"></script> 
 <script type="text/javascript" src="Directives/HelpdeskTopCallers.js"></script> 
@@ -168,6 +174,8 @@
 <script type="text/javascript" src="Directives/SynergyGravatar.js"></script> 
 <script type="text/javascript" src="Directives/Synergy5Gravatars.js"></script> 
 <script type="text/javascript" src="Directives/Synergy5NewClient.js"></script>
+<script type="text/javascript" src="Directives/CakeDay.js"></script>
+<script type="text/javascript" src="Directives/SynergyCompanyLeaderboard.js"></script>
 
 <script type="text/javascript" src="Directives/Settings.js"></script>
 

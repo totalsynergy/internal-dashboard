@@ -119,8 +119,8 @@ h1{
     width: 12%;
     display: block;
     position: fixed;
-    bottom: 2.5%;
-    left: 2.5%;
+    bottom: 5.5%;
+    left: 5.5%;
     z-index: 1000;
 }
 
@@ -263,8 +263,8 @@ div.vic {
 
 div.earthNumbers{
     position: absolute;
-    left: 39%;
-    top: 38%;
+    left: 23%;
+    top: 35%;
     text-align: center;
     color: #58595B;
     font-family: openSans;
@@ -272,9 +272,35 @@ div.earthNumbers{
     margin-right: auto;
 }
 
+.conference-flex{
+  display:flex;
+  flex-direction:column;
+  width:100%;
+}
+
+.conference-countdown-title{
+  
+}
+
+.conference-top{
+      display: block;
+    align-self: center;
+    margin-top: auto;
+}
+
+.conference-logo{
+    width: 200px;
+    position: fixed;
+    top: 100px;
+    left: 50%;
+    margin-left: -100px;
+}
+
 .countDownHeader{
   color:#58595B;
-  font-family: openSansBold;
+  font-family: openSansLight;
+    font-weight: bold;
+    font-size:3vw;
   text-decoration:bold;
   padding-top:20%;
   text-align:center;
@@ -282,12 +308,7 @@ div.earthNumbers{
 }
 
 .countDown{
-  text-align: center;
-  margin: 0 auto;
-  margin: 0 auto;
-  width: 120%;
-  position:relative;
-  right:10%;
+ text-align: center;
 }
 
 .time, .period{
@@ -302,29 +323,34 @@ div.earthNumbers{
 
 .period{
   color:#58595B;
-  font-family:openSans;
+  font-family: openSansLight;
+    font-weight: bold;
   font-size:2vw;
   padding-right:10px;
 }
 
 .conferenceStarts{
-  padding-top:5%;
-  text-align: center;
-  height:100%;
+    text-align: center;
+    flex-direction: column;
+    margin-top: auto;
+    margin-bottom: 10%;
 }
 
 .starts{
   font-family:openSansLight;
   color:#58595B;
   font-size:2vw;
+  font-weight: bold;
+      margin-bottom: -15px;
 }
 
 .startDate{
-  font-family:openSans;
-  color:#8bc53f;
-  font-size:3vw;
-  position: relative;
-  bottom:2.5%;
+  font-family: openSansLight;
+    font-weight: bold;
+    color: #27B4B9;
+    font-size: 3vw;
+    position: relative;
+    bottom: 2.5%;
 }
 
 .cube{
@@ -349,18 +375,33 @@ div.earthNumbers{
 
 .yellowBold{
   font-family:openSans;
-  color:#8bc53f;
+  color:#27B4B9;
   font-size:3vw;
   padding-left:1%;
   padding-right:1%;
 }
+
+.tealBold{
+  font-family:openSans;
+  color:#58595B;
+  font-size:3vw;
+  padding-left:1%;
+  padding-right:1%;
+}
+
 
 .totalAttendees{
   text-align: center;
   width:50%;
   height:80%;
   z-index:999;
+  
+  display: flex;
+  flex-direction: column;
+    
 }
+
+
 
 .totalAttendeesHeader{
   color:#58595B;
@@ -377,16 +418,11 @@ div.earthNumbers{
   position:relative;
 }
 
+
 .numberOf{
-    position: absolute;
-    color: #F0EFF4;
+    color: #5d5d5e;
     font-family: openSans;
-    /* text-align: center; */
     font-size: 14vw;
-    width: 100%;
-    height: 50%;
-    bottom: 22%;
-    left: 0%;
 }
 
 input[type="text"] {
@@ -2268,12 +2304,23 @@ left: 55%;
   background: #009ee3;
 }
 
+.companyLeaderboardHeader{
+  width:100%;
+  height:15%;
+  background: #27b4b9;
+}
+
+
 .leaderboardText{
   font-size: 4vw;
   text-align:center;
   color:#fff;
   margin: 0 !important;
   padding-top: 20px;
+}
+
+.leaderboardText:first-letter{
+  text-transform:capitalize;
 }
 
 .leaderboardFirstPlace{
@@ -2528,6 +2575,12 @@ left: 55%;
   position: absolute;
   top: 38px;
   left: 161px;
+}
+
+.silver-dev{
+  width: 42px;
+  position: absolute;
+  left: 45px;
 }
 
 #relicWebView{
@@ -2931,6 +2984,7 @@ li:before {
       font-size: 3vw;
     font-family: openSansLight;
     text-align: justify;
+        margin-top: 15px;
 }
 
 #synergy5-new-client-location{
@@ -2964,4 +3018,134 @@ li:before {
   margin-bottom:50px;
 }
 
+#cake-header{
+      font-size: 4vw;
+    font-family: openSansLight;
+    line-height: 6vw;
+    margin-top: 5%;
+    color: #333333;
+}
+
+#cake-second-header{
+  font-size:4vw;
+  font-family:openSansLight;
+  line-height:4vw;
+}
+
+#cake-header .highlight-cake{
+      font-size: 6vw;
+    color: #51C4CC;
+    font-family: openSans;
+}
+#cake-second-header .highlight-cake{
+      font-family: openSans;
+    font-size: 4vw;
+}
+
+.synergy-cake{
+  position:relative;
+  top:-72px;
+}
+
+/* GENERAL LAYOUT DIMENSIOS*/
+
+.medium-margin-left{
+  margin-left:15px !important;
+}
+
+.medium-margin-top{
+  margin-top:15px !important;
+}
+
+.yammer-photos-logo{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.yammer-photos-card{
+  border-radius: 2px !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24) !important;
+  
+  width:25%;
+  display:block;
+  
+  background: #fff;
+  
+  margin: 0 50px;
+  
+  display: flex;
+  flex: 1 100%;
+  flex-direction: column;
+}
+
+.yammer-card-holder{
+  display: flex;
+  margin-top: 50px;
+  height:66%;
+}
+
+.yammer-image{
+  max-width:100%;
+  max-height:100%;
+  width:100%;
+}
+
+.yammer-photo-gravatar{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: 10px;
+}
+
+#first-yammer-grav, #second-yammer-grav, #third-yammer-grav{
+    display: inline-block;
+    float: left;
+}
+
+#first-image, #second-image, #third-image{
+    order: 2;
+    justify-content: center;
+    align-content: center;
+    display: flex;
+    flex-direction: column;
+    flex: 1 100%;
+}
+
+.yammer-photo-title{
+    font-size: 16px;
+    float: left;
+    margin: 20px 10px;
+}
+
+.yammer-photo-header{
+  order: 1;
+}
+
+.yammer-photo-message{
+  font-size:18px;
+    border-left: solid 4px #0093be;
+  padding-left: 4px;
+}
+
+.yammer-photo-heart{
+      font-size: 50px;
+    line-height: 80px;
+    margin-left: 10px;
+    margin-right: 10px;
+    float: left;
+    color:#0093be;
+}
+
+.yammer-photo-footer{
+      padding: 10px;
+    text-overflow: ellipsis;
+    width: 100%;
+    height: 65px;
+    overflow: hidden;
+    display: block;
+    margin-bottom:5px;
+    
+    order:3;
+}
 

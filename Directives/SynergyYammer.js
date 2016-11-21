@@ -1,7 +1,7 @@
 app.directive("synergyYammer", function(){
 
 
-  var controller = function($scope, Service, $http, gravatarService){
+  var controller = function($scope, Service, YammerService, gravatarService){
     
    $scope.users = [];
    $scope.message = [];
@@ -23,18 +23,13 @@ app.directive("synergyYammer", function(){
     //currently 7FPAj1DeqTJylDNWlGzJg
     function getYammerData(){
 
-      $http({
-        // url: 'https://www.yammer.com/api/v1/messages/my_feed.json',
-         url : 'https://www.yammer.com/api/v1/users.json',
-         method: 'GET',
-         headers: {'Content-Type': 'application/json', 'Authorization' : 'Bearer '  + $scope.yammerKey }
-         }).success(function(d, status, headers, config){
-           sortUsers(d);
-           getGroups();
-         })
-        .error(function(data, status, headers, config){
-           $scope.data = "fail";
-        });
+      YammerService.getYammerData().then(function success(data){
+
+        sortUsers(data);
+        getGroups();
+      }, function error(data){
+        $scope.data = "fail";
+      });
     }
     
     function sortUsers(data){
@@ -49,39 +44,31 @@ app.directive("synergyYammer", function(){
     }
     
     function getGroups(){
-      $http({
-         url: 'https://www.yammer.com/api/v1/users/current.json?include_group_memberships=true',
-         method: 'GET',
-         headers: {'Content-Type': 'application/json', 'Authorization' : 'Bearer 7FPAj1DeqTJylDNWlGzJg' }
-         }).success(function(d, status, headers, config){
+      
+      YammerService.getGroups().then(function success(data){
            $scope.groups = [];
-
-           for(var i = 0; i < d.group_memberships.length; i++)
+            
+           for(var i = 0; i < data.group_memberships.length; i++)
            {
-             var group = {Name: d.group_memberships[i].name, Id: d.group_memberships[i].id};
+             var group = {Name: data.group_memberships[i].name, Id: data.group_memberships[i].id};
              $scope.groups.push(group);
            }
            
            getMessages();
-         })
-        .error(function(data, status, headers, config){
-           $scope.data = "fail";
-        });
+      }, function error(data){
+          $scope.data = "fail";
+      });
+
     }
     
     function getMessages(){
-      $http({
-         url: 'https://www.yammer.com/api/v1/messages/my_feed.json',
-         method: 'GET',
-         headers: {'Content-Type': 'application/json', 'Authorization' : 'Bearer 7FPAj1DeqTJylDNWlGzJg' }
-         }).success(function(d, status, headers, config){
-           sortMessages(d.messages);
+      YammerService.getMessages().then(function success(data){
+           sortMessages(data.messages);
            getImages();
            pinImages();
-         })
-        .error(function(data, status, headers, config){
+         }, function error(data){
            $scope.data = "fail";
-        });
+         });
     }
     
     //converts userId to userName

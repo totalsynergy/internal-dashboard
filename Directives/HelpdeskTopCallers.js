@@ -16,7 +16,6 @@ app.directive("helpdeskTopCallers", function(){
     });
 
      $scope.$on('callsDataUpdated', function(){
-       console.log("Time to!");
       $scope.progressData = HelpdeskService.progressData;
       sortData();
     })

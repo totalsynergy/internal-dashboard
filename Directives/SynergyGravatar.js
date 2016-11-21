@@ -74,7 +74,7 @@ app.directive("synergyGravatar", function(){
           counter++;
           
         }
-        loadAvatar(hash, i, name, blank, counter);
+        loadAvatar(hash, i, name, blank, counter, email);
         
       }
       //Update the gravatars that are used in other areas of the application.
@@ -82,7 +82,7 @@ app.directive("synergyGravatar", function(){
     
     //Load Initials as an alertnate to mystery man using Gregs initial web service
     //Append these to the appropriate divs
-    function loadInitials(name, index){
+    function loadInitials(name, index, email){
       var initials = name.replace(/\W*(\w)\w*/g, '$1').toUpperCase();
         var url = "http://profileimages.azurewebsites.net/Image/300/" + initials;
         var xhr = new XMLHttpRequest();
@@ -99,7 +99,7 @@ app.directive("synergyGravatar", function(){
           $(divName).append('<p id="gravatarName">' + name + '</p>');
 
           var srcClone = img.src;
-          $scope.trelloImages.push({"Name": name, "Image" :srcClone});
+          $scope.trelloImages.push({"Name": name, "Image" :srcClone, "Email" : email});
           $scope.completedXMLRequests++;
           
           //Check if all xml requests are done and send
@@ -111,7 +111,7 @@ app.directive("synergyGravatar", function(){
     }
 
       //XMLHTTP request to get individual gravatars - If 404 is thrown load initials instead.
-      function loadAvatar(hash, index, email, blank){
+      function loadAvatar(hash, index, email, blank, counter, contactEmail){
         var count = 0;
 
         var url = "https://secure.gravatar.com/avatar/" +  hash + "?s=300&d=404";
@@ -128,7 +128,7 @@ app.directive("synergyGravatar", function(){
             
             if(xhr.status == 404 && email != ''){
                 count++;
-                loadInitials(email,index);
+                loadInitials(email,index, contactEmail);
             }
             else
             {
@@ -143,7 +143,7 @@ app.directive("synergyGravatar", function(){
               $(divName).append('<p id="gravatarName">' + email + '</p>');
     
               var srcClone = img.src;
-              $scope.trelloImages.push({"Name": email, "Image" :srcClone});
+              $scope.trelloImages.push({"Name": email, "Image" :srcClone, "Email" : contactEmail});
               $scope.completedXMLRequests++;
               
               //Check if all xml requests are done and send

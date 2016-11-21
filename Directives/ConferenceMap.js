@@ -1,7 +1,7 @@
 app.directive("conferenceMap", function(){
   
 
-  var controller = function($scope, Service, $http, EventbriteService){
+  var controller = function($scope, Service, $http, EventbriteService, MailchimpService){
   
     $scope.NSWnACT = 0;
     $scope.QLD = 0;
@@ -17,14 +17,16 @@ app.directive("conferenceMap", function(){
       $scope.totalSynergyKey = $scope.keys[0];
       
       var event = { "attendees" : [] };
-      $scope.getPagedData(1, event);
+      //$scope.getPagedData(1, event);
+      $scope.loadMailChimpData(event);
       
     });
     
     $scope.$on('shortDataFetch', function(){
       
       var event = { "attendees" : [] };
-      $scope.getPagedData(1, event);
+      $scope.loadMailChimpData(event);
+      //$scope.getPagedData(1, event);
       
     });
     
@@ -32,61 +34,27 @@ app.directive("conferenceMap", function(){
     function count(data){
       
       var totalAttendees = 0;
-      $scope.NSWnACT = 0;
-      $scope.QLD = 0;
-      $scope.VICnTAS = 0;
-      $scope.NT = 0;
-      $scope.WA = 0;
-      $scope.SA = 0;
-      $scope.international = 0;
+      totalAttendees = data.length;
       
-      for(i = 0; i < data.attendees.length; i++)
-      {
-        
-        if(!data.attendees[i].cancelled)
-        {
-          
-          if(data.attendees[i].profile.addresses.work.country === "AU")
-          {
-            
-            switch(data.attendees[i].profile.addresses.work.region)
-            {
-              
-             case 'NSW':
-             case 'ACT': $scope.NSWnACT += 1;
-                          break;
-             case 'QLD': $scope.QLD += 1;
-                         break;
-             case 'VIC':
-             case 'TAS': $scope.VICnTAS += 1;
-                         break;
-             case 'NT': $scope.NT += 1;
-                         break;
-             case 'WA': $scope.WA += 1;
-                       break;
-             case 'SA': $scope.SA += 1;
-                       break;
-              default: ;
-            }
-          }
-          else
-          {
-            $scope.international++;
-          }
-          totalAttendees++;
-        }
-        
-      }
-      EventbriteService.updateTotalAttendees(totalAttendees);
+      MailchimpService.updateTotalAttendees(totalAttendees);
     }
 
 
-
+    $scope.loadMailChimpData = function(event)
+    {
+      MailchimpService.getAttendeesData().then(function success(data){
+        count(data.members);
+        
+      }, function error(data){
+        //
+      })
+    }
+    
     $scope.getPagedData = function(page, event) {
       
       
       EventbriteService.getAttendeesData(page, $scope.eventBriteKey).then(function(success){
-        
+
         for(i = 0; i < success.attendees.length; i++)
         {
           event.attendees.push(success.attendees[i]);

@@ -3,7 +3,6 @@
   /*
   
   Needs to be factored into smaller more suitable services.
-  Currently controllers handle most AJAX requests - should be moved into service
   
   
   */
@@ -37,6 +36,9 @@
     service.twitterSecret = '';
     service.keysArray = [];
     
+    //Default set to totalsynergydev
+    service.leaderboardSlug = "totalsynergydev";
+    
     //Functions
     service.loadData = loadData;
     service.updateKeys = updateKeys;
@@ -54,12 +56,20 @@
             //comment this if you need to restore pages
             service.updatePagesAndSpeed(result.pages, result.speed);
             service.updateKeys(result.eventBriteKey, result.totalSynergyKey, result.slackKey, result.trelloKeys, result.synergy5Keys, result.yammer, result.twitterKey, result.twitterSecret);
-  
+            
+            //If a slug exists, change the default
+            if(result.leaderboardSlug)
+            {
+              service.leaderboardSlug = result.leaderboardSlug;
+            }
+
   
             this.trelloUserAuth = result.trelloUserAuth;
             service.trelloListSelected = result.trelloListSelected;
             if(service.trelloListSelected && service.trelloListSelected != "")
               $rootScope.$broadcast('trelloListUpdated');
+
+            $rootScope.$broadcast("keysUpdated");
 
         }
       });
@@ -80,7 +90,7 @@
       
       this.keysArray = [tsKey, eventKey, sKey, trKey, s5Key, yam, twitterK, twitterS];
 
-      $rootScope.$broadcast("keysUpdated");
+
 
     }
     

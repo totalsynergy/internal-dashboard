@@ -15,31 +15,36 @@ app.directive("conferenceCountdown", function(){
     })
 
     function timerUpdate(d){
+
+      
+  
       $interval(function(){
+
         var currentDate = new Date().getTime();
-        if($scope.eventDate > currentDate){
-        var secondsDate = (d - currentDate) / 1000;
+      
 
-        $scope.days = parseInt(secondsDate / 86400);
-        var secondsLeft = secondsDate % 86400;
+        if($scope.eventDate > currentDate)
+        {
 
-        $scope.hours = parseInt(secondsLeft / 3600);
-        secondsLeft = secondsLeft % 3600;
+          var secondsDate = ($scope.eventDate - currentDate) / 1000;
+  
+          $scope.days = parseInt(secondsDate / 86400);
+          var secondsLeft = secondsDate % 86400;
+  
+          $scope.hours = parseInt(secondsLeft / 3600);
+          secondsLeft = secondsLeft % 3600;
+  
+          $scope.minutes = parseInt(secondsLeft / 60);
+          $scope.seconds = parseInt(secondsLeft % 60);
 
-        $scope.minutes = parseInt(secondsLeft / 60);
-        $scope.seconds = parseInt(secondsLeft % 60);
         }
       },1000);  //change this to minutes
     }
 
     function getConferenceData(){
       
-      EventbriteService.getCountdown($scope.eventBriteKey).then(function(success){
-                
-        $scope.eventDate = new Date(success.start.utc).getTime();
-        timerUpdate($scope.eventDate);
-        
-      });
+      $scope.eventDate = new Date(2017, 2, 16, 8, 0, 0, 0).getTime();
+      timerUpdate($scope.eventDate);
 
     }
 

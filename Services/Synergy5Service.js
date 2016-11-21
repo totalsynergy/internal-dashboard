@@ -1,3 +1,5 @@
+//TO DO - Reuse the q constructor code - getting repetitive
+
 (function(){
   angular
     .module('myApp')
@@ -7,23 +9,30 @@
   function Service($q, $http){
     
     var service = {};
+    
+    //Revealing Module pattern
     service.getLatestClient = getLatestClient;
     service.getCountryData = getCountryData;
     service.getIndustryData = getIndustryData;
     service.getStaffData = getStaffData;
     service.getProductData = getProductData;
     service.getSynergyStaff = getSynergy5Staff;
+    service.getSynergy5Leaderboard = getSynergy5Leaderboard;
     
     function getLatestClient(key){
       
       return $q(function (resolve, reject){
+        
+        if(!key || key == '')
+        {
+          reject("No key");
+        }
         
         $http({
           method: 'POST',
           url: 'https://app.totalsynergy.com/internalkpi/totalsynergy/summary/newclient',
           headers: {'Content-Type': 'application/json', 'internal-token' : key}
         }).success(function(d, status, headers, config){
-          console.log(JSON.stringify(d));
            resolve(d);
          })
         .error(function(data, status, headers, config){
@@ -36,6 +45,11 @@
     
     function getCountryData(key){
       return $q(function(resolve, reject){
+        
+        if(!key || key == '')
+        {
+          reject("No key");
+        }
         
         $http({
          url: 'https://app.totalsynergy.com/internalkpi/totalsynergy/summary/country',
@@ -53,6 +67,12 @@
     
     function getIndustryData(key){
       return $q(function(resolve, reject){
+        
+        if(!key || key == '')
+        {
+          reject("No key");
+        }
+        
         $http({
          url: 'https://app.totalsynergy.com/internalkpi/totalsynergy/summary/industries',
          method: 'POST',
@@ -68,6 +88,12 @@
     
     function getStaffData(key){
       return $q(function(resolve, reject){
+        
+        if(!key || key == '')
+        {
+          reject("No key");
+        }
+        
         $http({
          url: 'https://app.totalsynergy.com/internalkpi/totalsynergy/summary/staffSize',
          method: 'POST',
@@ -83,6 +109,12 @@
     
     function getProductData(key){
       return $q(function(resolve, reject){
+        
+        if(!key || key == '')
+        {
+          reject("No key");
+        }
+        
         $http({
            url: 'https://app.totalsynergy.com/internalkpi/totalsynergy/summary/product',
            method: 'POST',
@@ -97,13 +129,19 @@
     }
     
     function getSynergy5Staff(key){
+
       return $q(function(resolve, reject){
+        
+        if(!key || key == '')
+        {
+          reject("No key");
+        }
+        
         $http({
           method: 'POST',
           url: 'https://app.totalsynergy.com/internalkpi/totalsynergy/summary/synergystaff',
           headers: {'Content-Type': 'application/json', 'internal-token' : key}
         }).success(function(d, status, headers, config){
-            console.log(JSON.stringify(d));
            resolve(d);
          })
         .error(function(data, status, headers, config){
@@ -111,6 +149,29 @@
         });
       });
     }
+    
+    function getSynergy5Leaderboard(key, slug){
+
+      return $q(function(resolve, reject){
+        
+        if(!key || key == '')
+        {
+          reject("No key");
+        }
+        
+        $http({
+          method: 'POST',
+          url: 'https://app.totalsynergy.com/api/v1/Organisation/' + slug + '/Timesheet/Leaderboard',
+          headers: {'Content-Type': 'application/json', 'internal-token' : key}
+        }).success(function(d, status, headers, config){
+           resolve(d);
+         })
+        .error(function(data, status, headers, config){
+           reject(data);
+        });
+      });
+    }
+    
     return service;
   }
   

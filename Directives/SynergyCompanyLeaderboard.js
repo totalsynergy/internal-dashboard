@@ -1,14 +1,12 @@
-app.directive("synergyLeaderboard", function(){
+app.directive("synergyCompanyLeaderboard", function(){
   
 
-  var controller = function($scope, Service, Synergy5Service, $http, $timeout){
+  var controller = function($scope, Service, $http, $timeout){
   
     $scope.timeout1 = null;
-    $scope.title = "Development Leaderboard";
-    
-    $scope.needsSliding = false;
     
     $scope.Math = window.Math;
+    $scope.title = "Total Synergy Leaderboard";
     //math for math function in angular bindings
   
     $scope.count = 0;
@@ -17,7 +15,7 @@ app.directive("synergyLeaderboard", function(){
       
       $scope.$watch('tab', function(){
         $scope.tab = Service.tab;
-        if($scope.tab == 32){
+        if($scope.tab == 39){
           slideUp();
           $scope.count = 0;
         }
@@ -29,49 +27,41 @@ app.directive("synergyLeaderboard", function(){
   
       $scope.$on('gravatarsUpdated', function(){
         getLeaderBoardStats();
-        //Also update the title while your at it
-        $scope.title = Service.leaderboardSlug + " Leaderboard"
       });
       
       
       $scope.$watch('keys', function(){
         $scope.synergy4Key = $scope.keys[0];
-        $scope.synergy5Key = $scope.keys[4];
       });
       
-      function needToSlide(){
-        var topTenHeight = $(".leaderboardTopTen").height();
-        var othersHeight = $(".companyLeaderboardHeader").height() + $(".leaderboardFirstPlace").height() + $(".leaderboardSecondPlace").height()*2;
-        var pageHeight = $(document).height();
-        return true;
-      }
       
       function getLeaderBoardStats(){
   
-        Synergy5Service.getSynergy5Leaderboard($scope.synergy5Key, Service.leaderboardSlug).then(function success(data){
-
-          if(data.length)
-          {
-            sortData(data);
+        $http({
+           url: 'https://beta.synergycloudapp.com/totalsynergy/InternalKpi/Home/timeSheetLeaderboard',
+           method: 'POST',
+           headers : {'internal-token' : $scope.synergy4Key}
+           }).success(function(d, status, headers, config){
+             
+             if(d.data)
+              sortData(d.data);
+             
              getImages(Service.images);
-          }
-
-        }, function error(data){
-          $scope.data = "fail";
-        });
+             
+           })
+          .error(function(data, status, headers, config){
+             $scope.data = "fail";
+          });
       }
       
       function sortData(data){
         $scope.leaderBoardRankings = [];
-        var topScore = 100/data[0].penalties;
-
+        var topScore = data[0].Ranking;
         for(var i = 0; i < data.length; i++){
-
-          var fullName = data[i].name;
-          var score = Math.floor( ( (100/data[i].penalties)/topScore) * 100 );
-          var ranking = data[i].position;
-
-          $scope.leaderBoardRankings.push({"Name" : fullName, "Score" : score, "Ranking" : score, "Image" : null, "Email" : data[i].email});
+          var fullName = data[i].FirstName + " " + data[i].LastName;
+          var ranking = Math.floor((data[i].Ranking/topScore)*100);
+          var score = data[i].Count;
+          $scope.leaderBoardRankings.push({"Name" : fullName, "Score" : score, "Ranking" : ranking, "Image" : null});
         }
       }
       
@@ -96,16 +86,10 @@ app.directive("synergyLeaderboard", function(){
       
       //Returns the image source for a person. N.B can not save images only their source
       function storeImageSource(index, images){
-
         for(var i = 0; i < images.length; i++){
           
-          //Make the emails match if there are differences - e.g. Mels email
-          var imageEmail = images[i].Email.endsWith('.au') ? images[i].Email.slice(0,images[i].Email.length - 3) : images[i].Email;
-          var leaderboardEmail = $scope.leaderBoardRankings[index].Email.endsWith('.au') 
-            ? $scope.leaderBoardRankings[index].Email.slice(0,$scope.leaderBoardRankings[index].Email.length - 3) : $scope.leaderBoardRankings[index].Email;
-          
-          if(leaderboardEmail == imageEmail){
-            //console.log("Found the dev for: " + imageEmail);
+          if($scope.leaderBoardRankings[index].Name == images[i].Name){
+            //console.log("Company - Found the match for: " + images[i].Name);
             $scope.leaderBoardRankings[index].Image = images[i].Image;
             break;
           }
@@ -164,7 +148,7 @@ app.directive("synergyLeaderboard", function(){
   
   return{
     restrict: 'AEC',
-    templateUrl: '../Views/SynergyLeaderboard.html',
+    templateUrl: '../Views/SynergyCompanyLeaderboard.html',
     controller: controller,
     scope : {
       tab : "=tab",

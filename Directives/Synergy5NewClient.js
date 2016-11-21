@@ -44,7 +44,7 @@
       }
       
       function getLatestClient(){
-        
+
         Synergy5Service
           .getLatestClient($scope.totalSynergyKey)
           .then(function(success){

@@ -1,0 +1,52 @@
+<img src="./assets/synerjamLogo.png" class="yammer-photos-logo"></img>
+<div class="container">
+  <div class="yammer-card-holder">
+    
+      <div id="firstYammer" class="yammer-photos-card" ng-show="messagesWithImages.length > 0">
+        
+        <div class="yammer-photo-header">
+          <div id="first-yammer-grav"></div>
+          <span class="yammer-photo-title">{{messagesWithImages[0].User}}</span>
+        </div>
+        
+        <div id="first-image"></div>
+        
+        <div class="yammer-photo-footer">
+          <span class="yammer-photo-message">{{messagesWithImages[0].Message}}</span>
+        </div>
+        
+      </div>
+      
+      <div id="secondYammer" class="yammer-photos-card" ng-show="messagesWithImages.length > 1">
+        
+        <div class="yammer-photo-header">
+          <div id="second-yammer-grav"></div>
+          <span class="yammer-photo-title">{{messagesWithImages[1].User}}</span>
+        </div>
+        
+        <div id="second-image"></div>
+        
+        <div class="yammer-photo-footer">
+          <span class="yammer-photo-message">{{messagesWithImages[1].Message}}</span>
+        </div>
+        
+      </div>
+      
+      <div id="thirdYammer" class="yammer-photos-card" ng-show="messagesWithImages.length > 2">
+        
+        <div class="yammer-photo-header">
+          <div id="third-yammer-grav"></div>
+          <span class="yammer-photo-title">{{messagesWithImages[2].User}}</span>
+        </div>
+        
+        <div id="third-image"></div>
+        
+        <div class="yammer-photo-footer">
+          <span class="yammer-photo-message">{{messagesWithImages[2].Message}}</span>
+        </div>
+        
+      </div>
+      
+      <h1 class="text-center" ng-show="messagesWithImages.length == 0">No recent images :(</h1>
+  </div>
+</div>

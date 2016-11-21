@@ -6,6 +6,7 @@ app.directive("settings", function(){
 
    $scope.trelloKeys = '';
    $scope.masterKey ='';
+   $scope.leaderboardSlug = '';
 
    //$scope.pages = pages;
    $scope.practiceNumber = 10;
@@ -15,6 +16,8 @@ app.directive("settings", function(){
     $scope.$watch('keys', function(){
     
       $scope.trelloKeys = $scope.keys[3];
+      $scope.leaderboardSlug = Service.leaderboardSlug;
+     
 
     });
     
@@ -23,13 +26,15 @@ app.directive("settings", function(){
       $scope.trelloListSelected.listId = Service.trelloListSelected;
     });
     
-    $scope.$on('keysUpdated', getTrelloLists);
-    
-    function getTrelloLists(){
+    $scope.$on('keysUpdated', function getTrelloLists(){
+      //Keys update - get the synergy slug
+      console.log("Change to slug!");
+      $scope.leaderboardSlug = Service.leaderboardSlug;
+      console.log("Settings changed and now: " + Service.leaderboardSlug);
       $scope.trelloKeys = Service.trelloKeys.split("-");
       $scope.trelloUserAuth = Service.trelloUserAuth;
       getTrelloInformation();
-    };
+    });
     
     function getTrelloInformation(){
       
@@ -140,8 +145,10 @@ app.directive("settings", function(){
              $scope.masterKey = 'Error Occured';
           });
       }
-
       
+      //Save the leaderboard slug
+      if($scope.leaderboardSlug)
+        chrome.storage.local.set({'leaderboardSlug': $scope.leaderboardSlug});
       //Only load this if we are set up with auth
       if($scope.trelloAuthWorks)
         Service.saveTrelloListId($scope.trelloListSelected.listId);

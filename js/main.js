@@ -1,5 +1,10 @@
 chrome.power.requestKeepAwake('display');
 
+
+String.prototype.endsWith = function(suffix) {
+    return this.indexOf(suffix, this.length - suffix.length) !== -1;
+};
+
 //Global Variable to access page names
 var pages = [
   {"name" : "Totaltest Synergy Gravatar", "isSelected" : false},
@@ -20,7 +25,8 @@ var pages = [
   {"name" : "Synergy 4 Desktop Version Graph", "isSelected" : true},
   {"name" : "Synergy 4 Client Aus Map", "isSelected" : false},
   {"name" : "Synergy 4 World Map", "isSelected" : false},
-  {"name" : "Synergy 4 PlaceHolder 1", "isSelected" : false},
+  {"name" : "Cake Day", "isSelected" : false},
+
   {"name" : "Synergy 4 PlaceHolder 2", "isSelected" : false},
   {"name" : "Synergy 4 Promotors", "isSelected" : false},
   {"name" : "Synergy 4 Passive", "isSelected" : false},
@@ -33,13 +39,15 @@ var pages = [
   {"name" : "Synergy 5 Staff Distribution", "isSelected" : false},
   {"name" : "Synergy 5 Average Client Life", "isSelected" : false},
   {"name" : "Joke of The Day", "isSelected" : false},
-  {"name" : "Leaderboard", "isSelected" : false},
+  {"name" : "Development Leaderboard", "isSelected" : false},
   {"name" : "Marketing Values 1", "isSelected" : false},
   {"name" : "Marketing Values 2", "isSelected" : false},
   {"name" : "Total Synergy Structure", "isSelected" : false},
   {"name" : "Bom Radar", "isSelected" : false},
   {"name" : "Synergy 5 Gravatars", "isSelected" : false},
-  {"name" : "Synergy 5 New Client", "isSelected" : false}
+  {"name" : "Synergy 5 New Client", "isSelected" : false},
+  {"name" : "Synergy Company Leaderboard", "isSelected" : false},
+  {"name" : "Yammer Photos", "isSelected" : false}
 ];
     
     

@@ -25,7 +25,7 @@ app.directive("synergy4AustraliaMap", function(){
 
     function count(data){
         $scope.total = 0;
-        $scope.NSW = 1;
+        $scope.NSW = 0;
         $scope.ACT = 0;
         $scope.QLD = 0;
         $scope.VIC = 0;
@@ -37,33 +37,45 @@ app.directive("synergy4AustraliaMap", function(){
         
         if(data && data != null){
           for(i = 0; i < data.length; i++){
+            
             if(data[i].Active && !data[i].NoUpgrades && !data[i].Testing){
-                switch(data[i].State){
+              
+                var noSpaces = data[i].State.replace(/\s/g, '');
+                var uppercaseState = noSpaces.toUpperCase();
+                
+                switch(uppercaseState){
                  case 'NSW': $scope.NSW++;
+                             $scope.total++;
                              break;
                  case 'ACT': $scope.ACT++;
+                             $scope.total++;
                              break;
-                 case 'QLD': $scope.QLD += 1;
+                 case 'QLD': $scope.QLD++;;
+                             $scope.total++;
                              break;
                  case 'VIC': $scope.VIC++;
+                             $scope.total++;
                              break;
-                 case 'TAS': $scope.TAS += 1;
+                 case 'TAS': $scope.TAS++;
+                             $scope.total++;
                              break;
-                 case 'NT': $scope.NT += 1;
+                 case 'NT':  $scope.NT++;
+                             $scope.total++;
                              break;
-                 case 'WA': $scope.WA += 1;
-                            break;
-                 case 'SA': $scope.SA += 1;
-                            break;
-                  default: ;
+                 case 'WA':  $scope.WA++;;
+                             $scope.total++;
+                             break;
+                 case 'SA':  $scope.SA++;;
+                             $scope.total++;
+                             break;
+                 default:   $scope.international++; 
+                             break;
                   }
-               if(data[i].Country != 'Australia')
-                $scope.international++;
-               else
-                $scope.total++;
-                }
             }
         }
+
+      }
+    
     }
 
   

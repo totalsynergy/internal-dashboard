@@ -24,7 +24,6 @@
        method: 'POST',
        headers : {'internal-token' : key}
        }).success(function(data){
-         console.log("YAAA");
          service.mapData = data;
          $rootScope.$broadcast('synergy4MapData');
        })

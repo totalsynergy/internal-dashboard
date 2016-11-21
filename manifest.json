@@ -4,14 +4,13 @@
   "short_name": "TSD",
   "description": "Total Synergy Dashboard",
 
-  "version": "1.7",
+  "version": "1.34",
 
   "kiosk_enabled": true,
 
   "icons": {
     "16": "assets/favicon-16x16.png",
-    "128": "assets/Small-128x128.png",
-    "Logo" : "bronze.png"
+    "128": "assets/Small-128x128.png"
   },
 
   "app": {
@@ -48,7 +47,9 @@
     "http://www.bom.gov.au/",
     "https://www.yammer.com/",
     "https://api.trello.com/",
-    "https://api.twitter.com/"
+    "https://api.twitter.com/",
+    "https://api.bamboohr.com/",
+    "https://us4.api.mailchimp.com/"
     ],
 
   "web_accessible_resources": [
