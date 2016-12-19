@@ -133,6 +133,7 @@ app.directive("settings", function(){
            method: 'GET'
            }).success(function(d, status, headers, config){
              
+             console.log("GOT KJEYS: " + JSON.stringify(d));
              $scope.masterKey = 'Key Worked';
 
              if(d.data != null)

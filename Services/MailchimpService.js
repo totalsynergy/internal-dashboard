@@ -18,7 +18,7 @@
         
         $http({
           method: 'GET',
-          url: "https://us4.api.mailchimp.com/3.0/lists/499ea9f3f4/members",
+          url: "https://us4.api.mailchimp.com/3.0/lists/499ea9f3f4/members?count=200",
           headers: {
             "Authorization" : "Basic QWRhbToyOTJlZDVkOTcwNDZkNWVhNzM2ZGUxZTMyODU0MGFlNi11czQ="
           }

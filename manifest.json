@@ -4,7 +4,7 @@
   "short_name": "TSD",
   "description": "Total Synergy Dashboard",
 
-  "version": "1.34",
+  "version": "1.42",
 
   "kiosk_enabled": true,
 
@@ -28,6 +28,7 @@
     "https://beta.synergycloudapp.com/",
     "https://beta.totalsynergy.com/",
     "https://app.totalsynergy.com/",
+    "https://api.totalsynergy.com/",
     "https://en.gravatar.com/",
     "https://s3-us-west-2.amazonaws.com/",
     "https://secure.gravatar.com/",
@@ -49,7 +50,8 @@
     "https://api.trello.com/",
     "https://api.twitter.com/",
     "https://api.bamboohr.com/",
-    "https://us4.api.mailchimp.com/"
+    "https://us4.api.mailchimp.com/",
+    "http://localhost:5000/"
     ],
 
   "web_accessible_resources": [

@@ -30,9 +30,10 @@
         
         $http({
           method: 'POST',
-          url: 'https://app.totalsynergy.com/internalkpi/totalsynergy/summary/newclient',
+          url: 'http://localhost:5000/internalkpi/totalsynergy/summary/newclient',
           headers: {'Content-Type': 'application/json', 'internal-token' : key}
         }).success(function(d, status, headers, config){
+          console.log("Got latest client: " + JSON.stringify(d));
            resolve(d);
          })
         .error(function(data, status, headers, config){
@@ -52,7 +53,7 @@
         }
         
         $http({
-         url: 'https://app.totalsynergy.com/internalkpi/totalsynergy/summary/country',
+         url: 'https://beta.totalsynergy.com/internalkpi/totalsynergy/summary/country',
          method: 'POST',
          headers: {'Content-Type': 'application/json', 'internal-token' : key}
          }).success(function(d, status, headers, config){
@@ -74,7 +75,7 @@
         }
         
         $http({
-         url: 'https://app.totalsynergy.com/internalkpi/totalsynergy/summary/industries',
+         url: 'http://localhost:5000/internalkpi/totalsynergy/summary/industries',
          method: 'POST',
          headers: {'Content-Type': 'application/json', 'internal-token' : key}
          }).success(function(d, status, headers, config){
@@ -89,13 +90,14 @@
     function getStaffData(key){
       return $q(function(resolve, reject){
         
+        console.log("TRY WITH STAFF DATA KEY: " + key);
         if(!key || key == '')
         {
           reject("No key");
         }
         
         $http({
-         url: 'https://app.totalsynergy.com/internalkpi/totalsynergy/summary/staffSize',
+         url: 'http://localhost:5000/internalkpi/totalsynergy/summary/staffSize',
          method: 'POST',
          headers: {'Content-Type': 'application/json', 'internal-token' : key}
          }).success(function(d, status, headers, config){
@@ -118,7 +120,7 @@
         $http({
            url: 'https://app.totalsynergy.com/internalkpi/totalsynergy/summary/product',
            method: 'POST',
-           headers: {'Content-Type': 'application/json', 'internal-token' : key}
+           headers: {'Content-Type': 'application/json', 'internal-token' : 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImRldmVsb3BlckB0b3RhbHN5bmVyZ3kuY29tIiwiYXBwbGljYXRpb25pZCI6MTMsInVzZXJuYW1lIjoiZGV2ZWxvcGVyIiwidGVuYW50IjoiIiwiY29kZV9leHBpcmVzIjo2MzYxNzE3ODk5OTY5MTI0NDF9.nma1MQu3Uot47w3tHznFm7KXpO4Q5BngFNC48qBwCbE'}
            }).success(function(d, status, headers, config){
              resolve(d);
            })

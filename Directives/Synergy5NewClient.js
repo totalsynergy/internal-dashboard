@@ -37,11 +37,9 @@
         getLatestClient();
       });
       
-      setDataFetchTimer();
-      
-      function setDataFetchTimer(){
-        $interval(getLatestClient, 3000000);
-      }
+      $scope.$on('longDataFetch', function(){
+        getLatestClient();
+      })
       
       function getLatestClient(){
 

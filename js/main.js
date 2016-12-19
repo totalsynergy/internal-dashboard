@@ -47,7 +47,8 @@ var pages = [
   {"name" : "Synergy 5 Gravatars", "isSelected" : false},
   {"name" : "Synergy 5 New Client", "isSelected" : false},
   {"name" : "Synergy Company Leaderboard", "isSelected" : false},
-  {"name" : "Yammer Photos", "isSelected" : false}
+  {"name" : "Yammer Photos", "isSelected" : false},
+  {"name" : "Whos out", "isSelected" : false}
 ];
     
     

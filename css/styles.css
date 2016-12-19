@@ -3145,7 +3145,44 @@ li:before {
     overflow: hidden;
     display: block;
     margin-bottom:5px;
-    
     order:3;
 }
 
+.whos-out-container h2{
+  font-family: openSansLight;
+}
+
+.whos-out-row{
+  align-content:flex-start;
+}
+
+.whos-out-row div{
+  position: relative;
+    width: 100px;
+    height: 100px;
+    float:left;
+    margin:25px;
+}
+.whos-out-container{
+    width: 90%;
+    margin-left: 5%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.whos-out-row img{
+  width:100%;
+  height:100%;
+}
+
+.whos-out-row span{
+  font-size:14px;
+  color:#555;
+  position:absolute;
+  bottom:0;
+  width:100%;
+  text-align:center;
+  bottom: -40px;
+  line-height: 13px;
+}
