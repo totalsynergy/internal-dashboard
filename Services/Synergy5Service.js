@@ -30,7 +30,7 @@
         
         $http({
           method: 'POST',
-          url: 'http://localhost:5000/internalkpi/totalsynergy/summary/newclient',
+          url: 'https://app.totalsynergy.com/internalkpi/totalsynergy/summary/newclient',
           headers: {'Content-Type': 'application/json', 'internal-token' : key}
         }).success(function(d, status, headers, config){
           console.log("Got latest client: " + JSON.stringify(d));
@@ -53,7 +53,7 @@
         }
         
         $http({
-         url: 'https://beta.totalsynergy.com/internalkpi/totalsynergy/summary/country',
+         url: 'https://app.totalsynergy.com/internalkpi/totalsynergy/summary/country',
          method: 'POST',
          headers: {'Content-Type': 'application/json', 'internal-token' : key}
          }).success(function(d, status, headers, config){
@@ -75,7 +75,7 @@
         }
         
         $http({
-         url: 'http://localhost:5000/internalkpi/totalsynergy/summary/industries',
+         url: 'https://app.totalsynergy.com/internalkpi/totalsynergy/summary/industries',
          method: 'POST',
          headers: {'Content-Type': 'application/json', 'internal-token' : key}
          }).success(function(d, status, headers, config){
@@ -97,7 +97,7 @@
         }
         
         $http({
-         url: 'http://localhost:5000/internalkpi/totalsynergy/summary/staffSize',
+         url: 'https://app.totalsynergy.com/internalkpi/totalsynergy/summary/staffSize',
          method: 'POST',
          headers: {'Content-Type': 'application/json', 'internal-token' : key}
          }).success(function(d, status, headers, config){

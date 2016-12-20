@@ -6,19 +6,21 @@ app.directive("whosOut", function(){
       var employees = [];
       
       $scope.whosOut = []; // {dateDisplay, employees}
-      
+      $scope.bambooKey = "";
       
       $scope.$on('gravatarsUpdated', function(){
         getEmployees();
       });
       
       $scope.$watch('keys', function(){
+        $scope.bambooKey = $scope.keys[8];
 
+        BambooHRService.updateKey($scope.bambooKey);
       })
       
       function getEmployees(){
         BambooHRService.getEmployees(null).then(function success(data){
-          
+
           employees = [];
           
           data = data.employees;
@@ -206,13 +208,25 @@ app.directive("whosOut", function(){
       for(var j = 0 ; j < $scope.whosOut.length; j++){
         
         var dateRow = $("#whos-out-" + j);
+        dateRow.empty();
+        dateRow.prepend('<h2>' + $scope.whosOut[j].DateDisplay + '</h2>');
         
         for(var i = 0; i < $scope.whosOut[j].Employees.length; i++)
         {
             var container = document.createElement('div');
             var img = document.createElement('img');
-            img.src = $scope.whosOut[j].Employees[i].Image;
+            
+            if($scope.whosOut[j].Employees[i].Image)
+            {
+              img.src = $scope.whosOut[j].Employees[i].Image;
+            }
+            else
+            {
+              img.src = "assets/mysterious.png";
+            }
+            
             img.setAttribute("class", "yammer-photo-gravatar");
+            
             
             var title = document.createElement('span');
             title.innerHTML  = $scope.whosOut[j].Employees[i].Name;
@@ -223,6 +237,8 @@ app.directive("whosOut", function(){
             dateRow.append(container);
 
         }
+        
+        
         
         
       }

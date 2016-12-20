@@ -162,7 +162,7 @@ app.directive("settings", function(){
     function arrangeKeys(data){
       
       var trelloApplicationKey, trelloUserTokenKey, trelloCombinedKey = '';
-      var fromAndTo = ["EventBrite Key", "Synergy 4 Key", "Slack", "Trello Application Key","Synergy 5 Key", "yammer", "TwitterKey", "TwitterSecret"];
+      var fromAndTo = ["EventBrite Key", "Synergy 4 Key", "Slack", "Trello Application Key","Synergy 5 Key", "yammer", "TwitterKey", "TwitterSecret", "bamboohr"];
       var keysArray = [];
       
       if(data){
@@ -191,6 +191,8 @@ app.directive("settings", function(){
     
     //Save keys and then notify service of the change
     function saveKeysToLocalStorage(keysArray){
+      
+      console.log("Keys we got: " + JSON.stringify(keysArray));
       chrome.storage.local.set({'eventBriteKey': keysArray[0]});
       chrome.storage.local.set({'totalSynergyKey': keysArray[1]});
       chrome.storage.local.set({'slackKey': keysArray[2]});
@@ -199,10 +201,10 @@ app.directive("settings", function(){
       chrome.storage.local.set({'yammer' : keysArray[5]});
       chrome.storage.local.set({'twitterKey' : keysArray[6]});
       chrome.storage.local.set({'twitterSecret' : keysArray[7]});
-      
+      chrome.storage.local.set({'bambooHrKey' : keysArray[8]});
       
             
-      Service.updateKeys(keysArray[0], keysArray[1], keysArray[2], keysArray[3], keysArray[4], keysArray[5], keysArray[6], keysArray[7]);
+      Service.updateKeys(keysArray[0], keysArray[1], keysArray[2], keysArray[3], keysArray[4], keysArray[5], keysArray[6], keysArray[7], keysArray[8]);
       Service.sendForData();
     }
 

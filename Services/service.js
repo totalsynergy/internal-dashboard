@@ -22,6 +22,7 @@
     service.eventBriteKey = "";
     service.slackKey = "";
     service.yammerKey = "";
+    service.bambooHrKey = "";
     service.callsData = null;
     service.progressData = null;
     service.images = [];
@@ -55,7 +56,7 @@
                   
             //comment this if you need to restore pages
             service.updatePagesAndSpeed(result.pages, result.speed);
-            service.updateKeys(result.eventBriteKey, result.totalSynergyKey, result.slackKey, result.trelloKeys, result.synergy5Keys, result.yammer, result.twitterKey, result.twitterSecret);
+            service.updateKeys(result.eventBriteKey, result.totalSynergyKey, result.slackKey, result.trelloKeys, result.synergy5Keys, result.yammer, result.twitterKey, result.twitterSecret, result.bambooHrKey);
             
             //If a slug exists, change the default
             if(result.leaderboardSlug)
@@ -77,7 +78,7 @@
     
 
     //Saves the Keys in the Service and sends a broadcast to all controllers
-    function updateKeys(eventKey, tsKey, sKey, trKey, s5Key, yam, twitterK, twitterS){
+    function updateKeys(eventKey, tsKey, sKey, trKey, s5Key, yam, twitterK, twitterS, bambooHrKey){
       
       this.totalSynergyKey = tsKey;
       this.eventBriteKey = eventKey;
@@ -87,8 +88,8 @@
       this.yammerKey = yam;
       this.twitterKey = twitterK;
       this.twitterS = twitterS;
-      
-      this.keysArray = [tsKey, eventKey, sKey, trKey, s5Key, yam, twitterK, twitterS];
+      this.bambooHrKey = bambooHrKey
+      this.keysArray = [tsKey, eventKey, sKey, trKey, s5Key, yam, twitterK, twitterS, bambooHrKey];
 
 
 

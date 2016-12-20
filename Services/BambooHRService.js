@@ -9,18 +9,34 @@
     
     var service = {};
     service.slug = "totalsynergysandbox";
-    service.key = "9f2b2692b0f865f4f67118e1646026bc5d7841af";
+    service.sandboxKey = "9f2b2692b0f865f4f67118e1646026bc5d7841af";
+    service.key = "";
     
     service.getBirthdays = getBirthdays;
     service.getEmployees = getEmployees;
     service.getTimeOff = getTimeOff;
-
-    function getBirthdays(key){
+    service.updateKey = updateKey;
+    
+    function updateKey(key){
+      service.key = key
+      
+      //Check for sandbox environment
+      if(key != service.sandboxKey)
+      {
+        service.slug = "totalsynergy";
+      }
+      else
+      {
+        console.log("In sandbox environment");
+      }
+    }
+    
+    function getBirthdays(){
 
       return $q(function(resolve, reject){
         
            $http({
-              url: 'https://api.bamboohr.com/api/gateway.php/totalsynergy/v1/employees?apikey=' + key,
+              url: 'https://api.bamboohr.com/api/gateway.php/' + service.slug + '/v1/employees',
               method: 'POST',
               headers: {
                 'Content-Type' : 'application/x-www-form-urlencoded;charset=UTF-8'
@@ -36,12 +52,12 @@
 
     };
     
-    function getEmployees(key){
+    function getEmployees(){
 
       return $q(function(resolve, reject){
         
            $http({
-              url: 'https://api.bamboohr.com/api/gateway.php/totalsynergysandbox/v1/employees/directory',
+              url: 'https://api.bamboohr.com/api/gateway.php/' + service.slug + '/v1/employees/directory',
               method: 'GET',
               headers: {
                 'Content-Type' : 'application/json',
@@ -59,13 +75,13 @@
 
     };
     
-    function getTimeOff(key, start){
+    function getTimeOff(start){
 
       
       return $q(function(resolve, reject){
         
            $http({
-              url: 'https://api.bamboohr.com/api/gateway.php/totalsynergysandbox/v1/time_off/whos_out?start=' + start,
+              url: 'https://api.bamboohr.com/api/gateway.php/' + service.slug + '/v1/time_off/whos_out?start=' + start,
               method: 'GET',
               headers: {
                 'Content-Type' : 'application/json',
