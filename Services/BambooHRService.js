@@ -77,7 +77,6 @@
     
     function getTimeOff(start){
 
-      
       return $q(function(resolve, reject){
         
            $http({

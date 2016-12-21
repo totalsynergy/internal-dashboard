@@ -38,6 +38,7 @@ app.directive("whosOut", function(){
       function getTimeOff(){
         
         var today = new Date();
+        
         var dateToFetchFrom = today.toISOString();
         
         BambooHRService.getTimeOff(null, dateToFetchFrom).then(function success(data){
@@ -52,9 +53,17 @@ app.directive("whosOut", function(){
             //for every date they are away for add entries
             var dateAway = Date.parse(data[i].start);
             dateAway = new Date(dateAway);
+            
+            var currentDate = new Date();
+            if(dateAway < currentDate)
+            {
+              //Make it today
+              dateAway = currentDate;
+            }
+            
             var endDate = Date.parse(data[i].end);
             endDate = new Date(endDate);
-            
+
             while(dateAway <= endDate)
             {
               var dateDisplay = getDateDisplay(dateAway.toISOString());
