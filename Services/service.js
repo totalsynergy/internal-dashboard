@@ -35,6 +35,7 @@
     service.twitterBearerToken = '';
     service.twitterKey = '';
     service.twitterSecret = '';
+    service.yammerClientId = '';
     service.keysArray = [];
     
     //Default set to totalsynergydev
@@ -56,7 +57,7 @@
                   
             //comment this if you need to restore pages
             service.updatePagesAndSpeed(result.pages, result.speed);
-            service.updateKeys(result.eventBriteKey, result.totalSynergyKey, result.slackKey, result.trelloKeys, result.synergy5Keys, result.yammer, result.twitterKey, result.twitterSecret, result.bambooHrKey);
+            service.updateKeys(result.eventBriteKey, result.totalSynergyKey, result.slackKey, result.trelloKeys, result.synergy5Keys, result.yammer, result.twitterKey, result.twitterSecret, result.bambooHrKey, result.yammerClientId);
             
             //If a slug exists, change the default
             if(result.leaderboardSlug)
@@ -78,7 +79,7 @@
     
 
     //Saves the Keys in the Service and sends a broadcast to all controllers
-    function updateKeys(eventKey, tsKey, sKey, trKey, s5Key, yam, twitterK, twitterS, bambooHrKey){
+    function updateKeys(eventKey, tsKey, sKey, trKey, s5Key, yam, twitterK, twitterS, bambooHrKey, yammerClientId){
       
       this.totalSynergyKey = tsKey;
       this.eventBriteKey = eventKey;
@@ -88,10 +89,9 @@
       this.yammerKey = yam;
       this.twitterKey = twitterK;
       this.twitterS = twitterS;
-      this.bambooHrKey = bambooHrKey
-      this.keysArray = [tsKey, eventKey, sKey, trKey, s5Key, yam, twitterK, twitterS, bambooHrKey];
-
-
+      this.bambooHrKey = bambooHrKey;
+      this.yammerClientId = yammerClientId;
+      this.keysArray = [tsKey, eventKey, sKey, trKey, s5Key, yam, twitterK, twitterS, bambooHrKey, yammerClientId];
 
     }
     

@@ -35,13 +35,17 @@ app.directive("whosOut", function(){
         });
       }
       
+      function getDateString(date)
+      {
+        return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + (date.getDate());
+      }
+      
       function getTimeOff(){
         
         var today = new Date();
+        var todayString = getDateString(today);
         
-        var dateToFetchFrom = today.toISOString();
-        
-        BambooHRService.getTimeOff(null, dateToFetchFrom).then(function success(data){
+        BambooHRService.getTimeOff(null, todayString).then(function success(data){
           
           var sortedTimeOff = [];
           
@@ -66,7 +70,7 @@ app.directive("whosOut", function(){
 
             while(dateAway <= endDate)
             {
-              var dateDisplay = getDateDisplay(dateAway.toISOString());
+              var dateDisplay = getDateDisplay(getDateString(dateAway));
               var existingPosition = dateGroupingPosition(dateDisplay);
               
               var employeeObject = {
@@ -99,7 +103,7 @@ app.directive("whosOut", function(){
               {
                 //Make new ojbect
                 var timeOffDateGrouping = {
-                  "Date" : dateAway.toISOString(),
+                  "Date" : getDateString(dateAway),
                   "DateDisplay" : dateDisplay,
                   "Employees" : [employeeObject]
                 };
@@ -112,6 +116,7 @@ app.directive("whosOut", function(){
             }
             
           }
+          
           
           getImages();
 
@@ -136,9 +141,10 @@ app.directive("whosOut", function(){
         var current = new Date();
         var tomorrow = new Date();
         tomorrow.setDate(current.getDate() + 1);
-        
+        tomorrow.setHours(23);
+
         //Person is currently on leave
-        if(date <= current)
+        if(getDateString(date) == getDateString(current))
         {
           return "Today";
         }

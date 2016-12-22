@@ -11,9 +11,17 @@
     service.getGroups = getGroups;
     service.getMessages = getMessages;
     service.getYammerData = getYammerData;
-
+    service.setKeys = setKeys;
+    
+    service.encodedKey = '';
+    
+    function setKeys(yammerKey, yammerClientId){
+      console.log("Make the encoded with: " + yammerKey + " & " + yammerClientId);
+    }
+    
     function getGroups(key){
 
+      console.log("GET YAMMER GROUPS: " + key);
       return $q(function(resolve, reject){
          $http({
            url: 'https://www.yammer.com/api/v1/users/current.json?include_group_memberships=true',

@@ -17,6 +17,8 @@ app.directive("synergyYammer", function(){
     
     $scope.$watch('keys', function(){
       $scope.yammerKey = $scope.keys[5];
+      $scope.yammerClientId = $scope.keys[9];
+      YammerService.setKeys($scope.yammerKey, $scope.yammerClientId);
     })
     
     //IF NEW ACCESS TOKEN NEEDED - FOLLOW STEPS FOR OAUTH LOCALHOST ACCESS CODE ONLINE 
