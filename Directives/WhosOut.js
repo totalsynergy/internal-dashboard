@@ -64,9 +64,12 @@ app.directive("whosOut", function(){
               //Make it today
               dateAway = currentDate;
             }
+
             
             var endDate = Date.parse(data[i].end);
             endDate = new Date(endDate);
+            endDate.setHours(23);
+            endDate.setMinutes(59);
 
             while(dateAway <= endDate)
             {
